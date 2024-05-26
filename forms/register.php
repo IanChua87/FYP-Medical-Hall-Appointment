@@ -4,16 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <title>Sin Nam Medical Hall | Register</title>
+    <!-- 'links.php' contains cdn links' -->
+    <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -36,7 +29,7 @@
 
                     <div class="form-container">
 
-                        <form>
+                        <form method="post" action="registrationSuccessful.php">
 
                             <h3 class="text">Create<br> Account</h3>
                             <p class="registered-prompt">Already registered? <span> <a href="login.php">Login</a> </span>now</p>
@@ -74,7 +67,7 @@
                             </div>
 
                             <div class="mt-3">
-                                <a href="registrationSuccessful.php" class="btn register-btn">Create Account</a>
+                                <button type="submit" class="btn register-btn">Create Account</button>
                             </div>
                         </form>
                     </div>
