@@ -8,12 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -147,9 +147,9 @@
 
     <section class="contact" id="contact">
         <h2 class="text-center">Contact Us</h2>
-        <div class="container">
+        <div class="contact-box">
             <div class="row">
-                <div class="col-12 col-md-12 col-lg-6">
+                <div class="col-12 col-md-12 col-lg-7">
                     <form action="forms/contact.php" method="post">
                         <div class="mb-3">
                             <input type="text" class="form-control-lg" name="name" placeholder="Name">
@@ -164,7 +164,7 @@
                     </form>
                 </div>
     
-                <div class="col-12 col-md-12 col-lg-6">
+                <div class="col-12 col-md-12 col-lg-5">
                     <img src="img/contact-img.png" alt="contact-img">
                 </div>
             </div>
@@ -172,7 +172,7 @@
     </section>
 
 <footer class="footer">
-    <div class="container">
+    <div class="footer-box">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-3">
                 <h2 class="logo">Logo</h2>
