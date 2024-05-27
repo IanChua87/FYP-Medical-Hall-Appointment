@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Booked | Successful</title>
+    <title>Reset Password | Successful</title>
     <!-- 'links.php' contains cdn links' -->
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
-<section class="booked vh-100">
+<section class="reset-password vh-100">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-8 px-0 d-none d-sm-block">
@@ -20,9 +20,9 @@
             <div class="col-sm-4 text-black right-col">
                 <div class="verified-box">
                     <img src="../img/tick-verification.svg" alt="Tick logo symbol"/>
-                    <h2>Booking<br> Successful</h2>
+                    <h2>Reset Password<br> Successful</h2>
                     <div class="mt-3">
-                        <a href="../index.php" class="btn back-to-home-btn">Back to Home</a>
+                        <a href="login.php" class="btn login-btn">Login</a>
                     </div>
                 </div>
             </div>
