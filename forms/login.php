@@ -10,14 +10,14 @@
 </head>
 
 <body>
-<section class="login vh-100">
+<section class="login">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-8 px-0 d-none d-sm-block">
+            <div class="col-lg-8 col-md-12 col-sm-12 px-0 d-sm-block left-col">
                 <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100"
                      style="object-fit: cover; object-position: left;">
             </div>
-            <div class="col-sm-4 text-black right-col">
+            <div class="col-lg-4 col-md-12 col-sm-12 text-black right-col">
                 <div class="form-container">
                     <h3 class="text">Login</h3>
 

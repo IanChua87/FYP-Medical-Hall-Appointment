@@ -10,14 +10,14 @@
 </head>
 
 <body>
-<section class="registered vh-100">
+<section class="contacted">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-8 px-0 d-none d-sm-block">
+            <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
                 <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100"
                      style="object-fit: cover; object-position: left;">
             </div>
-            <div class="col-sm-4 text-black right-col">
+            <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
                 <div class="verified-box">
                     <img src="../img/tick-verification.svg" alt="Tick logo symbol"/>
                     <h2>Message sent <br>successfully</h2>

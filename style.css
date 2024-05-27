@@ -593,6 +593,10 @@ nav{
 
 
 /* ===========================Media queries responsiveness=========================== */
+
+
+
+/* ============Main page start=============== */
 @media (max-width: 768px) {
     .navbar .nav-item {
         margin-bottom: 15px;
@@ -615,4 +619,49 @@ nav{
         flex-direction: column;
         width: 95%;
     }
+    /* ============Main page end=============== */
+
+
+
+
+
+    /* ============Register / Login page start=============== */
+    .register .left-col,
+    .registered .left-col,
+    .login .left-col, 
+    .reset-password .left-col,
+    .loggedout .left-col,
+    .booked .left-col{
+        height: 60vh;
+    }
+
+    .register .right-col,
+    .registered .right-col,
+    .login .right-col, 
+    .reset-password .right-col,
+    .loggedout .right-col,
+    .booked .right-col
+    {
+        margin-top: 0;
+    }
+
+    .login .form-container{
+        height: 55vh;
+        padding: 0 30px;
+    }
+
+    .register .form-container{
+        height: 80vh;
+        padding: 0 30px;
+    }
+
+    .registered .verified-box,
+    .reset-password .verified-box,
+    .loggedout .verified-box,
+    .contacted .verified-box,
+    .booked .verified-box{
+        margin-top: 70px;
+        height: calc(60vh - 100px);
+    }
+
 }

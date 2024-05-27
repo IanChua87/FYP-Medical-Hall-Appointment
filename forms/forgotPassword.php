@@ -18,14 +18,14 @@
                 </div>
                 <div class="col-sm-4 text-black right-col">
                     <div class="form-container">
-                        <h3 class="text">Reset Password</h3>
+                        <h3 class="text">Forgot Password</h3>
                         <form method="post" action="../index.php">
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="email" class="form-control form-control-lg" placeholder="Email" />
+                                <input type="password" class="form-control form-control-lg" placeholder="Old Password" />
                             </div>
 
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="Password" />
+                                <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="New Password" />
                             </div>
 
                             <!-- Simple link -->
