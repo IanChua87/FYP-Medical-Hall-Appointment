@@ -15,96 +15,108 @@
 
 
 
-<!--hero-->
-<section class="hero" id="hero">
-    <div class="container">
-        <div class="hero-text">
-            <h1>Providing quality <br>care and <br>convenience for all</h1>
-            <p>Sin Nam Medical Hall is a Chinese Medical Hall with <br> more than 60 years of history. It specializes in <br> Traditional Chinese medicine and professional <br> consulation services.</p>
-            <div class="mt-3">
-                <a href="#about" class="btn learn-more-btn">Learn More</a>
+    <!--hero start-->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-text">
+                <h1>Providing quality <br>care and <br>convenience for all</h1>
+                <p>Sin Nam Medical Hall is a Chinese Medical Hall with <br> more than 60 years of history. It specializes in <br> Traditional Chinese medicine and professional <br> consulation services.</p>
+                <div class="mt-3">
+                    <a href="#about" class="btn learn-more-btn">Learn More</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!--hero end-->
 
 
 
 
-<!--about-->
-<section class="about" id="about">
-    <div class="about-box">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6 left-col">
-                <h2>About Us</h2>
-                <p>At Sim Nam Medical Hall, we pride ourselves on <br> a rich history and legacy that spans over multiple <br> generations. Established with a vision to provide <br> exceptional and professional healthcare services, <br> we have been serving the community for <br> decades, earning the trust and respect <br> of our patients.</p>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 right-col">
-                <img src="img/sin-nam-brand.png" alt="about-section">
+    <!--about start-->
+    <section class="about" id="about">
+        <div class="about-box">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6 left-col">
+                    <h2>About Us</h2>
+                    <p>At Sim Nam Medical Hall, we pride ourselves on <br> a rich history and legacy that spans over multiple <br> generations. Established with a vision to provide <br> exceptional and professional healthcare services, <br> we have been serving the community for <br> decades, earning the trust and respect <br> of our patients.</p>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6 right-col">
+                    <img src="img/sin-nam-brand.png" alt="about-section">
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!--about end-->
 
-<section class="services" id="services">
-    <div class="services-box">
-        <h2 class="text-center">Our Services</h2>
-        <div class="row row-md-2 g-4">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="consultation img">
-                    <div class="card-body">
-                      <h5 class="card-title">Personalized TCM Consultations</h5>
-                      <p class="card-text">Our expert practitioners provide comprehensive health assessments and personalized treatment plans based on Traditional Chinese Medicine principles. Discover how TCM addresses health concerns and promote overall wellness.</p>
-                      <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+
+
+    <!--services start-->
+    <section class="services" id="services">
+        <div class="services-box">
+            <h2 class="text-center">Our Services</h2>
+            <div class="row row-md-2 g-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="consultation img">
+                        <div class="card-body">
+                        <h5 class="card-title">Personalized TCM Consultations</h5>
+                        <p class="card-text">Our expert practitioners provide comprehensive health assessments and personalized treatment plans based on Traditional Chinese Medicine principles. Discover how TCM addresses health concerns and promote overall wellness.</p>
+                        <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                        </div>
                     </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="img/accupuncture.png" class="card-img-top img-fluid" alt="acupuncture img">
-                    <div class="card-body">
-                      <h5 class="card-title">Effective Acupuncture Treatments </h5>
-                      <p class="card-text">Experience the benefits of acupuncture for pain relief, stress reduction, and enhanced well-being. Our skilled acupuncturists use precise techniques to restore balance and improve your health naturally.</p>
-                      <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="img/accupuncture.png" class="card-img-top img-fluid" alt="acupuncture img">
+                        <div class="card-body">
+                        <h5 class="card-title">Effective Acupuncture Treatments </h5>
+                        <p class="card-text">Experience the benefits of acupuncture for pain relief, stress reduction, and enhanced well-being. Our skilled acupuncturists use precise techniques to restore balance and improve your health naturally.</p>
+                        <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                        </div>
                     </div>
-                  </div>
-            </div>
-            <div class="col-12 col-md-12 col-lg-4">
-                <div class="card h-100">
-                    <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="chinese herbs img">
-                    <div class="card-body">
-                      <h5 class="card-title">Customized Chinese Herbal Prescriptions</h5>
-                      <p class="card-text">Receive tailored herbal formulations designed to address your specific health needs. Our high-quality, natural herbal prescriptions support your body’s healing processes and promote holistic health.</p>
-                      <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4">
+                    <div class="card h-100">
+                        <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="chinese herbs img">
+                        <div class="card-body">
+                        <h5 class="card-title">Customized Chinese Herbal Prescriptions</h5>
+                        <p class="card-text">Receive tailored herbal formulations designed to address your specific health needs. Our high-quality, natural herbal prescriptions support your body’s healing processes and promote holistic health.</p>
+                        <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                        </div>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!--services end-->
 
-<section class="operating-hours" id="operating-hours">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-5 col-lg-5">
-                <h2>Opening Hours</h2>
-                <h3>Tuesday - Friday</h3>
-                <p class="mb-4">11AM - 4:30PM</p>
-                <h3>Saturday</h3>
-                <p class="mb-0">10:30AM - 4:30PM</p>
-            </div>
-            <div class="col-12 col-md-7 col-lg-7">
-                <h2>Appointment Duration</h2>
-                <h3>New Patients</h3>
-                <p class="mb-4">30 mins</p>
-                <h3>Registered Patients</h3>
-                <p class="mb-0">15 mins</p>
+
+
+    <!--operating hours-->
+    <section class="operating-hours" id="operating-hours">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-5 col-lg-5">
+                    <h2>Opening Hours</h2>
+                    <h3>Tuesday - Friday</h3>
+                    <p class="mb-4">11AM - 4:30PM</p>
+                    <h3>Saturday</h3>
+                    <p class="mb-0">10:30AM - 4:30PM</p>
+                </div>
+                <div class="col-12 col-md-7 col-lg-7">
+                    <h2>Appointment Duration</h2>
+                    <h3>New Patients</h3>
+                    <p class="mb-4">30 mins</p>
+                    <h3>Registered Patients</h3>
+                    <p class="mb-0">15 mins</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!--operating hours start-->
 
+
+    <!--contact start-->
     <section class="contact" id="contact">
         <h2 class="text-center">Contact Us</h2>
         <div class="contact-box">
@@ -123,56 +135,61 @@
                         <a class="btn submit-btn" href="forms/contactSuccessful.php" role="button">Submit</a>
                     </form>
                 </div>
-    
+
                 <div class="col-12 col-md-12 col-lg-5">
                     <img src="img/contact-img.png" alt="contact-img">
                 </div>
             </div>
         </div>
     </section>
+    <!--contact end-->
 
-<footer class="footer">
-    <div class="footer-box">
-        <div class="row">
-            <div class="col-12 col-md-12 col-lg-3">
-                <h2 class="logo">Logo</h2>
-            </div>
-            <div class="col-12 col-md-12 col-lg-6">
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#hero">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Booking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-12 col-lg-3">
-                <div class="contact-details">
-                    <div class="address">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <p>#01-101 Yishun Street 71, Block 729, Singapore 760729</p>
-                    </div>
-                    <div class="phone">
-                        <i class="bi bi-telephone-fill"></i>
-                        <p>6257 0881</p>
+
+
+    <!--footer start-->
+    <footer class="footer">
+        <div class="footer-box">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-3">
+                    <h2 class="logo">Logo</h2>
+                </div>
+                <div class="col-12 col-md-12 col-lg-6">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#hero">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Booking</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-12 col-lg-3">
+                    <div class="contact-details">
+                        <div class="address">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <p>#01-101 Yishun Street 71, Block 729, Singapore 760729</p>
+                        </div>
+                        <div class="phone">
+                            <i class="bi bi-telephone-fill"></i>
+                            <p>6257 0881</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="footer-separator"></div>
+            <p class="copyright-text mb-0">&copy; 2024 My Web Page. All rights reserved.</p>
         </div>
-        <div class="footer-separator"></div>
-        <p class="copyright-text mb-0">&copy; 2024 My Web Page. All rights reserved.</p>
-    </div>
-</footer>
+    </footer>
+    <!--footer end-->
 
 </body>
 </html>
