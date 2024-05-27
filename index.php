@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Sin Nam Medical Hall | Main</title>
@@ -7,11 +8,12 @@
     <?php include 'links.php'; ?>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
 
-<!--navbar-->
-<?php include 'navbar.php'; ?>
+    <!--navbar-->
+    <?php include 'navbar.php'; ?>
 
 
 
@@ -59,9 +61,9 @@
                     <div class="card h-100">
                         <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="consultation img">
                         <div class="card-body">
-                        <h5 class="card-title">Personalized TCM Consultations</h5>
-                        <p class="card-text">Our expert practitioners provide comprehensive health assessments and personalized treatment plans based on Traditional Chinese Medicine principles. Discover how TCM addresses health concerns and promote overall wellness.</p>
-                        <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                            <h5 class="card-title">Personalized TCM Consultations</h5>
+                            <p class="card-text">Our expert practitioners provide comprehensive health assessments and personalized treatment plans based on Traditional Chinese Medicine principles. Discover how TCM addresses health concerns and promote overall wellness.</p>
+                            <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -69,9 +71,9 @@
                     <div class="card h-100">
                         <img src="img/accupuncture.png" class="card-img-top img-fluid" alt="acupuncture img">
                         <div class="card-body">
-                        <h5 class="card-title">Effective Acupuncture Treatments </h5>
-                        <p class="card-text">Experience the benefits of acupuncture for pain relief, stress reduction, and enhanced well-being. Our skilled acupuncturists use precise techniques to restore balance and improve your health naturally.</p>
-                        <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                            <h5 class="card-title">Effective Acupuncture Treatments </h5>
+                            <p class="card-text">Experience the benefits of acupuncture for pain relief, stress reduction, and enhanced well-being. Our skilled acupuncturists use precise techniques to restore balance and improve your health naturally.</p>
+                            <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -79,9 +81,9 @@
                     <div class="card h-100">
                         <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="chinese herbs img">
                         <div class="card-body">
-                        <h5 class="card-title">Customized Chinese Herbal Prescriptions</h5>
-                        <p class="card-text">Receive tailored herbal formulations designed to address your specific health needs. Our high-quality, natural herbal prescriptions support your body’s healing processes and promote holistic health.</p>
-                        <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                            <h5 class="card-title">Customized Chinese Herbal Prescriptions</h5>
+                            <p class="card-text">Receive tailored herbal formulations designed to address your specific health needs. Our high-quality, natural herbal prescriptions support your body’s healing processes and promote holistic health.</p>
+                            <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -192,4 +194,5 @@
     <!--footer end-->
 
 </body>
+
 </html>
