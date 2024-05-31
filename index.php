@@ -10,6 +10,12 @@ if (!isset($_SESSION['patient_id'])) {
     header("Location: forms/login.php");
     exit();
 }
+
+if(!isset($_SESSION['doctor_id'])){
+    header("Location: forms/login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

@@ -1,10 +1,10 @@
-<?php 
+<?php
 include "../db_connect.php";
 ?>
 
 <?php
 $msg = "";
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -16,16 +16,16 @@ if(isset($_POST['submit'])){
     $last_updated_datetime = date("Y-m-d H:i:s");
     $payment_status = "unpaid";
     $amount_payable = 0;
-    
+
 
     if (empty($name) || empty($email) || empty($password) || empty($dob) || empty($phone)) {
         $error = "All fields are required.";
         header("Location: register.php?error=" . urlencode($error));
         exit();
-    } else{
+    } else {
         //prepared statement for checking if user already exists
-        $query = "SELECT * FROM patient WHERE patient_name = ? AND patient_email = ?";
-        $stmt = mysqli_prepare($conn, $query);
+        $d_query = "SELECT * FROM patient WHERE patient_name = ? AND patient_email = ?";
+        $stmt = mysqli_prepare($conn, $d_query);
         mysqli_stmt_bind_param($stmt, "ss", $name, $email);
         mysqli_stmt_execute($stmt);
         $queryResult = mysqli_stmt_get_result($stmt);
@@ -42,9 +42,7 @@ if(isset($_POST['submit'])){
             }
             header("Location: register.php?error=" . urlencode($error));
             exit();
-        }
-
-        else {
+        } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             //prepared statement for inserting user into database, for security purpose
             $insert = "INSERT INTO patient (patient_name, patient_dob, patient_phoneNo, patient_email, patient_password, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) 
@@ -79,28 +77,26 @@ if(isset($_POST['submit'])){
 </head>
 
 <body>
-<section class="registered vh-100">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
-                <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100"
-                     style="object-fit: cover; object-position: left;">
-            </div>
-            <div class="col-sm-12 col-sm-12 col-lg-4 text-black right-col">
-                <div class="verified-box">
-                    <img src="../img/tick-verification.svg" alt="Tick logo symbol"/>
-                    <?php echo $msg ?>
-                    <div class="mt-3">
-                        <a href="login.php" class="btn login-btn">Login</a>
+    <section class="registered vh-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
+                    <img src="../img/herb.jpg" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+                </div>
+                <div class="col-sm-12 col-sm-12 col-lg-4 text-black right-col">
+                    <div class="verified-box">
+                        <img src="../img/tick-verification.svg" alt="Tick logo symbol" />
+                        <?php echo $msg ?>
+                        <div class="mt-3">
+                            <a href="login.php" class="btn login-btn">Login</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 </body>
 
 </html>
-
