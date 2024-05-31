@@ -30,7 +30,7 @@ echo '
             
 if (isset($_SESSION['patient_id'])) {
     echo '<ul class="nav navbar-nav">
-            <a class="btn logout-btn" href="forms/logout.php" role="button">Logout</a>
+            <a class="btn logout-btn" role="button">Logout</a>
           </ul>';
 } else {
     echo '<ul class="nav navbar-nav">

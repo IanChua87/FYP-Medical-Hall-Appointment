@@ -464,6 +464,13 @@ nav{
     border-radius: 5px;
     font-size: 16px;
 }
+
+.register .register-error-msg{
+    color: red;
+    font-size: 14px;
+    margin-top: 700px;
+    position: fixed;
+}
 /* ===========================Register page end=========================== */
 
 

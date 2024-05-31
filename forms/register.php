@@ -25,8 +25,7 @@ include "../db_connect.php";
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
-                    <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100"
-                         style="object-fit: cover; object-position: left;">
+                    <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
 
@@ -49,14 +48,13 @@ include "../db_connect.php";
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="password" id="form2Example28" class="form-control form-control-lg"
-                                    placeholder="Password" name="password" />
+                                <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="Password" name="password" />
                             </div>
 
 
                             <div class="double-form-field row mb-4">
                                 <div class="col">
-                                  <input type="date" class="form-control date-input" id="dob" name="dob" placeholder="Date of Birth">
+                                    <input type="date" class="form-control date-input" id="dob" name="dob" placeholder="Date of Birth">
                                 </div>
                                 <!-- <div class="col">
                                   <select class="form-select" id="gender" name="gender">
@@ -65,11 +63,10 @@ include "../db_connect.php";
                                     <option value="female">Female</option>
                                   </select>
                                 </div> -->
-                              </div>
+                            </div>
 
                             <div class="form-outline mb-4">
-                                <input type="number" id="form2Example28" class="form-control form-control-lg"
-                                    placeholder="Phone Number" name="phone" />
+                                <input type="number" id="form2Example28" class="form-control form-control-lg" placeholder="Phone Number" name="phone" />
                             </div>
 
                             <div class="mt-3">
@@ -77,9 +74,9 @@ include "../db_connect.php";
                             </div>
                         </form>
                         <?php
-                            if (isset($_GET['error'])) {
-                                echo '<div class="alert alert-danger">' . htmlspecialchars($_GET['error']) . '</div>';
-                            }
+                        if (isset($_GET['error'])) {
+                            echo '<div class="register-error-msg" id="register-error-msg">' . htmlspecialchars($_GET['error']) . '</div>';
+                        }
                         ?>
                     </div>
                 </div>
@@ -90,8 +87,14 @@ include "../db_connect.php";
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#dob').attr('placeholder', 'Date of Birth');
+        });
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#register-error-msg').fadeOut('slow');
+            }, 1700);
         });
     </script>
 
