@@ -20,6 +20,10 @@
                     <div class="form-container">
                         <h3 class="text">Forgot Password</h3>
                         <form method="post" action="../index.php">
+                            <div data-mdb-input-init class="form-outline mb-5">
+                                <input type="email" class="form-control form-control-lg" placeholder="Email" />
+                            </div>
+
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <input type="password" class="form-control form-control-lg" placeholder="Old Password" />
                             </div>

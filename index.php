@@ -1,3 +1,17 @@
+<?php 
+session_start();
+include "db_connect.php";
+?>
+
+<?php
+
+
+if (!isset($_SESSION['patient_id'])) {
+    header("Location: forms/login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 

@@ -1,6 +1,5 @@
-
 <?php
-// navbar details are included in this snippet, so if you want to use this snippet in your project, you need to include the links in your php file. This snippet includes Bootstrap 5 CSS and JS, Google Fonts, and Bootstrap Icons. You can copy and paste this snippet into your HTML file to include the necessary links.
+
 echo '
 <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -27,11 +26,20 @@ echo '
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contact</a>
                 </li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
-                <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
-            </ul>
-        </div>
+            </ul>';
+            
+if (isset($_SESSION['patient_id'])) {
+    echo '<ul class="nav navbar-nav">
+            <a class="btn logout-btn" href="forms/logout.php" role="button">Logout</a>
+          </ul>';
+} else {
+    echo '<ul class="nav navbar-nav">
+            <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
+            <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
+          </ul>';
+}
+
+echo '    </div>
     </div>
 </nav>';
+?>
