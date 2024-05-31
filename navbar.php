@@ -29,8 +29,9 @@ echo '
             </ul>';
             
 if (isset($_SESSION['patient_id'])) {
+    echo '<i class="bi bi-person-circle"></i>';
     echo '<ul class="nav navbar-nav">
-            <a class="btn logout-btn" href="forms/logout.php" role="button">Logout</a>
+            <a class="btn logout-btn" href="forms/loggedOutSuccessful.php" role="button">Logout</a>
           </ul>';
 } else {
     echo '<ul class="nav navbar-nav">

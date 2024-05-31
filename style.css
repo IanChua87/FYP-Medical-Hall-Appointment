@@ -64,7 +64,7 @@ nav{
     color: #f9f9f9;
     font-size: 16px;
     font-weight: 500;
-    margin: 0 0 0 15px;
+    margin: 0 0 0 20px;
 }
 
 .navbar .sign-up-btn{
@@ -95,6 +95,16 @@ nav{
 .navbar-toggler i{
     color: #f9f9f9;
     font-size: 30px;
+}
+
+.bi-person-circle {
+    font-size: 30px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.bi-person-circle:hover{
+    color: #CFA61E;
 }
 /* ====navbar end==== */
 
@@ -169,6 +179,8 @@ nav{
 .right-col img{
     width: 100%;
     height: auto;
+    margin-top: 160px;
+    margin-left: 50px;
 }
 /* ====about end==== */
 
@@ -329,7 +341,10 @@ nav{
 .contact img{
     width: 100%;
     height: auto;
+    margin-top: 30px;
 }
+
+
 /* ====contact end==== */
 
 

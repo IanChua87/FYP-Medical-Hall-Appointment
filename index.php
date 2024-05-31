@@ -202,7 +202,7 @@ if (!isset($_SESSION['patient_id'])) {
                 </div>
             </div>
             <div class="footer-separator"></div>
-            <p class="copyright-text mb-0">&copy; 2024 My Web Page. All rights reserved.</p>
+            <p class="copyright-text mb-0">&copy; 2024 Sin Nam Medical Hall. All rights reserved.</p>
         </div>
     </footer>
     <!--footer end-->
