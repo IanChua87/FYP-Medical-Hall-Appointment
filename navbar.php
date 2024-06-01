@@ -27,10 +27,10 @@ echo '
                     <a class="nav-link" href="#contact">Contact</a>
                 </li>
             </ul>';
-            
-if (isset($_SESSION['patient_id'])) {
+
+if (isset($_SESSION['patient_id']) || isset($_SESSION['+doctor_id'])) {
     echo '<ul class="nav navbar-nav">
-            <a class="btn logout-btn" role="button">Logout</a>
+            <a class="btn logout-btn" href="forms/loggedOutSuccessful.php" role="button">Logout</a>
           </ul>';
 } else {
     echo '<ul class="nav navbar-nav">
@@ -42,4 +42,3 @@ if (isset($_SESSION['patient_id'])) {
 echo '    </div>
     </div>
 </nav>';
-?>

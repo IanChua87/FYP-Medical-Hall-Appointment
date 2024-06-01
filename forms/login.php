@@ -13,7 +13,8 @@ if (isset($_POST['submit'])) {
 
     if (empty($email) || empty($password)) {
         $error = "Please enter your email and password.";
-    } else {
+    } 
+    else {
 
         // Query to fetch user data from the database
         $p_query = "SELECT * FROM patient WHERE patient_email=? && patient_password=?";
@@ -66,13 +67,14 @@ if (isset($_POST['submit'])) {
         }
 
 
-        $a_query = "SELECT * FROM 'admin' WHERE admin_email=? && admin_password=?";
+        $a_query = "SELECT * FROM admin WHERE admin_email=? && admin_password=?";
 
         $admin_stmt = mysqli_prepare($conn, $a_query);
 
         if (!$admin_stmt) {
             die("Failed to prepare statement");
-        } else {
+        } 
+        else {
             mysqli_stmt_bind_param($admin_stmt, "ss", $email, $password);
             mysqli_stmt_execute($admin_stmt);
             $a_result = mysqli_stmt_get_result($admin_stmt);
@@ -83,7 +85,7 @@ if (isset($_POST['submit'])) {
                 $a_user_data = mysqli_fetch_assoc($a_result);
 
                 $_SESSION['admin_id'] = $a_user_data['admin_id'];
-                header("Location: ../index.php");
+                header("Location: ../adminMain.php");
                 exit();
             } else {
                 $error = "Invalid email or password. Please try again.";
@@ -91,10 +93,9 @@ if (isset($_POST['submit'])) {
         }
 
 
-        mysqli_stmt_close($doctor_stmt);
         mysqli_stmt_close($patient_stmt);
+        mysqli_stmt_close($doctor_stmt);
         mysqli_stmt_close($admin_stmt);
-        mysqli_close($conn);
     }
 }
 

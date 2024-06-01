@@ -6,12 +6,7 @@ include "db_connect.php";
 <?php
 
 
-if (!isset($_SESSION['patient_id'])) {
-    header("Location: forms/login.php");
-    exit();
-}
-
-if(!isset($_SESSION['doctor_id'])){
+if (!isset($_SESSION['patient_id']) OR !isset($_SESSION['doctor_id'])) {
     header("Location: forms/login.php");
     exit();
 }
