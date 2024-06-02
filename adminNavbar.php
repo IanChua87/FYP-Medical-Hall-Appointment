@@ -1,7 +1,7 @@
 <?php
 
 echo '
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg custom-nav">
     <div class="container">
         <a class="navbar-brand" href="#">Logo</a>
 
@@ -10,25 +10,25 @@ echo '
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#hero">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">About</a>
+                    <a class="nav-link" href="#">Queue No</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
+                    <a class="nav-link" href="#">Doctor Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Booking</a>
+                    <a class="nav-link" href="#">Appointments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
+                    <a class="nav-link" href="#">Patient Details</a>
                 </li>
             </ul>';
 
-if (isset($_SESSION['patient_id']) || isset($_SESSION['doctor_id'])) {
+if (isset($_SESSION['admin_id'])) {
     echo '<ul class="nav navbar-nav">
             <a class="btn logout-btn" href="forms/loggedOutSuccessful.php" role="button">Logout</a>
           </ul>';

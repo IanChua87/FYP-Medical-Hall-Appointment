@@ -22,27 +22,28 @@ if (isset($_POST['submit'])) {
         $error = "All fields are required.";
         header("Location: register.php?error=" . urlencode($error));
         exit();
-    } else {
+    } 
+    else {
         //prepared statement for checking if user already exists
-        $d_query = "SELECT * FROM patient WHERE patient_name = ? AND patient_email = ?";
-        $stmt = mysqli_prepare($conn, $d_query);
-        mysqli_stmt_bind_param($stmt, "ss", $name, $email);
-        mysqli_stmt_execute($stmt);
-        $queryResult = mysqli_stmt_get_result($stmt);
+        $p_query = "SELECT * FROM patient WHERE patient_name = ? AND patient_email = ?";
+        $patient_stmt = mysqli_prepare($conn, $p_query);
+        mysqli_stmt_bind_param($patient_stmt, "ss", $name, $email);
+        mysqli_stmt_execute($patient_stmt);
+        $p_queryResult = mysqli_stmt_get_result($patient_stmt);
 
 
+        if (mysqli_num_rows($p_queryResult) > 0) {
+            $p_row = mysqli_fetch_assoc($p_queryResult);
 
-        if (mysqli_num_rows($queryResult) > 0) {
-            $row = mysqli_fetch_assoc($queryResult);
-
-            if ($row['patient_name'] == $name) {
+            if ($p_row['patient_name'] == $name) {
                 $error = "User with this name already exists.";
-            } elseif ($row['patient_email'] == $email) {
+            } elseif ($p_row['patient_email'] == $email) {
                 $error = "User with this email already exists.";
             }
             header("Location: register.php?error=" . urlencode($error));
             exit();
-        } else {
+        } 
+        else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             //prepared statement for inserting user into database, for security purpose
             $insert = "INSERT INTO patient (patient_name, patient_dob, patient_phoneNo, patient_email, patient_password, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) 
@@ -59,7 +60,12 @@ if (isset($_POST['submit'])) {
                 exit();
             }
         }
-        mysqli_stmt_close($stmt);
+
+
+
+
+
+        mysqli_stmt_close($insert_stmt);
         mysqli_close($conn);
     }
 }

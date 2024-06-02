@@ -59,7 +59,7 @@ nav{
 
 .navbar .login-btn, .navbar .logout-btn{
     background-color: #CFA61E;
-    padding: 6px 16px;
+    padding: 10px 16px;
     border-radius: 5px;
     color: #f9f9f9;
     font-size: 16px;
@@ -436,6 +436,10 @@ nav{
 
 }
 
+.registered-prompt a:hover{
+    text-decoration: underline;
+}
+
 .registered-prompt span{
     color: #CFA61E;
     font-weight: 500;
@@ -447,6 +451,11 @@ nav{
     font-size: 16px;
     width: 100%;
     padding: 15px;
+}
+
+.register .register-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
 }
 
 .register .copyright{
@@ -503,6 +512,11 @@ nav{
     text-decoration: none;
 }
 
+.forgot-text:hover{
+    color: #CFA61E;
+    text-decoration: underline;
+}
+
 .login .registered{
     color: #f9f9f9;
     font-size: 13px;
@@ -520,6 +534,11 @@ nav{
     text-decoration: none;
 }
 
+.login-prompt a:hover{
+    text-decoration: underline;
+
+}
+
 
 .login .login-prompt a span{
     color: #CFA61E;
@@ -532,6 +551,11 @@ nav{
     font-size: 16px;
     width: 100%;
     padding: 15px;
+}
+
+.login .login-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
 }
 
 .login .copyright{
@@ -657,6 +681,7 @@ nav{
         flex-direction: column;
         width: 95%;
     }
+
     /* ============Main page end=============== */
 
 
@@ -702,4 +727,53 @@ nav{
         height: calc(60vh - 100px);
     }
 
+    .custom-nav ul li{
+        padding: 5px 0px;
+    
+    }
+
+    .custom-nav .logout-btn{
+        margin-bottom: 20px;
+    }
+
+    
+
 }
+
+/* ===========================Admin main page start=========================== */
+.custom-nav ul li{
+    padding: 10px 15px;
+}
+
+.admin-main .admin-box{
+    padding: 0 35%;
+}
+
+.admin-main h1{
+    text-align: center;
+    font-size: 60px;
+    font-weight: 600;
+    margin: 50px 0;
+}
+
+.admin-main .control-options{
+    display: flex;
+    flex-direction: column;
+    padding: 0 90px;
+    justify-content: center;
+
+}
+
+.admin-main .btn{
+    background-color: #CFA61E;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 20px 0px;
+    margin-bottom: 40px;
+}
+
+.admin-main .btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
+}
+/* ===========================Admin main page end=========================== */
