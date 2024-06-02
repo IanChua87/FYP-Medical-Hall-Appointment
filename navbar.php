@@ -12,7 +12,7 @@ echo '
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#hero">Home</a>
+                    <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -27,12 +27,18 @@ echo '
                     <a class="nav-link" href="#contact">Contact</a>
                 </li>
             </ul>';
-            
+
 if (isset($_SESSION['patient_id'])) {
-    echo '<i class="bi bi-person-circle"></i>';
-    echo '<ul class="nav navbar-nav">
-            <a class="btn logout-btn" href="forms/loggedOutSuccessful.php" role="button">Logout</a>
-          </ul>';
+    echo '<div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
+            </ul>
+          </div>';
 } else {
     echo '<ul class="nav navbar-nav">
             <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>

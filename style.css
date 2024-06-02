@@ -101,11 +101,31 @@ nav{
     font-size: 30px;
     margin-left: 10px;
     margin-top: 5px;
-}
-
-.bi-person-circle:hover{
     color: #CFA61E;
 }
+
+.dropdown-toggle::after {
+    color: #CFA61E; /* Match the color of the icon */
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:active {
+    background-color: #CFA61E; /* Background color when item is hovered or clicked */
+    color: #fff; /* Text color when item is hovered or clicked */
+}
+
+.dropdown-menu{
+    background-color: #682924;
+}
+
+.dropdown-item{
+    color: #fff;
+}
+
+/* .bi-person-circle:hover{
+    color: #CFA61E;
+} */
 /* ====navbar end==== */
 
 
