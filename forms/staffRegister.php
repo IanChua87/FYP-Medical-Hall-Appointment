@@ -32,29 +32,26 @@ include "../db_connect.php";
 
                     <div class="form-container">
 
-                        <form method="post" action="registrationSuccessful.php">
+                        <form method="post" action="">
 
                             <h3 class="text">Staff Create<br> Account</h3>
                             <p class="registered-prompt">Already registered? <span> <a href="login.php">Login</a> </span>now</p>
 
                             <div class="form-outline mb-4">
-                                <input type="email" class="form-control form-control-lg" placeholder="Email" name="email" />
+                                <input type="text" class="form-control form-control-lg" placeholder="Username" name="username" />
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="Password" name="password" />
-                            </div>
+                <input type="email" class="form-control form-control-lg" placeholder="Email" name="email" />
+            </div>
 
+            <div class="form-outline mb-4">
+                <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="Password" name="password" />
+            </div>
 
-                            <div class="double-form-field row mb-4">
-                                <div class="col">
-                                    <input type="date" class="form-control date-input" id="dob" name="dob" placeholder="Date of Birth">
-                                </div>
-                            </div>
-
-                            <div class="mt-3">
-                                <button type="submit" name="submit" class="btn register-btn">Create Account</button>
-                            </div>
+            <div class="mt-3">
+                <button type="submit" name="submit" class="btn register-btn">Create Account</button>
+            </div>
                         </form>
                         <?php
                         if (isset($_GET['error'])) {
