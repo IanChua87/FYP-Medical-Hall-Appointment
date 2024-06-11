@@ -32,7 +32,7 @@ include "../db_connect.php";
 
                     <div class="form-container">
 
-                        <form method="post" action="">
+                        <form method="post" action="staffRegistrationSuccessful.php">
 
                             <h3 class="text">Staff Create<br> Account</h3>
                             <p class="registered-prompt">Already registered? <span> <a href="login.php">Login</a> </span>now</p>
