@@ -2,12 +2,14 @@
 include "../db_connect.php";
 ?>
 
+<!-- this is for doctor/admin -->
 <?php
 $msg = "";
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $role = $_POST['role'];
 
 
     if (empty($username) || empty($email) || empty($password)) {
@@ -41,7 +43,7 @@ if (isset($_POST['submit'])) {
             $insert = "INSERT INTO users (user_name, user_email, user_password, role) 
                     VALUES (?, ?, ?, ?)";
             $insert_stmt = mysqli_prepare($conn, $insert);
-            mysqli_stmt_bind_param($insert_stmt, "ssss", $name, $email, $hashed_password, "role");
+            mysqli_stmt_bind_param($insert_stmt, "ssss", $name, $email, $hashed_password, $role);
 
             //execute the prepared statement
             if (mysqli_stmt_execute($insert_stmt)) {
