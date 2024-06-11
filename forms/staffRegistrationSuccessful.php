@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $role = "";
+    $role = $_POST['role'];
 
 
     if (empty($username) || empty($email) || empty($password)) {
