@@ -2,6 +2,7 @@
 include "../db_connect.php";
 ?>
 
+<!-- this is for patient register -->
 <?php
 $msg = "";
 if(isset($_POST['submit'])){
