@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
             $p_user = mysqli_num_rows($p_result);
 
             // Verify password and set session if login is successful
-            if ($p_user == 1) {
+            if ($p_user > 0) {
                 $p_user_data = mysqli_fetch_assoc($p_result);
 
                 if (password_verify($password, $p_user_data['patient_password'])) {
@@ -76,38 +76,6 @@ if (isset($_POST['submit'])) {
             }
             mysqli_stmt_close($user_stmt);
         }
-
-
-        // $a_query = "SELECT * FROM admin WHERE admin_email=?";
-
-        // $admin_stmt = mysqli_prepare($conn, $a_query);
-
-        // if (!$admin_stmt) {
-        //     die("Failed to prepare statement");
-        // } else {
-        //     mysqli_stmt_bind_param($admin_stmt, "s", $email);
-        //     mysqli_stmt_execute($admin_stmt);
-        //     $a_result = mysqli_stmt_get_result($admin_stmt);
-        //     $a_user = mysqli_num_rows($a_result);
-
-        //     // Verify password and set session if login is successful
-        //     if ($a_user == 1) {
-        //         $a_user_data = mysqli_fetch_assoc($a_result);
-
-        //         if (password_verify($password, $a_user_data['admin_password'])) {
-        //             $_SESSION['admin_id'] = $a_user_data['admin_id'];
-        //             $login_success = true;
-        //             header("Location: ../adminMain.php");
-        //             exit();
-        //         }
-        //     }
-        //     mysqli_stmt_close($admin_stmt);
-        // }
-
-
-        // if (!$login_success) {
-        //     $error = "Invalid email or password. Please try again.";
-        // }
     }
 }
 
