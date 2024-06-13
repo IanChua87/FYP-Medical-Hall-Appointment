@@ -1,11 +1,10 @@
 <?php
+session_start();
 include "../db_connect.php";
 ?>
 
 <?php
 $error = "";
-// Check if the form is submitted
-session_start();
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
@@ -14,30 +13,69 @@ if (isset($_POST['submit'])) {
     if (empty($email) || empty($password)) {
         $error = "Please enter your email and password.";
     } else {
+        $login_success = false;
+
 
         // Query to fetch user data from the database
-        $query = "SELECT * FROM patient WHERE patient_email=? && patient_password=?";
-        $stmt = mysqli_prepare($conn, $query);
-        if (!$stmt) {
+        $p_query = "SELECT * FROM patient WHERE patient_email=?";
+
+        $patient_stmt = mysqli_prepare($conn, $p_query);
+
+        if (!$patient_stmt) {
             die("Failed to prepare statement");
         } else {
-            mysqli_stmt_bind_param($stmt, "ss", $email, $password);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            $user = mysqli_num_rows($result);
+            mysqli_stmt_bind_param($patient_stmt, "s", $email);
+            mysqli_stmt_execute($patient_stmt);
+            $p_result = mysqli_stmt_get_result($patient_stmt);
+            $p_user = mysqli_num_rows($p_result);
 
             // Verify password and set session if login is successful
-            if ($user > 0) {
-                $user_data = mysqli_fetch_assoc($result);
+            if ($p_user > 0) {
+                $p_user_data = mysqli_fetch_assoc($p_result);
 
-                $_SESSION['patient_id'] = $user_data['patient_id'];
-                header("Location: ../index.php");
-                exit();
-            } else {
-                $error = "Invalid email or password. Please try again.";
+                if (password_verify($password, $p_user_data['patient_password'])) {
+                    $_SESSION['patient_id'] = $p_user_data['patient_id'];
+                    $login_success = true;
+                    header("Location: ../index.php");
+                    exit();
+                }
             }
+            mysqli_stmt_close($patient_stmt);
         }
-        mysqli_stmt_close($stmt);
+
+
+        $u_query = "SELECT * FROM users WHERE user_email=?";
+
+        $user_stmt = mysqli_prepare($conn, $u_query);
+
+        if (!$user_stmt) {
+            die("Failed to prepare statement");
+        } else {
+            mysqli_stmt_bind_param($user_stmt, "s", $email);
+            mysqli_stmt_execute($user_stmt);
+            $u_result = mysqli_stmt_get_result($user_stmt);
+            $u_user = mysqli_num_rows($u_result);
+
+            // Verify password and set session if login is successful
+            if ($u_user > 0) {
+                $u_user_data = mysqli_fetch_assoc($u_result);
+
+                if (password_verify($password, $u_user_data['user_password'])) {
+                    if ($u_user_data['role'] == "Admin") {
+                        $_SESSION['admin_id'] = $u_user_data['user_id'];
+                        $login_success = true;
+                        header("Location: ../adminDashboard.php");
+                        exit();
+                    } else if ($u_user_data['role'] == "Doctor") {
+                        $_SESSION['doctor_id'] = $u_user_data['user_id'];
+                        $login_success = true;
+                        header("Location: ../index.php");
+                        exit();
+                    }
+                }
+            }
+            mysqli_stmt_close($user_stmt);
+        }
     }
 }
 
@@ -58,7 +96,7 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12 px-0 d-sm-block left-col">
-                    <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+                    <img src="../img/medical-herbs-img.jpg" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 text-black right-col">
                     <div class="form-container">
@@ -74,14 +112,6 @@ if (isset($_POST['submit'])) {
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col d-flex">
-                                    <!-- Checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                        <label class="form-check-label rem-me-label" for="form2Example31"> Remember me </label>
-                                    </div>
-                                </div>
-
                                 <div class="col text-end">
                                     <!-- Simple link -->
                                     <a href="forgotPassword.php" class="forgot-text">Forgot password?</a>
@@ -100,7 +130,7 @@ if (isset($_POST['submit'])) {
                             $(document).ready(function() {
                                 setTimeout(function() {
                                     $('#login-error-msg').fadeOut('slow');
-                                }, 3000);
+                                }, 1700);
                             });
                         </script>
 
@@ -118,3 +148,4 @@ if (isset($_POST['submit'])) {
 </html>
 
 <?php
+
