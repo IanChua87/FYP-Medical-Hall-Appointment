@@ -96,6 +96,32 @@ nav{
     color: #f9f9f9;
     font-size: 30px;
 }
+
+.bi-person-circle {
+    font-size: 30px;
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #CFA61E;
+}
+
+.dropdown-toggle::after {
+    color: #CFA61E; /* Match the color of the icon */
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:active {
+    background-color: #CFA61E; /* Background color when item is hovered or clicked */
+    color: #fff; /* Text color when item is hovered or clicked */
+}
+
+.dropdown-menu{
+    background-color: #682924;
+}
+
+.dropdown-item{
+    color: #fff;
+}
 /* ====navbar end==== */
 
 
@@ -741,7 +767,7 @@ nav{
 }
 
 /* ===========================Admin main page start=========================== */
-.custom-nav ul li{
+/* .custom-nav ul li{
     padding: 10px 15px;
 }
 
@@ -775,5 +801,206 @@ nav{
 .admin-main .btn:hover{
     background-color: #d1ac47;
     color: #f9f9f9;
+} */
+
+#sidebar {
+    min-width: 300px;
+    max-width: 300px;
+    background: #682924;
+}
+
+#sidebar .header {
+    color: #f9f9f9;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.hidden-sidebar {
+    display: none;
+}
+
+.hidden-sidebar ul {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#sidebar a {
+    color: #f9f9f9;
+}
+
+#sidebar .btn {
+    color: #f9f9f9;
+    font-size: 30px;
+}
+
+#sidebar ul {
+    padding-left: 0;
+}
+
+#sidebar ul li {
+    list-style: none;
+    padding: 12px 24px;
+    margin-bottom: 8px;
+}
+
+#sidebar ul li.active {
+    background-color: #333;
+}
+
+#sidebar ul li.active a {
+    color: #CFA61E;
+}
+
+#sidebar ul li:hover {
+    background-color: #333;
+}
+
+#sidebar ul li a {
+    font-size: 18px;
+}
+
+#sidebar ul li a .fa-solid {
+    margin-right: 12px;
+    font-size: 16px;
+}
+
+.sidebar-separator {
+    height: 1px;
+    background-color: #f9f9f9;
+    margin: 16px;
+}
+
+.content {
+    width: 100%;
+}
+
+.content .navbar {
+    background-color: #333;
+    color: #f9f9f9;
+    width: 100%;
+}
+
+.content .navbar .logout-btn {
+    color: #f9f9f9;
+    background-color: #CFA61E;
+    padding: 6px 16px;
+}
+
+.close-btn {
+    border: none;
+}
+
+.close-btn .fa-bars {
+    font-size: 24px;
+    color: #f9f9f9;
+}
+
+.admin-box {
+    padding: 0 120px;
+}
+
+.admin-box h2 {
+    font-size: 48px;
+    font-weight: 600;
+    margin: 24px 0;
+}
+
+.edit-btn {
+    background-color: #CFA61E;
+    padding: 7px 20px;
+    color: #f9f9f9;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.delete-btn {
+    background-color: #682924;
+    padding: 7px 20px;
+    color: #f9f9f9;
+    font-size: 16px;
+}
+
+.delete-btn:hover{
+    background-color: #A34039;
+    color: #f9f9f9;
+}
+
+.edit-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
+}
+
+.card{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.info img{
+    height: auto;
+    width: 160px;
+    object-fit: cover;
+    padding: 15px;
+}
+
+.info:hover{
+    background-color: #C2C2C2;
+}
+
+.card .card-title{
+    font-size: 28px;
+    font-weight: 550;
 }
 /* ===========================Admin main page end=========================== */
+
+
+
+
+
+/* ===========================Admin patient details page start=========================== */
+.patient-table .patient-box{
+    padding: 0 13%;
+}
+
+.patient-table h2{
+    font-size: 56px;
+    font-weight: 600;
+    margin: 60px 0;
+    font-weight: 600;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th{
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #f9f9f9;
+}
+
+.table tr{
+    font-size: 15px;
+    font-size: 550;
+    align-items: center;
+}
+
+.table tr:nth-child(odd){
+   background-color: #FDD5D5;
+}
+
+.table tr:nth-child(even){
+    background-color: #f9f9f9;
+
+}
+
+.patient-table .btn-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}

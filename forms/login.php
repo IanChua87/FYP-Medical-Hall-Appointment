@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
                     if ($u_user_data['role'] == "Admin") {
                         $_SESSION['admin_id'] = $u_user_data['user_id'];
                         $login_success = true;
-                        header("Location: ../adminMain.php");
+                        header("Location: ../adminDashboard.php");
                         exit();
                     } else if ($u_user_data['role'] == "Doctor") {
                         $_SESSION['doctor_id'] = $u_user_data['user_id'];
