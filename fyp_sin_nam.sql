@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3307
--- Generation Time: Jun 05, 2024 at 09:47 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Host: 127.0.0.1:3307
+-- Generation Time: Jun 13, 2024 at 03:19 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fyp_simnam`
+-- Database: `fyp_sin_nam`
 --
 
 -- --------------------------------------------------------
@@ -29,16 +29,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `appointment` (
   `appointment_id` int(11) NOT NULL,
-  `appointment_status` varchar(45) NOT NULL,
   `appointment_date` date NOT NULL,
-  `appointment_time` time NOT NULL,
-  `queue_no` int(11) NOT NULL,
-  `appointment_remarks` int(11) DEFAULT NULL,
+  `appointment_start_time` time NOT NULL,
+  `appointment_end_time` time NOT NULL,
+  `appointment_status` varchar(45) NOT NULL DEFAULT 'UPCOMING',
   `booked_by` varchar(255) NOT NULL,
   `booked_datetime` datetime NOT NULL,
   `patient_id` int(11) NOT NULL,
-  `relation` varchar(255) DEFAULT NULL
+  `queue_no` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`appointment_id`, `appointment_date`, `appointment_start_time`, `appointment_end_time`, `appointment_status`, `booked_by`, `booked_datetime`, `patient_id`, `queue_no`) VALUES
+(1, '2024-06-27', '15:00:00', '15:15:00', '', '', '2024-06-09 10:22:19', 1, 0),
+(4, '2024-06-10', '15:30:00', '15:45:00', '', 'pookie', '2024-06-10 14:41:59', 1, 0),
+(5, '2024-06-10', '15:00:00', '15:15:00', '', 'pookie', '2024-06-10 14:45:23', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -48,37 +56,55 @@ CREATE TABLE `appointment` (
 
 CREATE TABLE `patient` (
   `patient_id` int(11) NOT NULL,
-  `patient_name` varchar(20) NOT NULL,
+  `patient_name` varchar(255) NOT NULL,
   `patient_dob` date NOT NULL,
-  `patient_phoneNo` varchar(20) NOT NULL,
+  `patient_phoneNo` int(11) NOT NULL,
   `patient_email` varchar(255) NOT NULL,
   `patient_password` varchar(255) NOT NULL,
   `patient_status` varchar(45) NOT NULL DEFAULT 'NEW',
-  `last_updated_by` varchar(45) NOT NULL,
+  `last_updated_by` varchar(255) NOT NULL,
   `last_updated_datetime` datetime NOT NULL,
-  `payment_status` varchar(20) NOT NULL DEFAULT 'unpaid',
-  `amount_payable` float DEFAULT NULL
+  `payment_status` varchar(45) NOT NULL,
+  `amount_payable` float NOT NULL DEFAULT 0,
+  `is_verified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`patient_id`, `patient_name`, `patient_dob`, `patient_phoneNo`, `patient_email`, `patient_password`, `patient_status`, `last_updated_by`, `last_updated_datetime`, `payment_status`, `amount_payable`) VALUES
-(1, 'pookie', '2002-07-16', '12345678', 'pookie@gmail.com', 'Password123', 'NEW', '2024-05-31', '2024-05-31 09:09:25', 'PENDING', NULL),
-(2, 'lebonbon', '2004-02-10', '65432100', 'lebon@gmail.com', 'Password12345', 'new', 'admin', '2024-05-31 13:30:50', 'unpaid', 0);
+INSERT INTO `patient` (`patient_id`, `patient_name`, `patient_dob`, `patient_phoneNo`, `patient_email`, `patient_password`, `patient_status`, `last_updated_by`, `last_updated_datetime`, `payment_status`, `amount_payable`, `is_verified`) VALUES
+(1, 'pookie', '2014-04-08', 12345678, 'pookie@gmail.com', 'Password234', '', '', '2024-06-09 10:15:03', '', 0, 0),
+(2, 'lebron', '2014-04-10', 56784321, 'lebron@gmail.com', 'Password12345', '', '', '2024-06-09 10:18:38', '', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `system`
+-- Table structure for table `settings`
 --
 
-CREATE TABLE `system` (
-  `system_id` int(11) NOT NULL,
-  `system_key` varchar(255) NOT NULL,
-  `system_value` varchar(255) NOT NULL
+CREATE TABLE `settings` (
+  `settings_id` int(11) NOT NULL,
+  `settings_key` varchar(255) NOT NULL,
+  `settings_value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`settings_id`, `settings_key`, `settings_value`) VALUES
+(1, 'weekday_open_time', '11.00'),
+(2, 'weekday_close_time', '16.30'),
+(3, 'weekend_open_time', '10.30'),
+(4, 'weekend_close_time', '16.30'),
+(5, 'weekday_start', 'Tuesday'),
+(6, 'weekday_end', 'Friday'),
+(7, 'weekend_start', 'Saturday'),
+(8, 'weekend_end', 'Saturday'),
+(9, 'appointment_duration', '15'),
+(10, 'new_appointment_duration', '30'),
+(11, 'last_queue_no', '01');
 
 -- --------------------------------------------------------
 
@@ -112,10 +138,10 @@ ALTER TABLE `patient`
   ADD PRIMARY KEY (`patient_id`);
 
 --
--- Indexes for table `system`
+-- Indexes for table `settings`
 --
-ALTER TABLE `system`
-  ADD PRIMARY KEY (`system_id`);
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`settings_id`);
 
 --
 -- Indexes for table `users`
@@ -131,7 +157,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `patient`
@@ -140,26 +166,16 @@ ALTER TABLE `patient`
   MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `system`
+-- AUTO_INCREMENT for table `settings`
 --
-ALTER TABLE `system`
-  MODIFY `system_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `settings`
+  MODIFY `settings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `appointment`
---
-ALTER TABLE `appointment`
-  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `appointment` (`appointment_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -104,6 +104,8 @@ nav{
     color: #CFA61E;
 }
 
+
+
 .dropdown-toggle::after {
     color: #CFA61E; /* Match the color of the icon */
 }
@@ -123,9 +125,11 @@ nav{
     color: #fff;
 }
 
-/* .bi-person-circle:hover{
-    color: #CFA61E;
-} */
+/* Remove blue highlight for Appointment on hover */
+.dropdown:hover .dropdown-toggle {
+    background-color: #682924;
+    color: #f9f9f9;
+}
 /* ====navbar end==== */
 
 
@@ -654,8 +658,65 @@ nav{
 }
 /* ===========================Registration / Logged out / Booking successful pages end=========================== */
 
+/* ============Edit profile start=============== */
+
+.form-container {
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 10px;
+    background-color: #682924;
+    color: #fff;
+    height: 560px;
+}
+
+.back-btn,
+.save-btn {
+    width: 100%;
+    background-color: #CFA61E;
+    color: #fff;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon-text i {
+    margin-right: 20px; /* Space between icon and text */
+    font-size: 5rem; /* Increase icon size */
+}
+
+.icon-text h3 {
+    margin: 0;
+    font-weight: bold; /* Make text bold */
+    margin-top: 5px;
+    color: #fff;
+}
+
+.input-text {
+    color: #fff;
+}
+
+/* ============Edit profile end=============== */
+
+/* ============Change password start============== */
 
 
+.form-container-password {
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 10px;
+    background-color: #682924;
+    color: #fff;
+    height: 450px;
+}
+
+
+
+
+
+
+
+/* ============Change password end============== */
 
 
 /* ===========================Media queries responsiveness=========================== */

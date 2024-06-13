@@ -1,3 +1,82 @@
+<?php
+include "../db_connect.php";
+session_start();
+
+$error = "";
+
+// Check if the user is logged in
+if (!isset($_SESSION['patient_id'])) {
+    header("Location: forms/login.php");
+    exit();
+}
+
+$patient_id = $_SESSION['patient_id'];
+
+// Query the database to retrieve the patient's name
+$query = "SELECT patient_name FROM patient WHERE patient_id = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "i", $patient_id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $patient_name);
+mysqli_stmt_fetch($stmt);
+mysqli_stmt_close($stmt);
+
+// Check if the form is submitted
+if (isset($_POST['book'])) {
+    if (isset($_POST['timeslot']) && isset($_POST['apptdate'])) {
+        $timeslot = $_POST['timeslot'];
+        $apptdate = $_POST['apptdate'];
+
+        // Separate the timeslot into start and end times
+        $timeslot_parts = explode(' - ', $timeslot);
+        if (count($timeslot_parts) == 2) {
+            $appointment_start_time = $timeslot_parts[0];
+            $appointment_end_time = $timeslot_parts[1];
+
+            // Get the current date and time
+            $booked_datetime = date('Y-m-d H:i:s');
+
+            // Prepare the SQL query
+            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+            
+            if (!$stmt) {
+                die("Failed to prepare statement: " . mysqli_error($conn));
+            }
+
+            // Bind the parameters
+            mysqli_stmt_bind_param($stmt, "sssssi", $apptdate, $appointment_start_time, $appointment_end_time, $patient_name, $booked_datetime, $patient_id);
+
+
+            // Execute the statement
+            if (mysqli_stmt_execute($stmt)) {
+                header("Location: bookingSuccessful.php?success=" . urlencode("Appointment booked successfully."));
+                exit();
+            } else {
+                $error = "Failed to book appointment: " . mysqli_error($conn);
+                header("Location: dobooking.php?error=" . urlencode($error));
+                exit();
+            }
+
+            // Close the statement and connection
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+        } else {
+            $error = "Invalid timeslot format.";
+            header("Location: dobooking.php?error=" . urlencode($error));
+            exit();
+        }
+    } else {
+        $error = "Missing required fields.";
+        header("Location: dobooking.php?error=" . urlencode($error));
+        exit();
+    }
+} 
+?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 

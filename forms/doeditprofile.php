@@ -12,7 +12,6 @@ $error = "";
 $patient_id = $_SESSION['patient_id'];
 $email = $_POST['email'];
 $name = $_POST['name'];
-$password = $_POST['password'];
 $dob = $_POST['dob'];
 $phone = $_POST['phone'];
 
@@ -22,20 +21,15 @@ if (empty($email)) {
     header("Location: editprofile.php?error=" . urlencode($error));
     exit();
 }
-if (empty($password)) {
-    $error = "Please enter your password again.";
-    header("Location: editprofile.php?error=" . urlencode($error));
-    exit();
-}
 if (empty($phone)) {
     $error = "Please enter your phone number again.";
     header("Location: editprofile.php?error=" . urlencode($error));
     exit();
 }
 
-$query = "UPDATE patient SET patient_email = ?, patient_password = ?, patient_dob = ?, patient_phoneNo = ? WHERE patient_id = ?";
+$query = "UPDATE patient SET patient_email = ?, patient_phoneNo = ? WHERE patient_id = ?";
 $stmt = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt, "sssii", $email, $password, $dob, $phone, $patient_id);
+mysqli_stmt_bind_param($stmt, "sii", $email, $phone, $patient_id);
 
 
 if (mysqli_stmt_execute($stmt)) {
@@ -62,44 +56,7 @@ mysqli_close($conn);
             -webkit-appearance: none;
             margin: 0;
         }
-        .container{
-            width: 1500px;
-        }
-        .form-container {
-            height: 600px; /* Adjust this value as needed */
-            /* overflow-y: auto; */
-            padding: 20px; /* Adjust the padding as needed */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .back-btn {
-            width: 100%;
-            background-color: #CFA61E;
-            color: #fff;
-        }
-        .save-btn {
-            width: 100%;
-            background-color: #CFA61E;
-            color: #fff;
-        }
-        .icon-text {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .icon-text i {
-            margin-right: 20px; /* Space between icon and text */
-            font-size: 5rem; /* Increase icon size */
-        }
-        .icon-text h3 {
-            margin: 0;
-            font-weight: bold; /* Make text bold */
-            margin-top: 5px;
-            color: #fff;
-        }
-        .input-text{
-            color: #fff;
-        }
+        
     </style>
 <body>
 
@@ -113,7 +70,7 @@ mysqli_close($conn);
     ?>
 </div>
 <br>
-<section class="register vh-100 d-flex align-items-center justify-content-center">
+<section class="d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-black right-col">
@@ -131,9 +88,9 @@ mysqli_close($conn);
                         <div class="form-outline mb-4">
                         <div class="input-text">Email:</div><input type="email" class="form-control form-control-lg" placeholder="Email" name="email" value="<?php echo htmlspecialchars($email); ?>" readonly/>
                         </div>
-                        <div class="form-outline mb-4">
+                        <!-- <div class="form-outline mb-4">
                         <div class="input-text">Password:</div><input type="text" id="password" class="form-control form-control-lg" placeholder="Password" name="password" value="<?php echo htmlspecialchars($password); ?>" readonly />
-                        </div>
+                        </div> -->
                         <div class="double-form-field row mb-4">
                             <div class="col">
                             <div class="input-text">Date Of Birth:</div><input type="date" class="form-control date-input" name="dob" value="<?php echo htmlspecialchars($dob); ?>" readonly />

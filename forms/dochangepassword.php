@@ -1,19 +1,50 @@
-<?php 
+<?php
 session_start();
 include "../db_connect.php";
 
+// Ensure the user is logged in
 if (!isset($_SESSION['patient_id'])) {
-    header("Location: forms/login.php");
+    header("Location: login.php");
     exit();
 }
 
-$query = "SELECT patient_name, patient_dob, patient_email, patient_phoneNo FROM patient WHERE patient_id = ?";
-$stmt = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt, "i", $_SESSION['patient_id']);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $patient_name, $patient_dob, $patient_email, $patient_phoneNo);
-mysqli_stmt_fetch($stmt);
-mysqli_stmt_close($stmt);
+
+// Get the form data
+$new_password = trim($_POST['newpassword']);
+$confirm_password = trim($_POST['cfmpassword']);
+
+// Validate input
+if (empty($email) || empty($new_password) || empty($confirm_password)) {
+    header("Location: change_password.php?error=Please fill in all fields.");
+    exit();
+}
+
+// Check if passwords match
+if ($new_password !== $confirm_password) {
+    header("Location: change_password.php?error=Passwords do not match.");
+    exit();
+}
+
+
+
+// Hash the new password
+// $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+// Update the password in the database
+    $stmt = $conn->prepare("UPDATE patient SET patient_password = ? WHERE patient_email = ? AND patient_id = ?");
+    $stmt->bind_param("ssi", $new_password, $email, $_SESSION['patient_id']);
+    $stmt->execute();
+    
+    if ($stmt->affected_rows > 0) {
+        // Password updated successfully
+        $message = "Password updated successfully";
+    } else {
+        // No rows updated (could be wrong email or patient_id)
+        $message = "An error occurred while updating the password";
+    }
+    $stmt->close();
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +52,7 @@ mysqli_stmt_close($stmt);
 
 <head>
     <meta charset="utf-8" />
-    <title>Sin Nam Medical Hall | Edit Profile</title>
+    <title>Sin Nam Medical Hall | Change Password</title>
     <!-- 'links.php' contains cdn links' -->
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
@@ -50,35 +81,22 @@ mysqli_stmt_close($stmt);
     ?>
 </div>
 
-
 <section class=" d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-black right-col">
-                <div class="form-container">
-                    <form id="profileForm" method="post" action="doeditprofile.php">
-                        <div class="form-outline mb-4">
-                            <div class="icon-text">
-                                <i class="bi bi-person-circle"></i>
-                                <h3><?php echo htmlspecialchars($patient_name); ?></h3>
-                            </div>
-                        </div>
+                <div class="form-container-password">
+                    <form id="passwordForm" method="post" action="dochangepassword.php">
                         <div class="form-outline mb-4">
                             <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" value="<?php echo htmlspecialchars($patient_name); ?>" hidden/>
                         </div>
+                        <h2 class="text">Change Password</h2>
+                        <br>
                         <div class="form-outline mb-4">
-                        <div class="input-text">Email:</div><input type="email" class="form-control form-control-lg" placeholder="Email" name="email" value="<?php echo htmlspecialchars($patient_email); ?>"/>
-                        </div>
-                        <!-- <div class="form-outline mb-4">
-                        <div class="input-text">Password:</div><input type="text" id="password" class="form-control form-control-lg" placeholder="Password" name="password" value="<?php echo htmlspecialchars($patient_password); ?>"  />
-                        </div> -->
-                        <div class="double-form-field row mb-4">
-                            <div class="col">
-                            <div class="input-text">Date Of Birth:</div><input type="date" class="form-control date-input" name="dob" value="<?php echo htmlspecialchars($patient_dob); ?>" readonly/>
-                            </div>
+                        <div class="input-text">New Password:</div><input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword" required/>
                         </div>
                         <div class="form-outline mb-4">
-                        <div class="input-text">Phone No:</div><input type="number" class="form-control form-control-lg" placeholder="Phone Number" name="phone" value="<?php echo htmlspecialchars($patient_phoneNo); ?>" />
+                        <div class="input-text">Confirm Password:</div><input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword" required/>
                         </div>
                         <br>
                         <div class="row mt-3">
@@ -101,3 +119,4 @@ mysqli_stmt_close($stmt);
 </body>
 
 </html>
+
