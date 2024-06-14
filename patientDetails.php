@@ -29,7 +29,7 @@ if (!isset($_SESSION['admin_id'])) {
     <script>
         $(document).ready(function() {
             $('#table').DataTable({
-                    "pagingType": "full_numbers",
+                    "pagingType": "numbers",
                     "pageLength": 10,
                     "lengthMenu": 
                         [10, 25, 50, 75],
@@ -56,7 +56,7 @@ if (!isset($_SESSION['admin_id'])) {
                                     <th scope="col">Last Updated Datetime</th>
                                     <th scope="col">Payment Status</th>
                                     <th scope="col">Amount Payable</th>
-                                    <th scope="col-2">Actions</th>
+                                    <th scope="col-2">Take Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,6 +94,7 @@ if (!isset($_SESSION['admin_id'])) {
                                     }
                                 }
                                 ?>
+                                <a href='addPatient.php' class='btn add-btn'>Add</a>
                             </tbody>
                         </table>
                     </div>

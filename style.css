@@ -920,12 +920,20 @@ nav{
     font-size: 16px;
 }
 
+.add-btn{
+    background-color: #CFA61E;
+    padding: 7px 20px;
+    color: #f9f9f9;
+    font-size: 16px;
+    align-items: right;
+}
+
 .delete-btn:hover{
     background-color: #A34039;
     color: #f9f9f9;
 }
 
-.edit-btn:hover{
+.edit-btn:hover, .add-btn:hover{
     background-color: #d1ac47;
     color: #f9f9f9;
 }
@@ -959,12 +967,12 @@ nav{
 
 
 
-/* ===========================Admin patient details page start=========================== */
+/* ===========================Admin patient/appointment details page start=========================== */
 .patient-table .patient-box{
     padding: 0 13%;
 }
 
-.patient-table h2{
+.patient-table h2, .appointment-table h2{
     font-size: 56px;
     font-weight: 600;
     margin: 60px 0;
@@ -985,8 +993,7 @@ nav{
 
 .table tr{
     font-size: 15px;
-    font-size: 550;
-    align-items: center;
+    font-size: 600;
 }
 
 .table tr:nth-child(odd){
@@ -998,9 +1005,51 @@ nav{
 
 }
 
+.modal .yes-btn{
+    background-color: #682924;
+    padding: 7px 20px;
+    color: #f9f9f9;
+    font-size: 14px;
+}
+
+.modal .no-btn{
+    background-color: #CFA61E;
+    padding: 7px 20px;
+    color: #f9f9f9;
+    font-size: 14px;
+
+}
+
+.yes-btn:hover{
+    background-color: #A34039;
+    color: #f9f9f9;
+}
+
+.no-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
+}
+
 .patient-table .btn-group{
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
 }
+
+.modal .modal-title{
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.modal-title span{
+    color: #ff4b3e;
+
+}
+
+.modal .modal-text{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
