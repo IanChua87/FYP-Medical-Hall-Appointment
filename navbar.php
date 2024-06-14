@@ -27,12 +27,23 @@ echo '
                     <a class="nav-link" href="#contact">Contact</a>
                 </li>
             </ul>';
-            
-if (isset($_SESSION['patient_id'])) {
-    echo '<ul class="nav navbar-nav">
-            <a class="btn logout-btn" href="forms/logout.php" role="button">Logout</a>
-          </ul>';
-} else {
+
+if (isset($_SESSION['patient_id']) || isset($_SESSION['doctor_id'])) {
+    // echo '<ul class="nav navbar-nav">
+    //         <a class="btn logout-btn" href="forms/loggedOutSuccessful.php" role="button">Logout</a>
+    //       </ul>';
+    echo '<div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
+            </ul>
+          </div>';
+} 
+else {
     echo '<ul class="nav navbar-nav">
             <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
             <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
@@ -42,4 +53,3 @@ if (isset($_SESSION['patient_id'])) {
 echo '    </div>
     </div>
 </nav>';
-?>
