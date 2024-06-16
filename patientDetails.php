@@ -83,7 +83,7 @@ if (!isset($_SESSION['admin_id'])) {
                                             echo "<td>" . $row['payment_status'] . "</td>";
                                             echo "<td>" . $row['amount_payable'] . "</td>";
                                             echo "<td>
-                                                    <div class='btn-group'>
+                                                    <div class='buttons'>
                                                         <a href='editPatient.php' class='btn edit-btn'>Edit</a>
                                                         <a href='deletePatient.php' class='btn delete-btn'>Delete</a>
                                                     </div>

@@ -95,7 +95,11 @@ if (!$edit_appointment_stmt) {
 <script>
     $(document).ready(function() {
         $('#appointment_date').datepicker({
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'yy-mm-dd',
+            beforeShowDay: function(date) {
+                    var day = date.getDay();
+                    return [(day !== 1 && day !== 0), ''];
+            }
         });
 
         $('#appointment_time').timepicker({

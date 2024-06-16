@@ -63,6 +63,7 @@ if (isset($_POST['submit'])) {
                 if (password_verify($password, $u_user_data['user_password'])) {
                     if ($u_user_data['role'] == "Admin") {
                         $_SESSION['admin_id'] = $u_user_data['user_id'];
+                        $_SESSION['admin_role'] = $u_user_data['role'];
                         $login_success = true;
                         header("Location: ../adminDashboard.php");
                         exit();

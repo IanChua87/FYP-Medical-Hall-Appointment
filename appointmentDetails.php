@@ -81,6 +81,7 @@ if (!isset($_SESSION['admin_id'])) {
                             }
                         }
                         ?>
+                         <a href='addAppointment.php' class='btn add-btn'>Add</a>
                     </tbody>
                 </table>
 
@@ -104,7 +105,6 @@ if (!isset($_SESSION['admin_id'])) {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>

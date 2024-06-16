@@ -1052,14 +1052,14 @@ nav{
     font-weight: 500;
 }
 
-.appointment{
+.appointment, .appointment-add{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.appointment-box{
+.appointment .appointment-box{
     background-color: #FCF9F9;
     height: 680px;
     border-radius: 16px;
@@ -1067,22 +1067,30 @@ nav{
     padding: 0 50px;
 }
 
-.appointment h2{
+.appointment-add .appointment-box{
+    background-color: #FCF9F9;
+    height: 620px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
+    padding: 0 50px;
+}
+
+.appointment h2, .appointment-add h2{
     font-size: 36px;
     font-weight: 600;
     font-weight: 600;
 
 }
 
-.appointment form {
+.appointment form, .appointment-add form {
     width: 100%; 
 }
 
-.appointment .form-group{
+.appointment .form-group, .appointment-add .form-group{
     margin-bottom: 20px;
 }
 
-.appointment .form-group label{
+.appointment .form-group label, .appointment-add .form-group label{
     font-size: 16px;
     font-weight: 500;
     margin-right: 10px;
@@ -1090,7 +1098,7 @@ nav{
     margin-bottom: 8px;
 }
 
-.appointment .form-control{
+.appointment .form-control, .appointment-add .form-control{
     width: 400px;
     height: 45px;
     border-radius: 5px;
@@ -1100,13 +1108,13 @@ nav{
     background-color: #EFEFEF;
 }
 
-.appointment .bi-person-circle{
+.appointment .bi-person-circle, .appointment-add .fa-calendar{
     color: black;
     font-size: 60px;
     margin-right: 15px;
 }
 
-.appointment .profile-details{
+.appointment .profile-details, .appointment-add .profile-details{
     display: flex;
     align-items: center;
     margin: 40px 0;
@@ -1130,6 +1138,15 @@ nav{
     width: 100%;
 }
 
+.appointment-add .create-btn{
+    background-color: #682924;
+    color: #f9f9f9;
+    font-size: 14px;
+    padding: 12px 20px;
+    width: 100%;
+
+}
+
 .appointment .save-btn:hover{
     background-color: #d1ac47;
     color: #f9f9f9;
@@ -1147,5 +1164,19 @@ nav{
     justify-content: center;
     margin-top: 40px;
 
+}
+
+.appointment-add .buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+
+}
+
+.patient-table .buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
