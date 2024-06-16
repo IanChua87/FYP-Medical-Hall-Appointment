@@ -33,7 +33,7 @@ CREATE TABLE `appointment` (
   `appointment_date` date NOT NULL,
   `appointment_time` time NOT NULL,
   `queue_no` int(11) NOT NULL,
-  `appointment_remarks` int(11) DEFAULT NULL,
+  `appointment_remarks` varchar(255) DEFAULT NULL,
   `booked_by` varchar(255) NOT NULL,
   `booked_datetime` datetime NOT NULL,
   `patient_id` int(11) NOT NULL,
