@@ -28,6 +28,11 @@ if (!$edit_appointment_stmt) {
         $appointment_time = $row['appointment_time'];
         $appointment_status = $row['appointment_status'];
 
+    } else{
+        $_SESSION['message'] = "Appointment not found.";
+        header("Location: appointmentDetails.php");
+        exit();
+    
     }
 }
 ?>
@@ -75,7 +80,7 @@ if (!$edit_appointment_stmt) {
                     <input type="text" name="appointment_status" id="appointment_status" class="form-control" value="<?php echo $appointment_status ?>" disabled>
                 </div>
                 <div class="buttons">
-                    <button type="reset" class="btn back-btn">Back</button>
+                    <button class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
                 </div>
         </div>

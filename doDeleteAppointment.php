@@ -27,6 +27,10 @@ if (isset($_POST['appointment_id'])) {
         }
         mysqli_stmt_close($stmt);
     }
+} else{
+    header("Location: appointmentDetails.php");
+    exit();
+
 }
 ?>
 

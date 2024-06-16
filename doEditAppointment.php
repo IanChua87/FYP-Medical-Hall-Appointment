@@ -30,6 +30,10 @@ if(isset($_POST['submit'])){
         }
         mysqli_stmt_close($update_appointment_stmt);
     }
+} else{
+    header("Location: appointmentDetails.php");
+    exit();
+
 }
 ?>
 
