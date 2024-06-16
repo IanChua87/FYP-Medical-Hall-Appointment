@@ -120,7 +120,7 @@ $conn->close();
                     $appt_status = $apptData['appointment_status'];
                 ?>
                     <tr>
-                        <td><?php echo $appt_date; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($appt_date)); ?></td>
                         <td><?php echo $appt_start_time; ?></td>
                         <td><?php echo $appt_end_time; ?></td>
                         <td><?php echo $appt_status; ?></td>

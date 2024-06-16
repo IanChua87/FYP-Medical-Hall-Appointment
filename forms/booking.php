@@ -97,7 +97,42 @@ $conn->close();
         .btn-primary:hover {
             background-color: #0056b3;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selfRadio = document.getElementById('self');
+            const othersRadio = document.getElementById('others');
+            const relationField = document.getElementById('relationField');
+            const relationInput = document.getElementById('relation');
+            const submitButton = document.querySelector('button[name="submit"]');
+
+            // Initialize with self checked
+            selfRadio.checked = true;
+            relationField.classList.add('hidden');
+
+            selfRadio.addEventListener('change', function () {
+                relationField.classList.add('hidden');
+                relationInput.required = false;
+            });
+
+            othersRadio.addEventListener('change', function () {
+                relationField.classList.remove('hidden');
+                relationInput.required = true;
+            });
+
+            // Prevent form submission if relation input is empty when others is selected
+            submitButton.addEventListener('click', function (event) {
+                if (othersRadio.checked && relationInput.value.trim() === '') {
+                    event.preventDefault();
+                    alert('Please enter the relation.');
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -122,6 +157,9 @@ $conn->close();
                     <label for="others">
                         <input type="radio" id="others" name="options" value="2"> Others
                     </label>
+                </div>
+                <div class="form-group hidden" id="relationField">
+                    <input type="text" class="form-control" id="relation" name="relation" placeholder="Relation" style="margin-bottom: 10px;">
                 </div>
                 <div class="form-group date-and-button">
                 <input type="date" class="form-control date-input" id="apptdate" name="apptdate" placeholder="Date of appointment" required>

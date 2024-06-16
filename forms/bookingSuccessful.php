@@ -26,6 +26,8 @@ if (isset($_POST['book'])) {
     if (isset($_POST['timeslot']) && isset($_POST['apptdate'])) {
         $timeslot = $_POST['timeslot'];
         $apptdate = $_POST['apptdate'];
+        $options = $_POST['options'];
+        $relation = isset($_POST['relation']) ? $_POST['relation'] : null;
 
         // Separate the timeslot into start and end times
         $timeslot_parts = explode(' - ', $timeslot);
@@ -36,21 +38,39 @@ if (isset($_POST['book'])) {
             // Get the current date and time
             $booked_datetime = date('Y-m-d H:i:s');
 
-            // Prepare the SQL query
+            // Prepare the SQL query for inserting into appointment table
             $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $query);
-            
+
             if (!$stmt) {
                 die("Failed to prepare statement: " . mysqli_error($conn));
             }
 
-            // Bind the parameters
+            // Bind the parameters for appointment insertion
             mysqli_stmt_bind_param($stmt, "sssssi", $apptdate, $appointment_start_time, $appointment_end_time, $patient_name, $booked_datetime, $patient_id);
 
-
-            // Execute the statement
+            // Execute the statement for appointment insertion
             if (mysqli_stmt_execute($stmt)) {
-                header("Location: bookingSuccessful.php?success=" . urlencode("Appointment booked successfully."));
+                // Get the last inserted appointment ID
+                $appointment_id = mysqli_insert_id($conn);
+
+                // If booking is for others and relation is provided, insert into relation table
+                if ($options === '2' && $relation) {
+                    $sql = "INSERT INTO relation (relation_name, appointment_id) VALUES (?, ?)";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    if (!$stmt) {
+                        die("Failed to prepare statement: " . mysqli_error($conn));
+                    }
+                    mysqli_stmt_bind_param($stmt, "si", $relation, $appointment_id);
+                    if (!mysqli_stmt_execute($stmt)) {
+                        $error = "Failed to book appointment for relation: " . mysqli_error($conn);
+                        header("Location: dobooking.php?error=" . urlencode($error));
+                        exit();
+                    }
+                    mysqli_stmt_close($stmt);
+                }
+
+                header("Location: bookingSuccessful.php?success=" . urlencode("Appointment booked successfully for relation: $relation"));
                 exit();
             } else {
                 $error = "Failed to book appointment: " . mysqli_error($conn);
@@ -71,8 +91,10 @@ if (isset($_POST['book'])) {
         header("Location: dobooking.php?error=" . urlencode($error));
         exit();
     }
-} 
+}
 ?>
+
+
 
 
 
