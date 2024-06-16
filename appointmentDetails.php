@@ -45,7 +45,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <th>Patient Name</th>
                             <th>Phone No.</th>
                             <th>Appointment Date</th>
-                            <th>Patient Time</th>
+                            <th>Appointment Time</th>
                             <th>Status</th>
                             <th>Take Actions</th>
                         </tr>
@@ -72,8 +72,8 @@ if (!isset($_SESSION['admin_id'])) {
                                     echo "<td>" . $row['appointment_status'] . "</td>";
                                     echo "<td>
                                                     <div class='btn-group'>
-                                                        <a href='editAppointment.php' class='btn edit-btn'>Edit</a>
-                                                        <button href='#' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['appointment_id'] . "'>Delete</button>
+                                                        <a href='editAppointment.php?appointment_id=" . $row['appointment_id'] . "' class='btn edit-btn'>Edit</a>
+                                                        <button class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['appointment_id'] . "'>Delete</button>
                                                     </div>
                                                 </td>";
                                     echo "</tr>";
