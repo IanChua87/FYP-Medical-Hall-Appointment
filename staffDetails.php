@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Patient</title>
+    <title>Admin | Staff</title>
     <!-- 'links.php' contains cdn links' -->
     <?php include 'links.php'; ?>
     <!-- Bootstrap CSS -->
@@ -42,46 +42,36 @@ if (!isset($_SESSION['admin_id'])) {
                 <table class="table table-bordered table-striped" id="table">
                     <thead>
                         <tr>
-                            <th scope="col">Patient ID</th>
-                            <th scope="col">Patient Name</th>
-                            <th scope="col">Patient DOB</th>
-                            <th scope="col">Patient Phone No</th>
-                            <th scope="col">Patient Email</th>
-                            <th scope="col">Patient Status</th>
-                            <th scope="col">Last Updated By</th>
-                            <th scope="col">Last Updated Datetime</th>
-                            <th scope="col">Payment Status</th>
-                            <th scope="col">Amount Payable</th>
-                            <th scope="col-2">Take Actions</th>
+                            <th scope="col">Staff ID</th>
+                            <th scope="col">Staff Name</th>
+                            <th scope="col">Staff Email</th>
+                            <!-- <th scope="col">Staff Password</th> -->
+                            <th scope="col">Role</th>
+                            <th scope="col">Take Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $query = "SELECT * FROM patient ORDER BY patient_id ASC";
-                        $patient_stmt = mysqli_prepare($conn, $query);
-                        if (!$patient_stmt) {
+                        $query = "SELECT * FROM users ORDER BY user_id ASC";
+                        $user_stmt = mysqli_prepare($conn, $query);
+                        if (!$user_stmt) {
                             die("Failed to prepare statement");
                         } else {
-                            mysqli_stmt_execute($patient_stmt);
-                            $result = mysqli_stmt_get_result($patient_stmt);
+                            mysqli_stmt_execute($user_stmt);
+                            $result = mysqli_stmt_get_result($user_stmt);
 
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['patient_id'] . "</td>";
-                                    echo "<td>" . $row['patient_name'] . "</td>";
-                                    echo "<td>" . $row['patient_dob'] . "</td>";
-                                    echo "<td>" . $row['patient_phoneNo'] . "</td>";
-                                    echo "<td>" . $row['patient_email'] . "</td>";
-                                    echo "<td>" . $row['patient_status'] . "</td>";
-                                    echo "<td>" . $row['last_updated_by'] . "</td>";
-                                    echo "<td>" . $row['last_updated_datetime'] . "</td>";
-                                    echo "<td>" . $row['payment_status'] . "</td>";
-                                    echo "<td>" . $row['amount_payable'] . "</td>";
+                                    echo "<td>" . $row['user_id'] . "</td>";
+                                    echo "<td>" . $row['user_name'] . "</td>";
+                                    echo "<td>" . $row['user_email'] . "</td>";
+                                    // echo "<td>" . $row['user_password'] . "</td>";
+                                    echo "<td>" . $row['role'] . "</td>";
                                     echo "<td>
                                                     <div class='buttons'>
-                                                        <a href='editPatient.php?patient_id=" . $row['patient_id'] . "' class='btn edit-btn'>Edit</a>
-                                                        <a href='deletePatient.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['patient_id'] . "'>Delete</a>
+                                                        <a href='editStaff.php?user_id=" . $row['user_id'] . "' class='btn edit-btn'>Edit</a>
+                                                        <a href='deleteStaff.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['user_id'] . "'>Delete</a>
                                                     </div>
                                                 </td>";
 

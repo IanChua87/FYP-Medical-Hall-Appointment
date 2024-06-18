@@ -71,11 +71,11 @@ if (!isset($_SESSION['admin_id'])) {
                                     echo "<td>" . $row['appointment_time'] . "</td>";
                                     echo "<td>" . $row['appointment_status'] . "</td>";
                                     echo "<td>
-                                                    <div class='btn-group'>
-                                                        <a href='editAppointment.php?appointment_id=" . $row['appointment_id'] . "' class='btn edit-btn'>Edit</a>
-                                                        <button class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['appointment_id'] . "'>Delete</button>
-                                                    </div>
-                                                </td>";
+                                            <div class='buttons'>
+                                                <a href='editAppointment.php?appointment_id=" . $row['appointment_id'] . "' class='btn edit-btn'>Edit</a>
+                                                <button class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['appointment_id'] . "'>Delete</button>
+                                            </div>
+                                        </td>";
                                     echo "</tr>";
                                 }
                             }
@@ -93,7 +93,7 @@ if (!isset($_SESSION['admin_id'])) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p class="modal-text">Are you sure you want to cancel the appointment? <br> This action cannot be undone.</p>
+                                <p class="modal-text">Are you sure you want to delete the appointment record? <br> This action cannot be undone.</p>
                             </div>
                             <div class="modal-footer">
                                 <form action="doDeleteAppointment.php" id="delete-form" method="POST">
@@ -122,5 +122,16 @@ if (!isset($_SESSION['admin_id'])) {
         });
     });
 </script>
+
+<?php include 'sessionMsg.php' ?>
+
+<script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#session-msg').fadeOut('slow');
+            }, 1700);
+        });
+</script>
+
 
 </html>

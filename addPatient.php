@@ -17,42 +17,43 @@ if (!isset($_SESSION['admin_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Add Appointment</title>
+    <title>Admin | Add Patient</title>
      <!-- 'links.php' contains cdn links' -->
     <?php include 'links.php'; ?>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <body>
-    <section class="appointment-add">
-        <div class="appointment-box">
+    <section class="patient-add">
+        <div class="patient-box">
             <div class="profile-details">
-                <i class="fa-regular fa-calendar"></i>
-                <h2 class="">Add Appointment</h2>
+                <i class="bi bi-person-circle"></i>
+                <h2 class="">Add Patient</h2>
             </div>
-            <form action="doAddAppointment.php" method="POST">
+            <form action="doAddPatient.php" method="POST">
                 <div class="form-group">
-                    <input type="text" name="patient_id" id="patient_id" class="form-control" value="" hidden>
-                </div>
-
-                <div class="form-group">
-                    <label for="patient_name">Name:</label>
+                    <label for="name">Name:</label>
                     <input type="text" name="patient_name" id="patient_name" class="form-control" value="">
                 </div>
 
                 <div class="form-group">
-                    <label for="appointment_date">Appointment Date:</label>
-                    <input type="text" name="appointment_date" id="appointment_date" class="form-control" value="">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="">
                 </div>
 
                 <div class="form-group">
-                    <label for="appointment_time">Appointment Time:</label>
-                    <input type="text" name="appointment_time" id="appointment_time" class="form-control" value="">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="text" name="dob" id="dob" class="form-control" value="">
                 </div>
 
                 <div class="form-group">
-                    <label for="relation">Relation:</label>
-                    <input type="text" name="relation" id="relation" class="form-control" value="">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" class="form-control" value="">
                 </div>
 
                 <div class="buttons">
@@ -69,12 +70,8 @@ if (!isset($_SESSION['admin_id'])) {
 
 <script>
     $(document).ready(function() {
-        $('#appointment_date').datepicker({
+        $('#dob').datepicker({
             dateFormat: 'yy-mm-dd', 
-            beforeShowDay: function(date) {
-                    var day = date.getDay();
-                    return [(day !== 1 && day !== 0), ''];
-            }
         });
 
         $('#appointment_time').timepicker({

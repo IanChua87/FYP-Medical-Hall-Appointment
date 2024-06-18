@@ -9,34 +9,36 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-$query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE appointment_id = ?";
-$edit_appointment_stmt = mysqli_prepare($conn, $query);
-if (!$edit_appointment_stmt) {
+$query = "SELECT * FROM patient WHERE patient_id = ?";
+$edit_patient_stmt = mysqli_prepare($conn, $query);
+
+
+if (!$edit_patient_stmt) {
     die("Failed to prepare statement");
 } else{
-    mysqli_stmt_bind_param($edit_appointment_stmt, 's', $_GET['appointment_id']);
-    mysqli_stmt_execute($edit_appointment_stmt);
-    $edit_appointment_result = mysqli_stmt_get_result($edit_appointment_stmt);
+    mysqli_stmt_bind_param($edit_patient_stmt, 's', $_GET['patient_id']);
+    mysqli_stmt_execute($edit_patient_stmt);
+    $edit_patient_result = mysqli_stmt_get_result($edit_patient_stmt);
 
-    if(mysqli_num_rows($edit_appointment_result) > 0){
-        $row = mysqli_fetch_assoc($edit_appointment_result);
-
-        $patient_name = $row['patient_name'];
-        $phone_number = $row['patient_phoneNo'];
-        $appointment_id = $row['appointment_id'];
-        $appointment_date = $row['appointment_date'];
-        $appointment_time = $row['appointment_time'];
-        $appointment_status = $row['appointment_status'];
+    if(mysqli_num_rows($edit_patient_result) > 0){
+        if($row = mysqli_fetch_assoc($edit_patient_result)){
+            $patient_id = $row['patient_id'];
+            $patient_name = $row['patient_name'];
+            $dob = $row['patient_dob'];
+            $patient_phoneNo = $row['patient_phoneNo'];
+            $patient_email = $row['patient_email'];
+            $patient_status = $row['patient_status'];
+            $patient_password = $row['patient_password'];
+        }
 
     } else{
-        $_SESSION['message'] = "Appointment not found.";
-        header("Location: appointmentDetails.php");
+        $_SESSION['message'] = "Patient not found.";
+        header("Location: patientDetails.php");
         exit();
-    
     }
 }
 ?>
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,30 +58,30 @@ if (!$edit_appointment_stmt) {
                 <i class="bi bi-person-circle"></i>
                 <h2 class=""><?php echo $patient_name ?></h2>
             </div>
-            <form action="doEditAppointment.php" method="POST">
+            <form action="doEditPatient.php" method="POST">
                 <div class="form-group">
-                    <input type="text" name="appointment_id" class="form-control" value="<?php echo $appointment_id ?>" hidden>
+                    <input type="text" name="patient_id" class="form-control" value="<?php echo $patient_id ?>" hidden>
                 </div>
 
                 <div class="form-group">
                     <label for="phone_number">Phone Number:</label>
-                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="<?php echo $phone_number ?>" disabled>
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="<?php echo $patient_phoneNo ?>" disabled>
                 </div>
 
                 <div class="form-group">
-                    <label for="appointment_date">Appointment Date:</label>
-                    <input type="text" name="appointment_date" id="appointment_date" class="form-control" value="<?php echo $appointment_date ?>">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="text" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>" disabled>
                 </div>
 
                 <div class="form-group">
-                    <label for="appointment_time">Appointment Time:</label>
-                    <input type="text" name="appointment_time" id="appointment_time" class="form-control" value="<?php echo $appointment_time ?>">
+                    <label for="appointment_time">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" value="<?php echo $patient_email ?>">
                 </div>
 
-                <div class="form-group">
-                    <label for="appointment_status">Appointment Status:</label>
-                    <input type="text" name="appointment_status" id="appointment_status" class="form-control" value="<?php echo $appointment_status ?>" disabled>
-                </div>
+                <!-- <div class="form-group">
+                    <label for="appointment_status">Password:</label>
+                    <input type="password" name="password" id="password" class="form-control" value="<?php echo $patient_password ?>">
+                </div> -->
                 <div class="buttons">
                     <button class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
@@ -94,18 +96,5 @@ if (!$edit_appointment_stmt) {
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $('#appointment_date').datepicker({
-            dateFormat: 'yy-mm-dd'
-        });
-
-        $('#appointment_time').timepicker({
-            timeFormat: 'hh:mm p',
-            minTime: '1100',
-            maxTime: '1630',
-            showDuration: true,
-            interval: 15
-        });
-    });
 </script>
 </html>

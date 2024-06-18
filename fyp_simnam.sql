@@ -160,6 +160,15 @@ ALTER TABLE `users`
 --
 ALTER TABLE `appointment`
   ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`);
+
+
+ALTER TABLE `appointment` DROP FOREIGN KEY `appointment_ibfk_1`;
+
+ALTER TABLE `appointment`
+ADD CONSTRAINT `appointment_ibfk_1`
+FOREIGN KEY (`patient_id`) REFERENCES `patient`(`patient_id`)
+ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

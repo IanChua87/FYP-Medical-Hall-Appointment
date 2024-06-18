@@ -88,10 +88,6 @@ include "../db_connect.php";
 
     <script>
         $(document).ready(function() {
-            $('#dob').attr('placeholder', 'Date of Birth');
-        });
-
-        $(document).ready(function() {
             setTimeout(function() {
                 $('#register-error-msg').fadeOut('slow');
             }, 1700);
