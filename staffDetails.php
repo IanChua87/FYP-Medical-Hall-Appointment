@@ -23,6 +23,16 @@ if (!isset($_SESSION['admin_id'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
+    <style>
+        .pagination .page-item.active .page-link {
+            background-color: #682924;
+            border: none;
+        }
+
+        .pagination .page-item.active .page-link:hover {
+            background-color: #A34039;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,16 +42,18 @@ if (!isset($_SESSION['admin_id'])) {
                 "pagingType": "numbers",
                 "pageLength": 10,
                 "lengthMenu": [10, 25, 50, 75],
+                "color": "red"
+
             });
         });
     </script>
-    <section class="patient-table">
+    <section class="staff-table">
         <div class="container">
-            <h2 class="text-center">Patient Details</h2>
+            <h2 class="text-center">Staff Details</h2>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="table">
+                <table class="table table-striped" id="table">
                     <thead>
-                        <tr>
+                        <tr class="table-head">
                             <th scope="col">Staff ID</th>
                             <th scope="col">Staff Name</th>
                             <th scope="col">Staff Email</th>
@@ -62,25 +74,33 @@ if (!isset($_SESSION['admin_id'])) {
 
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>";
+                                    echo "<tr class='table-body'>";
                                     echo "<td>" . $row['user_id'] . "</td>";
                                     echo "<td>" . $row['user_name'] . "</td>";
                                     echo "<td>" . $row['user_email'] . "</td>";
                                     // echo "<td>" . $row['user_password'] . "</td>";
                                     echo "<td>" . $row['role'] . "</td>";
-                                    echo "<td>
-                                                    <div class='buttons'>
-                                                        <a href='editStaff.php?user_id=" . $row['user_id'] . "' class='btn edit-btn'>Edit</a>
-                                                        <a href='deleteStaff.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['user_id'] . "'>Delete</a>
-                                                    </div>
-                                                </td>";
+                                    if ($row['role'] == 'Doctor') {
+                                        echo "<td>
+                                        <div class='buttons'>
+                                            <a href='editStaff.php?user_id=" . $row['user_id'] . "' class='btn edit-btn'>Edit</a>
+                                            <a href='deleteStaff.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['user_id'] . "'>Delete</a>
+                                        </div>
+                                    </td>";
 
-                                    echo "</tr>";
+                                        echo "</tr>";
+                                    } else{
+                                        echo "<td>
+                                        <div class='buttons'>
+                                            <a href='editStaff.php?user_id=" . $row['user_id'] . "' class='btn edit-btn'>Edit</a>
+                                        </div>
+                                    </td>";
+                                    }
                                 }
                             }
                         }
                         ?>
-                        <a href='addPatient.php' class='btn add-btn'>Add</a>
+                        <a href='addStaff.php' class='btn add-btn'>Add</a>
                     </tbody>
                 </table>
 
@@ -92,11 +112,11 @@ if (!isset($_SESSION['admin_id'])) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p class="modal-text">Are you sure you want to delete the patient record? <br> This action cannot be undone.</p>
+                                <p class="modal-text">Are you sure you want to delete the staff record? <br> This action cannot be undone.</p>
                             </div>
                             <div class="modal-footer">
-                                <form action="doDeletePatient.php" id="delete-form" method="POST">
-                                    <input type="hidden" name="patient_id" id="patient_id" value="">
+                                <form action="doDeleteStaff.php" id="delete-form" method="POST">
+                                    <input type="hidden" name="user_id" id="user_id" value="">
                                     <button type="submit" class="btn yes-btn">Yes</button>
                                     <button type="button" class="btn no-btn" data-bs-dismiss="modal">No</button>
                                 </form>
@@ -112,8 +132,8 @@ if (!isset($_SESSION['admin_id'])) {
     <script>
         $(document).ready(function() {
             $('.delete-btn').on('click', function() {
-                var patientId = $(this).data('id');
-                $('#patient_id').val(patientId);
+                var userId = $(this).data('id');
+                $('#user_id').val(userId);
             });
 
             $('.yes-btn').on('click', function() {

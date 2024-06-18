@@ -978,7 +978,7 @@ nav{
     padding: 0 13%;
 }
 
-.patient-table h2, .appointment-table h2{
+.patient-table h2, .appointment-table h2, .staff-table h2{
     font-size: 56px;
     font-weight: 600;
     margin: 60px 0;
@@ -995,6 +995,7 @@ nav{
     font-size: 16px;
     font-weight: 700;
     background-color: #f9f9f9;
+
 }
 
 .table tr{
@@ -1009,6 +1010,16 @@ nav{
 .table tr:nth-child(even){
     background-color: #f9f9f9;
 
+}
+
+.table tr th{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.table tr.table-body td,
+.table tr.table-head th{
+    border: none
 }
 
 .modal .yes-btn{
@@ -1108,7 +1119,6 @@ nav{
 .patient-add .form-group label{
     font-size: 16px;
     font-weight: 500;
-    margin-right: 10px;
     display: block;
     margin-bottom: 8px;
 }
@@ -1116,7 +1126,8 @@ nav{
 .appointment .form-control, 
 .appointment-add .form-control, 
 .patient .form-control,
-.patient-add .form-control{
+.patient-add .form-control,
+.form-select{
     width: 400px;
     height: 45px;
     border-radius: 5px;
@@ -1124,6 +1135,11 @@ nav{
     border: none;
     font-size: 16px;
     background-color: #EFEFEF;
+}
+
+.form-select{
+    margin-top: 30px;
+    font-size: 16px;
 }
 
 .bi-person-circle, .fa-calendar{

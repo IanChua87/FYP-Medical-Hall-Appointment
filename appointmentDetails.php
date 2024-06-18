@@ -39,7 +39,7 @@ if (!isset($_SESSION['admin_id'])) {
         <div class="container">
             <h2 class="text-center">Appointment Details</h2>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="table">
+                <table class="table table-striped" id="table">
                     <thead>
                         <tr>
                             <th>Patient Name</th>
