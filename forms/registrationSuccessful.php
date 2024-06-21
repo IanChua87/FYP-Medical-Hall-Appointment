@@ -27,7 +27,27 @@ if (isset($_POST['submit'])) {
             $error = "Invalid email format.";
             header("Location: register.php?error=" . urlencode($error));
             exit();
-        } else {
+        } 
+
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+            $error = "Only letters and white space allowed in name.";
+            header("Location: register.php?error=" . urlencode($error));
+            exit();
+        }
+
+        if(!preg_match("/^[0-9]*$/", $phone)){
+            $error = "Only numbers allowed in phone number.";
+            header("Location: register.php?error=" . urlencode($error));
+            exit();
+        }
+        
+        if(!strlen($password) >=8){
+            $error = "Password must be at least 8 characters long.";
+            header("Location: register.php?error=" . urlencode($error));
+            exit();
+        }        
+        
+        else {
             //prepared statement for checking if user already exists
             $p_query = "SELECT * FROM patient WHERE patient_name = ? AND patient_email = ?";
             $patient_stmt = mysqli_prepare($conn, $p_query);
