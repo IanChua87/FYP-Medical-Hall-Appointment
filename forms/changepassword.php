@@ -58,7 +58,7 @@ if (!isset($_SESSION['patient_id'])) {
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../index.php" class="btn back-btn">Back</a>
+                            <a href="../loginindex.php" class="btn back-btn">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>

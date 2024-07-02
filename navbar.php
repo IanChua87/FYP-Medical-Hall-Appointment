@@ -10,7 +10,8 @@ echo '
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto">'; ?>
+            <?php if (!isset($_SESSION["patient_id"])) { ?>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                 </li>
@@ -20,8 +21,23 @@ echo '
                 <li class="nav-item">
                     <a class="nav-link" href="#services">Services</a>
                 </li>
-                <div class="nav-item dropdown">
-                 <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+<?php } else { ?>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="../loginindex.php">Home</a>
+                </li>
+<?php } ?>
+<?php echo '
+                
+              
+            </ul>; ' ?>
+<?php
+if (isset($_SESSION['patient_id'])) {
+    echo '
+        <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Appointment
                 </a>
             <ul class="dropdown-menu" aria-labelledby="apptDropdown">
@@ -29,25 +45,19 @@ echo '
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
             </ul>
-          </div>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>';
-
-if (isset($_SESSION['patient_id'])) {
-    echo '<div class="nav-item dropdown">
+        </div>
+        <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-person-circle"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
-                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="forms/changepassword.php">Change Password</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
             </ul>
-          </div>';
+        </div>';
 } else {
     echo '<ul class="nav navbar-nav">
             <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>

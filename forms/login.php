@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
                 $user_data = mysqli_fetch_assoc($result);
 
                 $_SESSION['patient_id'] = $user_data['patient_id'];
-                header("Location: ../index.php");
+                header("Location: ../loginindex.php");
                 exit();
             } else {
                 $error = "Invalid email or password. Please try again.";

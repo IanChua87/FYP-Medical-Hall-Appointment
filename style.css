@@ -655,7 +655,11 @@ nav{
     font-size: 16px;
     padding: 12px 21px;
     justify-content: center;
+    margin-left: 10px;
 }
+
+
+
 /* ===========================Registration / Logged out / Booking successful pages end=========================== */
 
 /* ============Edit profile start=============== */

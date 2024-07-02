@@ -23,6 +23,7 @@
                     <p>You have been logged out. Please login again.</p>
                     <div class="mt-5">
                         <a href="login.php" class="btn login-btn">Login</a>
+                        <a href="../index.php" class="btn back-to-home-btn">Back to Home</a>
                     </div>
                 </div>
             </div>

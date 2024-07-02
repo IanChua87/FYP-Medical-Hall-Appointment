@@ -12,14 +12,26 @@ if (!isset($patient_id)) {
     exit();
 }
 
+
+
+
 if (isset($_POST['cancel'])) {
     if (isset($_POST['apptdate']) && isset($_POST['apptstarttime']) && isset($_POST['apptendtime'])) {
         $date = $_POST['apptdate'];
         $start_time = $_POST['apptstarttime'];
         $end_time = $_POST['apptendtime'];
+        $appointment_id = $_POST['appt_id'];
 
-        // SQL query to delete the appointment
-        $query = "DELETE FROM appointment WHERE appointment_date = ? AND appointment_start_time = ? AND appointment_end_time = ? AND patient_id = ?";
+          // Check if the selected date is in the past
+          $today = date('Y-m-d');
+          if ($date < $today) {
+              $_SESSION['error'] = "The date is already in the past.";
+              header("Location: viewappointment.php");
+              exit();
+          }
+
+        // SQL query to update the appointment status to 'CANCELLED'
+        $query = "UPDATE appointment SET appointment_status = 'CANCELLED' WHERE appointment_date = ? AND appointment_start_time = ? AND appointment_end_time = ? AND patient_id = ?";
 
         // Prepare the statement
         $stmt = $conn->prepare($query);
@@ -31,11 +43,14 @@ if (isset($_POST['cancel'])) {
         // Bind the parameters
         $stmt->bind_param("sssi", $date, $start_time, $end_time, $patient_id);
 
-        if ($stmt->execute()) {
+          // Execute statement
+          if ($stmt->execute()) {
+            // Redirect with success message
             header("Location: viewappointment.php?success=true");
             exit();
         } else {
-            $error = "Deletion failed: " . $stmt->error;
+            // Redirect with error message
+            $error = "Cancellation failed: " . $stmt->error;
             header("Location: viewappointment.php?error=" . urlencode($error));
             exit();
         }
@@ -59,7 +74,7 @@ $stmt->fetch();
 $stmt->close();
 
 // Fetch appointments
-$query = "SELECT appointment_date, TIME_FORMAT(appointment_start_time, '%H:%i') AS formatted_start_time, TIME_FORMAT(appointment_end_time, '%H:%i') AS formatted_end_time, appointment_status FROM appointment WHERE patient_id = ?";
+$query = "SELECT appointment_date, TIME_FORMAT(appointment_start_time, '%H:%i') AS formatted_start_time, TIME_FORMAT(appointment_end_time, '%H:%i') AS formatted_end_time, appointment_status FROM appointment WHERE patient_id = ? ORDER BY appointment_date";
 $stmt = $conn->prepare($query);
 
 if (!$stmt) {
@@ -98,10 +113,6 @@ $conn->close();
             color: #fff;
         }
 
-        .btn-back {
-            background-color: #948b8b;
-            color: #fff;
-        }
     </style>
 </head>
 <body>
@@ -137,10 +148,12 @@ $conn->close();
                         <td><?php echo $appt_end_time; ?></td>
                         <td><?php echo $appt_status; ?></td>
                         <?php if (isset($patient_id)) { ?>
-                        <td><button type="submit" class="btn btn-edit" name="edit">Edit</button></td>
-                        <td>
-                            <button type="button" class="btn btn-cancel" onclick="updateModalContent('<?php echo $appt_date; ?>', '<?php echo $appt_start_time; ?>', '<?php echo $appt_end_time; ?>')" data-bs-toggle="modal" data-bs-target="#cancelapptmodal">Cancel</button>
-                        </td>
+                            <td>
+                <button type="submit" class="btn btn-edit" name="edit" <?php echo ($appt_status === 'CANCELLED') ? 'disabled' : ''; ?>>Edit</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-cancel" onclick="updateModalContent('<?php echo $appt_date; ?>', '<?php echo $appt_start_time; ?>', '<?php echo $appt_end_time; ?>')" data-bs-toggle="modal" data-bs-target="#cancelapptmodal" <?php echo ($appt_status === 'CANCELLED') ? 'disabled' : ''; ?>>Cancel</button>
+            </td>
                         <?php } ?>
                     </tr>
                 <?php } ?>
@@ -178,7 +191,7 @@ $conn->close();
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-cancel" form="cancelForm" name="cancel">Cancel</button>
-                    <button type="button" class="btn btn-back" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back</button>
                 </div>
             </div>
         </div>
