@@ -78,12 +78,13 @@ if (!$edit_patient_stmt) {
                     <input type="email" name="email" id="email" class="form-control" value="<?php echo $patient_email ?>">
                 </div>
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label for="appointment_status">Password:</label>
                     <input type="password" name="password" id="password" class="form-control" value="<?php echo $patient_password ?>">
-                </div> -->
+                </div>
+                
                 <div class="buttons">
-                    <button class="btn back-btn">Back</button>
+                    <button type="button" class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
                 </div>
         </div>
@@ -94,6 +95,14 @@ if (!$edit_patient_stmt) {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.back-btn').on('click', function(){
+            window.location.href = "patientDetails.php";
+        });
+    });
+</script>
 
 <script>
 </script>

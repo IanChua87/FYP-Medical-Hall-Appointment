@@ -1,82 +1,21 @@
 <?php
 session_start();
 include "../db_connect.php";
+include "../helper_functions.php";
 ?>
 
 <?php
-$error = "";
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (empty($email) || empty($password)) {
-        $error = "Please enter your email and password.";
+    if (check_empty_login_input_fields($email, $password)) {
+        $_SESSION['login-error'] = "Please enter your email and password.";
     } else {
-        $login_success = false;
+        login_patient($conn, $email, $password);
 
-
-        // Query to fetch user data from the database
-        $p_query = "SELECT * FROM patient WHERE patient_email=?";
-
-        $patient_stmt = mysqli_prepare($conn, $p_query);
-
-        if (!$patient_stmt) {
-            die("Failed to prepare statement");
-        } else {
-            mysqli_stmt_bind_param($patient_stmt, "s", $email);
-            mysqli_stmt_execute($patient_stmt);
-            $p_result = mysqli_stmt_get_result($patient_stmt);
-            $p_user = mysqli_num_rows($p_result);
-
-            // Verify password and set session if login is successful
-            if ($p_user > 0) {
-                $p_user_data = mysqli_fetch_assoc($p_result);
-
-                if (password_verify($password, $p_user_data['patient_password'])) {
-                    $_SESSION['patient_id'] = $p_user_data['patient_id'];
-                    $login_success = true;
-                    header("Location: ../index.php");
-                    exit();
-                }
-            }
-            mysqli_stmt_close($patient_stmt);
-        }
-
-
-        $u_query = "SELECT * FROM users WHERE user_email=?";
-
-        $user_stmt = mysqli_prepare($conn, $u_query);
-
-        if (!$user_stmt) {
-            die("Failed to prepare statement");
-        } else {
-            mysqli_stmt_bind_param($user_stmt, "s", $email);
-            mysqli_stmt_execute($user_stmt);
-            $u_result = mysqli_stmt_get_result($user_stmt);
-            $u_user = mysqli_num_rows($u_result);
-
-            // Verify password and set session if login is successful
-            if ($u_user > 0) {
-                $u_user_data = mysqli_fetch_assoc($u_result);
-
-                if (password_verify($password, $u_user_data['user_password'])) {
-                    if ($u_user_data['role'] == "Admin") {
-                        $_SESSION['admin_id'] = $u_user_data['user_id'];
-                        $_SESSION['admin_role'] = $u_user_data['role'];
-                        $login_success = true;
-                        header("Location: ../adminDashboard.php");
-                        exit();
-                    } else if ($u_user_data['role'] == "Doctor") {
-                        $_SESSION['doctor_id'] = $u_user_data['user_id'];
-                        $login_success = true;
-                        header("Location: ../index.php");
-                        exit();
-                    }
-                }
-            }
-            mysqli_stmt_close($user_stmt);
-        }
+        login_users($conn, $email, $password);
     }
 }
 
@@ -122,8 +61,10 @@ if (isset($_POST['submit'])) {
                                 <button type="submit" name="submit" class="btn login-btn">Login</button>
                             </div>
                         </form>
-                        <?php if (!empty($error)) {
-                            echo '<p class="login-error-msg" id="login-error-msg">' . $error . '</p>';
+                        <?php
+                        if(isset($_SESSION['login-error'])){
+                            echo '<p class="login-error-msg" id="login-error-msg">' . $_SESSION['login-error'] . '</p>';
+                            unset($_SESSION['login-error']);
                         }
                         ?>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

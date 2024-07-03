@@ -68,7 +68,7 @@ if (!isset($_SESSION['admin_id'])) {
                                     echo "<td>" . $row['patient_name'] . "</td>";
                                     echo "<td>" . $row['patient_phoneNo'] . "</td>";
                                     echo "<td>" . $row['appointment_date'] . "</td>";
-                                    echo "<td>" . $row['appointment_time'] . "</td>";
+                                    echo "<td>" . $row['appointment_start_time'] . "</td>";
                                     echo "<td>" . $row['appointment_status'] . "</td>";
                                     echo "<td>
                                             <div class='buttons'>

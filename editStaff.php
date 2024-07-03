@@ -77,7 +77,7 @@ if (!$edit_users_stmt) {
                 </div>
 
                 <div class="buttons">
-                    <button class="btn back-btn">Back</button>
+                    <button type="button" class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
                 </div>
         </div>
@@ -90,5 +90,10 @@ if (!$edit_users_stmt) {
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <script>
+    $(document).ready(function() {
+        $('.back-btn').click(function() {
+            window.location.href = "staffDetails.php";
+        });
+    });
 </script>
 </html>

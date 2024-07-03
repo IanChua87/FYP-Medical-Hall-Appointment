@@ -1,5 +1,7 @@
 <?php
+session_start();
 include "../db_connect.php";
+include "../helper_functions.php";
 ?>
 
 <?php
@@ -10,82 +12,99 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $dob = $_POST['dob'];
     $phone = $_POST['phone'];
-
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $status = "new";
     $last_updated_by = "admin";
     $last_updated_datetime = date("Y-m-d H:i:s");
     $payment_status = "unpaid";
     $amount_payable = 0;
+    $is_verified = 0;
 
 
-    if (empty($name) || empty($email) || empty($password) || empty($dob) || empty($phone)) {
-        $error = "All fields are required.";
-        header("Location: register.php?error=" . urlencode($error));
+    if (check_empty_register_input_fields($name, $email, $password, $dob, $phone)) {
+        $_SESSION['error'] = "All fields are required.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
         exit();
     } else {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error = "Invalid email format.";
-            header("Location: register.php?error=" . urlencode($error));
-            exit();
-        } 
-
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
-            $error = "Only letters and white space allowed in name.";
-            header("Location: register.php?error=" . urlencode($error));
+        if (invalid_email($email) !== false) {
+            $_SESSION['error'] = "Invalid email format.";
+            $_SESSION['form_data'] = $_POST;
+            header("Location: register.php");
             exit();
         }
 
-        if(!preg_match("/^[0-9]*$/", $phone)){
-            $error = "Only numbers allowed in phone number.";
-            header("Location: register.php?error=" . urlencode($error));
+        if (invalid_name($name) !== false){
+            $_SESSION['error'] = "Only letters and white space allowed in name.";
+            $_SESSION['form_data'] = $_POST;
+            header("Location: register.php");
             exit();
         }
-        
-        if(!strlen($password) >=8){
-            $error = "Password must be at least 8 characters long.";
-            header("Location: register.php?error=" . urlencode($error));
+
+        if (invalid_phone_number($phone) !== false){
+            $_SESSION['error'] = "Only numbers allowed in phone number.";
+            $_SESSION['form_data'] = $_POST;
+            header("Location: register.php");
             exit();
-        }        
-        
-        else {
-            //prepared statement for checking if user already exists
-            $p_query = "SELECT * FROM patient WHERE patient_name = ? AND patient_email = ?";
-            $patient_stmt = mysqli_prepare($conn, $p_query);
-            mysqli_stmt_bind_param($patient_stmt, "ss", $name, $email);
-            mysqli_stmt_execute($patient_stmt);
-            $p_queryResult = mysqli_stmt_get_result($patient_stmt);
+        }
+
+        if (check_password_strength($password)){
+            $_SESSION['error'] = "Password must be at least 8 characters long.";
+            $_SESSION['form_data'] = $_POST;
+            header("Location: register.php");
+            exit();
+        }
+        //prepared statement for checking if user already exists
+        // $p_query = "SELECT * FROM patient WHERE patient_email = ?";
+        // $patient_stmt = mysqli_prepare($conn, $p_query);
+        // mysqli_stmt_bind_param($patient_stmt, "s", $email);
+        // mysqli_stmt_execute($patient_stmt);
+        // $p_queryResult = mysqli_stmt_get_result($patient_stmt);
 
 
-            if (mysqli_num_rows($p_queryResult) > 0) {
-                $p_row = mysqli_fetch_assoc($p_queryResult);
+        // if (mysqli_num_rows($p_queryResult) > 0) {
+        //     $p_row = mysqli_fetch_assoc($p_queryResult);
 
-                if ($p_row['patient_name'] == $name) {
-                    $error = "User with this name already exists.";
-                } elseif ($p_row['patient_email'] == $email) {
-                    $error = "User with this email already exists.";
-                }
-                header("Location: register.php?error=" . urlencode($error));
-                exit();
+        //     if ($p_row['patient_email'] == $email) {
+        //         $_SESSION['error'] = "User with this email already exists.";
+        //     }
+        //     header("Location: register.php?");
+        //     exit();
+        // } else {
+        //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        //     //prepared statement for inserting user into database, for security purpose
+        //     $insert = "INSERT INTO patient (patient_name, patient_dob, patient_phoneNo, patient_email, patient_password, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) 
+        //             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        //     $insert_stmt = mysqli_prepare($conn, $insert);
+        //     mysqli_stmt_bind_param($insert_stmt, "ssisssssss", $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable);
+
+        //     //execute the prepared statement
+        //     if (mysqli_stmt_execute($insert_stmt)) {
+        //         $msg = "<h2>Registration<br> successful</h2>";
+        //     } else {
+        //         $error = "Registration failed";
+        //         header("Location: register.php?error=" . urlencode($error));
+        //         exit();
+        //     }
+        // }
+
+        if(check_patient_exists_by_email($conn, $email) !== false){
+            $_SESSION['error'] = "User with this email already exists.";
+            $_SESSION['form_data'] = $_POST;
+            header("Location: register.php");
+            exit();
+        } else {
+            if(insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false){
+                $msg = "<h2>Registration<br> successful</h2>";
             } else {
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                //prepared statement for inserting user into database, for security purpose
-                $insert = "INSERT INTO patient (patient_name, patient_dob, patient_phoneNo, patient_email, patient_password, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $insert_stmt = mysqli_prepare($conn, $insert);
-                mysqli_stmt_bind_param($insert_stmt, "ssssssssss", $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable);
+                $_SESSION['error'] = "Registration failed";
+                $_SESSION['form_data'] = $_POST;
+                mysqli_stmt_close($insert_stmt);
+                header("Location: register.php");
+                exit();
 
-                //execute the prepared statement
-                if (mysqli_stmt_execute($insert_stmt)) {
-                    $msg = "<h2>Registration<br> successful</h2>";
-                } else {
-                    $error = "Registration failed";
-                    header("Location: register.php?error=" . urlencode($error));
-                    exit();
-                }
             }
         }
-
-        mysqli_stmt_close($insert_stmt);
         mysqli_close($conn);
     }
 }

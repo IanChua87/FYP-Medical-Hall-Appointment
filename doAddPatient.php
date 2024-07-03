@@ -37,6 +37,7 @@ if (isset($_POST['submit'])) {
             $select_result = mysqli_stmt_get_result($select_stmt);
 
             if (mysqli_num_rows($select_result) > 0) {
+                $_SESSION['message'] = "Failed to add patient, patient already exists.";
             } else {
                 $insert_query = "INSERT INTO patient (patient_dob, patient_phoneNo, patient_email, patient_password, patient_name, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $patient_stmt = mysqli_prepare($conn, $insert_query);

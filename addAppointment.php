@@ -12,6 +12,26 @@ if (!isset($_SESSION['admin_id'])) {
 
 ?>
 
+<?php
+$query = "SELECT * FROM appointment ORDER BY queue_no DESC LIMIT 1";
+$stmt = mysqli_prepare($conn, $query);
+if(!$stmt){
+    die("Failed to prepare statement");
+} else{
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $queue_no = $row['queue_no'];
+    } else{
+        $queue_no = 0;
+    
+    }
+    $latest_queue_no = $queue_no + 1;
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,10 +75,17 @@ if (!isset($_SESSION['admin_id'])) {
                     <input type="text" name="relation" id="relation" class="form-control" value="">
                 </div>
 
+                <div class="form-group">
+                    <label for="relation">Queue No:</label>
+                    <input type="text" name="queue" id="queue" class="form-control" value="<?php echo $latest_queue_no ?>">
+                </div>
+
                 <div class="buttons">
                     <button type="submit" name="submit" class="btn create-btn">Create</button>
                 </div>
+            </form>
         </div>
+        
     </section>
 </body>
 

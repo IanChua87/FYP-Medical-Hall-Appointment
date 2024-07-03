@@ -1,5 +1,13 @@
 <?php
+session_start();
 include "../db_connect.php";
+
+$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+
+
+unset($_SESSION['error']);
+unset($_SESSION['form_data']);
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +52,7 @@ include "../db_connect.php";
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="email" class="form-control form-control-lg" placeholder="Email" name="email" />
+                                <input type="text" class="form-control form-control-lg" placeholder="Email" name="email" />
                             </div>
 
                             <div class="form-outline mb-4">
@@ -54,43 +62,51 @@ include "../db_connect.php";
 
                             <div class="double-form-field row mb-4">
                                 <div class="col">
-                                    <input type="date" class="form-control date-input" id="dob" name="dob" placeholder="Date of Birth">
+                                    <input type="text" class="form-control date-input" id="dob" name="dob" placeholder="Date of Birth">
                                 </div>
-                                <!-- <div class="col">
-                                  <select class="form-select" id="gender" name="gender">
-                                    <option selected>Select...</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                  </select>
-                                </div> -->
                             </div>
 
                             <div class="form-outline mb-4">
-                                <input type="number" id="form2Example28" class="form-control form-control-lg" placeholder="Phone Number" name="phone" />
+                                <input type="text" id="form2Example28" class="form-control form-control-lg" placeholder="Phone Number" name="phone" />
                             </div>
 
                             <div class="mt-3">
                                 <button type="submit" name="submit" class="btn register-btn">Create Account</button>
                             </div>
                         </form>
-                        <?php
-                        if (isset($_GET['error'])) {
-                            echo '<div class="register-error-msg" id="register-error-msg">' . htmlspecialchars($_GET['error']) . '</div>';
-                        }
-                        ?>
+
+                        <div class="register-error-msg" id="register-error-msg">
+                             <?php echo $error ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
 
     <script>
         $(document).ready(function() {
             setTimeout(function() {
                 $('#register-error-msg').fadeOut('slow');
             }, 1700);
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $("#dob").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0",
+                dateFormat: "yy-mm-dd"
+            });
         });
     </script>
 

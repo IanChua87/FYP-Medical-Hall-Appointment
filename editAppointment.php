@@ -25,7 +25,7 @@ if (!$edit_appointment_stmt) {
         $phone_number = $row['patient_phoneNo'];
         $appointment_id = $row['appointment_id'];
         $appointment_date = $row['appointment_date'];
-        $appointment_time = $row['appointment_time'];
+        $appointment_time = $row['appointment_start_time'];
         $appointment_status = $row['appointment_status'];
 
     } else{
@@ -72,7 +72,7 @@ if (!$edit_appointment_stmt) {
 
                 <div class="form-group">
                     <label for="appointment_time">Appointment Time:</label>
-                    <input type="text" name="appointment_time" id="appointment_time" class="form-control" value="<?php echo $appointment_time ?>">
+                    <input type="text" name="appointment_start_time" id="appointment_time" class="form-control" value="<?php echo $appointment_time ?>">
                 </div>
 
                 <div class="form-group">
@@ -80,7 +80,7 @@ if (!$edit_appointment_stmt) {
                     <input type="text" name="appointment_status" id="appointment_status" class="form-control" value="<?php echo $appointment_status ?>" disabled>
                 </div>
                 <div class="buttons">
-                    <button class="btn back-btn">Back</button>
+                    <button type="button" class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
                 </div>
         </div>
@@ -108,6 +108,13 @@ if (!$edit_appointment_stmt) {
             maxTime: '1630',
             showDuration: true,
             interval: 15
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $('.back-btn').on('click', function(){
+            window.location.href = "appointmentDetails.php";
         });
     });
 </script>

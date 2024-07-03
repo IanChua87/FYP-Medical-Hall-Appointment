@@ -17,10 +17,11 @@ if (isset($_POST['submit'])) {
     } else {
         $patient_id = $_POST['patient_id'];
         $patient_name = $_POST['patient_name'];
-        $appointment_status = "Pending";
+        $appointment_status = "UPCOMING";
         $appointment_date = $_POST['appointment_date'];
-        $appointment_time = $_POST['appointment_time'];
-        $queue_no = "";
+        $appointment_start_time = $_POST['appointment_time'];
+        $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 1800);
+        $queue_no = $_POST['queue'];
         $appointment_remark = "";
         $relation = $_POST['relation'];
         $current_time = date('Y-m-d H:i:s');
@@ -39,13 +40,13 @@ if (isset($_POST['submit'])) {
                 $row = mysqli_fetch_assoc($select_result);
                 $patient_id = $row['patient_id'];
 
-                $insert_query = "INSERT INTO appointment (appointment_status, appointment_date, appointment_time, queue_no, appointment_remarks, booked_by, booked_datetime, patient_id, relation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $insert_query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id, queue_no, appointment_remarks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $appointment_stmt = mysqli_prepare($conn, $insert_query);
 
                 if (!$appointment_stmt) {
                     die("Failed to prepare statement");
                 } else {
-                    mysqli_stmt_bind_param($appointment_stmt, 'sssssssss', $appointment_status, $appointment_date, $appointment_time, $queue_no, $appointment_remark, $_SESSION['admin_role'], $current_time, $patient_id, $relation);
+                    mysqli_stmt_bind_param($appointment_stmt, 'ssssssiis', $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $_SESSION['admin_role'], $current_time, $patient_id, $queue_no, $appointment_remark);
 
                     if (mysqli_stmt_execute($appointment_stmt)) {
                         $_SESSION['message'] = "Appointment successfully added.";

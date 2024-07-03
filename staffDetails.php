@@ -78,13 +78,12 @@ if (!isset($_SESSION['admin_id'])) {
                                     echo "<td>" . $row['user_id'] . "</td>";
                                     echo "<td>" . $row['user_name'] . "</td>";
                                     echo "<td>" . $row['user_email'] . "</td>";
-                                    // echo "<td>" . $row['user_password'] . "</td>";
                                     echo "<td>" . $row['role'] . "</td>";
                                     if ($row['role'] == 'Doctor') {
                                         echo "<td>
                                         <div class='buttons'>
                                             <a href='editStaff.php?user_id=" . $row['user_id'] . "' class='btn edit-btn'>Edit</a>
-                                            <a href='deleteStaff.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['user_id'] . "'>Delete</a>
+                                            <a href='doDeleteStaff.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['user_id'] . "'>Delete</a>
                                         </div>
                                     </td>";
 
