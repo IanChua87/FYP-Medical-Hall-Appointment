@@ -14,14 +14,16 @@ $new_password = trim($_POST['newpassword']);
 $confirm_password = trim($_POST['cfmpassword']);
 
 // Validate input
-if (empty($email) || empty($new_password) || empty($confirm_password)) {
-    header("Location: change_password.php?error=Please fill in all fields.");
+if (empty($new_password) || empty($confirm_password)) {
+    $error = "Please fill in all fields.";
+    header("Location: changepassword.php?error=".urlencode($error));
     exit();
 }
 
 // Check if passwords match
 if ($new_password !== $confirm_password) {
-    header("Location: change_password.php?error=Passwords do not match.");
+    $error = "Passwords do not match.";
+    header("Location: changepassword.php?error=".urlencode($error));
     exit();
 }
 

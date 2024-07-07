@@ -16,7 +16,7 @@ if (!isset($patient_id)) {
 
 
 if (isset($_POST['cancel'])) {
-    if (isset($_POST['apptdate']) && isset($_POST['apptstarttime']) && isset($_POST['apptendtime'])) {
+    if (isset($_POST['apptdate']) && isset($_POST['apptstarttime']) && isset($_POST['apptendtime']) && isset($_POST['appt_id'])) {
         $date = $_POST['apptdate'];
         $start_time = $_POST['apptstarttime'];
         $end_time = $_POST['apptendtime'];

@@ -34,7 +34,14 @@ if (!isset($_SESSION['patient_id'])) {
 <?php include '../navbar.php'; ?>
 
 <div class="container mt-5">
-
+    <?php
+    if (isset($_GET['error'])) {
+        echo '<div class="alert alert-danger">' . htmlspecialchars($_GET['error']) . '</div>';
+    }
+    if (isset($_GET['message'])) {
+        echo '<div class="alert alert-success">' . htmlspecialchars($_GET['message']) . '</div>';
+    }
+    ?>
 </div>
 
 

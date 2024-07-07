@@ -11,6 +11,33 @@ $appointment_duration = 15; // Default duration
 if (isset($_POST['selectedDate'])) {
     $date = $_POST['selectedDate'];
 
+    // Function to fetch all public holidays from the database
+    function getPublicHolidays($conn) {
+        $holidays = [];
+        $sql = "SELECT holiday_date FROM holiday";
+        $result = $conn->query($sql);
+
+        if ($result === false) {
+            die("Query failed: " . $conn->error);
+        }
+
+        while ($row = $result->fetch_assoc()) {
+            $holidays[] = $row['holiday_date'];
+        }
+
+        $result->free();
+
+        return $holidays;
+    }
+
+    $publicHolidays = getPublicHolidays($conn);
+
+    // Check if the selected date is a public holiday
+    if (in_array($date, $publicHolidays)) {
+        echo json_encode(['error' => 'It is a public holiday on this date.']);
+        exit;
+    }
+
     // Function to check if the date is in the list of opening days
     function isOpen($date, $conn) {
         $dayName = strtolower(date('l', strtotime($date)));
@@ -77,37 +104,37 @@ if (isset($_POST['selectedDate'])) {
         }
 
         // Fetch patient status
-$patient_sql = "SELECT patient_status FROM patient WHERE patient_id = ?";
-$stmt = $conn->prepare($patient_sql);
-if ($stmt === false) {
-    die("Failed to prepare statement: " . $conn->error);
-}
-
-$patient_id = $_SESSION['patient_id'];
-$stmt->bind_param("i", $patient_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$patient = $result->fetch_assoc();
-$stmt->close();
-
-if ($patient) {
-    if ($patient['patient_status'] === "NEW") {
-        // Fetch new appointment duration
-        $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration' AND settings_value = '30'";
-        $stmt = $conn->prepare($settings_sql);
+        $patient_sql = "SELECT patient_status FROM patient WHERE patient_id = ?";
+        $stmt = $conn->prepare($patient_sql);
         if ($stmt === false) {
             die("Failed to prepare statement: " . $conn->error);
         }
+
+        $patient_id = $_SESSION['patient_id'];
+        $stmt->bind_param("i", $patient_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $settings = $result->fetch_assoc();
+        $patient = $result->fetch_assoc();
         $stmt->close();
 
-        if ($settings) {
-            $appointment_duration = 30; // Set duration to 30 minutes for new patients
+        if ($patient) {
+            if ($patient['patient_status'] === "NEW") {
+                // Fetch new appointment duration
+                $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration' AND settings_value = '30'";
+                $stmt = $conn->prepare($settings_sql);
+                if ($stmt === false) {
+                    die("Failed to prepare statement: " . $conn->error);
+                }
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $settings = $result->fetch_assoc();
+                $stmt->close();
+
+                if ($settings) {
+                    $appointment_duration = 30; // Set duration to 30 minutes for new patients
+                }
+            }
         }
-    }
-}
 
         // Function to fetch booked slots for the selected date
         function getBookedSlots($conn, $date) {
@@ -136,64 +163,37 @@ if ($patient) {
 
         $current_time = strtotime($opening_hour . ':' . $opening_min);
 
-        // while ($current_time < strtotime($closing_hour . ':' . $closing_min)) {
-        //     $end_time = strtotime('+' . $appointment_duration . ' minutes', $current_time);
-        //     $slot_start = date('H:i', $current_time);
-        //     $slot_end = date('H:i', $end_time);
-
-        //     $is_booked = false;
-
-        //     foreach ($booked_slots as $booked) {
-        //         $booked_start = strtotime($booked['start_time']);
-        //         $booked_end = strtotime($booked['end_time']);
-
-        //         if (($current_time >= $booked_start && $current_time < $booked_end) || 
-        //             ($end_time > $booked_start && $end_time <= $booked_end)) {
-        //             $is_booked = true;
-        //             break;
-        //         }
-        //     }
-
-        //     $available_slots[] = [
-        //         'start' => $slot_start,
-        //         'end' => $slot_end,
-        //         'booked' => $is_booked
-        //     ];
-
-        //     $current_time = $end_time;
-        // }
         // Loop through time slots and check availability based on booked slots
-while ($current_time < strtotime($closing_hour . ':' . $closing_min)) {
-    $end_time = strtotime('+' . $appointment_duration . ' minutes', $current_time);
-    $slot_start = date('H:i', $current_time);
-    $slot_end = date('H:i', $end_time);
+        while ($current_time < strtotime($closing_hour . ':' . $closing_min)) {
+            $end_time = strtotime('+' . $appointment_duration . ' minutes', $current_time);
+            $slot_start = date('H:i', $current_time);
+            $slot_end = date('H:i', $end_time);
 
-    $is_booked = false;
+            $is_booked = false;
 
-    foreach ($booked_slots as $booked) {
-        $booked_start = strtotime($booked['start_time']);
-        $booked_end = strtotime($booked['end_time']);
-        $appointment_status = $booked['appointment_status'];
+            foreach ($booked_slots as $booked) {
+                $booked_start = strtotime($booked['start_time']);
+                $booked_end = strtotime($booked['end_time']);
+                $appointment_status = $booked['appointment_status'];
 
-        // Check if slot overlaps with a booked slot that is not cancelled
-        if (($current_time >= $booked_start && $current_time < $booked_end) ||
-            ($end_time > $booked_start && $end_time <= $booked_end)) {
-            if ($appointment_status !== 'CANCELLED') {
-                $is_booked = true;
-                break;
+                // Check if slot overlaps with a booked slot that is not cancelled
+                if (($current_time >= $booked_start && $current_time < $booked_end) ||
+                    ($end_time > $booked_start && $end_time <= $booked_end)) {
+                    if ($appointment_status !== 'CANCELLED') {
+                        $is_booked = true;
+                        break;
+                    }
+                }
             }
+
+            $available_slots[] = [
+                'start' => $slot_start,
+                'end' => $slot_end,
+                'booked' => $is_booked
+            ];
+
+            $current_time = $end_time;
         }
-    }
-
-    $available_slots[] = [
-        'start' => $slot_start,
-        'end' => $slot_end,
-        'booked' => $is_booked
-    ];
-
-    $current_time = $end_time;
-}
-
 
         // Output available slots as JSON
         echo json_encode($available_slots);
