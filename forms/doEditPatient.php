@@ -12,6 +12,8 @@ if (!isset($_SESSION['admin_id'])) {
 
 if (isset($_POST['submit'])) {
     $patient_id = $_POST['patient_id'];
+    $dob = $_POST['dob'];
+    $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $payment_status = $_POST['payment_status'];
@@ -75,7 +77,7 @@ if (isset($_POST['submit'])) {
     //     }
     // }
     if (check_patient_exists_by_id($conn, $patient_id) !== false) {
-        if(update_patient_details($conn, $email, $password, $payment_status, $amount_payable, $patient_id)!== false){
+        if(update_patient_details($conn, $dob, $phone, $email, $password, $payment_status, $amount_payable, $patient_id)!== false){
             $_SESSION['message'] = "Updated patient profile successfully.";
             header("Location: patientDetails.php");
             exit();

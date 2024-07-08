@@ -299,11 +299,11 @@ function insert_relation_details($conn, $name, $appointment_id)
     mysqli_stmt_execute($insert_stmt);
 }
 
-function update_patient_details($conn, $email, $password, $payment_status, $amount_payable, $patient_id)
+function update_patient_details($conn, $dob, $phone, $email, $password, $payment_status, $amount_payable, $patient_id)
 {
-    $update = "UPDATE patient SET patient_email = ?, patient_password = ?, payment_status = ?, amount_payable = ? WHERE patient_id = ?";
+    $update = "UPDATE patient SET patient_dob = ?, patient_phoneNo = ?, patient_email = ?, patient_password = ?, payment_status = ?, amount_payable = ? WHERE patient_id = ?";
     $update_stmt = mysqli_prepare($conn, $update);
-    mysqli_stmt_bind_param($update_stmt, "sssdi", $email, $password, $payment_status, $amount_payable, $patient_id);
+    mysqli_stmt_bind_param($update_stmt, "sssssdi", $dob, $phone, $email, $password, $payment_status, $amount_payable, $patient_id);
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);
