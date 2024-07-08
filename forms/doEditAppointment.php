@@ -1,10 +1,10 @@
 <?php
 session_start();
-include "db_connect.php";
-include "helper_functions.php";
+include "../db_connect.php";
+include "../helper_functions.php";
 
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: forms/login.php");
+    header("Location: login.php");
     exit();
 }
 

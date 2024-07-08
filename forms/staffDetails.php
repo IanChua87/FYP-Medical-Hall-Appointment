@@ -19,7 +19,7 @@ if (!isset($_SESSION['admin_id'])) {
     <!-- 'links.php' contains cdn links' -->
     <?php include '../links.php'; ?>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
@@ -45,7 +45,7 @@ if (!isset($_SESSION['admin_id'])) {
                 <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
             </div>
             <ul class="mt-3">
-                <li class=""><a href="#" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li class=""><a href="../adminDashboard.php" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
                 <li class=""><a href="lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> Last Queue No.</a></li>
                 <li class="active"><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Edit Staff</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> Edit Patient</a></li>
@@ -154,7 +154,7 @@ if (!isset($_SESSION['admin_id'])) {
         });
     </script>
 
-    <?php include 'sessionMsg.php' ?>
+    <?php include '../sessionMsg.php' ?>
 
     <script>
         $(document).ready(function() {

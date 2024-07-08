@@ -5,7 +5,7 @@ include "../db_connect.php";
 
 <?php
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: forms/login.php");
+    header("Location: login.php");
     exit();
 }
 
