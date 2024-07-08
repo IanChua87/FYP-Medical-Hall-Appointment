@@ -68,12 +68,12 @@ if (!$edit_patient_stmt) {
 
                 <div class="form-group">
                     <label for="dob">Date of Birth:</label>
-                    <input type="text" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>" disabled>
+                    <input type="text" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>" >
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number:</label>
-                    <input type="text" name="phone" id="phone" class="form-control" value="<?php echo $patient_phoneNo ?>" disabled>
+                    <input type="text" name="phone" id="phone" class="form-control" value="<?php echo $patient_phoneNo ?>" >
                 </div>
 
                 <div class="form-group">
