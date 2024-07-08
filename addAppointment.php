@@ -52,12 +52,8 @@ if(!$stmt){
             </div>
             <form action="doAddAppointment.php" method="POST">
                 <div class="form-group">
-                    <input type="text" name="patient_id" id="patient_id" class="form-control" value="" hidden>
-                </div>
-
-                <div class="form-group">
-                    <label for="patient_name">Name:</label>
-                    <input type="text" name="patient_name" id="patient_name" class="form-control" value="">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" class="form-control" value="">
                 </div>
 
                 <div class="form-group">

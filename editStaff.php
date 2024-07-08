@@ -71,11 +71,6 @@ if (!$edit_users_stmt) {
                     <input type="email" name="email" id="email" class="form-control" value="<?php echo $user_email ?>">
                 </div>
 
-                <div class="form-group">
-                    <label for="dob">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control" value="<?php echo $user_password ?>" disabled>
-                </div>
-
                 <div class="buttons">
                     <button type="button" class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "db_connect.php";
+include "helper_functions.php";
 ?>
 
 <?php
@@ -10,57 +11,79 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 if (isset($_POST['submit'])) {
-    if (empty($_POST['patient_name']) || empty($_POST['phone_number']) || empty($_POST['dob']) || empty($_POST['email']) || empty($_POST['password'])) {
-        $_SESSION['message'] = "Please fill in all fields.";
+    $name = $_POST['name'];
+    $dob = $_POST['dob'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $status = "New";
+    $last_updated_datetime = date('Y-m-d H:i:s');
+    $payment_status = "Unpaid";
+    $amount_payable = 50.00;
+    $is_verified = 0;
+
+    if (check_empty_patient_input_fields($name, $email, $password, $dob, $phone)) {
+        $_SESSION['error'] = "Please fill in all fields.";
         header("Location: addPatient.php");
         exit();
-    } else {
-        $patient_name = $_POST['patient_name'];
-        $phone_number = $_POST['phone_number'];
-        $dob = $_POST['dob'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $current_date = date('Y-m-d H:i:s');
-        $def_payment_status = "Unpaid";
-        $def_patient_status = "New";
-        $def_payment_amt = 0;
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        $select_query = "SELECT * FROM patient WHERE patient_name = ?";
-        $select_stmt = mysqli_prepare($conn, $select_query);
-
-        if (!$select_stmt) {
-            die("Failed to prepare statement");
-        } else {
-            mysqli_stmt_bind_param($select_stmt, 's', $patient_name);
-            mysqli_stmt_execute($select_stmt);
-            $select_result = mysqli_stmt_get_result($select_stmt);
-
-            if (mysqli_num_rows($select_result) > 0) {
-                $_SESSION['message'] = "Failed to add patient, patient already exists.";
-            } else {
-                $insert_query = "INSERT INTO patient (patient_dob, patient_phoneNo, patient_email, patient_password, patient_name, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $patient_stmt = mysqli_prepare($conn, $insert_query);
-
-                if (!$patient_stmt) {
-                    die("Failed to prepare statement");
-                } else {
-                    mysqli_stmt_bind_param($patient_stmt, 'ssssssssss', $dob, $phone_number, $email, $hashed_password, $patient_name, $def_patient_status, $_SESSION['admin_role'], $current_date, $def_payment_status, $def_payment_amt);
-
-                    if (mysqli_stmt_execute($patient_stmt)) {
-                        $_SESSION['message'] = "Patient successfully added.";
-                        header("Location: patientDetails.php");
-                        exit();
-                    } else {
-                        $_SESSION['message'] = "Failed to add patient." . mysqli_stmt_error($patient_stmt);
-                    }
-
-                    mysqli_stmt_close($patient_stmt);
-                }
+    } 
+    else{
+        if (check_patient_exists_by_email($conn, $email) !== false) {
+            $_SESSION['error'] = "Patient with this email already exists.";
+            header("Location: addPatient.php");
+            exit();
+        } 
+        else{
+            if(insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $_SESSION['admin_role'], $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false){
+                $_SESSION['error'] = "Patient successfully added.";
+                header("Location: patientDetails.php");
+                exit();
+            } else{
+                $_SESSION['error'] = "Failed to add patient.";
+                header("Location: addPatient.php");
+                exit();
             }
         }
     }
-} else {
+
+        // $select_query = "SELECT * FROM patient WHERE patient_name = ?";
+        // $select_stmt = mysqli_prepare($conn, $select_query);
+
+        // if (!$select_stmt) {
+        //     die("Failed to prepare statement");
+        // } 
+        // else {
+        //     mysqli_stmt_bind_param($select_stmt, 's', $patient_name);
+        //     mysqli_stmt_execute($select_stmt);
+        //     $select_result = mysqli_stmt_get_result($select_stmt);
+
+        //     if (mysqli_num_rows($select_result) > 0) {
+        //         $_SESSION['error'] = "Failed to add patient, patient already exists.";
+        //     } else {
+        //         $insert_query = "INSERT INTO patient (patient_dob, patient_phoneNo, patient_email, patient_password, patient_name, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        //         $patient_stmt = mysqli_prepare($conn, $insert_query);
+
+        //         if (!$patient_stmt) {
+        //             die("Failed to prepare statement");
+        //         } else {
+        //             mysqli_stmt_bind_param($patient_stmt, 'ssssssssss', $dob, $phone_number, $email, $hashed_password, $patient_name, $def_patient_status, $_SESSION['admin_role'], $current_date, $def_payment_status, $def_payment_amt);
+
+        //             if (mysqli_stmt_execute($patient_stmt)) {
+        //                 $_SESSION['error'] = "Patient successfully added.";
+        //                 header("Location: patientDetails.php");
+        //                 exit();
+        //             } else {
+        //                 $_SESSION['error'] = "Failed to add patient." . mysqli_stmt_error($patient_stmt);
+        //             }
+
+        //             mysqli_stmt_close($patient_stmt);
+        //         }
+        //     }
+        // }
+}
+
+else {
     header("Location: patientDetails.php");
     exit();
 }

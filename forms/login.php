@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12 px-0 d-sm-block left-col">
-                    <img src="../img/medical-herbs-img.jpg" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+                    <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 text-black right-col">
                     <div class="form-container">

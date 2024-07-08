@@ -19,42 +19,32 @@ if (isset($_POST['submit'])) {
         'last_queue_no'
     ];
 
-    // Prepare the update statement outside the loop
     $update_query = "UPDATE settings SET settings_value = ? WHERE settings_key = ?";
     $update_stmt = mysqli_prepare($conn, $update_query);
+
     if (!$update_stmt) {
         die("Failed to prepare statement: " . mysqli_error($conn));
-    } else{
+    }
+    else{
         mysqli_stmt_bind_param($update_stmt, 'ss', $value, $key);
 
         for ($i = 0; $i < count($settings_keys); $i++) {
-            if(mysqli_stmt_execute($update_stmt)){
-                $key = $settings_keys[$i];
-                $value = $_POST[$key];
-            } else {
+            $key = $settings_keys[$i];
+            $value = $_POST[$key];
+
+            if (!mysqli_stmt_execute($update_stmt)) {
                 die("Failed to execute statement: " . mysqli_stmt_error($update_stmt));
             }
         }
-    }
-    mysqli_stmt_close($update_stmt);
 
-    $_SESSION['message'] = "Updated clinic settings successfully.";
+        mysqli_stmt_close($update_stmt);
+
+        $_SESSION['message'] = "Updated clinic settings successfully.";
+        header("Location: settings.php");
+        exit();
+    }
+
+} else {
     header("Location: editSettings.php");
     exit();
-} else {
-    header("Location: settings.php");
-    exit();
 }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>

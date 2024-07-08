@@ -22,16 +22,17 @@ if (!isset($_SESSION['admin_id'])) {
     <?php include 'links.php'; ?>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="style.css" />
+    
 </head>
 
 <body>
-    <div class="main-container d-flex">
+    <div class="main-content d-flex">
         <div class="sidebar" id="sidebar">
             <div class="header-box px-3 mt-2 mb-2 d-flex align-items-center justify-content-between">
                 <h1 class="header">Sin Nam</h1>
                 <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
             </div>
-            <ul class="mt-2">
+            <ul class="mt-3">
                 <li class="active"><a href="#" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
                 <li class=""><a href="lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> Last Queue No.</a></li>
                 <li class=""><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Edit Staff</a></li>
@@ -43,17 +44,7 @@ if (!isset($_SESSION['admin_id'])) {
         </div>
 
         <div class="content" id="content">
-            <nav class="navbar navbar-expand-lg">
-                <div class="container-fluid">
-                    <button class="btn close-btn"><i class="fa-solid fa-bars"></i></button>
-                    <div class="collapse navbar-collapse" id="navbarMenu">
-                        <ul class="nav navbar-nav ms-auto">
-                            <a class="btn logout-btn" href="forms/loggedOutSuccessful.php" role="button">Logout</a>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
+            <?php include 'adminNavbar.php' ?>
             <div class="section">
                 <div class="admin-box">
                     <h2>Admin Dashboard</h2>
@@ -224,15 +215,6 @@ if (!isset($_SESSION['admin_id'])) {
 
     <script>
         $(document).ready(function() {
-            // Click event listener for close button
-            $(".close-btn").click(function() {
-                $("#sidebar").toggleClass("hidden-sidebar");
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
             $('.delete-btn').on('click', function() {
                 var userId = $(this).data('id');
                 $('#user_id').val(userId);
@@ -241,6 +223,11 @@ if (!isset($_SESSION['admin_id'])) {
             $('.yes-btn').on('click', function() {
                 $('#delete-form').submit();
             });
+        });
+        
+        $('#sidebarToggle').on('click', function() {
+            $('#sidebar').toggleClass('active');
+            $('#content').toggleClass('active');
         });
     </script>
 

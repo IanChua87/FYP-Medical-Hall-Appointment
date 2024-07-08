@@ -27,6 +27,8 @@ if (!$edit_appointment_stmt) {
         $appointment_date = $row['appointment_date'];
         $appointment_time = $row['appointment_start_time'];
         $appointment_status = $row['appointment_status'];
+        $queue_no = $row['queue_no'];
+        $patient_id = $row['patient_id'];
 
     } else{
         $_SESSION['message'] = "Appointment not found.";
@@ -61,8 +63,7 @@ if (!$edit_appointment_stmt) {
                 </div>
 
                 <div class="form-group">
-                    <label for="phone_number">Phone Number:</label>
-                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="<?php echo $phone_number ?>" disabled>
+                    <input type="text" name="patient_id" class="form-control" value="<?php echo $patient_id ?>" hidden>
                 </div>
 
                 <div class="form-group">
@@ -77,8 +78,14 @@ if (!$edit_appointment_stmt) {
 
                 <div class="form-group">
                     <label for="appointment_status">Appointment Status:</label>
-                    <input type="text" name="appointment_status" id="appointment_status" class="form-control" value="<?php echo $appointment_status ?>" disabled>
+                    <input type="text" name="appointment_status" id="appointment_status" class="form-control" value="<?php echo $appointment_status ?>">
                 </div>
+
+                <div class="form-group">
+                    <label for="queue_no">Queue No:</label>
+                    <input type="text" name="queue_no" id="queue_no" class="form-control" value="<?php echo $queue_no ?>">
+                </div>
+
                 <div class="buttons">
                     <button type="button" class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
@@ -87,11 +94,6 @@ if (!$edit_appointment_stmt) {
     </section>
 </body>
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-
 <script>
     $(document).ready(function() {
         $('#appointment_date').datepicker({
@@ -99,7 +101,10 @@ if (!$edit_appointment_stmt) {
             beforeShowDay: function(date) {
                     var day = date.getDay();
                     return [(day !== 1 && day !== 0), ''];
-            }
+            },
+            yearRange: "-100:+0",
+            changeMonth: true,
+            changeYear: true,
         });
 
         $('#appointment_time').timepicker({

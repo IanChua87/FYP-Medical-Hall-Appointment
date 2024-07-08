@@ -10,18 +10,19 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $confirm_password = $_POST['confirm_password'];
     $dob = $_POST['dob'];
     $phone = $_POST['phone'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $status = "new";
-    $last_updated_by = "admin";
+    $status = "New";
+    $last_updated_by = "Admin";
     $last_updated_datetime = date("Y-m-d H:i:s");
-    $payment_status = "unpaid";
-    $amount_payable = 0;
+    $payment_status = "Unpaid";
+    $amount_payable = 50.00;
     $is_verified = 0;
 
 
-    if (check_empty_register_input_fields($name, $email, $password, $dob, $phone)) {
+    if (check_empty_register_input_fields($name, $email, $password, $confirm_password, $dob, $phone)) {
         $_SESSION['error'] = "All fields are required.";
         $_SESSION['form_data'] = $_POST;
         header("Location: register.php");
@@ -50,6 +51,13 @@ if (isset($_POST['submit'])) {
 
         if (check_password_strength($password)){
             $_SESSION['error'] = "Password must be at least 8 characters long.";
+            $_SESSION['form_data'] = $_POST;
+            header("Location: register.php");
+            exit();
+        }
+
+        if(check_confirm_password($password, $confirm_password)){
+            $_SESSION['error'] = "Passwords do not match.";
             $_SESSION['form_data'] = $_POST;
             header("Location: register.php");
             exit();
@@ -102,7 +110,6 @@ if (isset($_POST['submit'])) {
                 mysqli_stmt_close($insert_stmt);
                 header("Location: register.php");
                 exit();
-
             }
         }
         mysqli_close($conn);

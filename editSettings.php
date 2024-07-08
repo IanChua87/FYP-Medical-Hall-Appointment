@@ -47,25 +47,25 @@ if (!$result) {
                     <div class="form-group row mb-5">
                         <label for="weekday_open_time" class="col-sm-5 col-form-label text-right">Weekday Open Time:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="weekday_open_time" id="weekday_open_time" class="form-control" value="<?php echo $settings['weekday_open_time'] ?>">
+                            <input type="text" name="weekday_open_time" id="weekday_open_time" class="form-control time" value="<?php echo $settings['weekday_open_time'] ?>">
                         </div>
                     </div>
                     <div class="form-group row mb-5">
                         <label for="weekday_close_time" class="col-sm-5 col-form-label text-right">Weekday Close Time:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="weekday_close_time" id="weekday_close_time" class="form-control" value="<?php echo $settings['weekday_close_time'] ?>">
+                            <input type="text" name="weekday_close_time" id="weekday_close_time" class="form-control time" value="<?php echo $settings['weekday_close_time'] ?>">
                         </div>
                     </div>
                     <div class="form-group row mb-5">
                         <label for="weekend_open_time" class="col-sm-5 col-form-label text-right">Weekend Open Time:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="weekend_open_time" id="weekend_open_time" class="form-control" value="<?php echo $settings['weekend_open_time'] ?>">
+                            <input type="text" name="weekend_open_time" id="weekend_open_time" class="form-control time" value="<?php echo $settings['weekend_open_time'] ?>">
                         </div>
                     </div>
                     <div class="form-group row mb-5">
                         <label for="weekend_close_time" class="col-sm-5 col-form-label text-right">Weekend Close Time:</label>
                         <div class="col-sm-7">
-                            <input type="text" name="weekend_close_time" id="weekend_close_time" class="form-control" value="<?php echo $settings['weekend_close_time'] ?>">
+                            <input type="text" name="weekend_close_time" id="weekend_close_time" class="form-control time" value="<?php echo $settings['weekend_close_time'] ?>">
                         </div>
                     </div>
                     <div class="form-group row mb-5">
@@ -95,7 +95,7 @@ if (!$result) {
 
                     <div class="form-group">
                         <div class="col-sm-12 text-center">
-                            <button type="submit" class="btn save-btn">Save</button>
+                            <button type="submit" name="submit" class="btn save-btn">Save</button>
                         </div>
                     </div>
                 </form>
@@ -103,5 +103,22 @@ if (!$result) {
         </div>
     </div>
 </body>
+
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#login-error-msg').fadeOut('slow');
+        }, 1700);
+    });
+</script>
+
+<script>
+        $(function() {
+            $(".time").timepicker({
+                timeFormat: 'hh:mm p',
+                interval: 15
+            });
+        });
+</script>
 
 </html>

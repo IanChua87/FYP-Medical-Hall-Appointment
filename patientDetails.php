@@ -35,89 +35,103 @@ if (!isset($_SESSION['admin_id'])) {
             });
         });
     </script>
-    <section class="patient-table">
-        <div class="container">
-            <h2 class="text-center">Patient Details</h2>
-            <div class="table-responsive">
-                <table class="table table-striped" id="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Patient ID</th>
-                            <th scope="col">Patient Name</th>
-                            <th scope="col">Patient DOB</th>
-                            <th scope="col">Patient Phone No</th>
-                            <th scope="col">Patient Email</th>
-                            <th scope="col">Patient Status</th>
-                            <th scope="col">Last Updated By</th>
-                            <th scope="col">Last Updated Datetime</th>
-                            <th scope="col">Payment Status</th>
-                            <th scope="col">Amount Payable</th>
-                            <th scope="col-2">Take Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $query = "SELECT * FROM patient ORDER BY patient_id ASC";
-                        $patient_stmt = mysqli_prepare($conn, $query);
-                        if (!$patient_stmt) {
-                            die("Failed to prepare statement");
-                        } else {
-                            mysqli_stmt_execute($patient_stmt);
-                            $result = mysqli_stmt_get_result($patient_stmt);
+    <div class="main-content d-flex">
+        <div class="sidebar" id="sidebar">
+            <div class="header-box px-3 mt-2 mb-2 d-flex align-items-center justify-content-between">
+                <h1 class="header">Sin Nam</h1>
+                <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
+            </div>
+            <ul class="mt-2">
+                <li class=""><a href="#" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li class=""><a href="lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> Last Queue No.</a></li>
+                <li class=""><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Edit Staff</a></li>
+                <li class="active"><a href="patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> Edit Patient</a></li>
+                <li class=""><a href="appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> Edit Appointment</a></li>
+                <div class="sidebar-separator"></div>
+                <li class=""><a href="editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> Edit Settings</a></li>
+            </ul>
+        </div>
+        <div class="content" id="content">
+            <?php include 'adminNavbar.php' ?>
+            <div class="patient-table">
+                <div class="container">
+                    <h2 class="text-center">Patient Details</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th scope="col">Patient Name</th>
+                                    <th scope="col">Patient DOB</th>
+                                    <th scope="col">Patient Phone No</th>
+                                    <th scope="col">Patient Email</th>
+                                    <th scope="col">Patient Status</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Amount Payable</th>
+                                    <th scope="col-2">Take Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $query = "SELECT * FROM patient ORDER BY patient_id ASC";
+                                $patient_stmt = mysqli_prepare($conn, $query);
+                                if (!$patient_stmt) {
+                                    die("Failed to prepare statement");
+                                } else {
+                                    mysqli_stmt_execute($patient_stmt);
+                                    $result = mysqli_stmt_get_result($patient_stmt);
 
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row['patient_id'] . "</td>";
-                                    echo "<td>" . $row['patient_name'] . "</td>";
-                                    echo "<td>" . $row['patient_dob'] . "</td>";
-                                    echo "<td>" . $row['patient_phoneNo'] . "</td>";
-                                    echo "<td>" . $row['patient_email'] . "</td>";
-                                    echo "<td>" . $row['patient_status'] . "</td>";
-                                    echo "<td>" . $row['last_updated_by'] . "</td>";
-                                    echo "<td>" . $row['last_updated_datetime'] . "</td>";
-                                    echo "<td>" . $row['payment_status'] . "</td>";
-                                    echo "<td>" . $row['amount_payable'] . "</td>";
-                                    echo "<td>
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>";
+                                            echo "<td>" . $row['patient_name'] . "</td>";
+                                            echo "<td>" . $row['patient_dob'] . "</td>";
+                                            echo "<td>" . $row['patient_phoneNo'] . "</td>";
+                                            echo "<td>" . $row['patient_email'] . "</td>";
+                                            echo "<td>" . $row['patient_status'] . "</td>";
+                                            echo "<td>" . $row['payment_status'] . "</td>";
+                                            echo "<td>" . $row['amount_payable'] . "</td>";
+                                            echo "<td>
                                                     <div class='buttons'>
                                                         <a href='editPatient.php?patient_id=" . $row['patient_id'] . "' class='btn edit-btn'>Edit</a>
                                                         <a href='deletePatient.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['patient_id'] . "'>Delete</a>
                                                     </div>
                                                 </td>";
 
-                                    echo "</tr>";
+                                            echo "</tr>";
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                        ?>
-                        <a href='addPatient.php' class='btn add-btn'>Add</a>
-                    </tbody>
-                </table>
+                                ?>
+                                <a href='addPatient.php' class='btn add-btn'>Add</a>
+                            </tbody>
+                        </table>
 
-                <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="delete-modal-label">Warning<span>!</span></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="modal-text">Are you sure you want to delete the patient record? <br> This action cannot be undone.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <form action="doDeletePatient.php" id="delete-form" method="POST">
-                                    <input type="hidden" name="patient_id" id="patient_id" value="">
-                                    <button type="submit" class="btn yes-btn">Yes</button>
-                                    <button type="button" class="btn no-btn" data-bs-dismiss="modal">No</button>
-                                </form>
+                        <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="delete-modal-label">Warning<span>!</span></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="modal-text">Are you sure you want to delete the patient record? <br> This action cannot be undone.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="doDeletePatient.php" id="delete-form" method="POST">
+                                            <input type="hidden" name="patient_id" id="patient_id" value="">
+                                            <button type="submit" class="btn yes-btn">Yes</button>
+                                            <button type="button" class="btn no-btn" data-bs-dismiss="modal">No</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </section>
+    </div>
+
 
     <script>
         $(document).ready(function() {
@@ -129,6 +143,11 @@ if (!isset($_SESSION['admin_id'])) {
             $('.yes-btn').on('click', function() {
                 $('#delete-form').submit();
             });
+        });
+
+        $('#sidebarToggle').on('click', function() {
+            $('#sidebar').toggleClass('active');
+            $('#content').toggleClass('active');
         });
     </script>
 

@@ -47,48 +47,52 @@ unset($_SESSION['form_data']);
 
 
 
-                            <div class="form-outline mb-4">
-                                <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" />
+                            <div class="form-outline mb-3">
+                                <input type="text" class="form-control form-control-lg mb-1" placeholder="Name" name="name" />
+                                <p class="text-end">No using numbers for the name, for eg. Xavier Lee</p>
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" class="form-control form-control-lg" placeholder="Email" name="email" />
+                            <div class="form-outline mb-3">
+                                <input type="text" class="form-control form-control-lg mb-1" placeholder="Email" name="email" />
+                                <p class="text-end">Use '@' for valid email format</p>
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="Password" name="password" />
+                            <div class="form-outline mb-3">
+                                <input type="password" id="password" class="form-control form-control-lg mb-1" placeholder="Password" name="password" />
+                                <p>Length must be at least 8 characters long, containing upper, lower cases, numbers and special characters</p>
+                            </div>
+
+                            <div class="form-outline mb-5">
+                                <input type="password" id="confirm_password" class="form-control form-control-lg mb-1" placeholder="Confirm Password" name="confirm_password" />
                             </div>
 
 
-                            <div class="double-form-field row mb-4">
+                            <div class="double-form-field row mb-3">
                                 <div class="col">
-                                    <input type="text" class="form-control date-input" id="dob" name="dob" placeholder="Date of Birth">
+                                    <div class="form-outline">
+                                        <input type="text" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="text" id="form2Example28" class="form-control form-control-lg mb-1" placeholder="Phone Number" name="phone" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form2Example28" class="form-control form-control-lg" placeholder="Phone Number" name="phone" />
-                            </div>
-
-                            <div class="mt-3">
+                            <div class="mt-4">
                                 <button type="submit" name="submit" class="btn register-btn">Create Account</button>
                             </div>
                         </form>
 
                         <div class="register-error-msg" id="register-error-msg">
-                             <?php echo $error ?>
+                            <?php echo $error ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 
     <script>
