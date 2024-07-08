@@ -1,11 +1,11 @@
 <?php
 session_start();
-include "db_connect.php";
+include "../db_connect.php";
 ?>
 
 <?php
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: forms/login.php");
+    header("Location: login.php");
     exit();
 }
 ?>
@@ -17,7 +17,7 @@ if (!isset($_SESSION['admin_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | Staff</title>
     <!-- 'links.php' contains cdn links' -->
-    <?php include 'links.php'; ?>
+    <?php include '../links.php'; ?>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -55,7 +55,7 @@ if (!isset($_SESSION['admin_id'])) {
             </ul>
         </div>
         <div class="content" id="content">
-            <?php include 'adminNavbar.php'; ?>
+            <?php include '../adminNavbar.php'; ?>
             <div class="staff-table">
                 <div class="container-xl">
                     <h2 class="text-center">Staff Details</h2>
