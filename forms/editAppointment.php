@@ -1,11 +1,11 @@
 <?php
 session_start();
-include "db_connect.php";
+include "../db_connect.php";
 ?>
 
 <?php
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: forms/login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -47,7 +47,7 @@ if (!$edit_appointment_stmt) {
     <title>Admin | Edit Appointment</title>
      <!-- 'links.php' contains cdn links' -->
     <?php include 'links.php'; ?>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <body>

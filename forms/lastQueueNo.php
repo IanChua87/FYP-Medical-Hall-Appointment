@@ -1,11 +1,11 @@
 <?php
 session_start();
-include "db_connect.php";
+include "../db_connect.php";
 ?>
 
 <?php
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: forms/login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -31,11 +31,11 @@ if(!$queue_stmt){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check Queue No.</title>
-    <?php include 'links.php'; ?>
+    <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-    <?php include 'adminNavbar.php'; ?>
+    <?php include '../adminNavbar.php'; ?>
     <div class="queue-no">
         <h1>Queue No.</h1>
         <div class="queue-box">

@@ -21,7 +21,7 @@ if (!isset($_SESSION['admin_id'])) {
     <!-- 'links.php' contains cdn links' -->
     <?php include 'links.php'; ?>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
     
 </head>
 
@@ -33,13 +33,13 @@ if (!isset($_SESSION['admin_id'])) {
                 <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
             </div>
             <ul class="mt-3">
-                <li class="active"><a href="#" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> Last Queue No.</a></li>
-                <li class=""><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Edit Staff</a></li>
-                <li class=""><a href="patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> Edit Patient</a></li>
-                <li class=""><a href="appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> Edit Appointment</a></li>
+                <li class="active"><a href="adminDashboard.php" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li class=""><a href="forms/lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> Last Queue No.</a></li>
+                <li class=""><a href="forms/staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Edit Staff</a></li>
+                <li class=""><a href="forms/patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> Edit Patient</a></li>
+                <li class=""><a href="forms/appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> Edit Appointment</a></li>
                 <div class="sidebar-separator"></div>
-                <li class=""><a href="editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> Edit Settings</a></li>
+                <li class=""><a href="forms/editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> Edit Settings</a></li>
             </ul>
         </div>
 
@@ -53,7 +53,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <div class="card mb-4 h-100 info">
                                 <div class="row g-0">
                                     <div class="col-md-4 col-sm-12">
-                                        <img src="img/queue (2).svg" class="img-fluid rounded-start" alt="...">
+                                        <img src="../img/queue%20(2).svg" class="img-fluid rounded-start" alt="...">
                                     </div>
                                     <div class="col-md-8 col-sm-12">
                                         <div class="card-body">
@@ -69,7 +69,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <div class="card mb-4 h-100 info">
                                 <div class="row g-0">
                                     <div class="col-md-4 col-sm-12">
-                                        <img src="img/doctor.svg" class="img-fluid rounded-start" alt="...">
+                                        <img src="../img/doctor.svg" class="img-fluid rounded-start" alt="...">
                                     </div>
                                     <div class="col-md-8 col-sm-12">
                                         <div class="card-body">
@@ -87,7 +87,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <div class="card mb-4 h-100 info">
                                 <div class="row g-0">
                                     <div class="col-md-4 col-sm-12">
-                                        <img src="img/patient-mask.svg" class="img-fluid rounded-start" alt="...">
+                                        <img src="../img/patient-mask.svg" class="img-fluid rounded-start" alt="...">
                                     </div>
                                     <div class="col-md-8 col-sm-12">
                                         <div class="card-body">
@@ -103,7 +103,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <div class="card mb-4 h-100 info">
                                 <div class="row g-0">
                                     <div class="col-md-4 col-sm-12">
-                                        <img src="img/appointment.svg" class="img-fluid rounded-start" alt="...">
+                                        <img src="../img/appointment.svg" class="img-fluid rounded-start" alt="...">
                                     </div>
                                     <div class="col-md-8 col-sm-12">
                                         <div class="card-body">
@@ -193,7 +193,7 @@ if (!isset($_SESSION['admin_id'])) {
                                                     <p class="modal-text">Are you sure you want to delete the staff record? <br> This action cannot be undone.</p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <form action="doDeleteStaff.php" id="delete-form" method="POST">
+                                                    <form action="forms/doDeleteStaff.php" id="delete-form" method="POST">
                                                         <input type="hidden" name="user_id" id="user_id" value="">
                                                         <button type="submit" class="btn yes-btn">Yes</button>
                                                         <button type="button" class="btn no-btn" data-bs-dismiss="modal">No</button>

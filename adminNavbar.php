@@ -10,16 +10,16 @@ echo '
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="settings.php">Settings</a>
+                    <a class="nav-link active" aria-current="page" href="forms/settings.php">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="lastQueueNo.php">Queue No</a>
+                    <a class="nav-link" href="forms/lastQueueNo.php">Queue No</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Doctor Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="appointmentDetails.php">Appointments</a>
+                    <a class="nav-link" href="forms/appointmentDetails.php">Appointments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="patientDetails.php">Patient Details</a>
