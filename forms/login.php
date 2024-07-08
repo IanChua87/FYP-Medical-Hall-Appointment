@@ -1,43 +1,21 @@
 <?php
+session_start();
 include "../db_connect.php";
+include "../helper_functions.php";
 ?>
 
 <?php
-$error = "";
-// Check if the form is submitted
-session_start();
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (empty($email) || empty($password)) {
-        $error = "Please enter your email and password.";
+    if (check_empty_login_input_fields($email, $password)) {
+        $_SESSION['login-error'] = "Please enter your email and password.";
     } else {
+        login_patient($conn, $email, $password);
 
-        // Query to fetch user data from the database
-        $query = "SELECT * FROM patient WHERE patient_email=? && patient_password=?";
-        $stmt = mysqli_prepare($conn, $query);
-        if (!$stmt) {
-            die("Failed to prepare statement");
-        } else {
-            mysqli_stmt_bind_param($stmt, "ss", $email, $password);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            $user = mysqli_num_rows($result);
-
-            // Verify password and set session if login is successful
-            if ($user > 0) {
-                $user_data = mysqli_fetch_assoc($result);
-
-                $_SESSION['patient_id'] = $user_data['patient_id'];
-                header("Location: ../index.php");
-                exit();
-            } else {
-                $error = "Invalid email or password. Please try again.";
-            }
-        }
-        mysqli_stmt_close($stmt);
+        login_users($conn, $email, $password);
     }
 }
 
@@ -74,14 +52,6 @@ if (isset($_POST['submit'])) {
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col d-flex">
-                                    <!-- Checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                        <label class="form-check-label rem-me-label" for="form2Example31"> Remember me </label>
-                                    </div>
-                                </div>
-
                                 <div class="col text-end">
                                     <!-- Simple link -->
                                     <a href="forgotPassword.php" class="forgot-text">Forgot password?</a>
@@ -91,8 +61,10 @@ if (isset($_POST['submit'])) {
                                 <button type="submit" name="submit" class="btn login-btn">Login</button>
                             </div>
                         </form>
-                        <?php if (!empty($error)) {
-                            echo '<p class="login-error-msg" id="login-error-msg">' . $error . '</p>';
+                        <?php
+                        if(isset($_SESSION['login-error'])){
+                            echo '<p class="login-error-msg" id="login-error-msg">' . $_SESSION['login-error'] . '</p>';
+                            unset($_SESSION['login-error']);
                         }
                         ?>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -100,7 +72,7 @@ if (isset($_POST['submit'])) {
                             $(document).ready(function() {
                                 setTimeout(function() {
                                     $('#login-error-msg').fadeOut('slow');
-                                }, 3000);
+                                }, 1700);
                             });
                         </script>
 

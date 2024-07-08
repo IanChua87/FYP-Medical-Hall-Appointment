@@ -1,3 +1,11 @@
+<?php
+session_start();
+include "../db_connect.php";
+    $_SESSION = array();
+    session_destroy();
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -22,7 +30,7 @@
                     <h2>Logged Out</h2>
                     <p>You have been logged out. Please login again.</p>
                     <div class="mt-5">
-                        <a href="login.php" class="btn login-btn">Login</a>
+                        <a href="login.php" name="submit" class="btn login-btn">Login</a>
                     </div>
                 </div>
             </div>

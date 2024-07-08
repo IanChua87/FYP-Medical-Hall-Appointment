@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!-- 'header.php' contains header content -->
 <section class="contacted">
     <div class="container-fluid">
         <div class="row">

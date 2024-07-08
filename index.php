@@ -1,16 +1,8 @@
-<?php 
+<?php
 session_start();
 include "db_connect.php";
 ?>
 
-<?php
-
-
-if (!isset($_SESSION['patient_id'])) {
-    header("Location: forms/login.php");
-    exit();
-}
-?>
 
 <!DOCTYPE html>
 <html>
@@ -137,7 +129,7 @@ if (!isset($_SESSION['patient_id'])) {
         <h2 class="text-center">Contact Us</h2>
         <div class="contact-box">
             <div class="row">
-                <div class="col-12 col-md-12 col-lg-7">
+                <div class="col-12 col-md-12 col-lg-6">
                     <form action="forms/contact.php" method="post">
                         <div class="mb-3">
                             <input type="text" class="form-control-lg" name="name" placeholder="Name">
@@ -152,7 +144,7 @@ if (!isset($_SESSION['patient_id'])) {
                     </form>
                 </div>
 
-                <div class="col-12 col-md-12 col-lg-5">
+                <div class="col-12 col-md-12 col-lg-6">
                     <img src="img/contact-img.png" alt="contact-img">
                 </div>
             </div>

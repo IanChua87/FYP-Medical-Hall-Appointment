@@ -1,3 +1,9 @@
+<?php
+session_start();
+$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,26 +25,29 @@
                 <div class="col-sm-4 text-black right-col">
                     <div class="form-container">
                         <h3 class="text">Forgot Password</h3>
-                        <form method="post" action="../index.php">
-                            <div data-mdb-input-init class="form-outline mb-5">
-                                <input type="email" class="form-control form-control-lg" placeholder="Email" />
+                        <form method="post" action="handleForgotPassword.php">
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <input type="text" name="email" class="form-control form-control-lg" placeholder="Email" />
                             </div>
 
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="password" class="form-control form-control-lg" placeholder="Old Password" />
+                                <input type="password" name="old-password" class="form-control form-control-lg" placeholder="Old Password" />
                             </div>
 
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="New Password" />
+                                <input type="password" name="new-password" class="form-control form-control-lg" placeholder="New Password" />
                             </div>
 
                             <!-- Simple link -->
                             <a href="login.php" class="forgot-text">Remember password?</a>
 
                             <div class="mt-3">
-                                <button type="submit" class="btn reset-btn">Reset Password</button>
+                                <button type="submit" name="submit" class="btn reset-btn">Reset Password</button>
                             </div>
                         </form>
+                        <div class="reset-password-error-msg" id="register-error-msg">
+                            <?php echo $error ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,6 +56,11 @@
 
 
 </body>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 </html>
 
