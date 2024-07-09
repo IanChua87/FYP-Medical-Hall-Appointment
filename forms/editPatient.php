@@ -68,12 +68,12 @@ if (!$edit_patient_stmt) {
 
                 <div class="form-group">
                     <label for="dob">Date of Birth:</label>
-                    <input type="text" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>" >
+                    <input type="text" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number:</label>
-                    <input type="text" name="phone" id="phone" class="form-control" value="<?php echo $patient_phoneNo ?>" >
+                    <input type="text" name="phone" id="phone" class="form-control" value="<?php echo $patient_phoneNo ?>">
                 </div>
 
                 <div class="form-group">
@@ -81,17 +81,7 @@ if (!$edit_patient_stmt) {
                     <input type="email" name="email" id="email" class="form-control" value="<?php echo $patient_email ?>">
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control" value="<?php echo $patient_password ?>">
-                </div>
-
-                <!-- <div class="form-group">
-                    <label for="status">Status:</label>
-                    <input type="text" name="status" id="status" class="form-control" value="<?php echo $patient_status ?>">
-                </div> -->
-
-                <div class="double-form-field row mb-3">
+                <div class="double-form-field row mb-2">
                     <div class="col-sm-6">
                         <div class="form-outline">
                             <label for="status">Payment Status:</label>
@@ -110,6 +100,12 @@ if (!$edit_patient_stmt) {
                     <button type="button" class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
                 </div>
+            </form>
+            <div class="row mb-4">
+                <div class="col text-end text-underline">
+                    <a href='resetPatientPassword.php?patient_id=<?php echo $row['patient_id'] ?>' class="forgot-text">Reset Password</a>
+                </div>
+            </div>
         </div>
     </section>
 </body>

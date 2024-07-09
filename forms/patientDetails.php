@@ -105,6 +105,7 @@ if (!isset($_SESSION['admin_id'])) {
                                 <a href='addPatient.php' class='btn add-btn'>Add</a>
                             </tbody>
                         </table>
+                        <?php include '../sessionMsg.php' ?>
 
                         <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -151,13 +152,12 @@ if (!isset($_SESSION['admin_id'])) {
         });
     </script>
 
-    <?php include '../sessionMsg.php' ?>
-
     <script>
         $(document).ready(function() {
             setTimeout(function() {
-                $('#session-msg').fadeOut('slow');
+                $('#session-msg-success').fadeOut('slow');
             }, 1700);
+            
         });
     </script>
 </body>

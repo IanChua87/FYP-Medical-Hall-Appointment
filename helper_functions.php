@@ -299,11 +299,11 @@ function insert_relation_details($conn, $name, $appointment_id)
     mysqli_stmt_execute($insert_stmt);
 }
 
-function update_patient_details($conn, $dob, $phone, $email, $password, $payment_status, $amount_payable, $patient_id)
+function update_patient_details($conn, $dob, $phone, $email, $payment_status, $amount_payable, $patient_id)
 {
-    $update = "UPDATE patient SET patient_dob = ?, patient_phoneNo = ?, patient_email = ?, patient_password = ?, payment_status = ?, amount_payable = ? WHERE patient_id = ?";
+    $update = "UPDATE patient SET patient_dob = ?, patient_phoneNo = ?, patient_email = ?, payment_status = ?, amount_payable = ? WHERE patient_id = ?";
     $update_stmt = mysqli_prepare($conn, $update);
-    mysqli_stmt_bind_param($update_stmt, "sssssdi", $dob, $phone, $email, $password, $payment_status, $amount_payable, $patient_id);
+    mysqli_stmt_bind_param($update_stmt, "ssssdi", $dob, $phone, $email, $payment_status, $amount_payable, $patient_id);
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);
@@ -353,6 +353,25 @@ function check_empty_reset_password_input_fields($email, $oldPassword, $newPassw
     if (empty($email) || empty($oldPassword) || empty($newPassword)) {
         return true;
     } else {
+        return false;
+    }
+}
+
+function check_empty_patient_reset_password_field($password, $confirm_password)
+{
+    if (empty($password) || empty($confirm_password)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function check_password_match($password, $confirm_password)
+{
+    if ($password !== $confirm_password) {
+        return true;
+    } 
+    else {
         return false;
     }
 }

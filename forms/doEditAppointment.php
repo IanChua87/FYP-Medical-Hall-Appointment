@@ -33,7 +33,7 @@ if(isset($_POST['submit'])){
             }
 
         } else{
-            $_SESSION['error'] = "Patient not found.";
+            $_SESSION['error'] = "Appointment not found.";
             header("Location: editAppointment.php?appointment_id=" . $appointment_id);
             exit();
         }

@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
         } 
         else{
             if(insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $_SESSION['admin_role'], $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false){
-                $_SESSION['error'] = "Patient successfully added.";
+                $_SESSION['message'] = "Patient successfully added.";
                 header("Location: patientDetails.php");
                 exit();
             } else{

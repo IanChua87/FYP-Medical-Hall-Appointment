@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     $dob = $_POST['dob'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    // $password = $_POST['password'];
     $payment_status = $_POST['payment_status'];
     $amount_payable = $_POST['amount_payable'];
 
@@ -77,20 +77,15 @@ if (isset($_POST['submit'])) {
     //     }
     // }
     if (check_patient_exists_by_id($conn, $patient_id) !== false) {
-        if(update_patient_details($conn, $dob, $phone, $email, $password, $payment_status, $amount_payable, $patient_id)!== false){
+        if (update_patient_details($conn, $dob, $phone, $email, $payment_status, $amount_payable, $patient_id) !== false) {
             $_SESSION['message'] = "Updated patient profile successfully.";
             header("Location: patientDetails.php");
             exit();
         } else {
             $_SESSION['error'] = "Failed to update patient profile.";
-            header("Location: editPatient.php");
+            header("Location: editPatient.php?patient_id=" . $patient_id);
             exit();
         }
-    } else{
-        $_SESSION['message'] = "Patient not found.";
-        header("Location: patientDetails.php");
-        exit();
-    
     }
 } else {
     header("Location: appointmentDetails.php");

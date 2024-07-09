@@ -63,6 +63,7 @@ if (!isset($_SESSION['admin_id'])) {
                 </div>
         </div>
     </section>
+    <?php include '../sessionMsg.php' ?>
 
 </body>
 
@@ -89,5 +90,15 @@ if (!isset($_SESSION['admin_id'])) {
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#session-msg-error').fadeOut('slow');
+        }, 1700);
+
+    });
+</script>
+
 
 </html>

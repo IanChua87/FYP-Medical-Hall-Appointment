@@ -596,18 +596,26 @@ nav{
 }
 
 .login .login-error-msg{
-    color: #22eb97;
-    font-size: 14px;
+    color: #16a2ff;
+    font-size: 15px;
     margin-top: 500px;
     position: fixed;
 
 }
 
-.session-msg{
-    color: red;
-    font-size: 14px;
-
+.session-msg-error{
+    color: rgb(129, 27, 27);
+    font-size: 15px;
+    margin-top: 500px;
+    position: fixed;
 }
+
+/* .session-msg-success{
+    color: #22eb97;
+    font-size: 14px;
+    margin-top: 500px;
+    position: fixed;
+} */
 /* ===========================Login page end=========================== */
 
 
