@@ -26,6 +26,13 @@ if (isset($_POST['submit'])) {
         header("Location: addAppointment.php");
         exit();
     } else {
+
+        if (invalid_email($patient_email) !== false) {
+            $_SESSION['error'] = "Invalid email format.";
+            header("Location: addAppointment.php");
+            exit();
+        }
+        
         if (check_patient_exists_by_email($conn, $patient_email) !== false) {
             $patient_data = check_patient_exists_by_email($conn, $patient_email);
             $patient_id = $patient_data['patient_id'];

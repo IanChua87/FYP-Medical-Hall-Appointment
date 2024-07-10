@@ -8,7 +8,7 @@ function check_empty_register_input_fields($name, $email, $password, $confirm_pa
     }
 }
 
-function check_empty_patient_input_fields($name, $email, $password, $dob, $phone)
+function check_empty_add_patient_input_fields($name, $email, $password, $dob, $phone)
 {
     if (empty($name) || empty($email) || empty($password) || empty($dob) || empty($phone)) {
         return true;
@@ -16,6 +16,16 @@ function check_empty_patient_input_fields($name, $email, $password, $dob, $phone
         return false;
     }
 }
+
+function check_empty_edit_patient_input_fields($name, $email, $dob, $phone, $payment_status, $amount_payable)
+{
+    if (empty($name) || empty($email) || empty($dob) || empty($phone) || empty($payment_status) || empty($amount_payable)) {
+        return true;
+    } else {
+        return false;
+    }
+} 
+
 
 function check_empty_users_input_fields($name, $email, $password, $role)
 {
@@ -56,6 +66,15 @@ function invalid_name($name)
 function invalid_phone_number($phone)
 {
     if (!preg_match("/^[0-9]*$/", $phone)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function check_invalid_date($date)
+{
+    if (strtotime($date) < strtotime(date("Y-m-d"))) {
         return true;
     } else {
         return false;

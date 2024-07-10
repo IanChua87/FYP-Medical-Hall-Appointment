@@ -47,11 +47,11 @@ if (!isset($_SESSION['admin_id'])) {
             <ul class="mt-3">
                 <li class=""><a href="../adminDashboard.php" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
                 <li class=""><a href="lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> Last Queue No.</a></li>
-                <li class="active"><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Edit Staff</a></li>
-                <li class=""><a href="patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> Edit Patient</a></li>
-                <li class=""><a href="appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> Edit Appointment</a></li>
+                <li class="active"><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Staff Table</a></li>
+                <li class=""><a href="patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> Patient Table</a></li>
+                <li class=""><a href="appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> Appointment Table</a></li>
                 <div class="sidebar-separator"></div>
-                <li class=""><a href="editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> Edit Settings</a></li>
+                <li class=""><a href="editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> Settings</a></li>
             </ul>
         </div>
         <div class="content" id="content">

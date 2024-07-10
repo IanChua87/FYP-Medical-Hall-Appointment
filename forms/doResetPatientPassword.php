@@ -22,8 +22,14 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    if(check_password_match($password, $confirm_password) !== false){
+    if(check_password_match($password, $confirm_password)){
         $_SESSION['error'] = "Passwords do not match.";
+        header("Location: resetPatientPassword.php?patient_id=" . $patient_id);
+        exit();
+    }
+
+    if(check_password_strength($password)){
+        $_SESSION['error'] = "Password must be at least 8 characters long.";
         header("Location: resetPatientPassword.php?patient_id=" . $patient_id);
         exit();
     }

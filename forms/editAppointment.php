@@ -13,12 +13,12 @@ $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.p
 $edit_appointment_stmt = mysqli_prepare($conn, $query);
 if (!$edit_appointment_stmt) {
     die("Failed to prepare statement");
-} else{
+} else {
     mysqli_stmt_bind_param($edit_appointment_stmt, 's', $_GET['appointment_id']);
     mysqli_stmt_execute($edit_appointment_stmt);
     $edit_appointment_result = mysqli_stmt_get_result($edit_appointment_stmt);
 
-    if(mysqli_num_rows($edit_appointment_result) > 0){
+    if (mysqli_num_rows($edit_appointment_result) > 0) {
         $row = mysqli_fetch_assoc($edit_appointment_result);
 
         $patient_name = $row['patient_name'];
@@ -29,27 +29,27 @@ if (!$edit_appointment_stmt) {
         $appointment_status = $row['appointment_status'];
         $queue_no = $row['queue_no'];
         $patient_id = $row['patient_id'];
-
-    } else{
+    } else {
         $_SESSION['message'] = "Appointment not found.";
         header("Location: appointmentDetails.php");
         exit();
-    
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | Edit Appointment</title>
-     <!-- 'links.php' contains cdn links' -->
-    <?php include 'links.php'; ?>
+    <!-- 'links.php' contains cdn links' -->
+    <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
+
 <body>
     <section class="appointment">
         <div class="appointment-box">
@@ -78,12 +78,17 @@ if (!$edit_appointment_stmt) {
 
                 <div class="form-group">
                     <label for="appointment_status">Appointment Status:</label>
-                    <input type="text" name="appointment_status" id="appointment_status" class="form-control" value="<?php echo $appointment_status ?>">
+                    <select name="appointment_status" id="appointment_status" class="form-control">
+                        <option value="CANCELLED">CANCELLED</option>
+                        <option value="MISSED">MISSED</option>
+                        <option value="UPCOMING">UPCOMING</option>
+                        <option value="COMPLETED">COMPLETED</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="queue_no">Queue No:</label>
-                    <input type="text" name="queue_no" id="queue_no" class="form-control" value="<?php echo $queue_no ?>">
+                    <input type="text" name="queue_no" id="queue_no" class="form-control" value="<?php echo $queue_no ?>" disabled>
                 </div>
 
                 <div class="buttons">
@@ -96,15 +101,17 @@ if (!$edit_appointment_stmt) {
 
 <script>
     $(document).ready(function() {
+        var today = new Date();
         $('#appointment_date').datepicker({
             dateFormat: 'yy-mm-dd',
             beforeShowDay: function(date) {
-                    var day = date.getDay();
-                    return [(day !== 1 && day !== 0), ''];
+                var day = date.getDay();
+                return [(day !== 1 && day !== 0), ''];
             },
             yearRange: "-100:+0",
             changeMonth: true,
             changeYear: true,
+            minDate: today
         });
 
         $('#appointment_time').timepicker({
@@ -117,10 +124,11 @@ if (!$edit_appointment_stmt) {
     });
 </script>
 <script>
-    $(document).ready(function(){
-        $('.back-btn').on('click', function(){
+    $(document).ready(function() {
+        $('.back-btn').on('click', function() {
             window.location.href = "appointmentDetails.php";
         });
     });
 </script>
+
 </html>

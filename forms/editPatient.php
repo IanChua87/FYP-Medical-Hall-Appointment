@@ -67,6 +67,16 @@ if (!$edit_patient_stmt) {
                 </div>
 
                 <div class="form-group">
+                    <label for="dob">Name:</label>
+                    <input type="text" name="name" id="name" class="form-control" value="<?php echo $patient_name ?>">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" value="<?php echo $patient_email ?>">
+                </div>
+
+                <div class="form-group">
                     <label for="dob">Date of Birth:</label>
                     <input type="text" name="dob" id="dob" class="form-control" value="<?php echo $dob ?>">
                 </div>
@@ -76,16 +86,14 @@ if (!$edit_patient_stmt) {
                     <input type="text" name="phone" id="phone" class="form-control" value="<?php echo $patient_phoneNo ?>">
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" class="form-control" value="<?php echo $patient_email ?>">
-                </div>
-
                 <div class="double-form-field row mb-2">
                     <div class="col-sm-6">
                         <div class="form-outline">
                             <label for="status">Payment Status:</label>
-                            <input type="text" name="payment_status" id="status" class="form-control" value="<?php echo $payment_status ?>">
+                            <select name="payment_status" id="payment_status" class="form-control form-control-lg mb-1">
+                                <option value="PAID" <?php if ($payment_status == "PAID") echo "selected" ?>>PAID</option>
+                                <option value="UNPAID" <?php if ($payment_status == "UNPAID") echo "selected" ?>>UNPAID</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -122,7 +130,7 @@ if (!$edit_patient_stmt) {
         });
     });
     
-    $(function() {
+    $(document).ready(function() {
             $("#dob").datepicker({
                 changeMonth: true,
                 changeYear: true,
