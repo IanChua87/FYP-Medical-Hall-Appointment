@@ -26,9 +26,7 @@ if (isset($_POST['book'])) {
     if (isset($_POST['timeslot']) && isset($_POST['apptdate'])) {
         $timeslot = $_POST['timeslot'];
         $apptdate = $_POST['apptdate'];
-        $options = $_POST['options'];
-        // $relation = isset($_POST['relation']) ? $_POST['relation'] : null;
-        $relation = $_POST['relation'];
+        $appt_id = $_POST['appt_id'];
 
         // Separate the timeslot into start and end times
         $timeslot_parts = explode(' - ', $timeslot);
@@ -36,61 +34,45 @@ if (isset($_POST['book'])) {
             $appointment_start_time = $timeslot_parts[0];
             $appointment_end_time = $timeslot_parts[1];
 
-            // Get the current date and time
-            $booked_datetime = date('Y-m-d H:i:s');
-
-            // Prepare the SQL query for inserting into appointment table
-            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?)";
+            // Prepare the SQL query for updating the appointment table
+            $query = "UPDATE appointment SET appointment_date = ?, appointment_start_time = ?, appointment_end_time = ? WHERE appointment_id = ? AND patient_id = ?";
             $stmt = mysqli_prepare($conn, $query);
 
             if (!$stmt) {
                 die("Failed to prepare statement: " . mysqli_error($conn));
             }
 
-            // Bind the parameters for appointment insertion
-            mysqli_stmt_bind_param($stmt, "sssssi", $apptdate, $appointment_start_time, $appointment_end_time, $patient_name, $booked_datetime, $patient_id);
+            // Bind the parameters for appointment update
+            mysqli_stmt_bind_param($stmt, "ssssi", $apptdate, $appointment_start_time, $appointment_end_time, $appt_id, $patient_id);
 
-            // Execute the statement for appointment insertion
+            // Execute the statement for appointment update
             if (mysqli_stmt_execute($stmt)) {
-                // Get the last inserted appointment ID
-                $appointment_id = mysqli_insert_id($conn);
+                // Check if any rows were affected
+                if (mysqli_stmt_affected_rows($stmt) > 0) {
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($conn);
 
-                // If booking is for others and relation is provided, insert into relation table
-                if ($options == '2' && $relation) {
-                    $sql = "INSERT INTO relation (relation_name, appointment_id) VALUES (?, ?)";
-                    $stmt_relation = mysqli_prepare($conn, $sql);
-                    if (!$stmt_relation) {
-                        die("Failed to prepare statement: " . mysqli_error($conn));
-                    }
-                    mysqli_stmt_bind_param($stmt_relation, "si", $relation, $appointment_id);
-                    if (!mysqli_stmt_execute($stmt_relation)) {
-                        $error = "Failed to book appointment for relation: " . mysqli_error($conn);
-                        header("Location: booking.php?error=" . urlencode($error));
-                        exit();
-                    }
-                    mysqli_stmt_close($stmt_relation);
+                    header("Location: updbookingSuccessful.php?success=" . urlencode("Appointment updated successfully"));
+                    exit();
+                } else {
+                    $error = "No appointment found for update.";
+                    header("Location: dobooking.php?error=" . urlencode($error));
+                    exit();
                 }
-                 // Close the statement and connection
-            mysqli_stmt_close($stmt);
-            mysqli_close($conn);
-
-                header("Location: bookingSuccessful.php?success=" . urlencode("Appointment booked successfully for relation: $relation"));
-                exit();
             } else {
-                $error = "Failed to book appointment: " . mysqli_error($conn);
-                header("Location: booking.php?error=" . urlencode($error));
+                $error = "Failed to update appointment: " . mysqli_error($conn);
+                header("Location: dobooking.php?error=" . urlencode($error));
                 exit();
             }
 
-           
         } else {
             $error = "Invalid timeslot format.";
-            header("Location: booking.php?error=" . urlencode($error));
+            header("Location: dobooking.php?error=" . urlencode($error));
             exit();
         }
     } else {
         $error = "Missing required fields.";
-        header("Location: booking.php?error=" . urlencode($error));
+        header("Location: dobooking.php?error=" . urlencode($error));
         exit();
     }
 }
@@ -106,7 +88,7 @@ if (isset($_POST['book'])) {
 
 <head>
     <meta charset="utf-8" />
-    <title>Booked | Successful</title>
+    <title>Update Booking | Successful</title>
     <!-- 'links.php' contains cdn links' -->
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
@@ -123,7 +105,7 @@ if (isset($_POST['book'])) {
             <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
                 <div class="verified-box">
                     <img src="../img/tick-verification.svg" alt="Tick logo symbol"/>
-                    <h2>Booking<br> Successful</h2>
+                    <h2>Update<br> Successful</h2>
                     <div class="mt-3">
                         <a href="../loginindex.php" class="btn back-to-home-btn">Back to Home</a>
                     </div>

@@ -1,9 +1,8 @@
 <?php
 session_start();
 include "db_connect.php";
+
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -194,7 +193,7 @@ include "db_connect.php";
                 </div>
             </div>
             <div class="footer-separator"></div>
-            <p class="copyright-text mb-0">&copy; 2024 My Web Page. All rights reserved.</p>
+            <p class="copyright-text mb-0">&copy; 2024 Sin Nam Medical Hall. All rights reserved.</p>
         </div>
     </footer>
     <!--footer end-->

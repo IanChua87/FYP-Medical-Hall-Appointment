@@ -71,7 +71,7 @@ nav{
     color: #f9f9f9;
     font-size: 16px;
     font-weight: 500;
-    margin: 0 0 0 15px;
+    margin: 0 0 0 20px;
 }
 
 .navbar .sign-up-btn{
@@ -104,12 +104,14 @@ nav{
     font-size: 30px;
 }
 
-.nav-profile {
+.bi-person-circle {
     font-size: 30px;
     margin-left: 10px;
     margin-top: 5px;
     color: #CFA61E;
 }
+
+
 
 .dropdown-toggle::after {
     color: #CFA61E; /* Match the color of the icon */
@@ -128,6 +130,12 @@ nav{
 
 .dropdown-item{
     color: #fff;
+}
+
+/* Remove blue highlight for Appointment on hover */
+.dropdown:hover .dropdown-toggle {
+    background-color: #682924;
+    color: #f9f9f9;
 }
 /* ====navbar end==== */
 
@@ -202,6 +210,8 @@ nav{
 .right-col img{
     width: 100%;
     height: auto;
+    margin-top: 160px;
+    margin-left: 50px;
 }
 /* ====about end==== */
 
@@ -362,7 +372,10 @@ nav{
 .contact img{
     width: 100%;
     height: auto;
+    margin-top: 30px;
 }
+
+
 /* ====contact end==== */
 
 
@@ -706,11 +719,72 @@ nav{
     font-size: 16px;
     padding: 12px 21px;
     justify-content: center;
+    margin-left: 10px;
 }
+
+
+
 /* ===========================Registration / Logged out / Booking successful pages end=========================== */
 
+/* ============Edit profile start=============== */
+
+.form-container {
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 10px;
+    background-color: #682924;
+    color: #fff;
+    height: 560px;
+}
+
+.back-btn,
+.save-btn {
+    width: 100%;
+    background-color: #CFA61E;
+    color: #fff;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon-text i {
+    margin-right: 20px; /* Space between icon and text */
+    font-size: 5rem; /* Increase icon size */
+}
+
+.icon-text h3 {
+    margin: 0;
+    font-weight: bold; /* Make text bold */
+    margin-top: 5px;
+    color: #fff;
+}
+
+.input-text {
+    color: #fff;
+}
+
+/* ============Edit profile end=============== */
+
+/* ============Change password start============== */
 
 
+.form-container-password {
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 10px;
+    background-color: #682924;
+    color: #fff;
+    height: 450px;
+}
+
+
+
+
+
+
+
+/* ============Change password end============== */
 
 
 /* ===========================Media queries responsiveness=========================== */

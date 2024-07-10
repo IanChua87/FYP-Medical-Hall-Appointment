@@ -1,5 +1,4 @@
 <?php
-session_start();
 include "../db_connect.php";
 include "../helper_functions.php";
 ?>
@@ -112,6 +111,8 @@ if (isset($_POST['submit'])) {
                 exit();
             }
         }
+
+        mysqli_stmt_close($insert_stmt);
         mysqli_close($conn);
     }
 }
