@@ -46,24 +46,35 @@ unset($_SESSION['form_data']);
                             <h3 class="text">Create<br> Account</h3>
                             <p class="registered-prompt">Already registered? <span> <a href="login.php">Login</a> </span>now</p>
 
-
-
                             <div class="form-outline mb-3">
-                                <input type="text" class="form-control form-control-lg mb-1" placeholder="Name" name="name" />
-                                <p class="text-end">No using numbers for the name, for eg. Xavier Lee</p>
+                                <label for="name">
+                                    <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Name:
+                                    <span class="required-text">(required)</span>
+                                </label>
+                                <input type="text" class="form-control form-control-lg mb-1" placeholder="Name" name="name" id="name" />
                             </div>
 
                             <div class="form-outline mb-3">
+                            <label for="email">
+                                    <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Email:
+                                    <span class="required-text">(required)</span>
+                                </label>
                                 <input type="text" class="form-control form-control-lg mb-1" placeholder="Email" name="email" />
-                                <p class="text-end">Use '@' for valid email format</p>
                             </div>
 
                             <div class="form-outline mb-3">
+                            <label for="password">
+                                    <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Password:
+                                    <span class="required-text">(required)</span>
+                                </label>
                                 <input type="password" id="password" class="form-control form-control-lg mb-1" placeholder="Password" name="password" />
-                                <p>Length must be at least 8 characters long, containing upper, lower cases, numbers and special characters</p>
                             </div>
 
-                            <div class="form-outline mb-5">
+                            <div class="form-outline mb-3">
+                            <label for="confirm_password">
+                                    <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Confirm Password:
+                                    <span class="required-text">(required)</span>
+                                </label>
                                 <input type="password" id="confirm_password" class="form-control form-control-lg mb-1" placeholder="Confirm Password" name="confirm_password" />
                             </div>
 
@@ -71,11 +82,20 @@ unset($_SESSION['form_data']);
                             <div class="double-form-field row mb-3">
                                 <div class="col">
                                     <div class="form-outline">
+                                    <label for="dob">
+                                    <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Date of Birth:
+                                    <span class="required-text">(required)</span>
+                                </label>
                                         <input type="text" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
+                                    <label for="phone">
+                                    <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Phone Number:
+                                    <span class="required-text">(required)</span>
+                                
+                                </label>
                                         <input type="text" id="form2Example28" class="form-control form-control-lg mb-1" placeholder="Phone Number" name="phone" />
                                     </div>
                                 </div>

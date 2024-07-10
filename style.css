@@ -30,14 +30,27 @@
     font-size: 16px;
 }
 
-.form-outline p{
-    font-size: 13px;
-    line-height: 1.5em;
-    color: #d1ac47;
-    text-align: right;
+.register label{
+    font-size: 15px;
     font-weight: 500;
+    margin-bottom: 10px;
 }
 
+.register span{
+    font-size: 15px;
+    font-weight: 500;
+
+}
+
+.register .required-text{
+    margin-left: 10px;
+    color: #ce5047;
+}
+
+.register .asterik{
+    margin-right: 10px;
+    color: #ce5047;
+}
 
 /* ===========================Main page start=========================== */
 
@@ -109,6 +122,12 @@ nav{
     margin-left: 10px;
     margin-top: 5px;
     color: #CFA61E;
+}
+
+.dropdown-toggle{
+    color: #f9f9f9;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .dropdown-toggle::after {
@@ -521,7 +540,7 @@ nav{
 .register .register-error-msg{
     color: #22eb97;
     font-size: 14px;
-    margin-top: 800px;
+    margin-top: 300px;
     position: fixed;
 }
 /* ===========================Register page end=========================== */
