@@ -83,7 +83,7 @@ mysqli_stmt_close($stmt);
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../loginindex.php" class="btn back-btn">Back</a>
+                            <a href="../P_index.php" class="btn back-btn" style="background-color: #CFA61E">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>
