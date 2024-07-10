@@ -26,7 +26,7 @@ echo '
                 </li>
 <?php } else { ?>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../P_index.php">Home</a>
+                    <a class="nav-link" aria-current="page" href="../P_index.php">Home</a>
                 </li>
 <?php } ?>
 <?php echo '

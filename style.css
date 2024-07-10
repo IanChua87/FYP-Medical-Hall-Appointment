@@ -111,8 +111,6 @@ nav{
     color: #CFA61E;
 }
 
-
-
 .dropdown-toggle::after {
     color: #CFA61E; /* Match the color of the icon */
 }
