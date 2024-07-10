@@ -176,7 +176,7 @@ function login_patient($conn, $email, $password)
         $p_user_data = check_patient_exists_by_email($conn, $email);
         if (password_verify($password, $p_user_data['patient_password'])) {
             $_SESSION['patient_id'] = $p_user_data['patient_id'];
-            header("Location: ../index.php");
+            header("Location: ../P_index.php");
             exit();
         } else {
             $_SESSION['login-error'] = "Invalid password, please try again";
@@ -370,8 +370,7 @@ function check_password_match($password, $confirm_password)
 {
     if ($password !== $confirm_password) {
         return true;
-    } 
-    else {
+    } else {
         return false;
     }
 }
