@@ -15,25 +15,6 @@ if (!isset($_GET['patient_id'])) {
     exit();
 }
 
-// $query = "SELECT * FROM patient WHERE patient_id = ?";
-// $edit_patient_stmt = mysqli_prepare($conn, $query);
-
-
-// if (!$edit_patient_stmt) {
-//     die("Failed to prepare statement");
-// } else {
-//     mysqli_stmt_bind_param($edit_patient_stmt, 's', $_GET['patient_id'],);
-//     mysqli_stmt_execute($edit_patient_stmt);
-//     $edit_patient_result = mysqli_stmt_get_result($edit_patient_stmt);
-
-//     if (mysqli_num_rows($edit_patient_result) > 0) {
-//         if ($row = mysqli_fetch_assoc($edit_patient_result)) {
-//             $patient_id = $row['patient_id'];
-//             $patient_name = $row['patient_name'];
-//             $patient_password = $row['patient_password'];
-//         }
-//     }
-// }
 
 $patient_id = $_GET['patient_id'];
 ?>
@@ -53,9 +34,10 @@ $patient_id = $_GET['patient_id'];
 
 <body>
     <section class="patient">
+    <?php include '../sessionMsg.php' ?>
         <div class="patient-box">
             <div class="profile-details">
-                <i class="bi bi-person-circle"></i>
+                <i class="fa-solid fa-lock"></i>
                 <h2 class="">
                     Reset Password
                 </h2>
@@ -79,7 +61,6 @@ $patient_id = $_GET['patient_id'];
                 </div>
         </div>
     </section>
-    <?php include '../sessionMsg.php' ?>
 </body>
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

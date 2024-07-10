@@ -28,10 +28,7 @@ echo '
                 </li>
             </ul>';
 
-if (isset($_SESSION['patient_id']) || isset($_SESSION['doctor_id'])) {
-    // echo '<ul class="nav navbar-nav">
-    //         <a class="btn logout-btn" href="forms/loggedOutSuccessful.php" role="button">Logout</a>
-    //       </ul>';
+if (isset($_SESSION['patient_id'])) {
     echo '<div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-person-circle"></i>

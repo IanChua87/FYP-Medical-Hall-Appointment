@@ -605,17 +605,17 @@ nav{
 
 .session-msg-error{
     color: rgb(129, 27, 27);
-    font-size: 15px;
+    font-size: 16px;
     margin-top: 500px;
     position: fixed;
 }
 
-/* .session-msg-success{
-    color: #22eb97;
+.session-msg-success{
+    color: #13bd76;
     font-size: 14px;
     margin-top: 500px;
     position: fixed;
-} */
+}
 /* ===========================Login page end=========================== */
 
 
@@ -1213,7 +1213,7 @@ nav{
     font-size: 16px;
 }
 
-.profile-details .bi-person-circle, .fa-calendar{
+.profile-details .bi-person-circle, .fa-calendar, .fa-lock{
     color: black;
     font-size: 60px;
     margin-right: 15px;

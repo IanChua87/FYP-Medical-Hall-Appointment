@@ -121,6 +121,15 @@ if (!$edit_patient_stmt) {
             window.location.href = "patientDetails.php";
         });
     });
+    
+    $(function() {
+            $("#dob").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-100:+0",
+                dateFormat: "yy-mm-dd"
+            });
+        });
 </script>
 
 <script>
