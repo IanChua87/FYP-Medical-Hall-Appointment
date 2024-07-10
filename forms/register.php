@@ -10,6 +10,7 @@ unset($_SESSION['error']);
 unset($_SESSION['form_data']);
 ?>
 
+<!-- this is for patient register -->
 <!DOCTYPE html>
 <html>
 
