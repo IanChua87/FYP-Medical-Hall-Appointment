@@ -78,24 +78,6 @@ if (isset($_POST['submit'])) {
                 header("Location: register.php");
                 exit();
             }
-    
-            else {
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                //prepared statement for inserting user into database, for security purpose
-                $insert = "INSERT INTO patient (patient_name, patient_dob, patient_phoneNo, patient_email, patient_password, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $insert_stmt = mysqli_prepare($conn, $insert);
-                mysqli_stmt_bind_param($insert_stmt, "ssssssssss", $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable);
-    
-                //execute the prepared statement
-                if (mysqli_stmt_execute($insert_stmt)) {
-                    $msg = "<h2>Registration<br> successful</h2>";
-                } else {
-                    $error = "Registration failed";
-                    header("Location: register.php?error=" . urlencode($error));
-                    exit();
-                }
-            }
         }
 
         mysqli_close($conn);
