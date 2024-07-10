@@ -32,9 +32,9 @@ if (isset($_SESSION['admin_id'])) {
                 <i class="bi bi-person-circle nav-profile"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="editprofile.php">Edit Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
+                <li><a class="dropdown-item" href="loggedOutSuccessful.php">Logout</a></li>
             </ul>
           </div>';
 } else {
