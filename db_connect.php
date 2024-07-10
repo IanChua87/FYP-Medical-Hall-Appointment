@@ -1,5 +1,5 @@
 <?php
-$host = "127.0.0.1:3307";
+$host = "localhost:3304";
 $username = "root";
 $password = "";
 $dbname = "fyp_sin_nam";
