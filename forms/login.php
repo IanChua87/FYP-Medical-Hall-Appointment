@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
                 $user_data = mysqli_fetch_assoc($result);
 
                 $_SESSION['patient_id'] = $user_data['patient_id'];
-                header("Location: ../loginindex.php");
+                header("Location: ../P_index.php");
                 exit();
             } else {
                 $error = "Invalid email or password. Please try again.";
@@ -93,7 +93,7 @@ if (isset($_POST['submit'])) {
                         </form>
                         <?php if (!empty($error)) {
                             echo '<p class="login-error-msg" id="login-error-msg">' . $error . '</p>';
-                        }
+                        };
                         ?>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                         <script>
