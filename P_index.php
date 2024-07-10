@@ -115,9 +115,9 @@ $conn->close();
                 Appointment
                 </a>
             <ul class="dropdown-menu" aria-labelledby="apptDropdown">
-                <li><a class="dropdown-item" href="booking.php">Book Appointment</a></li>
+                <li><a class="dropdown-item" href="forms/booking.php">Book Appointment</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="viewappointment.php">View Appointment</a></li>
+                <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
             </ul>
         </div>
         <div class="nav-item dropdown">

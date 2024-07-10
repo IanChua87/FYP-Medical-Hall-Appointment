@@ -240,7 +240,7 @@ function login_users($conn, $email, $password)
                 exit();
             } else if ($u_user_data['role'] == "Doctor") {
                 $_SESSION['doctor_id'] = $u_user_data['user_id'];
-                header("Location: ../doctor_welcome_page.php");
+                header("Location: ../d_index.php");
                 exit();
             }
         } else {

@@ -1,5 +1,5 @@
 <?php
-include "../db_connect.php"; // Adjust the path based on your setup
+include "db_connect.php"; // Adjust the path based on your setup
 
 // Fetch the doctor's name from the users table
 $doctorQuery = "SELECT user_name FROM users WHERE role = 'Doctor' LIMIT 1";
@@ -174,7 +174,7 @@ $appointments_json = json_encode($appointments);
                         if (duration) {
                             // AJAX call to save remarks to the database
                             $.ajax({
-                                url: 'update_appointment.php',
+                                url: 'forms/update_appointment.php',
                                 type: 'POST',
                                 data: {
                                     appointment_id: event.id, // Assuming you have appointment ID
@@ -205,7 +205,7 @@ $appointments_json = json_encode($appointments);
                         if (duration) {
                             // AJAX call to save edited remarks to the database
                             $.ajax({
-                                url: 'update_appointment.php',
+                                url: 'forms/update_appointment.php',
                                 type: 'POST',
                                 data: {
                                     appointment_id: event.id, // Assuming you have appointment ID
