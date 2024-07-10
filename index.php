@@ -1,12 +1,4 @@
-<?php 
 
-include "db_connect.php";
-
-if (isset($_SESSION['patient_id'])) {
-    header("Location: loginindex.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 
