@@ -41,6 +41,13 @@ if (!$stmt) {
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        .session-msg-error {
+            margin-top: 20px;
+            text-align: center;
+            position: fixed;
+        }
+    </style>
 </head>
 
 <body>
@@ -79,18 +86,14 @@ if (!$stmt) {
                     </select>
                 </div>
 
-
-                <div class="form-group">
-                    <label for="relation">Queue No:</label>
-                    <input type="text" name="queue" id="queue" class="form-control" value="<?php echo $latest_queue_no ?>" disabled>
-                </div>
+                <input type="text" name="queue" id="queue" class="form-control" value="<?php echo $latest_queue_no ?>" hidden>
 
                 <div class="buttons">
                     <button type="submit" name="submit" class="btn create-btn">Create</button>
                 </div>
             </form>
+            <?php include '../sessionMsg.php' ?>
         </div>
-
     </section>
 </body>
 
@@ -119,6 +122,12 @@ if (!$stmt) {
             showDuration: true,
             interval: 15
         });
+    });
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#session-msg-error').fadeOut('slow');
+        }, 1700);
+
     });
 </script>
 

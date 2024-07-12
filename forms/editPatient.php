@@ -52,6 +52,12 @@ if (!$edit_patient_stmt) {
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        .session-msg-error{
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -114,6 +120,7 @@ if (!$edit_patient_stmt) {
                     <a href='resetPatientPassword.php?patient_id=<?php echo $row['patient_id'] ?>' class="forgot-text">Reset Password</a>
                 </div>
             </div>
+            <?php include '../sessionMsg.php' ?>
         </div>
     </section>
 </body>
@@ -137,7 +144,12 @@ if (!$edit_patient_stmt) {
                 yearRange: "-100:+0",
                 dateFormat: "yy-mm-dd"
             });
-        });
+    });
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#session-msg-error').fadeOut('slow');
+        }, 1700);
+    });
 </script>
 
 <script>

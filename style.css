@@ -9,7 +9,7 @@
     background-color: #682924;
 }
 
-.copyright .copyright-text{
+.copyright .copyright-text {
     color: #f9f9f9;
     font-size: 13px;
     font-weight: 300;
@@ -30,24 +30,24 @@
     font-size: 16px;
 }
 
-.register label{
+.register label {
     font-size: 15px;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-.register span{
+.register span {
     font-size: 15px;
     font-weight: 500;
 
 }
 
-.register .required-text{
+.register .required-text {
     margin-left: 10px;
     color: #ce5047;
 }
 
-.register .asterik{
+.register .asterik {
     margin-right: 10px;
     color: #ce5047;
 }
@@ -56,28 +56,29 @@
 
 
 /* ====navbar start==== */
-nav{
+nav {
     background-color: #682924;
 }
 
-.navbar-brand{
+.navbar-brand {
     color: #f9f9f9;
     font-size: 24px;
     font-weight: 600;
 }
 
-.nav-link{
+.nav-link {
     color: #f9f9f9;
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: #CFA61E;
 }
 
-.navbar .login-btn, .navbar .logout-btn{
+.navbar .login-btn,
+.navbar .logout-btn {
     background-color: #CFA61E;
     padding: 10px 16px;
     border-radius: 5px;
@@ -87,7 +88,7 @@ nav{
     margin: 0 0 0 20px;
 }
 
-.navbar .sign-up-btn{
+.navbar .sign-up-btn {
     background-color: transparent;
     padding: 6px 16px;
     border-radius: 5px;
@@ -98,12 +99,12 @@ nav{
 }
 
 .navbar .login-btn:hover,
-.navbar .logout-btn:hover{
+.navbar .logout-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.navbar .sign-up-btn:hover{
+.navbar .sign-up-btn:hover {
     background-color: #CFA61E;
     border: 2px solid transparent
 }
@@ -112,7 +113,7 @@ nav{
     border: 1px solid #f9f9f9;
 }
 
-.navbar-toggler i{
+.navbar-toggler i {
     color: #f9f9f9;
     font-size: 30px;
 }
@@ -124,28 +125,31 @@ nav{
     color: #CFA61E;
 }
 
-.dropdown-toggle{
+.dropdown-toggle {
     color: #f9f9f9;
     font-size: 16px;
     font-weight: 500;
 }
 
 .dropdown-toggle::after {
-    color: #CFA61E; /* Match the color of the icon */
+    color: #CFA61E;
+    /* Match the color of the icon */
 }
 
 .dropdown-menu .dropdown-item:hover,
 .dropdown-menu .dropdown-item:focus,
 .dropdown-menu .dropdown-item:active {
-    background-color: #CFA61E; /* Background color when item is hovered or clicked */
-    color: #fff; /* Text color when item is hovered or clicked */
+    background-color: #CFA61E;
+    /* Background color when item is hovered or clicked */
+    color: #fff;
+    /* Text color when item is hovered or clicked */
 }
 
-.dropdown-menu{
+.dropdown-menu {
     background-color: #682924;
 }
 
-.dropdown-item{
+.dropdown-item {
     color: #fff;
 }
 
@@ -154,13 +158,14 @@ nav{
     background-color: #682924;
     color: #f9f9f9;
 }
+
 /* ====navbar end==== */
 
 
 
 
 /* ====hero start==== */
-.hero{
+.hero {
     display: flex;
     align-items: center;
     height: 100vh;
@@ -172,75 +177,77 @@ nav{
 
 }
 
-.hero-text h1{
+.hero-text h1 {
     font-size: 54px;
     font-weight: 700;
     color: #f9f9f9e8;
 }
 
-.hero-text p{
+.hero-text p {
     font-size: 18px;
     font-weight: 500;
     margin-top: 25px;
     color: #f9f9f9d8;
 }
 
-.hero .learn-more-btn{
+.hero .learn-more-btn {
     padding: 12px 24px;
     background-color: #CFA61E;
     color: #f9f9f9;
     box-shadow: 4px 9px 12px rgb(41, 40, 40);
     font-size: 16px;
     margin-top: 16px;
-} 
+}
+
 /* ====hero end==== */
 
 
 
 
 /* ====about==== */
-.about{
+.about {
     background-color: #682924;
     padding: 160px 0;
 }
 
-.about-box{
+.about-box {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     width: 70%;
 }
 
-.about h2{
+.about h2 {
     font-size: 56px;
     color: #f9f9f9;
     font-weight: 700;
 }
 
-.about p{
+.about p {
     font-size: 18px;
     color: #f9f9f9;
     margin-top: 50px;
 }
 
 
-.right-col img{
+.right-col img {
     width: 100%;
     height: auto;
     margin-top: 160px;
     margin-left: 50px;
 }
+
 /* ====about end==== */
 
 
 
 
 /* ====services start==== */
-.services{
+.services {
     background-color: #f9f9f9;
 }
 
-.services-box{
+.services-box {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -248,38 +255,38 @@ nav{
 
 }
 
-.services .row{
+.services .row {
     padding-bottom: 80px;
 }
 
 .services .card,
-.services .card-body{
+.services .card-body {
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
 }
 
-.services .card-body{
+.services .card-body {
     background-color: #f9f9f9ec;
 }
 
-.services .card img{
+.services .card img {
     width: 100%;
     height: auto
 }
 
-.services h2{
+.services h2 {
     font-size: 56px;
     font-weight: 700;
     padding: 60px 0;
     color: black;
 }
 
-.services h5{
+.services h5 {
     font-size: 30px;
     font-weight: 700;
 }
 
-.services p{
+.services p {
     font-size: 16px;
     margin-top: 20px;
     font-weight: 500;
@@ -288,73 +295,75 @@ nav{
 .services h2,
 .services h5,
 .services p,
-.services .learn-more-btn{
+.services .learn-more-btn {
     margin: 15px 10px;
 
 }
 
-.services .learn-more-btn{
+.services .learn-more-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 16px;
     padding: 12px 24px;
 }
+
 /* ====services end==== */
 
 
 
 
 /* ====operating hours start==== */
-.operating-hours{
+.operating-hours {
     background-color: #682924;
     color: #f9f9f9;
     padding: 80px 0;
 }
 
-.operating-hours h2{
+.operating-hours h2 {
     font-size: 42px;
     font-weight: 600;
     margin-bottom: 60px;
 }
 
-.operating-hours h3{
+.operating-hours h3 {
     font-size: 20px;
     font-weight: 450;
 }
 
-.operating-hours p{
+.operating-hours p {
     font-size: 14px;
     font-weight: 400;
 }
+
 /* ====operating hours end==== */
 
 
 
 
 /* ====contact start==== */
-.contact{
+.contact {
     background-color: #f9f9f9;
     padding: 80px 0;
 }
 
-.contact-box{
+.contact-box {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     width: 80%;
 }
 
-.contact .row{
+.contact .row {
     margin-bottom: 0;
 }
 
-.contact h2{
+.contact h2 {
     font-size: 56px;
     font-weight: 700;
     margin-bottom: 60px;
 }
 
-.contact .form-control-lg{
+.contact .form-control-lg {
     width: 100%;
     height: 50px;
     border-radius: 5px;
@@ -366,13 +375,13 @@ nav{
     color: #514A4A;
 }
 
-.contact .feedback-field{
+.contact .feedback-field {
     background-color: #f9f9f9d8;
     color: #514A4A;
     font-size: 16px;
 }
 
-.contact .submit-btn{
+.contact .submit-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 16px;
@@ -381,12 +390,12 @@ nav{
     margin-top: 16px;
 }
 
-.contact form{
+.contact form {
     margin-top: 60px;
     padding-right: 20px;
 }
 
-.contact img{
+.contact img {
     width: 100%;
     height: auto;
     margin-top: 30px;
@@ -399,13 +408,13 @@ nav{
 
 
 /* ====footer start==== */
-.footer{
+.footer {
     background-color: #682924;
     color: #f9f9f9;
     padding: 60px 0;
 }
 
-.footer-box{
+.footer-box {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -413,54 +422,55 @@ nav{
 
 }
 
-.footer .logo{
+.footer .logo {
     color: #f9f9f9;
     font-size: 24px;
     font-weight: 600;
 
 }
 
-.footer ul li{
+.footer ul li {
     list-style: none;
 
 }
 
-.footer ul li a{
+.footer ul li a {
     color: #f9f9f9;
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
 }
 
-.footer .contact-details p{
+.footer .contact-details p {
     font-size: 13px;
     font-weight: 400;
 }
 
 .footer .address,
-.footer .phone{
+.footer .phone {
     display: flex;
 }
 
 .footer .address i,
-.footer .phone i{
+.footer .phone i {
     margin-right: 10px;
     color: black;
     font-size: 20px;
 }
 
 .footer-separator {
-    border-top: 1px solid #ddd; 
+    border-top: 1px solid #ddd;
     margin: 20px 0;
     width: 100%;
 }
 
-.footer .copyright-text{
+.footer .copyright-text {
     font-size: 13px;
     font-weight: 500;
     text-align: center;
     margin-top: 60px;
 }
+
 /* ====footer end==== */
 
 
@@ -471,7 +481,7 @@ nav{
 
 
 /* ===========================Register page start=========================== */
-.register .form-container{
+.register .form-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -487,28 +497,28 @@ nav{
     line-height: 1;
 }
 
-.registered-prompt{
+.registered-prompt {
     color: #f9f9f9;
     font-size: 13px;
     margin-bottom: 3rem;
 }
 
-.registered-prompt a{
+.registered-prompt a {
     color: #CFA61E;
     text-decoration: none;
 
 }
 
-.registered-prompt a:hover{
+.registered-prompt a:hover {
     text-decoration: underline;
 }
 
-.registered-prompt span{
+.registered-prompt span {
     color: #CFA61E;
     font-weight: 500;
 }
 
-.register .register-btn{
+.register .register-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 16px;
@@ -516,33 +526,34 @@ nav{
     padding: 15px;
 }
 
-.register .register-btn:hover{
+.register .register-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.register .copyright{
+.register .copyright {
     margin-top: 70px;
 }
 
-.double-form-field select{
+.double-form-field select {
     font-size: 16px;
     padding: 12px 0 12px 15px;
     border-radius: 5px;
 }
 
-.register .date-input{
+.register .date-input {
     padding: 12px 12px 12px 15px;
     border-radius: 5px;
     font-size: 16px;
 }
 
-.register .register-error-msg{
+.register .register-error-msg {
     color: #22eb97;
     font-size: 14px;
     margin-top: 100px;
     position: fixed;
 }
+
 /* ===========================Register page end=========================== */
 
 
@@ -575,35 +586,35 @@ nav{
     text-decoration: none;
 }
 
-.forgot-text:hover{
+.forgot-text:hover {
     color: #CFA61E;
     text-decoration: underline;
 }
 
-.login .registered{
+.login .registered {
     color: #f9f9f9;
     font-size: 13px;
 }
 
-.login-prompt{
+.login-prompt {
     color: #f9f9f9;
     font-size: 13px;
     margin-bottom: 3rem;
 }
 
-.login-prompt a{
+.login-prompt a {
     color: #CFA61E;
     font-size: 13px;
     text-decoration: none;
 }
 
-.login-prompt a:hover{
+.login-prompt a:hover {
     text-decoration: underline;
 
 }
 
 
-.login .login-prompt a span{
+.login .login-prompt a span {
     color: #CFA61E;
     font-weight: 500;
 }
@@ -616,16 +627,16 @@ nav{
     padding: 15px;
 }
 
-.login .login-btn:hover{
+.login .login-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.login .copyright{
+.login .copyright {
     margin-top: 100px;
 }
 
-.login .login-error-msg{
+.login .login-error-msg {
     color: #16a2ff;
     font-size: 15px;
     margin-top: 500px;
@@ -633,19 +644,19 @@ nav{
 
 }
 
-.session-msg-error{
+.session-msg-error p {
     color: rgb(129, 27, 27);
     font-size: 16px;
-    margin-top: 500px;
+    position: fixed;
+    text-align: center;
+}
+
+.session-msg-success p {
+    color: #297d92;
+    font-size: 16px;
     position: fixed;
 }
 
-.session-msg-success{
-    color: #13bd76;
-    font-size: 14px;
-    margin-top: 500px;
-    position: fixed;
-}
 /* ===========================Login page end=========================== */
 
 
@@ -669,7 +680,7 @@ nav{
     line-height: 1;
 }
 
-.forgot-password .reset-btn{
+.forgot-password .reset-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 16px;
@@ -677,17 +688,18 @@ nav{
     padding: 15px;
 }
 
-.forgot-password .reset-btn:hover{
+.forgot-password .reset-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.reset-password-error-msg{
+.reset-password-error-msg {
     color: red;
     font-size: 14px;
     margin-top: 500px;
     position: fixed;
 }
+
 /* ===========================Forgot Password page end=========================== */
 
 
@@ -695,7 +707,7 @@ nav{
 
 
 /* ===========================Registration / Logged out / Booking successful pages=========================== */
-.verified-box{
+.verified-box {
     display: flex;
     flex-direction: column;
     padding: 0 30px;
@@ -704,13 +716,13 @@ nav{
     height: calc(100vh - 200px);
 }
 
-.verified-box img{
+.verified-box img {
     width: 160px;
     height: 160px;
     justify-content: center;
 }
 
-.verified-box h2{
+.verified-box h2 {
     font-size: 48px;
     font-weight: 700;
     color: #f9f9f9;
@@ -720,7 +732,7 @@ nav{
 
 }
 
-.verified-box p{
+.verified-box p {
     font-size: 14px;
     color: #f9f9f9;
     margin-top: 1rem;
@@ -730,7 +742,7 @@ nav{
 }
 
 .verified-box .login-btn,
-.verified-box .back-to-home-btn{
+.verified-box .back-to-home-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 16px;
@@ -746,7 +758,8 @@ nav{
 /* ============Edit profile start=============== */
 
 .form-container {
-    padding: 20px; /* Adjust the padding as needed */
+    padding: 20px;
+    /* Adjust the padding as needed */
     border-radius: 10px;
     background-color: #682924;
     color: #fff;
@@ -767,13 +780,16 @@ nav{
 }
 
 .icon-text i {
-    margin-right: 20px; /* Space between icon and text */
-    font-size: 5rem; /* Increase icon size */
+    margin-right: 20px;
+    /* Space between icon and text */
+    font-size: 5rem;
+    /* Increase icon size */
 }
 
 .icon-text h3 {
     margin: 0;
-    font-weight: bold; /* Make text bold */
+    font-weight: bold;
+    /* Make text bold */
     margin-top: 5px;
     color: #fff;
 }
@@ -788,7 +804,8 @@ nav{
 
 
 .form-container-password {
-    padding: 20px; /* Adjust the padding as needed */
+    padding: 20px;
+    /* Adjust the padding as needed */
     border-radius: 10px;
     background-color: #682924;
     color: #fff;
@@ -820,14 +837,14 @@ nav{
     }
 
     .navbar .login-btn {
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
 
-    .right-col{
+    .right-col {
         margin-top: 60px;
     }
 
-    .services-box{
+    .services-box {
         flex-direction: column;
         width: 95%;
     }
@@ -841,29 +858,28 @@ nav{
     /* ============Register / Login page start=============== */
     .register .left-col,
     .registered .left-col,
-    .login .left-col, 
+    .login .left-col,
     .reset-password .left-col,
     .loggedout .left-col,
-    .booked .left-col{
+    .booked .left-col {
         height: 60vh;
     }
 
     .register .right-col,
     .registered .right-col,
-    .login .right-col, 
+    .login .right-col,
     .reset-password .right-col,
     .loggedout .right-col,
-    .booked .right-col
-    {
+    .booked .right-col {
         margin-top: 0;
     }
 
-    .login .form-container{
+    .login .form-container {
         height: 55vh;
         padding: 0 30px;
     }
 
-    .register .form-container{
+    .register .form-container {
         height: 80vh;
         padding: 0 30px;
     }
@@ -872,21 +888,21 @@ nav{
     .reset-password .verified-box,
     .loggedout .verified-box,
     .contacted .verified-box,
-    .booked .verified-box{
+    .booked .verified-box {
         margin-top: 70px;
         height: calc(60vh - 100px);
     }
 
-    .custom-nav ul li{
+    .custom-nav ul li {
         padding: 5px 0px;
-    
+
     }
 
-    .custom-nav .logout-btn{
+    .custom-nav .logout-btn {
         margin-bottom: 20px;
     }
 
-    
+
 
 }
 
@@ -998,14 +1014,14 @@ nav{
     margin: 16px;
 }
 
-#sidebarToggle{
+#sidebarToggle {
     /* display: block;  */
     background-color: transparent;
     border: none;
     outline: none;
 }
 
-#sidebarToggle .bi-list{
+#sidebarToggle .bi-list {
     font-size: 36px;
     color: #f9f9f9;
 }
@@ -1018,14 +1034,14 @@ nav{
 
 }
 
-.header-title-bg{
+.header-title-bg {
     background-color: hsl(210, 6%, 58%);
     padding: 20px;
     margin: 30px 0;
     border-radius: 10px;
 }
 
-.header-title-bg h2{
+.header-title-bg h2 {
     font-size: 36px;
     font-weight: 600;
     color: #f9f9f9;
@@ -1082,7 +1098,7 @@ nav{
     font-size: 16px;
 }
 
-.add-btn{
+.add-btn {
     background-color: #CFA61E;
     padding: 7px 20px;
     color: #f9f9f9;
@@ -1090,33 +1106,34 @@ nav{
     align-items: right;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
     background-color: #A34039;
     color: #f9f9f9;
 }
 
-.edit-btn:hover, .add-btn:hover{
+.edit-btn:hover,
+.add-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.content .card{
+.content .card {
     box-shadow: 0 0 10px rgba(71, 70, 70, 0.24);
     border-radius: 10px;
     border: none;
-    
+
 }
 
-.content .card.p-table-row{
+.content .card.p-table-row {
     padding: 15px 10px 10px 0;
 }
 
-.content .card.p-table-row{
+.content .card.p-table-row {
     max-height: 1000px;
-    min-height:500px
+    min-height: 500px
 }
 
-.content .p-table-row .card-title{
+.content .p-table-row .card-title {
     font-size: 28px;
     font-weight: 550;
 
@@ -1125,26 +1142,26 @@ nav{
 .info .fa-hospital-user,
 .info .fa-calendar-check,
 .info .fa-user-tie,
-.info .fa-list-ol
-{
+.info .fa-list-ol {
     font-size: 60px;
     color: #682924;
     padding-left: 20px;
 }
 
-.info:hover{
+.info:hover {
     background-color: #e9e9e9;
 }
 
-.content .card-title{
+.content .card-title {
     font-size: 20px;
     font-weight: 550;
 }
 
-.content .card-text{
+.content .card-text {
     font-size: 16px;
     font-weight: 500;
 }
+
 /* ===========================Admin main page end=========================== */
 
 
@@ -1152,34 +1169,36 @@ nav{
 
 
 /* ===========================Admin patient/appointment details page start=========================== */
-.patient-table{
+.patient-table {
     padding-bottom: 60px;
 }
 
-.patient-table .patient-box{
+.patient-table .patient-box {
     padding: 0 13%;
 }
 
-.patient-table h2, .appointment-table h2, .staff-table h2{
+.patient-table h2,
+.appointment-table h2,
+.staff-table h2 {
     font-size: 36px;
     font-weight: 600;
     font-weight: 600;
 }
 
-.table{
+.table {
     width: 100%;
     border-collapse: collapse;
-    box-shadow:  0 0 10px rgba(71, 70, 70, 0.24);
+    box-shadow: 0 0 10px rgba(71, 70, 70, 0.24);
 }
 
-.table-card{
+.table-card {
     padding: 30px;
     background-color: #f4f4f4;
-    box-shadow:  0 0 10px rgba(71, 70, 70, 0.24);
+    box-shadow: 0 0 10px rgba(71, 70, 70, 0.24);
     border-radius: 10px;
 }
 
-.search-card{
+.search-card {
     padding: 24px;
     background-color: #f4f4f4;
     margin-bottom: 30px;
@@ -1187,7 +1206,7 @@ nav{
     margin-top: 60px;
 }
 
-.search-card input{
+.search-card input {
     width: 400px;
     max-width: 400px;
     height: 40px;
@@ -1199,35 +1218,35 @@ nav{
 
 }
 
-.search-card .fa-search{
+.search-card .fa-search {
     color: #f5f5f5
 }
 
-.search-card button{
+.search-card button {
     margin-left: 15px;
     background-color: #CFA61E;
 }
 
-.appointment-table{
+.appointment-table {
     padding-bottom: 60px;
 
 }
 
-.table th{
+.table th {
     font-size: 16px;
     font-weight: 700;
 }
 
-.patient-table tbody td.affect{
+.patient-table tbody td.affect {
     padding-top: 18px;
 
 }
 
-.table tr{
+.table tr {
     font-size: 600;
 }
 
-.table tr td{
+.table tr td {
     font-size: 16px;
 }
 
@@ -1235,29 +1254,29 @@ nav{
    background-color: #FDD5D5;
 } */
 
-.table tr:nth-child(even){
+.table tr:nth-child(even) {
     background-color: #f9f9f9;
 
 }
 
-.table tr th{
+.table tr th {
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
 .table tr.table-body td,
-.table tr.table-head th{
+.table tr.table-head th {
     border: none
 }
 
-.modal .yes-btn{
+.modal .yes-btn {
     background-color: #682924;
     padding: 7px 20px;
     color: #f9f9f9;
     font-size: 14px;
 }
 
-.modal .no-btn{
+.modal .no-btn {
     background-color: #CFA61E;
     padding: 7px 20px;
     color: #f9f9f9;
@@ -1265,91 +1284,98 @@ nav{
 
 }
 
-.yes-btn:hover{
+.yes-btn:hover {
     background-color: #A34039;
     color: #f9f9f9;
 }
 
-.no-btn:hover{
+.no-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.patient-table .btn-group{
+.patient-table .btn-group {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
 }
 
-.modal .modal-title{
+.modal .modal-title {
     font-size: 32px;
     font-weight: 600;
     color: #ff4b3e;
 }
 
-.modal .modal-text{
+.modal .modal-text {
     font-size: 16px;
     font-weight: 500;
 }
 
-.appointment, .appointment-add, .patient, .patient-add{
+.appointment,
+.appointment-add,
+.patient,
+.patient-add {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.appointment .appointment-box{
+.appointment .appointment-box {
     background-color: #FCF9F9;
     border-radius: 16px;
     box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
     padding: 50px;
 }
 
-.appointment-add .appointment-box{
-    background-color: #FCF9F9;;
+.appointment-add .appointment-box {
+    background-color: #FCF9F9;
+    ;
     border-radius: 16px;
     box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
     padding: 30px 50px;
 }
 
-.appointment h2, .appointment-add h2, .patient h2, .patient-add{
+.appointment h2,
+.appointment-add h2,
+.patient h2,
+.patient-add {
     font-size: 36px;
     font-weight: 600;
     font-weight: 600;
 
 }
 
-.appointment form, 
+.appointment form,
 .appointment-add form,
 .patient form,
 .patient-add form {
-    width: 100%; 
+    width: 100%;
 }
 
-.appointment .form-group, 
-.appointment-add .form-group, 
+.appointment .form-group,
+.appointment-add .form-group,
 .patient .form-group,
-.patient-add .form-group{
+.patient-add .form-group {
     margin-bottom: 20px;
 }
 
-.appointment .form-group label, 
-.appointment-add .form-group label, 
+.appointment .form-group label,
+.appointment-add .form-group label,
 .patient .form-group label,
-.patient-add .form-group label{
+.patient-add .form-group label {
     font-size: 16px;
     font-weight: 500;
     display: block;
     margin-bottom: 8px;
 }
 
-.appointment .form-control, 
-.appointment-add .form-control, 
+.appointment .form-control,
+.appointment-add .form-control,
 .patient .form-control,
 .patient-add .form-control,
-.form-select-grp{
+.form-select-grp {
     width: 100%;
     height: 45px;
     border-radius: 5px;
@@ -1359,31 +1385,33 @@ nav{
     background-color: #f5f5f5;
 }
 
-.patient-box .double-form-field{
+.patient-box .double-form-field {
     width: 400px;
 }
 
-.form-select-grp{
+.form-select-grp {
     margin-top: 30px;
     font-size: 16px;
 }
 
-.profile-details .bi-person-circle, .fa-calendar, .fa-lock{
+.profile-details .bi-person-circle,
+.fa-calendar,
+.fa-lock {
     color: black;
     font-size: 60px;
     margin-right: 15px;
 }
 
-.appointment .profile-details, 
-.appointment-add .profile-details, 
-.patient .profile-details, 
-.patient-add .profile-details{
+.appointment .profile-details,
+.appointment-add .profile-details,
+.patient .profile-details,
+.patient-add .profile-details {
     display: flex;
     align-items: center;
     margin: 40px 0;
 }
 
-.save-btn{
+.save-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 14px;
@@ -1391,7 +1419,7 @@ nav{
     width: 100%;
 }
 
-.back-btn{
+.back-btn {
     background-color: #682924;
     color: #f9f9f9;
     font-size: 14px;
@@ -1401,7 +1429,8 @@ nav{
     width: 100%;
 }
 
-.appointment-add .create-btn, .patient-add .create-btn{
+.appointment-add .create-btn,
+.patient-add .create-btn {
     background-color: #682924;
     color: #f9f9f9;
     font-size: 14px;
@@ -1410,40 +1439,43 @@ nav{
 
 }
 
-.appointment .save-btn:hover{
+.appointment .save-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 
 }
 
-.appointment .back-btn:hover, .patient-add .create-btn:hover{
+.appointment .back-btn:hover,
+.patient-add .create-btn:hover {
     background-color: #A34039;
     color: #f9f9f9;
 
 }
 
-.appointment .buttons{
+.appointment .buttons {
     display: flex;
     justify-content: center;
     margin-top: 40px;
 
 }
 
-.appointment-add .buttons, .patient .buttons, .patient-add .buttons{
+.appointment-add .buttons,
+.patient .buttons,
+.patient-add .buttons {
     display: flex;
     justify-content: center;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-.patient-table .buttons{
+.patient-table .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.patient-add .patient-box, 
-.patient .patient-box{
+.patient-add .patient-box,
+.patient .patient-box {
     background-color: #FCF9F9;
     border-radius: 16px;
     box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
@@ -1459,12 +1491,12 @@ nav{
     background-color: #A34039;
 }
 
-#dt-length-0{
+#dt-length-0 {
     background-color: #fffdfd;
     box-shadow: 0 2px 10px rgba(134, 117, 117, 0.3);
 }
 
-#dt-length-0 option:hover{
+#dt-length-0 option:hover {
     background-color: #fffdfd;
     color: black;
 }
@@ -1477,20 +1509,20 @@ nav{
 
 
 /* ===========================Last Queue No. page start=========================== */
-.queue-no{
+.queue-no {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.queue-no h1{
+.queue-no h1 {
     margin: 100px 0;
     font-size: 48px;
     font-weight: 700;
 }
 
-.queue-box{
+.queue-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1499,17 +1531,17 @@ nav{
     border: 1px solid #ccc;
 }
 
-.queue-box h2{
+.queue-box h2 {
     font-size: 64px;
     font-weight: 500;
     margin-bottom: 30px;
 }
 
-.queue-wrapper{
+.queue-wrapper {
     border: 1px solid #ccc;
 }
 
-.queue-wrapper h3{
+.queue-wrapper h3 {
     font-size: 128px;
     font-weight: 600;
     padding: 30px 50px;
@@ -1524,7 +1556,7 @@ nav{
 
 
 /* ===========================Settings page start=========================== */
-.settings{
+.settings {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -1534,11 +1566,12 @@ nav{
     padding: 0 30%;
 }
 
-.settings-square{
+.settings-square {
     padding: 0 600px;
 }
 
-.settings-box h1, .settings-square h1 {
+.settings-box h1,
+.settings-square h1 {
     font-size: 56px;
     font-weight: 700;
     margin: 60px 0;
@@ -1558,7 +1591,7 @@ nav{
     width: 100%;
 }
 
-.settings-group .save-btn{
+.settings-group .save-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 16px;
@@ -1567,7 +1600,7 @@ nav{
     margin-top: 30px;
 }
 
-.settings-group .edit-btn{
+.settings-group .edit-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
     font-size: 16px;
@@ -1575,15 +1608,16 @@ nav{
 }
 
 .settings-group .edit-btn:hover,
-.settings-group .save-btn:hover{
+.settings-group .save-btn:hover {
     background-color: #d1ac47;
 }
 
-.settings-value{
+.settings-value {
     text-align: right;
 }
 
-.settings-group .word-label{
+.settings-group .word-label {
     text-align: left;
 }
+
 /* ===========================Settings page end=========================== */

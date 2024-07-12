@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
 
         if(check_patient_exists_by_id($conn, $patient_id) !== false){
 
-            if(update_appointment_details($conn, $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $booked_datetime, $queue_no, $appointment_id) !== false){
+            if(update_appointment_details($conn, $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $booked_datetime, $appointment_id) !== false){
                 $_SESSION['message'] = "Appointment successfully updated.";
                 header("Location: appointmentDetails.php");
                 exit();

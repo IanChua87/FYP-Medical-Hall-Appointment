@@ -25,37 +25,37 @@ if (isset($_POST['submit'])) {
         $_SESSION['error'] = "Please fill in all fields.";
         header("Location: addAppointment.php");
         exit();
-    } else {
+    }
 
-        if (invalid_email($patient_email) !== false) {
-            $_SESSION['error'] = "Invalid email format.";
-            header("Location: addAppointment.php");
-            exit();
-        }
-        
-        if (check_patient_exists_by_email($conn, $patient_email) !== false) {
-            $patient_data = check_patient_exists_by_email($conn, $patient_email);
-            $patient_id = $patient_data['patient_id'];
+    if (invalid_email($patient_email) !== false) {
+        $_SESSION['error'] = "Invalid email format.";
+        header("Location: addAppointment.php");
+        exit();
+    }
+    
+    if (check_patient_exists_by_email($conn, $patient_email) !== false) {
+        $patient_data = check_patient_exists_by_email($conn, $patient_email);
+        $patient_id = $patient_data['patient_id'];
 
-            if (insert_appointment_details($conn, $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $_SESSION['admin_role'], $current_time, $patient_id, $queue_no, $appointment_remark) !== false) {
+        if (insert_appointment_details($conn, $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $_SESSION['admin_role'], $current_time, $patient_id, $queue_no, $appointment_remark) !== false) {
 
-                $appointment_id = mysqli_insert_id($conn);
-                if (insert_relation_details($conn, $relation, $appointment_id) !== false) {
-                    $_SESSION['error'] = "Appointment successfully added.";
-                    header("Location: appointmentDetails.php");
-                    exit();
-                }
-            } else {
-                $_SESSION['error'] = "Failed to add appointment.";
-                header("Location: addAppointment.php");
+            $appointment_id = mysqli_insert_id($conn);
+            if (insert_relation_details($conn, $relation, $appointment_id) !== false) {
+                $_SESSION['error'] = "Appointment successfully added.";
+                header("Location: appointmentDetails.php");
                 exit();
             }
         } else {
-            $_SESSION['error'] = "Patient with this email doesn't exist. Please register first.";
-            header("Location: forms/register.php");
+            $_SESSION['error'] = "Failed to add appointment.";
+            header("Location: addAppointment.php");
             exit();
         }
+    } else {
+        $_SESSION['error'] = "Patient with this email doesn't exist. Please register first.";
+        header("Location: forms/register.php");
+        exit();
     }
+
 } else {
     $_SESSION['error'] = "Invalid request method.";
     header("Location: addAppointment.php");

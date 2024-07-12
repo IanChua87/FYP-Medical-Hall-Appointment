@@ -14,7 +14,25 @@ if (isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    // $password = $_POST['password'];
+
+    if(check_empty_edit_users_input_fields($name, $email)){
+        $_SESSION['error'] = "Please fill in all fields.";
+        header("Location: editStaff.php?user_id=" . $user_id);
+        exit();
+    }
+
+    if (invalid_name($name) !== false) {
+        $_SESSION['error'] = "Only letters and white space allowed in name.";
+        header("Location: editStaff.php?user_id=" . $user_id);
+        exit();
+    }
+
+    if (invalid_email($email) !== false) {
+        $_SESSION['error'] = "Invalid email format.";
+        header("Location: editStaff.php?user_id=" . $user_id);
+        exit();
+    }
 
     if(check_users_exists_by_id($conn, $user_id) !== false ){
 

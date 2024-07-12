@@ -36,6 +36,16 @@ function check_empty_users_input_fields($name, $email, $password, $role)
     }
 }
 
+function check_empty_edit_users_input_fields($name, $email)
+{
+    if (empty($name) || empty($email)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 function check_empty_appointment_input_fields($email, $date, $time)
 {
     if (empty($email) || empty($date) || empty($time)) {
@@ -328,11 +338,11 @@ function update_patient_details($conn, $name, $dob, $phone, $email, $payment_sta
     mysqli_stmt_execute($update_stmt);
 }
 
-function update_appointment_details($conn, $date, $start_time, $end_time, $status, $current_time, $queue_no, $appointment_id)
+function update_appointment_details($conn, $date, $start_time, $end_time, $status, $current_time, $appointment_id)
 {
-    $update = "UPDATE appointment SET appointment_date = ?, appointment_start_time = ?, appointment_end_time = ?, appointment_status = ?, booked_datetime = ?, queue_no = ? WHERE appointment_id = ?";
+    $update = "UPDATE appointment SET appointment_date = ?, appointment_start_time = ?, appointment_end_time = ?, appointment_status = ?, booked_datetime = ? WHERE appointment_id = ?";
     $update_stmt = mysqli_prepare($conn, $update);
-    mysqli_stmt_bind_param($update_stmt, "sssssii", $date, $start_time, $end_time, $status, $current_time, $queue_no, $appointment_id);
+    mysqli_stmt_bind_param($update_stmt, "sssssi", $date, $start_time, $end_time, $status, $current_time, $appointment_id);
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);
@@ -361,15 +371,6 @@ function update_patient_password($conn, $password)
 function check_empty_login_input_fields($email, $password)
 {
     if (empty($email) || empty($password)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function check_empty_reset_password_input_fields($email, $oldPassword, $newPassword)
-{
-    if (empty($email) || empty($oldPassword) || empty($newPassword)) {
         return true;
     } else {
         return false;

@@ -111,7 +111,7 @@ if (!isset($_SESSION['admin_id'])) {
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card mb-4 h-100 info" data-href="forms/appointmentDetails.php">
+                            <div class="card mb-4 h-100 info" data-href="forms/staffDetails.php">
                                 <div class="row g-0 d-flex align-items-center">
                                     <div class="col-md-4 col-sm-12">
                                         <i class="fa-solid fa-user-tie"></i>

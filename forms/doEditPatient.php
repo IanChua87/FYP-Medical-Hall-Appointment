@@ -77,6 +77,11 @@ if (isset($_POST['submit'])) {
     //     }
     // }
 
+    if (check_empty_edit_patient_input_fields($patient_name, $email, $dob, $phone, $payment_status, $amount_payable)) {
+        $_SESSION['error'] = "Please fill in all fields.";
+        header("Location: editPatient.php?patient_id=" . $patient_id);
+        exit();
+    }
 
     if (invalid_name($name) !== false) {
         $_SESSION['error'] = "Only letters and white space allowed in name.";

@@ -27,8 +27,8 @@ if (!isset($_SESSION['admin_id'])) {
             word-wrap: break-word;
         }
 
-        #dt-length-0 {
-            padding: 4px 8px;
+        .session-msg-error{
+            margin-top: 20px;
         }
 
         #dt-length-0 label {
@@ -59,8 +59,9 @@ if (!isset($_SESSION['admin_id'])) {
                 <li class=""><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> Staff Table</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> Patient Table</a></li>
                 <li class="active"><a href="appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> Appointment Table</a></li>
-                <div class="sidebar-separator"></div>
                 <li class=""><a href="editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <div class="sidebar-separator"></div>
+                <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
         </div>
         <div class="content" id="content">
@@ -142,6 +143,7 @@ if (!isset($_SESSION['admin_id'])) {
                         </div>
                     </div>
                 </div>
+                <?php include '../sessionMsg.php' ?>
             </div>
         </div>
     </div>
@@ -176,7 +178,7 @@ if (!isset($_SESSION['admin_id'])) {
 <script>
     $(document).ready(function() {
         setTimeout(function() {
-            $('#session-msg').fadeOut('slow');
+            $('#session-msg-success').fadeOut('slow');
         }, 1700);
     });
 </script>

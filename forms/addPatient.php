@@ -23,6 +23,12 @@ if (!isset($_SESSION['admin_id'])) {
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        .session-msg-error{
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -61,9 +67,10 @@ if (!isset($_SESSION['admin_id'])) {
                 <div class="buttons">
                     <button type="submit" name="submit" class="btn create-btn">Create</button>
                 </div>
+            </form>
+            <?php include '../sessionMsg.php' ?>
         </div>
     </section>
-    <?php include '../sessionMsg.php' ?>
 
 </body>
 

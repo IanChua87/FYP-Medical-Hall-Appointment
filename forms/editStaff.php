@@ -75,7 +75,9 @@ if (!$edit_users_stmt) {
                     <button type="button" class="btn back-btn">Back</button>
                     <button type="submit" name="submit" class="btn save-btn">Save</button>
                 </div>
+            </form> 
         </div>
+        <?php include '../sessionMsg.php' ?>
     </section>
 </body>
 
@@ -89,6 +91,11 @@ if (!$edit_users_stmt) {
         $('.back-btn').click(function() {
             window.location.href = "staffDetails.php";
         });
+    });
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#session-msg-error').fadeOut('slow');
+        }, 1700);
     });
 </script>
 </html>

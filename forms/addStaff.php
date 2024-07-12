@@ -23,6 +23,11 @@ if (!isset($_SESSION['admin_id'])) {
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        .form-select-grp{
+            margin-top: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,16 +53,21 @@ if (!isset($_SESSION['admin_id'])) {
                     <input type="password" name="password" id="password" class="form-control" value="">
                 </div>
 
-                <select class="form-select-grp" id="role" name="role">
-                    <option selected class="selected">Select...</option>
-                    <option value="Doctor">Doctor</option>
-                    <option value="Admin">Admin</option>
-                </select>
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select class="form-select-grp" id="role" name="role">
+                        <option selected class="selected">Select...</option>
+                        <option value="Doctor">Doctor</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
 
                 <div class="buttons">
                     <button type="submit" name="submit" class="btn create-btn">Create</button>
                 </div>
+            </form>
         </div>
+        <?php include '../sessionMsg.php' ?>
     </section>
 
 
@@ -68,6 +78,11 @@ if (!isset($_SESSION['admin_id'])) {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<style>
+    .form-select-grp{
+        margin-top: 0;
+    }
+</style>
 
 <script>
     $(document).ready(function() {
@@ -90,7 +105,7 @@ if (!isset($_SESSION['admin_id'])) {
 <script>
     $(document).ready(function() {
         setTimeout(function() {
-            $('#session-msg').fadeOut('slow');
+            $('#session-msg-error').fadeOut('slow');
         }, 1700);
     });
 </script>
