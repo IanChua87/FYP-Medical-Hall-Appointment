@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $status = "New";
     $last_updated_datetime = date('Y-m-d H:i:s');
-    $payment_status = "Unpaid";
+    $payment_status = "UNPAID";
     $amount_payable = 50.00;
     $is_verified = 0;
 
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
         header("Location: addPatient.php");
         exit();
     } else {
-        
+
         if (invalid_name($name) !== false) {
             $_SESSION['error'] = "Only letters and white space allowed in name.";
             header("Location: addPatient.php");

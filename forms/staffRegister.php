@@ -50,7 +50,7 @@ include "../db_connect.php";
                 <input type="password" id="form2Example28" class="form-control form-control-lg" placeholder="Password" name="password" />
             </div>
 
-            <select class="form-select" id="role" name="role">
+            <select class="form-select-grp" id="role" name="role">
                                     <option selected>Select your role...</option>
                                     <option value="Doctor">Doctor</option>
                                     <option value="Admin">Admin</option>

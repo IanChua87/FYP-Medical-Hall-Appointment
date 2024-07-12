@@ -48,7 +48,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <input type="password" name="password" id="password" class="form-control" value="">
                 </div>
 
-                <select class="form-select" id="role" name="role">
+                <select class="form-select-grp" id="role" name="role">
                     <option selected class="selected">Select...</option>
                     <option value="Doctor">Doctor</option>
                     <option value="Admin">Admin</option>

@@ -20,34 +20,19 @@ if (!isset($_SESSION['admin_id'])) {
     <?php include '../links.php'; ?>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../style.css" />
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <style>
-        #sidebar.active {
-            left: 0;
-            width: 300px;
+        th,
+        td {
+            word-wrap: break-word;
         }
 
-        #sidebar {
-            max-width: 300px;
-            position: fixed;
-            top: 0;
-            left: -300px;
-            height: 100vh;
-            background: #682924;
-            z-index: 999;
-            transition: all 0.3s;
+        #dt-length-0 {
+            padding: 4px 8px;
         }
 
-        #content.active {
-            margin-left: 300px;
-        }
-
-        #content{
-            width: 100%;
-            transition: margin-left 0.3s ease;
-            margin-left: 0;
+        #dt-length-0 label {
+            font-size: 10px;
         }
     </style>
 </head>
@@ -79,73 +64,78 @@ if (!isset($_SESSION['admin_id'])) {
             </ul>
         </div>
         <div class="content" id="content">
-            <?php include '../adminNavbar.php' ?>
             <div class="appointment-table">
-                <div class="container">
-                    <h2 class="text-center">Appointment Details</h2>
-                    <div class="table-responsive">
-                        <table class="table table-striped" id="table">
-                            <thead class="table-primary">
-                                <tr>
-                                    <th>Patient Name</th>
-                                    <th>Phone No.</th>
-                                    <th>Appointment Date</th>
-                                    <th>Appointment Time</th>
-                                    <th>Status</th>
-                                    <th>Take Actions</th>
-                                </tr>
-                            </thead>
+                <div class="container-fluid">
+                    <div class="search-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="text-center">Appointment Details</h2>
+                            <a href='addAppointment.php' class='btn add-btn'>Add</a>
+                        </div>
+                    </div>
+                    <div class="table-card">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Phone No.</th>
+                                        <th>Appointment Date</th>
+                                        <th>Appointment Time</th>
+                                        <th>Status</th>
+                                        <th>Take Actions</th>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                <?php
-                                $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'Completed' ORDER BY appointment_id ASC";
-                                $appointment_stmt = mysqli_prepare($conn, $query);
-                                if (!$appointment_stmt) {
-                                    die("Failed to prepare statement");
-                                } else {
-                                    mysqli_stmt_execute($appointment_stmt);
-                                    $result = mysqli_stmt_get_result($appointment_stmt);
+                                <tbody>
+                                    <?php
+                                    $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'Completed' ORDER BY appointment_id ASC";
+                                    $appointment_stmt = mysqli_prepare($conn, $query);
+                                    if (!$appointment_stmt) {
+                                        die("Failed to prepare statement");
+                                    } else {
+                                        mysqli_stmt_execute($appointment_stmt);
+                                        $result = mysqli_stmt_get_result($appointment_stmt);
 
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $id = $row['appointment_id'];
-                                            echo "<tr>";
-                                            echo "<td>" . $row['patient_name'] . "</td>";
-                                            echo "<td>" . $row['patient_phoneNo'] . "</td>";
-                                            echo "<td>" . $row['appointment_date'] . "</td>";
-                                            echo "<td>" . $row['appointment_start_time'] . "</td>";
-                                            echo "<td>" . $row['appointment_status'] . "</td>";
-                                            echo "<td>
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $id = $row['appointment_id'];
+                                                echo "<tr>";
+                                                echo "<td>" . $row['patient_name'] . "</td>";
+                                                echo "<td>" . $row['patient_phoneNo'] . "</td>";
+                                                echo "<td>" . $row['appointment_date'] . "</td>";
+                                                echo "<td>" . $row['appointment_start_time'] . "</td>";
+                                                echo "<td>" . $row['appointment_status'] . "</td>";
+                                                echo "<td>
                                             <div class='buttons'>
                                                 <a href='editAppointment.php?appointment_id=" . $row['appointment_id'] . "' class='btn edit-btn'>Edit</a>
                                                 <button class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['appointment_id'] . "'>Delete</button>
                                             </div>
                                         </td>";
-                                            echo "</tr>";
+                                                echo "</tr>";
+                                            }
                                         }
                                     }
-                                }
-                                ?>
-                                <a href='addAppointment.php' class='btn add-btn'>Add</a>
-                            </tbody>
-                        </table>
+                                    ?>
+                                </tbody>
+                            </table>
 
-                        <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="delete-modal-label">Warning<span>!</span></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="modal-text">Are you sure you want to delete the appointment record? <br> This action cannot be undone.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form action="doDeleteAppointment.php" id="delete-form" method="POST">
-                                            <input type="hidden" name="appointment_id" id="appointment_id" value="">
-                                            <button type="submit" class="btn yes-btn">Yes</button>
-                                            <button type="button" class="btn no-btn" data-bs-dismiss="modal">No</button>
-                                        </form>
+                            <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="delete-modal-label">Warning<span>!</span></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="modal-text">Are you sure you want to delete the appointment record? <br> This action cannot be undone.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="doDeleteAppointment.php" id="delete-form" method="POST">
+                                                <input type="hidden" name="appointment_id" id="appointment_id" value="">
+                                                <button type="submit" class="btn yes-btn">Yes</button>
+                                                <button type="button" class="btn no-btn" data-bs-dismiss="modal">No</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +146,12 @@ if (!isset($_SESSION['admin_id'])) {
         </div>
     </div>
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -169,10 +165,10 @@ if (!isset($_SESSION['admin_id'])) {
         });
     });
 
-    $('#sidebarToggle').on('click', function() {
-            $('#sidebar').toggleClass('active');
-            $('#content').toggleClass('active');
-    });
+    // $('#sidebarToggle').on('click', function() {
+    //     $('#sidebar').toggleClass('active');
+    //     $('#content').toggleClass('active');
+    // });
 </script>
 
 <?php include '../sessionMsg.php' ?>

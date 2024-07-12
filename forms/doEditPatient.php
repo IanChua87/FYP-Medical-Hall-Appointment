@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
 
     if (check_patient_exists_by_id($conn, $patient_id) !== false) {
 
-        if (update_patient_details($conn, $dob, $phone, $email, $payment_status, $amount_payable, $patient_id) !== false) {
+        if (update_patient_details($conn, $patient_name, $dob, $phone, $email, $payment_status, $amount_payable, $patient_id) !== false) {
             $_SESSION['message'] = "Updated patient profile successfully.";
             header("Location: patientDetails.php");
             exit();

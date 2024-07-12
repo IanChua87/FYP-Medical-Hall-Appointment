@@ -930,19 +930,19 @@ nav{
 #sidebar {
     min-width: 300px;
     max-width: 300px;
-    position: fixed;
-    top: 0;
-    left: -300px;
+
+    /* left: -300px; */
     height: 100vh;
     background: #682924;
     z-index: 999;
-    transition: all 0.3s ease-in;
+    flex-shrink: 0;
+    /* transition: all 0.3s ease-in; */
 }
 
-#sidebar.active {
+/* #sidebar.active {
     left: 0;
     width: 300px;
-}
+} */
 
 #sidebar .header {
     color: #f9f9f9;
@@ -951,14 +951,6 @@ nav{
     margin-top: 10px;
 }
 
-.hidden-sidebar {
-    display: none;
-}
-
-.hidden-sidebar ul {
-    opacity: 0;
-    transition: opacity 0.5s;
-}
 
 #sidebar a {
     color: #f9f9f9;
@@ -1007,7 +999,7 @@ nav{
 }
 
 #sidebarToggle{
-    display: block; 
+    /* display: block;  */
     background-color: transparent;
     border: none;
     outline: none;
@@ -1020,8 +1012,23 @@ nav{
 
 #content {
     width: 100%;
-    transition: margin-left 0.3s ease-in;
-    margin-left: 0;
+    /* transition: margin-left 0.3s ease-in;
+    margin-left: 0; */
+    height: 100vh;
+
+}
+
+.header-title-bg{
+    background-color: hsl(210, 6%, 58%);
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 10px;
+}
+
+.header-title-bg h2{
+    font-size: 36px;
+    font-weight: 600;
+    color: #f9f9f9;
 }
 
 #content.active {
@@ -1050,7 +1057,7 @@ nav{
 }
 
 .admin-box {
-    max-width: 1320px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1093,28 +1100,50 @@ nav{
     color: #f9f9f9;
 }
 
-.card{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
+.content .card{
+    box-shadow: 0 0 10px rgba(71, 70, 70, 0.24);
     border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 20px;
     border: none;
+    
 }
 
-.info img{
-    height: auto;
-    width: 160px;
-    object-fit: cover;
-    padding: 15px;
+.content .card.p-table-row{
+    padding: 15px 10px 10px 0;
+}
+
+.content .card.p-table-row{
+    max-height: 1000px;
+    min-height:500px
+}
+
+.content .p-table-row .card-title{
+    font-size: 28px;
+    font-weight: 550;
+
+}
+
+.info .fa-hospital-user,
+.info .fa-calendar-check,
+.info .fa-user-tie,
+.info .fa-list-ol
+{
+    font-size: 60px;
+    color: #682924;
+    padding-left: 20px;
 }
 
 .info:hover{
-    background-color: #C2C2C2;
+    background-color: #e9e9e9;
 }
 
-.card .card-title{
-    font-size: 28px;
+.content .card-title{
+    font-size: 20px;
     font-weight: 550;
+}
+
+.content .card-text{
+    font-size: 16px;
+    font-weight: 500;
 }
 /* ===========================Admin main page end=========================== */
 
@@ -1132,16 +1161,51 @@ nav{
 }
 
 .patient-table h2, .appointment-table h2, .staff-table h2{
-    font-size: 56px;
+    font-size: 36px;
     font-weight: 600;
-    margin: 60px 0;
     font-weight: 600;
 }
 
 .table{
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    box-shadow:  0 0 10px rgba(71, 70, 70, 0.24);
+}
+
+.table-card{
+    padding: 30px;
+    background-color: #f4f4f4;
+    box-shadow:  0 0 10px rgba(71, 70, 70, 0.24);
+    border-radius: 10px;
+}
+
+.search-card{
+    padding: 24px;
+    background-color: #f4f4f4;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    margin-top: 60px;
+}
+
+.search-card input{
+    width: 400px;
+    max-width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0 15px;
+    border: 0.5px solid #ccc;
+    font-size: 16px;
+    background-color: #f5f1f1;
+
+}
+
+.search-card .fa-search{
+    color: #f5f5f5
+}
+
+.search-card button{
+    margin-left: 15px;
+    background-color: #CFA61E;
 }
 
 .appointment-table{
@@ -1154,13 +1218,17 @@ nav{
     font-weight: 700;
 }
 
+.patient-table tbody td.affect{
+    padding-top: 18px;
+
+}
+
 .table tr{
     font-size: 600;
 }
 
 .table tr td{
     font-size: 16px;
-    align-items: center;
 }
 
 /* .table tr:nth-child(odd){
@@ -1217,11 +1285,7 @@ nav{
 .modal .modal-title{
     font-size: 32px;
     font-weight: 600;
-}
-
-.modal-title span{
     color: #ff4b3e;
-
 }
 
 .modal .modal-text{
@@ -1285,7 +1349,7 @@ nav{
 .appointment-add .form-control, 
 .patient .form-control,
 .patient-add .form-control,
-.form-select{
+.form-select-grp{
     width: 100%;
     height: 45px;
     border-radius: 5px;
@@ -1299,7 +1363,7 @@ nav{
     width: 400px;
 }
 
-.form-select{
+.form-select-grp{
     margin-top: 30px;
     font-size: 16px;
 }
@@ -1404,6 +1468,8 @@ nav{
     background-color: #fffdfd;
     color: black;
 }
+
+
 /* ===========================Admin patient/appointment details page end=========================== */
 
 
