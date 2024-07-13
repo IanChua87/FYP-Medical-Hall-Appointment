@@ -102,7 +102,7 @@ mysqli_close($conn);
                         <br>
                         <div class="row mt-3">
                             <div class="col-12">
-                            <a href="../loginindex.php" class="btn back-btn">Back</a>
+                            <a href="editprofile.php" class="btn back-btn">Back</a>
                             </div>
                         </div>
                     </form>

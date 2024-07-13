@@ -44,6 +44,7 @@ nav{
     color: #f9f9f9;
     font-size: 24px;
     font-weight: 600;
+    height: 50px;
 }
 
 .nav-link{
@@ -129,6 +130,13 @@ nav{
 .dropdown:hover .dropdown-toggle {
     background-color: #682924;
     color: #f9f9f9;
+}
+
+.navbar-logo {
+    width: 100px;  /* Set the width of the logo */
+    height: 100px; /* Set the height of the logo */
+    transform: translateY(-30px);
+    margin-left: -20px;
 }
 /* ====navbar end==== */
 

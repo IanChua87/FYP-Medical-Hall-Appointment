@@ -8,7 +8,6 @@ if (!isset($_SESSION['patient_id'])) {
     exit();
 }
 
-
 // Get the form data
 $new_password = trim($_POST['newpassword']);
 $confirm_password = trim($_POST['cfmpassword']);
@@ -27,27 +26,29 @@ if ($new_password !== $confirm_password) {
     exit();
 }
 
-
-
 // Hash the new password
 // $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
 // Update the password in the database
-    $stmt = $conn->prepare("UPDATE patient SET patient_password = ? WHERE patient_email = ? AND patient_id = ?");
-    $stmt->bind_param("ssi", $new_password, $email, $_SESSION['patient_id']);
-    $stmt->execute();
-    
-    if ($stmt->affected_rows > 0) {
-        // Password updated successfully
-        $message = "Password updated successfully";
-    } else {
-        // No rows updated (could be wrong email or patient_id)
-        $message = "An error occurred while updating the password";
-    }
-    $stmt->close();
+$query = "UPDATE patient SET patient_password = ? WHERE patient_id = ?";
+$stmt = mysqli_prepare($conn, $query);
+$stmt->bind_param("si", $new_password, $_SESSION['patient_id']);
+$stmt->execute();
 
+if ($stmt->affected_rows > 0) {
+    // Password updated successfully
+    $message = "Password updated successfully";
+    header("Location: changepassword.php?message=".urlencode($message));
+} else {
+    // No rows updated (could be wrong email or patient_id)
+    $error = "An error occurred while updating the password";
+    header("Location: changepassword.php?error=".urlencode($error));
+}
+
+$stmt->close();
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -103,7 +104,7 @@ $conn->close();
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../loginindex.php" class="btn back-btn">Back</a>
+                            <a href="../P_index.php" class="btn back-btn">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>
