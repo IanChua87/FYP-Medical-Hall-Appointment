@@ -12,11 +12,16 @@ if (isset($_POST['submit'])) {
 
     if (check_empty_login_input_fields($email, $password)) {
         $_SESSION['login-error'] = "Please enter your email and password.";
-    } else {
-        login_patient($conn, $email, $password);
-
-        login_users($conn, $email, $password);
     }
+
+    if(login_patient($conn, $email, $password) === false || login_users($conn, $email, $password) === false){
+        $_SESSION['login-error'] = "Invalid email or password.";
+        header("Location: login.php");
+        exit();
+    }
+
+    header("Location: login.php");
+    exit();
 }
 
 ?>
@@ -42,7 +47,7 @@ if (isset($_POST['submit'])) {
                     <div class="form-container">
                         <h3 class="text">Login</h3>
                         <p class="login-prompt">Already registered? <span> <a href="register.php">Register</a> </span>now</p>
-                        <form method="post" action="">
+                        <form method="post" action="login.php">
                             <div class="form-outline mb-4">
                                 <input type="email" class="form-control form-control-lg" placeholder="Email" name="email" />
                             </div>

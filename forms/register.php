@@ -2,8 +2,18 @@
 session_start();
 include "../db_connect.php";
 
-$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+// $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+    $error = $_SESSION['error'];
+} else {
+    $error = '';
+}
+// $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+if (isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
+    $form_data = $_SESSION['form_data'];
+} else {
+    $form_data = [];
+}
 
 
 unset($_SESSION['error']);
@@ -21,7 +31,6 @@ unset($_SESSION['form_data']);
     <link rel="stylesheet" href="../style.css" />
     <style>
         .register-error-msg {
-            color: red;
             font-size: 14px;
             margin-top: 10px;
         }
@@ -80,7 +89,7 @@ unset($_SESSION['form_data']);
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Date of Birth:
                                             <span class="required-text">(required)</span>
                                         </label>
-                                        <input type="text" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo isset($form_data['dob']) ? $form_data['dob'] : '' ?>">
+                                        <input type="text" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" />
                                     </div>
                                 </div>
                                 <div class="col">
@@ -89,7 +98,7 @@ unset($_SESSION['form_data']);
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Phone Number:
                                             <span class="required-text">(required)</span>
                                         </label>
-                                        <input type="text" id="phone" class="form-control form-control-lg mb-1" placeholder="Phone Number" name="phone" value="<?php echo isset($form_data['phone']) ? $form_data['phone'] : '' ?>" />
+                                        <input type="text" id="phone" class="form-control form-control-lg mb-1" placeholder="Phone Number" name="phone" />
                                     </div>
                                 </div>
                             </div>
@@ -98,10 +107,9 @@ unset($_SESSION['form_data']);
                                 <button type="submit" name="submit" class="btn register-btn">Create Account</button>
                             </div>
                         </form>
-
-                        <div class="register-error-msg" id="register-error-msg">
+                    </div>
+                    <div class="register-error-msg" id="register-error-msg">
                             <?php echo $error ?>
-                        </div>
                     </div>
                 </div>
             </div>

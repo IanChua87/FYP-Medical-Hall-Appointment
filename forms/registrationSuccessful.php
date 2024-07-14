@@ -27,61 +27,60 @@ if (isset($_POST['submit'])) {
         $_SESSION['form_data'] = $_POST;
         header("Location: register.php");
         exit();
-    } else {
-        if (invalid_email($email) !== false) {
-            $_SESSION['error'] = "Invalid email format.";
-            $_SESSION['form_data'] = $_POST;
-            header("Location: register.php");
-            exit();
-        }
-
-        if (invalid_name($name) !== false) {
-            $_SESSION['error'] = "Only letters and white space allowed in name.";
-            $_SESSION['form_data'] = $_POST;
-            header("Location: register.php");
-            exit();
-        }
-
-        if (invalid_phone_number($phone) !== false) {
-            $_SESSION['error'] = "Only numbers allowed in phone number.";
-            $_SESSION['form_data'] = $_POST;
-            header("Location: register.php");
-            exit();
-        }
-
-        if (check_password_strength($password)) {
-            $_SESSION['error'] = "Password must be at least 8 characters long.";
-            $_SESSION['form_data'] = $_POST;
-            header("Location: register.php");
-            exit();
-        }
-
-        if (check_confirm_password($password, $confirm_password)) {
-            $_SESSION['error'] = "Passwords do not match.";
-            $_SESSION['form_data'] = $_POST;
-            header("Location: register.php");
-            exit();
-        }
-
-        if (check_patient_exists_by_email($conn, $email) !== false) {
-            $_SESSION['error'] = "User with this email already exists.";
-            $_SESSION['form_data'] = $_POST;
-            header("Location: register.php");
-            exit();
-        } else {
-            if (insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false) {
-                $msg = "<h2>Registration<br> successful</h2>";
-            } else {
-                $_SESSION['error'] = "Registration failed";
-                $_SESSION['form_data'] = $_POST;
-                mysqli_stmt_close($insert_stmt);
-                header("Location: register.php");
-                exit();
-            }
-        }
-
-        mysqli_close($conn);
     }
+    if (invalid_email($email) !== false) {
+        $_SESSION['error'] = "Invalid email format.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
+    if (invalid_name($name) !== false) {
+        $_SESSION['error'] = "Only letters and white space allowed in name.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
+    if (invalid_phone_number($phone) !== false) {
+        $_SESSION['error'] = "Only numbers allowed in phone number.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
+    if (check_password_strength($password)) {
+        $_SESSION['error'] = "Password must be at least 8 characters long.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
+    if (check_confirm_password($password, $confirm_password)) {
+        $_SESSION['error'] = "Passwords do not match.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
+    if (check_patient_exists_by_email($conn, $email) !== false) {
+        $_SESSION['error'] = "User with this email already exists.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    } else {
+        if (insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false) {
+            $msg = "<h2>Registration<br> successful</h2>";
+        } else {
+            $_SESSION['error'] = "Registration failed";
+            $_SESSION['form_data'] = $_POST;
+            mysqli_stmt_close($insert_stmt);
+            header("Location: register.php");
+            exit();
+        }
+    }
+
+    mysqli_close($conn);
 }
 ?>
 
