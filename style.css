@@ -506,6 +506,7 @@ nav {
 .registered-prompt a {
     color: #CFA61E;
     text-decoration: none;
+    font-size: 13px;
 
 }
 
@@ -547,9 +548,11 @@ nav {
     font-size: 16px;
 }
 
-.register .register-error-msg {
-    color: #22eb97;
-    font-size: 14px;
+.reg-error-msg {
+    color: #16a2ff;
+    font-size: 16px;
+    position: fixed;
+    margin-top: 820px;
 }
 
 /* ===========================Register page end=========================== */

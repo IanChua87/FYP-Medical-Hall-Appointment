@@ -118,7 +118,8 @@ if (!isset($_SESSION['admin_id'])) {
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
-            yearRange: "-100:+0"
+            yearRange: "-100:+0",
+            maxDate: new Date()
         });
 
         $('#appointment_time').timepicker({

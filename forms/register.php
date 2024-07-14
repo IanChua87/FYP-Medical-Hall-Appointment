@@ -2,22 +2,23 @@
 session_start();
 include "../db_connect.php";
 
-// $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-    $error = $_SESSION['error'];
-} else {
-    $error = '';
-}
-// $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
-if (isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
-    $form_data = $_SESSION['form_data'];
-} else {
-    $form_data = [];
-}
-
+$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+// if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+//     $error = $_SESSION['error'];
+// } else {
+//     $error = '';
+// }
+$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+// if (isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
+//     $form_data = $_SESSION['form_data'];
+// } else {
+//     $form_data = [];
+// }
 
 unset($_SESSION['error']);
 unset($_SESSION['form_data']);
+
+echo "<script>console.log('PHP Error Message:', '" . addslashes($error) . "');</script>";
 ?>
 
 <!-- this is for patient register -->
@@ -30,10 +31,7 @@ unset($_SESSION['form_data']);
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <style>
-        .register-error-msg {
-            font-size: 14px;
-            margin-top: 10px;
-        }
+
     </style>
 </head>
 
@@ -41,7 +39,7 @@ unset($_SESSION['form_data']);
     <section class="register vh-100">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
+                <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col vh-100">
                     <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
@@ -107,9 +105,7 @@ unset($_SESSION['form_data']);
                                 <button type="submit" name="submit" class="btn register-btn">Create Account</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="register-error-msg" id="register-error-msg">
-                            <?php echo $error ?>
+                        <p class="reg-error-msg" id="reg-error-msg"><?php echo $error ?></p>
                     </div>
                 </div>
             </div>
@@ -119,8 +115,8 @@ unset($_SESSION['form_data']);
     <script>
         $(document).ready(function() {
             setTimeout(function() {
-                $('#register-error-msg').fadeOut('slow');
-            }, 1700); 
+                $('#reg-error-msg').fadeOut('slow');
+            }, 1700);
         });
     </script>
 
@@ -130,7 +126,8 @@ unset($_SESSION['form_data']);
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-100:+0",
-                dateFormat: "yy-mm-dd"
+                dateFormat: "yy-mm-dd",
+                maxDate: new Date()
             });
         });
     </script>
@@ -138,5 +135,3 @@ unset($_SESSION['form_data']);
 </body>
 
 </html>
-
-
