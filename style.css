@@ -1501,45 +1501,84 @@ nav {
 
 
 /* ===========================Last Queue No. page start=========================== */
-.queue-no {
+.queue{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
-.queue-no h1 {
-    margin: 100px 0;
-    font-size: 48px;
+.queue-container{
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.queue-wrapper{
+    background-color: #f9f9f9;
+    padding: 50px;
+}
+
+h1.queue-title{
+    font-size: 56px;
     font-weight: 700;
-}
-
-.queue-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 100px;
-    border: 1px solid #ccc;
-}
-
-.queue-box h2 {
-    font-size: 64px;
-    font-weight: 500;
     margin-bottom: 30px;
+    text-align: center;
+
 }
 
-.queue-wrapper {
+label.queue_label{
+    margin-bottom: 16px;
+}
+
+.check-btn{
+    background-color: #CFA61E;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 24px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.check-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
+}
+
+.queue_no-wrapper{
+    max-width: 170px;
     border: 1px solid #ccc;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.queue-wrapper h3 {
-    font-size: 128px;
+.queue_no{
+    font-size: 90px;
     font-weight: 600;
-    padding: 30px 50px;
+    text-align: center;
 }
 
+.queue .buttons{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
 
+.queue .back-btn{
+    background-color: #682924;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 24px;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.queue .back-btn:hover{
+    background-color: #A34039;
+    color: #f9f9f9;
+
+}
 
 /* ===========================Last Queue No. page end=========================== */
 

@@ -38,7 +38,6 @@ if (!$result) {
 </head>
 
 <body>
-    <?php include '../adminNavbar.php' ?>
     <div class="settings">
         <div class="settings-box">
             <h1>Settings</h1>

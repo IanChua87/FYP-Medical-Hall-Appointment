@@ -64,6 +64,15 @@ function check_empty_appointment_input_fields($email, $date, $time)
     }
 }
 
+function check_empty_queue_input_field($queue_no)
+{
+    if (empty($queue_no)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function invalid_email($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -85,6 +94,15 @@ function invalid_name($name)
 function invalid_phone_number($phone)
 {
     if (!preg_match("/^[0-9]*$/", $phone)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function invalid_number($number)
+{
+    if (!preg_match("/^[0-9]*$/", $number)) {
         return true;
     } else {
         return false;
@@ -157,6 +175,26 @@ function check_appointment_exists_by_id($conn, $appointment_id)
         die("Failed to prepare statement");
     } else {
         mysqli_stmt_bind_param($appointment_stmt, "i", $appointment_id);
+        mysqli_stmt_execute($appointment_stmt);
+        $a_result = mysqli_stmt_get_result($appointment_stmt);
+
+        if ($a_user_data = mysqli_fetch_assoc($a_result)) {
+            return $a_user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
+function check_appointment_exists_by_queue_no($conn, $queue_no)
+{
+    $a_query = "SELECT * FROM appointment WHERE queue_no = ?";
+    $appointment_stmt = mysqli_prepare($conn, $a_query);
+
+    if (!$appointment_stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($appointment_stmt, "i", $queue_no);
         mysqli_stmt_execute($appointment_stmt);
         $a_result = mysqli_stmt_get_result($appointment_stmt);
 
