@@ -42,12 +42,12 @@
 
 }
 
-.register .required-text {
+.required-text {
     margin-left: 10px;
     color: #ce5047;
 }
 
-.register .asterik {
+.asterik {
     margin-right: 10px;
     color: #ce5047;
 }
@@ -550,8 +550,6 @@ nav {
 .register .register-error-msg {
     color: #22eb97;
     font-size: 14px;
-    margin-top: 100px;
-    position: fixed;
 }
 
 /* ===========================Register page end=========================== */
@@ -766,12 +764,7 @@ nav {
     height: 560px;
 }
 
-.back-btn,
-.save-btn {
-    width: 100%;
-    background-color: #CFA61E;
-    color: #fff;
-}
+
 
 .icon-text {
     display: flex;
@@ -952,6 +945,7 @@ nav {
     background: #682924;
     z-index: 999;
     flex-shrink: 0;
+    overflow: visible;
     /* transition: all 0.3s ease-in; */
 }
 
@@ -967,9 +961,19 @@ nav {
     margin-top: 10px;
 }
 
-
 #sidebar a {
     color: #f9f9f9;
+}
+
+#sidebar a.outer{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#sidebar a.inner{
+    font-size: 16px;
+    font-weight: 500;
+
 }
 
 #sidebar .btn {
@@ -1031,7 +1035,6 @@ nav {
     /* transition: margin-left 0.3s ease-in;
     margin-left: 0; */
     height: 100vh;
-
 }
 
 .header-title-bg {
@@ -1169,6 +1172,7 @@ nav {
 
 
 /* ===========================Admin patient/appointment details page start=========================== */
+/* ==patient== */
 .patient-table {
     padding-bottom: 60px;
 }
@@ -1250,10 +1254,6 @@ nav {
     font-size: 16px;
 }
 
-/* .table tr:nth-child(odd){
-   background-color: #FDD5D5;
-} */
-
 .table tr:nth-child(even) {
     background-color: #f9f9f9;
 
@@ -1313,80 +1313,73 @@ nav {
 }
 
 .appointment,
-.appointment-add,
 .patient,
-.patient-add {
+.staff {
+    width: 100%;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-.appointment .appointment-box {
-    background-color: #FCF9F9;
-    border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
-    padding: 50px;
-}
-
-.appointment-add .appointment-box {
-    background-color: #FCF9F9;
-    ;
-    border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
-    padding: 30px 50px;
 }
 
 .appointment h2,
-.appointment-add h2,
-.patient h2,
-.patient-add {
+.staff h2,
+.patient h2 {
+    color: #f9f9f9;
     font-size: 36px;
-    font-weight: 600;
-    font-weight: 600;
+    font-weight: 550;
+}
 
+.appointment .profile-details,
+.patient .profile-details,
+.staff .profile-details {
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-left: 100px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #682924;
+}
+
+.form-fields {
+    padding: 40px 100px;
+    background-color: #f9f9f9;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .appointment form,
-.appointment-add form,
 .patient form,
-.patient-add form {
+.staff form{
     width: 100%;
 }
 
-.appointment .form-group,
-.appointment-add .form-group,
-.patient .form-group,
-.patient-add .form-group {
-    margin-bottom: 20px;
-}
-
-.appointment .form-group label,
-.appointment-add .form-group label,
-.patient .form-group label,
-.patient-add .form-group label {
+.appointment label,
+.patient label,
+.staff label {
     font-size: 16px;
     font-weight: 500;
-    display: block;
     margin-bottom: 8px;
 }
 
 .appointment .form-control,
-.appointment-add .form-control,
 .patient .form-control,
-.patient-add .form-control,
-.form-select-grp {
+.staff .form-control,
+.custom-select-grp {
     width: 100%;
     height: 45px;
     border-radius: 5px;
-    padding: 0 15px;
-    border: none;
+    padding: 10px;
+    border: 1px solid #ccc;;
     font-size: 16px;
-    background-color: #f5f5f5;
-}
+    background-color: #ffffff;
+} 
 
-.patient-box .double-form-field {
-    width: 400px;
+.custom-select-grp{
+    box-shadow: 0 2px 10px rgba(134, 117, 117, 0.3);
+    border: 1px solid #ccc;;
 }
 
 .form-select-grp {
@@ -1394,73 +1387,69 @@ nav {
     font-size: 16px;
 }
 
-.profile-details .bi-person-circle,
-.fa-calendar,
-.fa-lock {
-    color: black;
+.appointment .profile-details i,
+.patient .profile-details i,
+.staff .profile-details i {
+    color: #f9f9f9;
     font-size: 60px;
     margin-right: 15px;
 }
 
-.appointment .profile-details,
-.appointment-add .profile-details,
-.patient .profile-details,
-.patient-add .profile-details {
+.appointment .buttons,
+.patient .buttons,
+.staff .buttons {
     display: flex;
-    align-items: center;
-    margin: 40px 0;
+    justify-content: flex-end;
 }
 
-.save-btn {
+.create-btn {
+    background-color: #682924;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 20px;
+}
+
+.create-btn:hover{
+    background-color: #A34039;
+    color: #f9f9f9;
+}
+
+.appointment .save-btn,
+.patient .save-btn,
+.staff .save-btn {
     background-color: #CFA61E;
     color: #f9f9f9;
-    font-size: 14px;
-    padding: 10px 20px;
-    width: 100%;
-}
-
-.back-btn {
-    background-color: #682924;
-    color: #f9f9f9;
-    font-size: 14px;
-    padding: 10px 20px;
-    margin-right: 15px;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.appointment-add .create-btn,
-.patient-add .create-btn {
-    background-color: #682924;
-    color: #f9f9f9;
-    font-size: 14px;
+    font-size: 16px;
     padding: 12px 20px;
-    width: 100%;
-
 }
 
-.appointment .save-btn:hover {
+.appointment .save-btn:hover,
+.patient .save-btn:hover,
+.staff .save-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 20px;
+}
 
+.appointment .back-btn,
+.patient .back-btn,
+.staff .back-btn {
+    background-color: #682924;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 20px;
+    margin-right: 15px;
 }
 
 .appointment .back-btn:hover,
-.patient-add .create-btn:hover {
+.patient .back-btn:hover,
+.staff .back-btn:hover {
     background-color: #A34039;
     color: #f9f9f9;
-
-}
-
-.appointment .buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-
 }
 
 .appointment-add .buttons,
-.patient .buttons,
 .patient-add .buttons {
     display: flex;
     justify-content: center;

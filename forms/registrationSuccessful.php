@@ -14,10 +14,10 @@ if (isset($_POST['submit'])) {
     $confirm_password = $_POST['confirm_password'];
     $dob = $_POST['dob'];
     $phone = $_POST['phone'];
-    $status = "New";
+    $status = "NEW";
     $last_updated_by = "Admin";
     $last_updated_datetime = date("Y-m-d H:i:s");
-    $payment_status = "Unpaid";
+    $payment_status = "UNPAID";
     $amount_payable = 50.00;
     $is_verified = 0;
 
@@ -35,41 +35,41 @@ if (isset($_POST['submit'])) {
             exit();
         }
 
-        if (invalid_name($name) !== false){
+        if (invalid_name($name) !== false) {
             $_SESSION['error'] = "Only letters and white space allowed in name.";
             $_SESSION['form_data'] = $_POST;
             header("Location: register.php");
             exit();
         }
 
-        if (invalid_phone_number($phone) !== false){
+        if (invalid_phone_number($phone) !== false) {
             $_SESSION['error'] = "Only numbers allowed in phone number.";
             $_SESSION['form_data'] = $_POST;
             header("Location: register.php");
             exit();
         }
 
-        if (check_password_strength($password)){
+        if (check_password_strength($password)) {
             $_SESSION['error'] = "Password must be at least 8 characters long.";
             $_SESSION['form_data'] = $_POST;
             header("Location: register.php");
             exit();
         }
 
-        if(check_confirm_password($password, $confirm_password)){
+        if (check_confirm_password($password, $confirm_password)) {
             $_SESSION['error'] = "Passwords do not match.";
             $_SESSION['form_data'] = $_POST;
             header("Location: register.php");
             exit();
         }
 
-        if(check_patient_exists_by_email($conn, $email) !== false){
+        if (check_patient_exists_by_email($conn, $email) !== false) {
             $_SESSION['error'] = "User with this email already exists.";
             $_SESSION['form_data'] = $_POST;
             header("Location: register.php");
             exit();
         } else {
-            if(insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false){
+            if (insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false) {
                 $msg = "<h2>Registration<br> successful</h2>";
             } else {
                 $_SESSION['error'] = "Registration failed";

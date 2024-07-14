@@ -18,6 +18,7 @@ if(isset($_POST['submit'])){
     $booked_datetime = date('Y-m-d H:i:s');
     $queue_no = $_POST['queue_no'];
 
+
     if(check_appointment_exists_by_id($conn, $appointment_id) !== false ){
 
         if(check_patient_exists_by_id($conn, $patient_id) !== false){

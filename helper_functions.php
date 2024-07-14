@@ -26,6 +26,15 @@ function check_empty_edit_patient_input_fields($name, $email, $dob, $phone, $pay
     }
 } 
 
+function check_empty_edit_appointment_input_fields($start_time)
+{
+    if (empty($start_time)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 function check_empty_users_input_fields($name, $email, $password, $role)
 {

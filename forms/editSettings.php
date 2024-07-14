@@ -94,7 +94,7 @@ if (!$result) {
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12 d-flex flex-end">
                             <button type="submit" name="submit" class="btn save-btn">Save</button>
                         </div>
                     </div>

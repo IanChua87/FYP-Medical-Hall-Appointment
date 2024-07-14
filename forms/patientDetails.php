@@ -6,22 +6,6 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit();
 }
-
-// $searchQuery = "";
-// if (isset($_POST['search'])) {
-//     $searchQuery = mysqli_real_escape_string($conn, $_POST['search']);
-// }
-
-// $query = "SELECT * FROM patient";
-// if (!empty($searchQuery)) {
-//     $query .= " WHERE patient_name LIKE '%$searchQuery%'";
-// }
-// $query .= " ORDER BY patient_id ASC";
-
-// $result = $conn->query($query);
-// if (!$result) {
-//     die("Query failed: " . $conn->error);
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,14 +59,14 @@ if (!isset($_SESSION['admin_id'])) {
                 <h1 class="header">Sin Nam</h1>
             </div>
             <ul class="mt-3">
-                <li><a href="../adminDashboard.php" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li><a href="lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> View Queue No.</a></li>
-                <li><a href="staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
-                <li class="active"><a href="patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> View Patient</a></li>
-                <li><a href="appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
-                <li><a href="editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li><a href="../adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a href="lastQueueNo.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> View Queue No.</a></li>
+                <li><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
+                <li class="active"><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
+                <!-- <li><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li> -->
+                <li><a href="editSettings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
                 <div class="sidebar-separator"></div>
-                <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
         </div>
         <div class="content" id="content">

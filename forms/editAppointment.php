@@ -48,55 +48,95 @@ if (!$edit_appointment_stmt) {
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        .session-msg-error {
+            margin-top: 20px;
+            position: fixed;
+        }
+    </style>
 </head>
 
 <body>
-    <section class="appointment">
-        <div class="appointment-box">
-            <div class="profile-details">
-                <i class="bi bi-person-circle"></i>
-                <h2 class=""><?php echo $patient_name ?></h2>
+    <div class="main-content d-flex">
+        <div class="sidebar" id="sidebar">
+            <div class="header-box px-3 mt-2 mb-2 d-flex align-items-center justify-content-between">
+                <h1 class="header">Sin Nam</h1>
+                <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
             </div>
-            <form action="doEditAppointment.php" method="POST">
-                <div class="form-group">
-                    <input type="text" name="appointment_id" class="form-control" value="<?php echo $appointment_id ?>" hidden>
-                </div>
-
-                <div class="form-group">
-                    <input type="text" name="patient_id" class="form-control" value="<?php echo $patient_id ?>" hidden>
-                </div>
-
-                <div class="form-group">
-                    <label for="appointment_date">Appointment Date:</label>
-                    <input type="text" name="appointment_date" id="appointment_date" class="form-control" value="<?php echo $appointment_date ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="appointment_time">Appointment Time:</label>
-                    <input type="text" name="appointment_start_time" id="appointment_time" class="form-control" value="<?php echo $appointment_time ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="appointment_status">Appointment Status:</label>
-                    <select name="appointment_status" id="appointment_status" class="form-control">
-                        <option value="CANCELLED">CANCELLED</option>
-                        <option value="MISSED">MISSED</option>
-                        <option value="UPCOMING">UPCOMING</option>
-                        <option value="COMPLETED">COMPLETED</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="queue_no">Queue No:</label>
-                    <input type="text" name="queue_no" id="queue_no" class="form-control" value="<?php echo $queue_no ?>" disabled>
-                </div>
-
-                <div class="buttons">
-                    <button type="button" class="btn back-btn">Back</button>
-                    <button type="submit" name="submit" class="btn save-btn">Save</button>
-                </div>
+            <ul class="mt-3">
+                <li class=""><a href="../adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li class=""><a href="lastQueueNo.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> View Queue No.</a></li>
+                <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
+                <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
+                <li class="active"><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class=""><a href="editSettings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <div class="sidebar-separator"></div>
+                <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
         </div>
-    </section>
+        <div class="appointment" id="appointment">
+            <div class="container">
+                <div class="profile-details">
+                    <i class="bi bi-person-circle"></i>
+                    <h2 class=""><?php echo $patient_name ?></h2>
+                </div>
+                <div class="form-fields">
+                    <form action="doEditAppointment.php" method="POST">
+                        <div class="form-group mb-3">
+                            <input type="text" name="appointment_id" class="form-control" value="<?php echo $appointment_id ?>" hidden>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input type="text" name="patient_id" class="form-control" value="<?php echo $patient_id ?>" hidden>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="appointment_date">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Appointment Date:
+                                <span class="required-text">(required)</span>
+                            </label>
+                            <input type="text" name="appointment_date" id="appointment_date" class="form-control" value="<?php echo $appointment_date ?>">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="appointment_time">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Appointment Time:
+                                <span class="required-text">(required)</span>
+                            </label>
+                            <input type="text" name="appointment_start_time" id="appointment_time" class="form-control" value="<?php echo $appointment_time ?>">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="appointment_status">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Appointment Status:
+                                <span class="required-text">(required)</span>
+                            </label>
+                            <select name="appointment_status" id="appointment_status" class="form-control">
+                                <option value="CANCELLED">CANCELLED</option>
+                                <option value="MISSED">MISSED</option>
+                                <option value="UPCOMING">UPCOMING</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="queue_no">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Queue No:
+                                <span class="required-text">(required)</span>
+                            </label>
+                            <input type="text" name="queue_no" id="queue_no" class="form-control" value="<?php echo $queue_no ?>" disabled>
+                        </div>
+
+                        <div class="buttons">
+                            <button type="button" class="btn back-btn">Go Back</button>
+                            <button type="submit" name="submit" class="btn save-btn">Save Appointment</button>
+                        </div>
+                    </form>
+                </div>
+                <?php include '../sessionMsg.php' ?>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script>
