@@ -3,22 +3,13 @@ session_start();
 include "../db_connect.php";
 
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-// if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-//     $error = $_SESSION['error'];
-// } else {
-//     $error = '';
-// }
 $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
-// if (isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
-//     $form_data = $_SESSION['form_data'];
-// } else {
-//     $form_data = [];
-// }
+
 
 unset($_SESSION['error']);
 unset($_SESSION['form_data']);
 
-echo "<script>console.log('PHP Error Message:', '" . addslashes($error) . "');</script>";
+// echo "<script>console.log('PHP Error Message:', '" . addslashes($error) . "');</script>";
 ?>
 
 <!-- this is for patient register -->
