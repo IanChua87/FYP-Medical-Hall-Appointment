@@ -80,14 +80,34 @@ $appointments_json = json_encode($appointments);
         #calendar {
             max-width: 900px;
             margin: 50px auto;
+            background-color: #CFA61E; /* Calendar background color */
+            color: white; /* Calendar text color */
         }
 
-        .fc-time-grid .fc-slats td {
-            height: 3em;
+        .fc-event, .fc-event:hover {
+            background-color: #682924 !important; /* Appointment slot color */
+            border-color: #000000 !important; /* Appointment slot border color */
+            color: white !important; /* Appointment slot text color */
         }
 
+        .fc-time-grid .fc-slats td,
+        .fc-widget-content,
         .fc-widget-content .fc-time-grid .fc-content-col {
-            height: auto;
+            background-color: #CFA61E !important; /* Slot background color */
+            border-color: #000000 !important; /* Slot border color */
+            color: white !important; /* Slot text color */
+        }
+
+        .fc-widget-header {
+            background-color: #CFA61E !important; /* Header background color */
+            border-color: #000000 !important; /* Header border color */
+            color: white !important; /* Header text color */
+        }
+
+        .fc-day-header {
+            background-color: #CFA61E !important; /* Day header background color */
+            border-color: #000000 !important; /* Day header border color */
+            color: white !important; /* Day header text color */
         }
 
         .modal-dialog {
