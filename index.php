@@ -1,3 +1,166 @@
+<?php
+// Include database connection file
+include "db_connect.php";
+
+// Initialize an empty array to store the settings values
+$opening_days = array();
+
+// Define the SQL query to fetch the settings_value from the settings table
+$sql = "SELECT settings_value FROM settings WHERE settings_key = 'opening_days'";
+
+// Execute the query
+if ($result = $conn->query($sql)) {
+    // Fetch the result row by row
+    while ($row = $result->fetch_assoc()) {
+        // Add the settings_value to the array
+        $opening_days = explode(',', $row['settings_value']); // Assuming opening_days are stored as a comma-separated string
+    }
+
+    // Free result set
+    $result->free();
+} else {
+    // Handle query execution error
+    echo "Error: " . $conn->error;
+}
+
+// Initialize variable to store the weekday open time
+$weekday_open_time = '';
+
+// Define the SQL query to fetch the settings_value from the settings table
+$sql = "SELECT settings_value FROM settings WHERE settings_key = 'weekday_open_time'";
+
+// Execute the query
+if ($result = $conn->query($sql)) {
+    // Check if a row is returned
+    if ($result->num_rows > 0) {
+        // Fetch the result (assuming only one row is expected)
+        $row = $result->fetch_assoc();
+        $weekday_open_time = $row['settings_value'];
+    } else {
+        // Handle case where no rows are returned
+        echo "No rows found";
+    }
+
+    // Free result set
+    $result->free();
+} else {
+    // Handle query execution error
+    echo "Error: " . $conn->error;
+}
+
+// Initialize variable to store the weekday close time
+$weekday_close_time = '';
+
+// Define the SQL query to fetch the settings_value from the settings table
+$sql = "SELECT settings_value FROM settings WHERE settings_key = 'weekday_close_time'";
+
+// Execute the query
+if ($result = $conn->query($sql)) {
+    // Check if a row is returned
+    if ($result->num_rows > 0) {
+        // Fetch the result (assuming only one row is expected)
+        $row = $result->fetch_assoc();
+        $weekday_close_time = $row['settings_value'];
+    } else {
+        // Handle case where no rows are returned
+        echo "No rows found";
+    }
+
+    // Free result set
+    $result->free();
+} else {
+    // Handle query execution error
+    echo "Error: " . $conn->error;
+}
+
+// Initialize variable to store the weekend open time
+$weekend_open_time = '';
+
+// Define the SQL query to fetch the settings_value from the settings table
+$sql = "SELECT settings_value FROM settings WHERE settings_key = 'weekend_open_time'";
+
+// Execute the query
+if ($result = $conn->query($sql)) {
+    // Check if a row is returned
+    if ($result->num_rows > 0) {
+        // Fetch the result (assuming only one row is expected)
+        $row = $result->fetch_assoc();
+        $weekend_open_time = $row['settings_value'];
+    } else {
+        // Handle case where no rows are returned
+        echo "No rows found";
+    }
+
+    // Free result set
+    $result->free();
+} else {
+    // Handle query execution error
+    echo "Error: " . $conn->error;
+}
+
+// Initialize variable to store the weekend close time
+$weekend_close_time = '';
+
+// Define the SQL query to fetch the settings_value from the settings table
+$sql = "SELECT settings_value FROM settings WHERE settings_key = 'weekend_close_time'";
+
+// Execute the query
+if ($result = $conn->query($sql)) {
+    // Check if a row is returned
+    if ($result->num_rows > 0) {
+        // Fetch the result (assuming only one row is expected)
+        $row = $result->fetch_assoc();
+        $weekend_close_time = $row['settings_value'];
+    } else {
+        // Handle case where no rows are returned
+        echo "No rows found";
+    }
+
+    // Free result set
+    $result->free();
+} else {
+    // Handle query execution error
+    echo "Error: " . $conn->error;
+}
+
+// Close the database connection
+$conn->close();
+
+// Initialize arrays for weekdays and weekends
+$weekdays = array();
+$weekends = array();
+
+// Define arrays of weekdays and weekends for comparison
+$weekday_names = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+$weekend_names = array("Saturday", "Sunday");
+
+// Separate the days
+foreach ($opening_days as $day) {
+    $day = trim($day); // Trim any extra whitespace
+    if (in_array($day, $weekday_names)) {
+        $weekdays[] = $day;
+    } elseif (in_array($day, $weekend_names)) {
+        $weekends[] = $day;
+    }
+}
+
+// Sort the days according to their natural order
+$days_of_week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+
+$weekdays = array_intersect($days_of_week, $weekdays);
+$weekends = array_intersect($days_of_week, $weekends);
+
+// Get start and end of weekdays and weekends
+$weekday_start = reset($weekdays); // First element
+$weekday_end = end($weekdays);     // Last element
+
+$weekend_start = reset($weekends); // First element
+$weekend_end = end($weekends);     // Last element
+
+$weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_start . "-" . $weekend_end;
+?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -101,17 +264,10 @@
             <div class="row">
                 <div class="col-12 col-md-5 col-lg-5">
                     <h2>Opening Hours</h2>
-                    <h3>Tuesday - Friday</h3>
-                    <p class="mb-4">11AM - 4:30PM</p>
-                    <h3>Saturday</h3>
-                    <p class="mb-0">10:30AM - 4:30PM</p>
-                </div>
-                <div class="col-12 col-md-7 col-lg-7">
-                    <h2>Appointment Duration</h2>
-                    <h3>New Patients</h3>
-                    <p class="mb-4">30 mins</p>
-                    <h3>Registered Patients</h3>
-                    <p class="mb-0">15 mins</p>
+                    <h3><?php echo $weekday_start . "-" . $weekday_end ?></h3>
+                    <p class="mb-4"><?php echo $weekday_open_time . "-" . $weekday_close_time ?></p>
+                    <h3><?php echo $weekend_display ?></h3>
+                    <p class="mb-0"><?php echo $weekend_open_time . "-" . $weekend_close_time ?></p>
                 </div>
             </div>
         </div>
@@ -154,7 +310,7 @@
         <div class="footer-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-3">
-                    <h2 class="logo">Logo</h2>
+                <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
                     <ul class="nav justify-content-center">
@@ -166,9 +322,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#services">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Booking</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">Contact</a>
@@ -189,7 +342,7 @@
                 </div>
             </div>
             <div class="footer-separator"></div>
-            <p class="copyright-text mb-0">&copy; 2024 Sin Nam Medical Hall. All rights reserved.</p>
+            <p class="copyright-text mb-0">&copy; Sin Nam Medical Hall. All rights reserved.</p>
         </div>
     </footer>
     <!--footer end-->

@@ -142,15 +142,14 @@ $conn->close();
             <?php if (count($appointments) === 0) { ?>
                 <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
                     <h3>There are no appointments to be displayed.</h3>
-                   
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                 <?php   if(isset($_GET['status'])) { ?>
-                <a href="viewappointment.php" class="btn back-btn" style=" width:100px; ">Back</a>
-                <?php } else { ?>
-                <a href="../P_index.php" class="btn back-btn" style=" width:100px; ">Back</a>
-                <?php } ?>
-                </div>   
+                    <?php if (isset($_GET['status'])) { ?>
+                        <a href="viewappointment.php" class="btn back-btn" style="width: 100px;">Back</a>
+                    <?php } else { ?>
+                        <a href="../P_index.php" class="btn back-btn" style="width: 100px;">Back</a>
+                    <?php } ?>
+                </div>
             <?php } else { ?>
                 <div class="table-header-row">
                     <h2 class="table-header-title">Appointments for <?php echo $patient_name; ?></h2>
@@ -170,8 +169,8 @@ $conn->close();
                             <th>End time</th>
                             <th>Status</th>
                             <?php if (isset($patient_id)) { ?>
-                            <th>Edit</th>
-                            <th>Cancel</th>
+                                <th>Edit</th>
+                                <th>Cancel</th>
                             <?php } ?>
                         </tr>
                     </thead>
@@ -189,7 +188,7 @@ $conn->close();
                             <td><?php echo $appt_status; ?></td>
                             <?php if (isset($patient_id)) { ?>
                                 <td>
-                                    <form action="editbooking.php" method="post">
+                                    <form action="editbooking.php" method="post" onsubmit="return handleEdit('<?php echo $appt_date; ?>')">
                                         <input type="hidden" name="appt_id" value="<?php echo $appt_id; ?>">
                                         <input type="hidden" name="appt_date" value="<?php echo $appt_date; ?>">
                                         <input type="hidden" name="appt_start_time" value="<?php echo $appt_start_time; ?>">
@@ -224,9 +223,17 @@ $conn->close();
             return selectedDate < today;
         }
 
+        function handleEdit(apptDate) {
+            if (isDateInPast(apptDate)) {
+                alert('Date is in the past. Cannot edit appointment.');
+                return false; // Prevent form submission
+            }
+            return true;
+        }
+
         function updateModalContent(apptDate, apptStartTime, apptEndTime, apptID) {
             if (isDateInPast(apptDate)) {
-                alert('The selected date is in the past.');
+                alert('Date is in the past. Cannot cancel appointment.');
                 return; // Exit the function if the date is in the past
             }
 
@@ -274,3 +281,4 @@ $conn->close();
     </div>
 </body>
 </html>
+
