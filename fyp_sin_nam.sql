@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Generation Time: Jun 16, 2024 at 08:23 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3304
+-- Generation Time: Jul 12, 2024 at 09:46 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,18 +40,34 @@ CREATE TABLE `appointment` (
   `appointment_remarks` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `appointment`
+-- Table structure for table `holiday`
 --
 
-INSERT INTO `appointment` (`appointment_id`, `appointment_date`, `appointment_start_time`, `appointment_end_time`, `appointment_status`, `booked_by`, `booked_datetime`, `patient_id`, `queue_no`, `appointment_remarks`) VALUES
-(1, '2024-06-27', '15:00:00', '15:30:00', '', '', '2024-06-09 10:22:19', 1, 0, NULL),
-(4, '2024-06-10', '15:30:00', '15:45:00', '', 'pookie', '2024-06-10 14:41:59', 1, 0, NULL),
-(5, '2024-06-10', '15:00:00', '15:15:00', '', 'pookie', '2024-06-10 14:45:23', 1, 0, NULL),
-(9, '2024-06-27', '12:00:00', '12:30:00', 'UPCOMING', 'pookie', '2024-06-14 07:00:50', 1, 0, NULL),
-(10, '2024-06-27', '14:00:00', '14:15:00', 'UPCOMING', 'lebron', '2024-06-14 07:02:10', 2, 0, NULL),
-(14, '2024-06-28', '12:00:00', '12:30:00', 'UPCOMING', 'pookie', '2024-06-15 10:42:31', 1, 0, NULL),
-(15, '2024-06-28', '15:00:00', '15:30:00', 'UPCOMING', 'pookie', '2024-06-16 08:19:13', 1, 0, NULL);
+CREATE TABLE `holiday` (
+  `holiday_id` int(11) NOT NULL,
+  `holiday_name` varchar(255) NOT NULL,
+  `holiday_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `holiday`
+--
+
+INSERT INTO `holiday` (`holiday_id`, `holiday_name`, `holiday_date`) VALUES
+(1, 'New Year\'s Day', '2024-01-01'),
+(2, 'Chinese New Year', '2024-02-10'),
+(3, 'Chinese New Year', '2024-02-11'),
+(4, 'Good Friday', '2024-03-29'),
+(5, 'Hari Raya Puasa', '2024-04-10'),
+(6, 'Labour Day', '2024-05-01'),
+(7, 'Vesak Day', '2024-05-22'),
+(8, 'Hari Raya Haji', '2024-06-17'),
+(9, 'National Day', '2024-08-09'),
+(10, 'Deepavali', '2024-10-31'),
+(11, 'Christmas Day', '2024-12-25');
 
 -- --------------------------------------------------------
 
@@ -79,8 +95,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`patient_id`, `patient_name`, `patient_dob`, `patient_phoneNo`, `patient_email`, `patient_password`, `patient_status`, `last_updated_by`, `last_updated_datetime`, `payment_status`, `amount_payable`, `is_verified`) VALUES
-(1, 'pookie', '2014-04-08', 12345678, 'pookie@gmail.com', 'Password234', 'NEW', '', '2024-06-09 10:15:03', '', 0, 0),
-(2, 'lebron', '2014-04-10', 56784321, 'lebron@gmail.com', 'Password12345', 'CURRENT', '', '2024-06-09 10:18:38', '', 0, 0);
+(6, 'Chee Cheong', '2024-07-16', 1234, 'CC@gmail.com', '$2y$10$xgy/sQluwITYBtqjrOTf7eaNgpSQaBmUKfixNmo2yBxwftfdfYKCe', 'New', 'Admin', '2024-07-11 16:33:47', 'UNPAID', 50, 0);
 
 -- --------------------------------------------------------
 
@@ -93,13 +108,6 @@ CREATE TABLE `relation` (
   `relation_name` varchar(255) NOT NULL,
   `appointment_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `relation`
---
-
-INSERT INTO `relation` (`relation_id`, `relation_name`, `appointment_id`) VALUES
-(1, 'friend', 14);
 
 -- --------------------------------------------------------
 
@@ -142,6 +150,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_password`, `role`) VALUES
+(2, 'Admin Lee', 'admin_sn@gmal.com', '$2y$10$JvcpPIKigD30Nm65JwMKbO9KiO2LebS7vsSwA8vQkiqG4DuxZ08AO', 'Admin'),
+(4, 'admin2', 'admin_lee@gmail.com', '$2y$10$vPwZF1xUJV4ZUc5.ZhvpuOpCwafavn0TqVYmRLoRRqQ2uwiB8k3i.', 'Admin'),
+(5, 'Doctor123', 'doctor123@gmail.com', '$2y$10$LOZAAHBekZpoxs1ZGhStveJLq4s9W00igailp1acKLWCaTpAVOxru', 'Doctor');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -151,6 +168,12 @@ CREATE TABLE `users` (
 ALTER TABLE `appointment`
   ADD PRIMARY KEY (`appointment_id`),
   ADD KEY `patient_id` (`patient_id`);
+
+--
+-- Indexes for table `holiday`
+--
+ALTER TABLE `holiday`
+  ADD PRIMARY KEY (`holiday_id`);
 
 --
 -- Indexes for table `patient`
@@ -185,19 +208,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `holiday`
+--
+ALTER TABLE `holiday`
+  MODIFY `holiday_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `relation`
 --
 ALTER TABLE `relation`
-  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -209,7 +238,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -219,21 +248,13 @@ ALTER TABLE `users`
 -- Constraints for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`);
-
-
-ALTER TABLE `appointment` DROP FOREIGN KEY `appointment_ibfk_1`;
-
-ALTER TABLE `appointment`
-    ADD CONSTRAINT `appointment_ibfk_1`
-    FOREIGN KEY (`patient_id`) REFERENCES `patient`(`patient_id`)
-    ON DELETE CASCADE;
+  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `relation`
 --
 ALTER TABLE `relation`
-  ADD CONSTRAINT `relation_ibfk_1` FOREIGN KEY (`appointment_id`) REFERENCES `appointment` (`appointment_id`);
+  ADD CONSTRAINT `relation_ibfk_1` FOREIGN KEY (`appointment_id`) REFERENCES `appointment` (`appointment_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
