@@ -2,14 +2,14 @@
 session_start();
 include "../db_connect.php";
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'Doctor') {
+if (!isset($_SESSION['doctor_id'])) {
     header("Location: forms/login.php");
     exit();
 }
 
 $query = "SELECT user_name, user_email FROM users WHERE user_id = ?";
 $stmt = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt, "i", $_SESSION['user_id']);
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['doctor_id']);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $user_name, $user_email);
 mysqli_stmt_fetch($stmt);
@@ -56,7 +56,7 @@ mysqli_stmt_close($stmt);
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-black right-col">
                 <div class="form-container">
-                    <form id="profileForm" method="post" action="doeditprofile.php">
+                    <form id="profileForm" method="post" action="doeditDoctorProfile.php">
                         <div class="form-outline mb-4">
                             <div class="icon-text">
                                 <i class="bi bi-person-circle"></i>
@@ -72,7 +72,7 @@ mysqli_stmt_close($stmt);
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../P_index.php" class="btn back-btn" style="background-color: #CFA61E">Back</a>
+                            <a href="../d_index.php" class="btn back-btn" style="background-color: #CFA61E">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>

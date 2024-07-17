@@ -3,7 +3,7 @@ session_start();
 include "../db_connect.php";
 
 // Ensure the user is logged in as a doctor
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'Doctor') {
+if (!isset($_SESSION['doctor_id'])) {
     header("Location: login.php");
     exit();
 }

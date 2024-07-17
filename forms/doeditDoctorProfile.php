@@ -2,21 +2,21 @@
 session_start();
 include "../db_connect.php";
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'Doctor') {
+if (!isset($_SESSION['doctor_id'])) {
     header("Location: forms/login.php");
     exit();
 }
 
 $error = "";
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['doctor_id'];
 $email = $_POST['email'];
 $name = $_POST['name'];
 
 // Check for empty fields
 if (empty($email)) {
     $error = "Please enter your email again.";
-    header("Location: editprofile.php?error=" . urlencode($error));
+    header("Location: editDoctorprofile.php?error=" . urlencode($error));
     exit();
 }
 
@@ -83,7 +83,7 @@ mysqli_close($conn);
                         <br>
                         <div class="row mt-3">
                             <div class="col-12">
-                                <a href="../P_index.php" class="btn back-btn" style="background-color: #CFA61E">Back</a>
+                                <a href="../d_index.php" class="btn back-btn" style="background-color: #CFA61E">Back</a>
                             </div>
                         </div>
                     </form>
