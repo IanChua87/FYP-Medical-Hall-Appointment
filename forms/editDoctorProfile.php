@@ -2,7 +2,7 @@
 session_start();
 include "../db_connect.php";
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'Doctor') {
+if (!isset($_SESSION['doctor_id']) || $_SESSION['role'] != 'Doctor') {
     header("Location: forms/login.php");
     exit();
 }
@@ -56,7 +56,7 @@ mysqli_stmt_close($stmt);
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-black right-col">
                 <div class="form-container">
-                    <form id="profileForm" method="post" action="doeditprofile.php">
+                    <form id="profileForm" method="post" action="doeditDoctorProfile.php">
                         <div class="form-outline mb-4">
                             <div class="icon-text">
                                 <i class="bi bi-person-circle"></i>
