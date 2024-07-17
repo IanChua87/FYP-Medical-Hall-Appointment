@@ -90,7 +90,7 @@ nav {
 
 .navbar .sign-up-btn {
     background-color: transparent;
-    padding: 6px 16px;
+    padding: 10px 16px;
     border-radius: 5px;
     color: #f9f9f9;
     border: 2px solid #f9f9f9;
@@ -207,7 +207,7 @@ nav {
 /* ====about==== */
 .about {
     background-color: #682924;
-    padding: 160px 0;
+    padding: 120px 0;
 }
 
 .about-box {
@@ -215,7 +215,7 @@ nav {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    width: 70%;
+    width: 1320px;
 }
 
 .about h2 {
@@ -227,15 +227,12 @@ nav {
 .about p {
     font-size: 18px;
     color: #f9f9f9;
-    margin-top: 50px;
+    margin-top: 40px;
 }
-
 
 .right-col img {
     width: 100%;
     height: auto;
-    margin-top: 160px;
-    margin-left: 50px;
 }
 
 /* ====about end==== */
@@ -258,6 +255,12 @@ nav {
 
 .services .row {
     padding-bottom: 80px;
+}
+
+.services .card{
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    box-shadow: 0 0 10px rgba(94, 92, 92, 0.24)
 }
 
 .services .card,
@@ -306,6 +309,12 @@ nav {
     color: #f9f9f9;
     font-size: 16px;
     padding: 12px 24px;
+}
+
+.services .learn-more-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
+
 }
 
 /* ====services end==== */
@@ -822,86 +831,7 @@ nav {
 
 
 
-/* ============Main page start=============== */
-@media (max-width: 768px) {
-    .navbar .nav-item {
-        margin-bottom: 15px;
-    }
 
-    .navbar .sign-up-btn {
-        margin-left: 0;
-        margin-bottom: 20px;
-    }
-
-    .navbar .login-btn {
-        margin-bottom: 10px;
-    }
-
-    .right-col {
-        margin-top: 60px;
-    }
-
-    .services-box {
-        flex-direction: column;
-        width: 95%;
-    }
-
-    /* ============Main page end=============== */
-
-
-
-
-
-    /* ============Register / Login page start=============== */
-    .register .left-col,
-    .registered .left-col,
-    .login .left-col,
-    .reset-password .left-col,
-    .loggedout .left-col,
-    .booked .left-col {
-        height: 60vh;
-    }
-
-    .register .right-col,
-    .registered .right-col,
-    .login .right-col,
-    .reset-password .right-col,
-    .loggedout .right-col,
-    .booked .right-col {
-        margin-top: 0;
-    }
-
-    .login .form-container {
-        height: 55vh;
-        padding: 0 30px;
-    }
-
-    .register .form-container {
-        height: 80vh;
-        padding: 0 30px;
-    }
-
-    .registered .verified-box,
-    .reset-password .verified-box,
-    .loggedout .verified-box,
-    .contacted .verified-box,
-    .booked .verified-box {
-        margin-top: 70px;
-        height: calc(60vh - 100px);
-    }
-
-    .custom-nav ul li {
-        padding: 5px 0px;
-
-    }
-
-    .custom-nav .logout-btn {
-        margin-bottom: 20px;
-    }
-
-
-
-}
 
 /* ===========================Admin main page start=========================== */
 /* .custom-nav ul li{
@@ -1653,3 +1583,84 @@ label.queue_label{
 }
 
 /* ===========================Settings page end=========================== */
+
+
+
+/* ============Main page start=============== */
+@media (max-width: 768px) {
+    .navbar .nav-item {
+        margin-bottom: 15px;
+    }
+
+    .navbar .sign-up-btn {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .navbar .login-btn {
+        margin-bottom: 10px;
+    }
+
+    .services-box, .contact-box{
+        flex-direction: column;
+    }
+
+    .right-col{
+        width: 100%;
+    }
+    /* ============Main page end=============== */
+
+
+
+
+
+    /* ============Register / Login page start=============== */
+    .register .left-col,
+    .registered .left-col,
+    .login .left-col,
+    .reset-password .left-col,
+    .loggedout .left-col,
+    .booked .left-col {
+        height: 60vh;
+    }
+
+    .register .right-col,
+    .registered .right-col,
+    .login .right-col,
+    .reset-password .right-col,
+    .loggedout .right-col,
+    .booked .right-col {
+        margin-top: 0;
+    }
+
+    .login .form-container {
+        height: 55vh;
+        padding: 0 30px;
+    }
+
+    .register .form-container {
+        height: 80vh;
+        padding: 0 30px;
+    }
+
+    .registered .verified-box,
+    .reset-password .verified-box,
+    .loggedout .verified-box,
+    .contacted .verified-box,
+    .booked .verified-box {
+        margin-top: 70px;
+        height: calc(60vh - 100px);
+    }
+
+    .custom-nav ul li {
+        padding: 5px 0px;
+
+    }
+
+    .custom-nav .logout-btn {
+        margin-bottom: 20px;
+    }
+
+
+
+}

@@ -109,11 +109,13 @@
     <section class="about" id="about">
         <div class="about-box">
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-7 left-col">
-                    <h2>About Us</h2>
-                    <p>At Sim Nam Medical Hall, we pride ourselves on <br> a rich history and legacy that spans over multiple <br> generations. Established with a vision to provide <br> exceptional and professional healthcare services, <br> we have been serving the community for <br> decades, earning the trust and respect <br> of our patients.</p>
+                <div class="col-12 col-md-5 col-lg-7 left-col">
+                    <div class="about-details mt-3">
+                        <h2>About Us</h2>
+                        <p>At Sim Nam Medical Hall, we pride ourselves on <br> a rich history and legacy that spans over multiple <br> generations. Established with a vision to provide <br> exceptional and professional healthcare services, <br> we have been serving the community for <br> decades, earning the trust and respect <br> of our patients.</p>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-5 right-col">
+                <div class="col-12 col-md-7 col-lg-5 right-col">
                     <img src="img/Mr Desmond Sin.jpg" alt="about-section">
                 </div>
             </div>
