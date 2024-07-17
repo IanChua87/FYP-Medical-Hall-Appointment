@@ -45,7 +45,7 @@ if (!isset($_SESSION['doctor_id'])){
 </div>
 
 
-<section class=" d-flex align-items-center justify-content-center">
+<section class="d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-black right-col">
