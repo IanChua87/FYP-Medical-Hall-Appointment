@@ -5,7 +5,7 @@ session_start(); // Start session
 $error = "";
 $booked_slots = [];
 $available_slots = [];
-$appointment_duration = 15; // Default duration
+$appointment_duration = 0; // Default duration
 
 // Check if selectedDate is provided via POST
 if (isset($_POST['selectedDate'])) {
@@ -120,7 +120,7 @@ if (isset($_POST['selectedDate'])) {
         if ($patient) {
             if ($patient['patient_status'] === "NEW") {
                 // Fetch new appointment duration
-                $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration' AND settings_value = '30'";
+                $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration'";
                 $stmt = $conn->prepare($settings_sql);
                 if ($stmt === false) {
                     die("Failed to prepare statement: " . $conn->error);
@@ -131,7 +131,22 @@ if (isset($_POST['selectedDate'])) {
                 $stmt->close();
 
                 if ($settings) {
-                    $appointment_duration = 30; // Set duration to 30 minutes for new patients
+                    $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
+                }
+            } else {
+                // Fetch regular appointment duration
+                $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'appointment_duration'";
+                $stmt = $conn->prepare($settings_sql);
+                if ($stmt === false) {
+                    die("Failed to prepare statement: " . $conn->error);
+                }
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $settings = $result->fetch_assoc();
+                $stmt->close();
+
+                if ($settings) {
+                    $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
                 }
             }
         }
