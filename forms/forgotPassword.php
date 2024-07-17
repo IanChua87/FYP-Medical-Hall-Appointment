@@ -15,6 +15,8 @@ $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
     <link rel="stylesheet" href="../style.css" />
 </head>
 
+<?php include '../navbar.php'; ?>
+
 <body>
     <section class="forgot-password vh-100">
         <div class="container-fluid">
@@ -25,18 +27,11 @@ $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
                 <div class="col-sm-4 text-black right-col">
                     <div class="form-container">
                         <h3 class="text">Forgot Password</h3>
-                        <form method="post" action="handleForgotPassword.php">
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" name="email" class="form-control form-control-lg" placeholder="Email" />
+                        <form method="post" action="doforgotPassword.php">
+                            <div data-mdb-input-init class="form-outline mb-5">
+                                <input type="email" class="form-control form-control-lg" placeholder="Email" />
                             </div>
 
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="password" name="old-password" class="form-control form-control-lg" placeholder="Old Password" />
-                            </div>
-
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="password" name="new-password" class="form-control form-control-lg" placeholder="New Password" />
-                            </div>
 
                             <!-- Simple link -->
                             <a href="login.php" class="forgot-text">Remember password?</a>

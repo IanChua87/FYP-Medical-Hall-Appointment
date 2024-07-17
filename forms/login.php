@@ -36,6 +36,8 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="../style.css" />
 </head>
 
+<?php include '../navbar.php'; ?>
+
 <body>
     <section class="login">
         <div class="container-fluid">

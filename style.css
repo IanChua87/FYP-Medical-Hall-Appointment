@@ -64,6 +64,7 @@ nav {
     color: #f9f9f9;
     font-size: 24px;
     font-weight: 600;
+    height: 50px;
 }
 
 .nav-link {
@@ -157,6 +158,15 @@ nav {
 .dropdown:hover .dropdown-toggle {
     background-color: #682924;
     color: #f9f9f9;
+}
+
+.navbar-logo {
+    width: 100px;
+    /* Set the width of the logo */
+    height: 100px;
+    /* Set the height of the logo */
+    transform: translateY(-30px);
+    margin-left: -20px;
 }
 
 /* ====navbar end==== */
@@ -316,7 +326,9 @@ nav {
 .operating-hours {
     background-color: #682924;
     color: #f9f9f9;
-    padding: 80px 0;
+    padding: 70px 0;
+    justify-content: center;
+
 }
 
 .operating-hours h2 {
@@ -827,13 +839,11 @@ nav {
         margin-bottom: 15px;
     }
 
-    .navbar .sign-up-btn {
-        margin-left: 0;
-        margin-bottom: 20px;
-    }
-
+    .navbar .sign-up-btn,
     .navbar .login-btn {
-        margin-bottom: 10px;
+        display: block;
+        width: 100%;
+        margin: 5px 0;
     }
 
     .right-col {
@@ -968,12 +978,12 @@ nav {
     color: #f9f9f9;
 }
 
-#sidebar a.outer{
+#sidebar a.outer {
     font-size: 18px;
     font-weight: 600;
 }
 
-#sidebar a.inner{
+#sidebar a.inner {
     font-size: 16px;
     font-weight: 500;
 
@@ -1355,7 +1365,7 @@ nav {
 
 .appointment form,
 .patient form,
-.staff form{
+.staff form {
     width: 100%;
 }
 
@@ -1375,14 +1385,16 @@ nav {
     height: 45px;
     border-radius: 5px;
     padding: 10px;
-    border: 1px solid #ccc;;
+    border: 1px solid #ccc;
+    ;
     font-size: 16px;
     background-color: #ffffff;
-} 
+}
 
-.custom-select-grp{
+.custom-select-grp {
     box-shadow: 0 2px 10px rgba(134, 117, 117, 0.3);
-    border: 1px solid #ccc;;
+    border: 1px solid #ccc;
+    ;
 }
 
 .form-select-grp {
@@ -1412,7 +1424,7 @@ nav {
     padding: 12px 20px;
 }
 
-.create-btn:hover{
+.create-btn:hover {
     background-color: #A34039;
     color: #f9f9f9;
 }

@@ -145,6 +145,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="message" id="message"></div>
 
+<a href="viewappointment.php">
+<i class="bi bi-arrow-left-square-fill" style="font-size:40px;margin-left:50px;color:primary;"></i>
+</a>
+
 <div class="date-btn-container">
     <h2>Book an Appointment</h2>
     <input type="date" id="selectedDate" name="selectedDate" style="width: 180px; height: 30px" min="<?php echo date('Y-m-d'); ?>" value="<?php echo isset($appt_date) ? $appt_date : ''; ?>">

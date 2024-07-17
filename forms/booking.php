@@ -228,43 +228,49 @@ $(document).ready(function() {
 
                 if (response.length > 0) {
                     $.each(response, function(index, slot) {
-                        var button = $('<button></button>')
+                        var slotButton = $('<button></button>')
                             .text(slot.start + ' - ' + slot.end)
                             .addClass('slot-button')
                             .prop('disabled', slot.booked);
-                            if(slot.booked) {
-                            button.addClass('booked-slot');
-                        }
-                        else {
-                            button.addClass('available-slot');
-                        }
 
-                        if (!slot.booked) {
-                            button.on('click', function() {
-                                // Fill the modal with the slot information
-                                $('#timeslot').val(slot.start + ' - ' + slot.end);
-                                $('#modalApptDate').val(selectedDate.toISOString().split('T')[0]);
-                                $('#modalOptions').val($('input[name="options"]:checked').val());
-                                $('#modalRelation').val($('#relation').val());
-
-                                // Show the modal
-                                var bookingModal = new bootstrap.Modal(document.getElementById('bookingmodal'));
-                                bookingModal.show();
-                            });
+                        if (slot.booked) {
+                            slotButton.addClass('booked-slot');
                         } else {
-                            button.addClass('booked');
+                            var currentTime = new Date();
+
+                            if (selectedDate.toDateString() === currentTime.toDateString()) {
+                                var slotStartTime = new Date(selectedDate);
+                                var slotEndTime = new Date(selectedDate);
+
+                                var startParts = slot.start.split(':');
+                                var endParts = slot.end.split(':');
+
+                                slotStartTime.setHours(startParts[0], startParts[1], 0, 0);
+                                slotEndTime.setHours(endParts[0], endParts[1], 0, 0);
+
+                                if (slotStartTime <= currentTime) {
+                                    slotButton.prop('disabled', true).addClass('booked-slot');
+                                }
+                            }
+
+                            if (!slotButton.prop('disabled')) {
+                                slotButton.addClass('available-slot');
+                                slotButton.on('click', function() {
+                                    populateModal(slot.start, slot.end);
+                                    var bookingModal = new bootstrap.Modal(document.getElementById('bookingmodal'));
+                                    bookingModal.show();
+                                });
+                            }
                         }
 
-                        slotContainer.append(button);
+                        slotContainer.append(slotButton);
                     });
-                } 
-                else {
-                     // og - $('#message').text('Sin Nam Medical Hall is not open on this day');
-                     var alertDiv = $('<div></div>')
+                } else {
+                    var alertDiv = $('<div></div>')
                         .addClass('alert alert-danger')
-                        .add('role', 'alert')
+                        .attr('role', 'alert')
                         .text('Sin Nam Medical Hall is not open on this day');
-                   
+
                     $('#message').html(alertDiv);
                 }
             },
@@ -276,8 +282,24 @@ $(document).ready(function() {
     });
 });
 
+function populateModal(startTime, endTime) {
+    const timeslot = startTime + " - " + endTime;
+    document.getElementById('timeslot').value = timeslot; // Populate timeslot field
+    document.getElementById('modalApptDate').value = document.getElementById('selectedDate').value; // Populate appointment date
 
+    // Check which radio button is selected and populate modal fields accordingly
+    const options = document.querySelector('input[name="options"]:checked');
+    if (options && options.value === '2') { // If 'others' is selected
+        document.getElementById('modalRelation').value = document.getElementById('relation').value; // Populate relation field
+    } else {
+        document.getElementById('modalRelation').value = ''; // Clear relation field if 'self' is selected (optional)
+    }
+
+    // Ensure modal options field is set to the selected radio button value
+    document.getElementById('modalOptions').value = options ? options.value : ''; 
+}
 </script>
+
 
 <!-- The Modal -->
 <div class="modal fade" id="bookingmodal" tabindex="-1" aria-labelledby="bookingmodalLabel" aria-hidden="true">

@@ -27,6 +27,23 @@ if (isset($_POST['cancel'])) {
             exit();
         }
 
+        // Check if appointment ID exists in the relation table and retrieve the relation_name
+        $relation_query = "SELECT relation_name FROM relation_table WHERE appointment_id = ?";
+        $relation_stmt = $conn->prepare($relation_query);
+
+        if (!$relation_stmt) {
+            die("Failed to prepare statement: " . $conn->error);
+        }
+
+        // Bind the parameters
+        $relation_stmt->bind_param("i", $appointment_id);
+
+        // Execute the statement
+        $relation_stmt->execute();
+        $relation_stmt->bind_result($relation_name);
+        $relation_stmt->fetch();
+        $relation_stmt->close();
+
         // SQL query to update the appointment status to 'CANCELLED'
         $query = "UPDATE appointment SET appointment_status = 'CANCELLED' WHERE appointment_id = ? AND patient_id = ?";
 
@@ -72,7 +89,7 @@ $stmt->close();
 
 // Fetch appointments based on the selected status
 $status = isset($_GET['status']) ? $_GET['status'] : 'UPCOMING';
-$query = "SELECT appointment_id, appointment_date, TIME_FORMAT(appointment_start_time, '%H:%i') AS formatted_start_time, TIME_FORMAT(appointment_end_time, '%H:%i') AS formatted_end_time, appointment_status FROM appointment WHERE patient_id = ? AND appointment_status = ? ORDER BY appointment_date";
+$query = "SELECT a.appointment_id, a.appointment_date, TIME_FORMAT(a.appointment_start_time, '%H:%i') AS formatted_start_time, TIME_FORMAT(a.appointment_end_time, '%H:%i') AS formatted_end_time, a.appointment_status, r.relation_name FROM appointment a LEFT JOIN relation r ON a.appointment_id = r.appointment_id WHERE a.patient_id = ? AND a.appointment_status = ? ORDER BY a.appointment_date";
 $stmt = $conn->prepare($query);
 
 if (!$stmt) {
@@ -139,59 +156,74 @@ $conn->close();
             </div>
         <?php } ?>
         <div class="container mt-3">
-            <div class="table-header-row">
-                <h2 class="table-header-title">Appointments for <?php echo $patient_name; ?></h2>
-                <div class="filter-dropdown">
-                    <select class="form-select" id="filterStatus" onchange="filterAppointments()">
-                        <option value="UPCOMING" <?php echo (!isset($_GET['status']) || $_GET['status'] == 'UPCOMING') ? 'selected' : ''; ?>>Upcoming</option>
-                        <option value="CANCELLED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'CANCELLED') ? 'selected' : ''; ?>>Cancelled</option>
-                        <option value="COMPLETED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'COMPLETED') ? 'selected' : ''; ?>>Completed</option>
-                    </select>
+            <?php if (count($appointments) === 0) { ?>
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                    <h3>There are no appointments to be displayed.</h3>
                 </div>
-            </div>
-            <table class="table table-hover table-secondary mt-3">
-                <thead class="table-primary">
-                    <tr>
-                        <th>Date</th>
-                        <th>Start time</th>
-                        <th>End time</th>
-                        <th>Status</th>
-                        <?php if (isset($patient_id)) { ?>
-                        <th>Edit</th>
-                        <th>Cancel</th>
-                        <?php } ?>
-                    </tr>
-                </thead>
-                <?php foreach ($appointments as $apptData) {
-                    $appt_id = $apptData['appointment_id'];
-                    $appt_date = $apptData['appointment_date'];
-                    $appt_start_time = $apptData['formatted_start_time'];
-                    $appt_end_time = $apptData['formatted_end_time'];
-                    $appt_status = $apptData['appointment_status'];
-                ?>
-                    <tr>
-                        <td><?php echo date('d/m/Y', strtotime($appt_date)); ?></td>
-                        <td><?php echo $appt_start_time; ?></td>
-                        <td><?php echo $appt_end_time; ?></td>
-                        <td><?php echo $appt_status; ?></td>
-                        <?php if (isset($patient_id)) { ?>
-                            <td>
-                                <form action="editbooking.php" method="post">
-                                    <input type="hidden" name="appt_id" value="<?php echo $appt_id; ?>">
-                                    <input type="hidden" name="appt_date" value="<?php echo $appt_date; ?>">
-                                    <input type="hidden" name="appt_start_time" value="<?php echo $appt_start_time; ?>">
-                                    <input type="hidden" name="appt_end_time" value="<?php echo $appt_end_time; ?>">
-                                    <button type="submit" class="btn btn-edit" name="edit" <?php echo ($appt_status === 'CANCELLED' || $appt_status === 'COMPLETED') ? 'disabled' : ''; ?>>Edit</button>
-                                </form>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-cancel" onclick="updateModalContent('<?php echo $appt_date; ?>', '<?php echo $appt_start_time; ?>', '<?php echo $appt_end_time; ?>', '<?php echo $appt_id; ?>')" <?php echo ($appt_status === 'CANCELLED' || $appt_status === 'COMPLETED') ? 'disabled' : ''; ?>>Cancel</button>
-                            </td>
-                        <?php } ?>
-                    </tr>
-                <?php } ?>
-            </table>
-            <br>
+                <div class="d-flex justify-content-center align-items-center">
+                    <?php if (isset($_GET['status'])) { ?>
+                        <a href="viewappointment.php" class="btn back-btn" style="width: 100px;">Back</a>
+                    <?php } else { ?>
+                        <a href="../P_index.php" class="btn back-btn" style="width: 100px;">Back</a>
+                    <?php } ?>
+                </div>
+            <?php } else { ?>
+                <div class="table-header-row">
+                    <h2 class="table-header-title">Appointments for <?php echo $patient_name; ?></h2>
+                    <div class="filter-dropdown">
+                        <select class="form-select" id="filterStatus" onchange="filterAppointments()">
+                            <option value="UPCOMING" <?php echo (!isset($_GET['status']) || $_GET['status'] == 'UPCOMING') ? 'selected' : ''; ?>>Upcoming</option>
+                            <option value="CANCELLED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'CANCELLED') ? 'selected' : ''; ?>>Cancelled</option>
+                            <option value="COMPLETED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'COMPLETED') ? 'selected' : ''; ?>>Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="table table-hover table-secondary mt-3">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Date</th>
+                            <th>Start time</th>
+                            <th>End time</th>
+                            <th>Status</th>
+                            <th>Relation</th>
+                            <?php if (isset($patient_id)) { ?>
+                                <th>Edit</th>
+                                <th>Cancel</th>
+                            <?php } ?>
+                        </tr>
+                    </thead>
+                    <?php foreach ($appointments as $apptData) {
+                        $appt_id = $apptData['appointment_id'];
+                        $appt_date = $apptData['appointment_date'];
+                        $appt_start_time = $apptData['formatted_start_time'];
+                        $appt_end_time = $apptData['formatted_end_time'];
+                        $appt_status = $apptData['appointment_status'];
+                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'Nil';
+                    ?>
+                        <tr>
+                            <td><?php echo date('d/m/Y', strtotime($appt_date)); ?></td>
+                            <td><?php echo $appt_start_time; ?></td>
+                            <td><?php echo $appt_end_time; ?></td>
+                            <td><?php echo $appt_status; ?></td>
+                            <td><?php echo htmlspecialchars($relation_name); ?></td>
+                            <?php if (isset($patient_id)) { ?>
+                                <td>
+                                    <form action="editbooking.php" method="post" onsubmit="return handleEdit('<?php echo $appt_date; ?>')">
+                                        <input type="hidden" name="appt_id" value="<?php echo $appt_id; ?>">
+                                        <input type="hidden" name="appt_date" value="<?php echo $appt_date; ?>">
+                                        <input type="hidden" name="appt_start_time" value="<?php echo $appt_start_time; ?>">
+                                        <input type="hidden" name="appt_end_time" value="<?php echo $appt_end_time; ?>">
+                                        <button type="submit" class="btn btn-edit" name="edit" <?php echo ($appt_status === 'CANCELLED' || $appt_status === 'COMPLETED') ? 'disabled' : ''; ?>>Edit</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-cancel" onclick="updateModalContent('<?php echo $appt_date; ?>', '<?php echo $appt_start_time; ?>', '<?php echo $appt_end_time; ?>', '<?php echo $appt_id; ?>')" <?php echo ($appt_status === 'CANCELLED' || $appt_status === 'COMPLETED') ? 'disabled' : ''; ?>>Cancel</button>
+                                </td>
+                            <?php } ?>
+                        </tr>
+                    <?php } ?>
+                </table>
+            <?php } ?>
         </div>
     </div>
 
@@ -211,9 +243,17 @@ $conn->close();
             return selectedDate < today;
         }
 
+        function handleEdit(apptDate) {
+            if (isDateInPast(apptDate)) {
+                alert('Date is in the past. Cannot edit appointment.');
+                return false; // Prevent form submission
+            }
+            return true;
+        }
+
         function updateModalContent(apptDate, apptStartTime, apptEndTime, apptID) {
             if (isDateInPast(apptDate)) {
-                alert('The selected date is in the past.');
+                alert('Date is in the past. Cannot cancel appointment.');
                 return; // Exit the function if the date is in the past
             }
 
@@ -259,7 +299,6 @@ $conn->close();
             </div>
         </div>
     </div>
-
-   
 </body>
 </html>
+

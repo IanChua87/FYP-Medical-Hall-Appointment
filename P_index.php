@@ -63,9 +63,29 @@ $conn->close();
 
         .button-container {
             display: flex;
-            gap: 20px;
-            /* Space between buttons */
+            gap: 20px; /* Space between buttons */
+        }
 
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>

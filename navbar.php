@@ -2,15 +2,23 @@
 
 echo '
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#">Logo</a>
-
+    <div class="container"> ' ?>
+    <?php if (!isset($_SESSION["patient_id"])) { ?>
+        <a class="navbar-brand" href="../index.php">
+        <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+        </a>
+        <?php } else { ?>
+        <a class="navbar-brand" href="../P_index.php">
+        <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+        </a>   
+        <?php } ?>
+        <?php echo '
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ms-auto">'; ?>
+            <ul class="navbar-nav ms-auto">' ?>
             <?php if (!isset($_SESSION["patient_id"])) { ?>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
@@ -41,9 +49,9 @@ if (isset($_SESSION['patient_id'])) {
                 Appointment
                 </a>
             <ul class="dropdown-menu" aria-labelledby="apptDropdown">
-                <li><a class="dropdown-item" href="booking.php">Book Appointment</a></li>
+                <li><a class="dropdown-item" href="forms/booking.php">Book Appointment</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="viewappointment.php">View Appointment</a></li>
+                <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
             </ul>
         </div>
         <div class="nav-item dropdown">
@@ -51,11 +59,11 @@ if (isset($_SESSION['patient_id'])) {
                 <i class="bi bi-person-circle"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="editprofile.php">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="changepassword.php">Change Password</a></li>
+                <li><a class="dropdown-item" href="forms/changepassword.php">Change Password</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="loggedOutSuccessful.php">Logout</a></li>
+                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
             </ul>
         </div>';
 } else {
