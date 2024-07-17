@@ -5,7 +5,7 @@ include "../db_connect.php";
 <?php
 $error = "";
 // Check if the form is submitted
-session_start();
+// session_start();
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
@@ -53,7 +53,9 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="../style.css" />
 </head>
 
-<?php include '../navbar.php'; ?>
+<?php 
+    include('../navbar.php');
+?>
 
 <body>
     <section class="login">
