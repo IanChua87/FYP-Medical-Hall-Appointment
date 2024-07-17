@@ -3,7 +3,7 @@ session_start();
 
 include "../db_connect.php";
 
-if (!isset($_SESSION['doctor_id']) || $_SESSION['role'] != 'Doctor') {
+if (!isset($_SESSION['doctor_id'])) {
     header("Location: login.php");
     exit();
 }
@@ -65,7 +65,7 @@ if (!isset($_SESSION['doctor_id']) || $_SESSION['role'] != 'Doctor') {
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../P_index.php" class="btn back-btn">Back</a>
+                            <a href="../d_index.php" class="btn back-btn">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>
