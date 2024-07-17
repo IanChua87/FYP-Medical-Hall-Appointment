@@ -89,7 +89,7 @@ $conn->close();
             <ul class="navbar-nav ms-auto">'; ?>
     <?php if (!isset($_SESSION["doctor_id"])) { ?>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+            <a class="nav-link active" aria-current="page" href="../d_index.php">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#about">About</a>

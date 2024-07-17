@@ -2,7 +2,7 @@
 session_start();
 include "../db_connect.php";
 
-if (!isset($_SESSION['patient_id'])) {
+if (!isset($_SESSION['patient_id']) && !isset($_SESSION['doctor_id'])) {
     header("Location: forms/login.php");
     exit();
 }
