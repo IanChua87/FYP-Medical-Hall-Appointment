@@ -3,27 +3,30 @@ session_start();
 include "db_connect.php";
 
 // Check if patient_id is set in the session
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['doctor_id'])) {
     header("Location: forms/login.php");
     exit();
 }
 
 // Assign session patient_id to a variable
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['doctor_id'];
 
 // Fetch doctor name
-$query = "SELECT user_name FROM users WHERE role = 'Doctor'";
+$query = "SELECT user_name FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($query);
 
 if (!$stmt) {
     die("Failed to prepare statement: " . $conn->error);
 }
-
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 $stmt->bind_result($doctor_name);
 $stmt->fetch();
 $stmt->close();
 $conn->close();
+
+// Display doctor name
+
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +87,7 @@ $conn->close();
 
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ms-auto">'; ?>
-    <?php if (!isset($_SESSION["user_id"])) { ?>
+    <?php if (!isset($_SESSION["doctor_id"])) { ?>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
         </li>
@@ -98,27 +101,17 @@ $conn->close();
             <a class="nav-link" href="#contact">Contact</a>
         </li>
     <?php } else { ?>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="../d_index.php">Home</a>
-        </li>
+        </li> -->
     <?php } ?>
     <?php echo '
                 
               
             </ul>; ' ?>
     <?php
-    if (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['doctor_id'])) {
         echo '
-        <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Appointment
-                </a>
-            <ul class="dropdown-menu" aria-labelledby="apptDropdown">
-                <li><a class="dropdown-item" href="forms/booking.php">Book Appointment</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
-            </ul>
-        </div>
         <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-person-circle"></i>
@@ -147,7 +140,7 @@ $conn->close();
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-text">
-                <h1>Welcome to Sin Nam <br>Medical Hall,<br><?php echo htmlspecialchars($patient_name, ENT_QUOTES, 'UTF-8'); ?></h1>
+                <h1>Welcome to Sin Nam <br>Medical Hall,<br><?php echo htmlspecialchars($doctor_name, ENT_QUOTES, 'UTF-8'); ?></h1>
                 <div class="button-container mt-3">
                     <a href="../d_viewAppointment.php" class="btn view-btn">View Appointment</a>
                 </div>
