@@ -27,6 +27,23 @@ if (isset($_POST['cancel'])) {
             exit();
         }
 
+        // Check if appointment ID exists in the relation table and retrieve the relation_name
+        $relation_query = "SELECT relation_name FROM relation_table WHERE appointment_id = ?";
+        $relation_stmt = $conn->prepare($relation_query);
+
+        if (!$relation_stmt) {
+            die("Failed to prepare statement: " . $conn->error);
+        }
+
+        // Bind the parameters
+        $relation_stmt->bind_param("i", $appointment_id);
+
+        // Execute the statement
+        $relation_stmt->execute();
+        $relation_stmt->bind_result($relation_name);
+        $relation_stmt->fetch();
+        $relation_stmt->close();
+
         // SQL query to update the appointment status to 'CANCELLED'
         $query = "UPDATE appointment SET appointment_status = 'CANCELLED' WHERE appointment_id = ? AND patient_id = ?";
 
@@ -72,7 +89,7 @@ $stmt->close();
 
 // Fetch appointments based on the selected status
 $status = isset($_GET['status']) ? $_GET['status'] : 'UPCOMING';
-$query = "SELECT appointment_id, appointment_date, TIME_FORMAT(appointment_start_time, '%H:%i') AS formatted_start_time, TIME_FORMAT(appointment_end_time, '%H:%i') AS formatted_end_time, appointment_status FROM appointment WHERE patient_id = ? AND appointment_status = ? ORDER BY appointment_date";
+$query = "SELECT a.appointment_id, a.appointment_date, TIME_FORMAT(a.appointment_start_time, '%H:%i') AS formatted_start_time, TIME_FORMAT(a.appointment_end_time, '%H:%i') AS formatted_end_time, a.appointment_status, r.relation_name FROM appointment a LEFT JOIN relation r ON a.appointment_id = r.appointment_id WHERE a.patient_id = ? AND a.appointment_status = ? ORDER BY a.appointment_date";
 $stmt = $conn->prepare($query);
 
 if (!$stmt) {
@@ -168,6 +185,7 @@ $conn->close();
                             <th>Start time</th>
                             <th>End time</th>
                             <th>Status</th>
+                            <th>Relation</th>
                             <?php if (isset($patient_id)) { ?>
                                 <th>Edit</th>
                                 <th>Cancel</th>
@@ -180,12 +198,14 @@ $conn->close();
                         $appt_start_time = $apptData['formatted_start_time'];
                         $appt_end_time = $apptData['formatted_end_time'];
                         $appt_status = $apptData['appointment_status'];
+                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'Nil';
                     ?>
                         <tr>
                             <td><?php echo date('d/m/Y', strtotime($appt_date)); ?></td>
                             <td><?php echo $appt_start_time; ?></td>
                             <td><?php echo $appt_end_time; ?></td>
                             <td><?php echo $appt_status; ?></td>
+                            <td><?php echo htmlspecialchars($relation_name); ?></td>
                             <?php if (isset($patient_id)) { ?>
                                 <td>
                                     <form action="editbooking.php" method="post" onsubmit="return handleEdit('<?php echo $appt_date; ?>')">
