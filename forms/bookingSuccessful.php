@@ -125,7 +125,7 @@ if (isset($_POST['book'])) {
                     <img src="../img/tick-verification.svg" alt="Tick logo symbol"/>
                     <h2>Booking<br> Successful</h2>
                     <div class="mt-3">
-                        <a href="../P_index.php" class="btn back-to-home-btn">Back to Home</a>
+                        <a href="viewappointment.php" class="btn back-to-home-btn">Back to View Appointment page</a>
                     </div>
                 </div>
             </div>
