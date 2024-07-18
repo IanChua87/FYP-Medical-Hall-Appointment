@@ -36,7 +36,7 @@ $conn->close();
     <meta charset="utf-8" />
     <title>Sin Nam Medical Hall | Logged In</title>
     <!-- 'links.php' contains CDN links' -->
-    <?php include 'links.php'; ?>
+    <?php include 'links.php' ?>
     <link rel="stylesheet" href="style.css" />
     <style>
         
@@ -48,7 +48,6 @@ $conn->close();
             padding: 10px 20px;
             text-decoration: none;
             width: auto;
-            /* Adjust width to fit content */
             margin-top: 20px;
         }
 
