@@ -43,11 +43,11 @@ if (!isset($_SESSION['admin_id'])) {
                 <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
             </div>
             <ul class="mt-3">
-                <li class="active"><a href="adminDashboard.php" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="forms/lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> View Queue No.</a></li>
-                <li class=""><a href="forms/staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
-                <li class=""><a href="forms/patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> View Patient</a></li>
-                <li class=""><a href="forms/appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class="active"><a href="adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li class=""><a href="forms/lastQueueNo.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> View Queue No.</a></li>
+                <li class=""><a href="forms/staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
+                <li class=""><a href="forms/patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
+                <li class=""><a href="forms/appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
                 <div class="sidebar-separator"></div>
                 <li class=""><a href="forms/editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> View Settings</a></li>
             </ul>

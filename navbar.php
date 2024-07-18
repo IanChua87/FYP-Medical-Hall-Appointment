@@ -24,7 +24,8 @@ echo '
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contact</a>
                 </li>
-<?php } else { ?>
+                
+            <?php } else { ?>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="../P_index.php">Home</a>
                 </li>
