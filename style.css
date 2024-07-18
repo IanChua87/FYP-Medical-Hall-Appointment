@@ -215,7 +215,7 @@ nav {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    width: 1320px;
+    width: 70%;
 }
 
 .about h2 {
@@ -232,7 +232,8 @@ nav {
 
 .right-col img {
     width: 100%;
-    height: auto;
+    max-height: 500px;
+    border-radius: 10px;
 }
 
 /* ====about end==== */
@@ -327,6 +328,13 @@ nav {
     background-color: #682924;
     color: #f9f9f9;
     padding: 80px 0;
+}
+
+.operating-box{
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 70%;
 }
 
 .operating-hours h2 {
@@ -429,7 +437,6 @@ nav {
     align-items: center;
     margin: 0 auto;
     width: 80%;
-
 }
 
 .footer .logo {
@@ -452,7 +459,7 @@ nav {
 }
 
 .footer .contact-details p {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 400;
 }
 
@@ -1587,6 +1594,34 @@ label.queue_label{
 
 
 /* ============Main page start=============== */
+@media (max-width: 992px) {
+    .navbar .nav-item {
+        margin-bottom: 15px;
+    }
+
+    .navbar .sign-up-btn {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .navbar .login-btn {
+        margin-bottom: 10px;
+    }
+
+    .services-box, .contact-box, .about-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90%;
+    }
+
+    .right-col{
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* ============Main page end=============== */
+}
 @media (max-width: 768px) {
     .navbar .nav-item {
         margin-bottom: 15px;
@@ -1601,12 +1636,74 @@ label.queue_label{
         margin-bottom: 10px;
     }
 
-    .services-box, .contact-box{
+    .hero .hero-text h1 {
+        font-size: 36px;
+    }
+    
+    .hero .hero-text p {
+        font-size: 16px;
+    }
+
+    .services-box, .contact-box, .about-box, .operating-box{
+        display: flex;
         flex-direction: column;
+        justify-content: center;
+        width: 90%;
+        margin-top: 0;
     }
 
     .right-col{
         width: 100%;
+        margin-top: 50px;
+    }
+
+    .about-details h2, .services h2, .operating-hours h2, .contact h2 {
+        font-size: 36px;
+    }
+
+    .services h2{
+        margin: 10px 20px;
+    }
+
+    .services h5{
+        font-size: 24px;
+    }
+
+    .services p{
+        font-size: 14px;
+    }
+
+    .about-details p {
+        font-size: 16px;
+    }
+
+    .appt-duration{
+        margin-top: 60px;
+    }
+
+    .operating-hours h3{
+        font-size: 18px;
+    }
+
+    .operating-hours p{
+        font-size: 14px;
+    }
+
+    .contact {
+        padding: 30px 0;
+    }
+
+    .contact h2{
+        margin-bottom: 0px;
+    }
+
+    .footer ul{
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .footer .contact-details{
+        margin-top: 30px;
     }
     /* ============Main page end=============== */
 

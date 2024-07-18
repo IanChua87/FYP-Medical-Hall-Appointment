@@ -1,4 +1,17 @@
+<?php
+include 'db_connect.php';
 
+$query = "SELECT settings_key, settings_value FROM settings";
+$result = mysqli_query($conn, $query);
+if (!$result) {
+    die("Failed to fetch settings: " . mysqli_error($conn));
+} else{
+    $settings = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $settings[$row['settings_key']] = $row['settings_value'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -109,14 +122,14 @@
     <section class="about" id="about">
         <div class="about-box">
             <div class="row">
-                <div class="col-12 col-md-5 col-lg-7 left-col">
+                <div class="col-12 col-md-6 col-lg-6 left-col">
                     <div class="about-details mt-3">
                         <h2>About Us</h2>
                         <p>At Sim Nam Medical Hall, we pride ourselves on <br> a rich history and legacy that spans over multiple <br> generations. Established with a vision to provide <br> exceptional and professional healthcare services, <br> we have been serving the community for <br> decades, earning the trust and respect <br> of our patients.</p>
                     </div>
                 </div>
-                <div class="col-12 col-md-7 col-lg-5 right-col">
-                    <img src="img/Mr Desmond Sin.jpg" alt="about-section">
+                <div class="col-12 col-md-6 col-lg-6 right-col">
+                    <img src="img/Mr Desmond Sin.jpg" alt="about-section" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -169,21 +182,21 @@
 
     <!--operating hours-->
     <section class="operating-hours" id="operating-hours">
-        <div class="container">
+        <div class="operating-box">
             <div class="row">
                 <div class="col-12 col-md-5 col-lg-5">
                     <h2>Opening Hours</h2>
-                    <h3>Tuesday - Friday</h3>
-                    <p class="mb-4">11AM - 4:30PM</p>
+                    <h3><?php echo $settings['opening_days']?></h3>
+                    <p class="mb-4"><?php echo $settings['weekday_open_time'] . ' - ' . $settings['weekday_close_time']?></p>
                     <h3>Saturday</h3>
-                    <p class="mb-0">10:30AM - 4:30PM</p>
+                    <p class="mb-0"><?php echo $settings['weekend_open_time'] . ' - ' . $settings['weekend_close_time']?></p>
                 </div>
-                <div class="col-12 col-md-7 col-lg-7">
+                <div class="col-12 col-md-7 col-lg-7 appt-duration">
                     <h2>Appointment Duration</h2>
                     <h3>New Patients</h3>
-                    <p class="mb-4">30 mins</p>
+                    <p class="mb-4"><?php echo $settings['new_appointment_duration'] . ' mins'?></p>
                     <h3>Registered Patients</h3>
-                    <p class="mb-0">15 mins</p>
+                    <p class="mb-0"><?php echo $settings['appointment_duration'] . ' mins'?></p>
                 </div>
             </div>
         </div>

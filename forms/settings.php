@@ -84,12 +84,6 @@ if (!$result) {
                             <p><?php echo $settings['new_appointment_duration'] ?></p>
                         </div>
                     </div>
-                    <div class="row mb-5">
-                        <label for="end_weekend_time" class="col-sm-5 word-label">Last Queue No:</label>
-                        <div class="col-sm-7 settings-value">
-                            <p><?php echo $settings['last_queue_no'] ?></p>
-                        </div>
-                    </div>
                     <div class="col-sm-4 mb-5">
                         <a href="editSettings.php" class="btn edit-btn">Edit</a>
                     </div>
