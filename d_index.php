@@ -39,18 +39,7 @@ $conn->close();
     <?php include 'links.php'; ?>
     <link rel="stylesheet" href="style.css" />
     <style>
-        .book-btn {
-            background-color: #CFA61E;
-            color: #fff;
-            display: inline-block;
-            text-align: center;
-            padding: 10px 20px;
-            text-decoration: none;
-            width: auto;
-            /* Adjust width to fit content */
-            margin-top: 20px;
-        }
-
+        
         .view-btn {
             background-color: #682924;
             color: #fff;
@@ -69,6 +58,12 @@ $conn->close();
             /* Space between buttons */
 
         }
+
+        .navbar-logo{
+            width: 60px;
+
+        }
+
     </style>
 </head>
 
@@ -78,15 +73,25 @@ $conn->close();
 
     echo '
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#">Logo</a>
+    <div class="container"> '?>
+        <?php if (!isset($_SESSION["doctor_id"])) { ?>
+        <a class="navbar-brand" href="../index.php">
+        <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+        </a>   
+        <?php } else { ?>
+        <a class="navbar-brand" href="../d_index.php">
+        <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+        </a>   
+        <?php } ?>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ms-auto">'; ?>
+            <ul class="navbar-nav ms-auto">
+        
+
     <?php if (!isset($_SESSION["doctor_id"])) { ?>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="../d_index.php">Home</a>
@@ -101,14 +106,12 @@ $conn->close();
             <a class="nav-link" href="#contact">Contact</a>
         </li>
     <?php } else { ?>
-        <!-- <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../d_index.php">Home</a>
-        </li> -->
+
     <?php } ?>
     <?php echo '
                 
               
-            </ul>; ' ?>
+            </ul>' ?>
     <?php
     if (isset($_SESSION['doctor_id'])) {
         echo '

@@ -52,7 +52,7 @@ if (!isset($_SESSION['doctor_id'])){
                 <div class="form-container-password">
                     <form id="passwordForm" method="post" action="doDoctorchangepassword.php">
                         <div class="form-outline mb-4">
-                            <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>" hidden/>
+                            <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" value="<?php echo htmlspecialchars($user_name); ?>" hidden/>
                         </div>
                         <h2 class="text">Change Password</h2>
                         <br>
@@ -65,7 +65,7 @@ if (!isset($_SESSION['doctor_id'])){
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../d_index.php" class="btn back-btn">Back</a>
+                            <a href="../d_index.php" class="btn back-btn" style="background-color: #CFA61E">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>
