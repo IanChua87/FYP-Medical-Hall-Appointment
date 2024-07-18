@@ -2,16 +2,16 @@
 session_start();
 include "../db_connect.php";
 
-if (!isset($_SESSION['patient_id']) && !isset($_SESSION['doctor_id'])) {
-    header("Location: forms/login.php");
+if (!isset($_SESSION['doctor_id'])) {
+    header("Location: login.php");
     exit();
 }
 
-$query = "SELECT patient_name, patient_dob, patient_email, patient_phoneNo FROM patient WHERE patient_id = ?";
+$query = "SELECT user_name, user_email FROM users WHERE user_id = ?";
 $stmt = mysqli_prepare($conn, $query);
-mysqli_stmt_bind_param($stmt, "i", $_SESSION['patient_id']);
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['doctor_id']);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $patient_name, $patient_dob, $patient_email, $patient_phoneNo);
+mysqli_stmt_bind_result($stmt, $user_name, $user_email);
 mysqli_stmt_fetch($stmt);
 mysqli_stmt_close($stmt);
 ?>
@@ -56,34 +56,23 @@ mysqli_stmt_close($stmt);
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-black right-col">
                 <div class="form-container">
-                    <form id="profileForm" method="post" action="doeditprofile.php">
+                    <form id="profileForm" method="post" action="doeditDoctorProfile.php">
                         <div class="form-outline mb-4">
                             <div class="icon-text">
                                 <i class="bi bi-person-circle"></i>
-                                <h3><?php echo htmlspecialchars($patient_name); ?></h3>
+                                <h3><?php echo htmlspecialchars($user_name); ?></h3>
                             </div>
                         </div>
                         <div class="form-outline mb-4">
-                            <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" value="<?php echo htmlspecialchars($patient_name); ?>" hidden/>
+                            <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" value="<?php echo htmlspecialchars($user_name); ?>" hidden/>
                         </div>
                         <div class="form-outline mb-4">
-                        <div class="input-text">Email:</div><input type="email" class="form-control form-control-lg" placeholder="Email" name="email" value="<?php echo htmlspecialchars($patient_email); ?>"/>
-                        </div>
-                        <!-- <div class="form-outline mb-4">
-                        <div class="input-text">Password:</div><input type="text" id="password" class="form-control form-control-lg" placeholder="Password" name="password" value="<?php echo htmlspecialchars($patient_password); ?>"  />
-                        </div> -->
-                        <div class="double-form-field row mb-4">
-                            <div class="col">
-                            <div class="input-text">Date Of Birth:</div><input type="date" class="form-control date-input" name="dob" value="<?php echo htmlspecialchars($patient_dob); ?>" readonly/>
-                            </div>
-                        </div>
-                        <div class="form-outline mb-4">
-                        <div class="input-text">Phone No:</div><input type="number" class="form-control form-control-lg" placeholder="Phone Number" name="phone" value="<?php echo htmlspecialchars($patient_phoneNo); ?>" />
+                        <div class="input-text">Email:</div><input type="email" class="form-control form-control-lg" placeholder="Email" name="email" value="<?php echo htmlspecialchars($user_email); ?>"/>
                         </div>
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../P_index.php" class="btn back-btn">Back</a>
+                            <a href="../d_index.php" class="btn back-btn" style="background-color: #CFA61E">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>
@@ -101,3 +90,4 @@ mysqli_stmt_close($stmt);
 </body>
 
 </html>
+

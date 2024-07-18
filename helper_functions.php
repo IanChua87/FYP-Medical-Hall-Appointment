@@ -282,6 +282,10 @@ function login_users($conn, $email, $password)
             $_SESSION['login-error'] = "Invalid password, please try again";
             return $_SESSION['login-error'];
         }
+    } 
+    else {
+        $_SESSION['login-error'] = "Email not found, please try again";
+        return $_SESSION['login-error'];
     }
 }
 

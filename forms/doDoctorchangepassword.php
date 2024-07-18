@@ -1,14 +1,55 @@
 <?php
 session_start();
-
 include "../db_connect.php";
 
-if (!isset($_SESSION['patient_id'])) {
+// Ensure the user is logged in as a doctor
+if (!isset($_SESSION['doctor_id'])){
     header("Location: login.php");
     exit();
 }
 
+// Get the form data
+$new_password = trim($_POST['newpassword']);
+$confirm_password = trim($_POST['cfmpassword']);
+
+// Validate input
+if (empty($new_password) || empty($confirm_password)) {
+    $error = "Please fill in all fields.";
+    header("Location: Doctorchangepassword.php?error=".urlencode($error));
+    exit();
+}
+
+// Check if passwords match
+if ($new_password !== $confirm_password) {
+    $error = "Passwords do not match.";
+    header("Location: Doctorchangepassword.php?error=".urlencode($error));
+    exit();
+}
+
+// Hash the new password
+$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+// Update the password in the database
+$query = "UPDATE users SET user_password = ? WHERE user_id = ?";
+$stmt = mysqli_prepare($conn, $query);
+$stmt->bind_param("si", $hashed_password, $_SESSION['doctor_id']);
+$stmt->execute();
+
+if ($stmt->affected_rows > 0) {
+    // Password updated successfully
+    $message = "Password updated successfully";
+    header("Location: Doctorchangepassword.php?message=".urlencode($message));
+} else {
+    // No rows updated (could be wrong email or user_id)
+    $error = "An error occurred while updating the password";
+    header("Location: Doctorchangepassword.php?error=".urlencode($error));
+}
+
+$stmt->close();
+$conn->close();
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -44,15 +85,14 @@ if (!isset($_SESSION['patient_id'])) {
     ?>
 </div>
 
-
-<section class="d-flex align-items-center justify-content-center">
+<section class=" d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-black right-col">
                 <div class="form-container-password">
                     <form id="passwordForm" method="post" action="dochangepassword.php">
                         <div class="form-outline mb-4">
-                            <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" value="<?php echo htmlspecialchars($patient_name); ?>" hidden/>
+                            <input type="text" class="form-control form-control-lg" placeholder="Name" name="name" value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>" hidden/>
                         </div>
                         <h2 class="text">Change Password</h2>
                         <br>
@@ -65,7 +105,7 @@ if (!isset($_SESSION['patient_id'])) {
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../P_index.php" class="btn back-btn">Back</a>
+                            <a href="../d_index.php" class="btn back-btn">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>
@@ -78,7 +118,6 @@ if (!isset($_SESSION['patient_id'])) {
     </div>
 </section>
 <br>
-
 
 </body>
 
