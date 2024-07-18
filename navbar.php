@@ -5,11 +5,11 @@ echo '
     <div class="container"> ' ?>
     <?php if (!isset($_SESSION["patient_id"])) { ?>
         <a class="navbar-brand" href="../index.php">
-        <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
         </a>
         <?php } else { ?>
         <a class="navbar-brand" href="../P_index.php">
-        <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
         </a>   
         <?php } ?>
         <?php echo '
