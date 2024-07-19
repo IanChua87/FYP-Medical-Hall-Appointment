@@ -17,7 +17,7 @@ $conn = mysqli_init();
 
 mysqli_ssl_set($conn, NULL, NULL, "", NULL, NULL);
 
-$host = 'sinnammed001server.mysql.database.azure.com';
+$host = 'sinnammed-001-server.mysql.database.azure.com';
 $username = 'turkdhuewv';
 $password = 'RYzd9GjQ43$Y56RZ';
 $database = 'fyp_sin_nam';
