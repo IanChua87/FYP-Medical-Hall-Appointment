@@ -250,7 +250,7 @@ function login_patient($conn, $email, $password)
 {
     if (check_patient_exists_by_email($conn, $email) !== false) {
         $p_user_data = check_patient_exists_by_email($conn, $email);
-        if (password_verify($password, $p_user_data['patient_password'])) {
+        if ($password === $p_user_data['patient_password']) {
             $_SESSION['patient_id'] = $p_user_data['patient_id'];
             header("Location: ../P_index.php");
             exit();
@@ -305,7 +305,7 @@ function login_users($conn, $email, $password)
 {
     if (check_users_exists_by_email($conn, $email) !== false) {
         $u_user_data = check_users_exists_by_email($conn, $email);
-        if (password_verify($password, $u_user_data['user_password'])) {
+        if ($password === $u_user_data['user_password']) {
             if ($u_user_data['role'] == "Admin") {
                 $_SESSION['admin_id'] = $u_user_data['user_id'];
                 $_SESSION['admin_role'] = $u_user_data['role'];
