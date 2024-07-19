@@ -1,5 +1,12 @@
 <?php
-include "db_connect.php"; // Adjust the path based on your setup
+include "db_connect.php"; // Adjust the path based on your setup]
+session_start();
+
+// Check if patient_id is set in the session
+if (!isset($_SESSION['doctor_id'])) {
+    header("Location: forms/login.php");
+    exit();
+}
 
 // Fetch the doctor's name from the users table
 $doctorQuery = "SELECT user_name FROM users WHERE role = 'Doctor' LIMIT 1";
@@ -65,13 +72,8 @@ $appointments_json = json_encode($appointments);
 <head>
     <meta charset="utf-8" />
     <title>Doctor Dashboard | Appointments Calendar</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../style.css" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <?php include 'links.php'; ?>
+    <link rel="stylesheet" href="style.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -121,6 +123,7 @@ $appointments_json = json_encode($appointments);
 </head>
 
 <body>
+<?php include 'navbar.php'; ?>
     <div id="calendar"></div>
 
     <!-- Modal Structure -->
