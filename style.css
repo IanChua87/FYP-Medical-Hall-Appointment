@@ -154,6 +154,13 @@ nav{
     background-color: #682924;
     color: #f9f9f9;
 }
+
+.navbar-logo {
+    width: 100px;  /* Set the width of the logo */
+    height: 100px; /* Set the height of the logo */
+    transform: translateY(-32px);
+    margin-left: -20px;
+}
 /* ====navbar end==== */
 
 
