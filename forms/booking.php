@@ -10,7 +10,7 @@ session_start();
     <title>Sin Nam Medical Hall | Appointment Booking</title>
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1AnmE4cbIsrMkeFN5DrGU6QT4M9O1QnNgl49NxqR1pi58A4NE+N" crossorigin="anonymous">
+
     <style>
         .booking {
             display: flex;
@@ -148,8 +148,15 @@ session_start();
         </label>
     </div>
     <div class="hidden" id="relationField">
-        <input type="text" class="form-control" id="relation" name="relation" placeholder="Relationship" style="margin-bottom: 10px;width: 180px; height: 30px">
-    </div>
+    <select class="form-control" id="relation" name="relation" style="margin-bottom: 10px; width: 180px; height: 40px; padding: 5px;">
+        <option value="" disabled selected>Select Relationship</option>
+        <option value="family">Family</option>
+        <option value="friend">Friend</option>
+        <option value="relative">Relative</option>
+    </select>
+</div>
+
+
     <input type="date" id="selectedDate" name="selectedDate" style="width: 180px; height: 30px" min="<?php echo date('Y-m-d'); ?>">
 </div>
 
@@ -185,13 +192,7 @@ session_start();
             relationField.classList.remove('hidden');
             relationInput.required = true;
         });
-        // Prevent form submission if relation input is empty when others is selected
-        bookButton.addEventListener('click', function (event) {
-                if (othersRadio.checked && relationInput.value.trim() === '') {
-                    event.preventDefault();
-                    alert('Please enter the relation.');
-                }
-            });
+       
     });
 </script>
 
