@@ -258,6 +258,9 @@ function login_patient($conn, $email, $password)
             $_SESSION['login-error'] = "Invalid password, please try again";
             return $_SESSION['login-error'];
         }
+    } else{
+        $_SESSION['login-error'] = "Invalid email, please try again";
+        return $_SESSION['login-error'];
     }
 }
 
@@ -321,6 +324,10 @@ function login_users($conn, $email, $password)
             $_SESSION['login-error'] = "Invalid password, please try again";
             return $_SESSION['login-error'];
         }
+    } else{
+        $_SESSION['login-error'] = "Invalid email, please try again";
+        return $_SESSION['login-error'];
+    
     }
 }
 
@@ -354,7 +361,7 @@ function insert_appointment_details($conn, $date, $start_time, $end_time, $statu
     $insert = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id, queue_no, appointment_remarks) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert);
-    mysqli_stmt_bind_param($insert_stmt, "sssssssis", $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
+    mysqli_stmt_bind_param($insert_stmt, "ssssssiis", $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
 
     //execute the prepared statement
     mysqli_stmt_execute($insert_stmt);

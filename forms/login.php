@@ -16,8 +16,6 @@ if (isset($_POST['submit'])) {
 
     if(login_patient($conn, $email, $password) === false || login_users($conn, $email, $password) === false){
         $_SESSION['login-error'] = "Invalid email or password.";
-        header("Location: login.php");
-        exit();
     }
 
     header("Location: login.php");
