@@ -305,7 +305,7 @@ function login_users($conn, $email, $password)
 {
     if (check_users_exists_by_email($conn, $email) !== false) {
         $u_user_data = check_users_exists_by_email($conn, $email);
-        // if (password_verify($password, $u_user_data['user_password'])) {
+        if (password_verify($password, $u_user_data['user_password'])) {
             if ($u_user_data['role'] == "Admin") {
                 $_SESSION['admin_id'] = $u_user_data['user_id'];
                 $_SESSION['admin_role'] = $u_user_data['role'];
@@ -316,11 +316,11 @@ function login_users($conn, $email, $password)
                 header("Location: ../d_index.php");
                 exit();
             }
-        // } 
-        // else {
-        //     $_SESSION['login-error'] = "Invalid password, please try again";
-        //     return $_SESSION['login-error'];
-        // }
+        } 
+        else {
+            $_SESSION['login-error'] = "Invalid password, please try again";
+            return $_SESSION['login-error'];
+        }
     }
 }
 
