@@ -1596,17 +1596,46 @@ label.queue_label{
 
 /* ===========================Settings page start=========================== */
 .settings{
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc; 
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 100px auto 50px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-wrapper{
+    padding: 50px;
 }
 
 .settings-box {
-    padding: 0 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+
 }
 
-.settings-square{
-    padding: 0 600px;
+.settings-wrapper h1{
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+.settings .edit-btn{
+    background-color: #CFA61E;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 24px;
+}
+
+.settings .edit-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
 }
 
 .settings-box h1, .settings-square h1 {
@@ -1616,6 +1645,10 @@ label.queue_label{
     text-align: center;
 }
 
+.settings-group form{
+    max-width: 500px;
+}
+
 .settings-group .form-group {
     display: flex;
     align-items: center;
@@ -1623,6 +1656,10 @@ label.queue_label{
 
 .settings-group .col-form-label {
     text-align: left;
+}
+
+.settings-group .form-group{
+    
 }
 
 .settings-group .form-control {
