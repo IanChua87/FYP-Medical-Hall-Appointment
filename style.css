@@ -826,7 +826,7 @@ nav{
 
 
 
-
+@media screen and (max-width: 768px) {
     .navbar .sign-up-btn {
         margin-left: 0;
         margin-bottom: 20px;
@@ -943,19 +943,20 @@ nav{
 #sidebar {
     min-width: 300px;
     max-width: 300px;
-    position: fixed;
-    top: 0;
-    left: -300px;
+
+    /* left: -300px; */
     height: 100vh;
     background: #682924;
     z-index: 999;
-    transition: all 0.3s ease-in;
+    flex-shrink: 0;
+    overflow: visible;
+    /* transition: all 0.3s ease-in; */
 }
 
-#sidebar.active {
+/* #sidebar.active {
     left: 0;
     width: 300px;
-}
+} */
 
 #sidebar .header {
     color: #f9f9f9;
@@ -964,17 +965,19 @@ nav{
     margin-top: 10px;
 }
 
-.hidden-sidebar {
-    display: none;
-}
-
-.hidden-sidebar ul {
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
 #sidebar a {
     color: #f9f9f9;
+}
+
+#sidebar a.outer{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#sidebar a.inner{
+    font-size: 16px;
+    font-weight: 500;
+
 }
 
 #sidebar .btn {
@@ -1019,22 +1022,36 @@ nav{
     margin: 16px;
 }
 
-#sidebarToggle{
-    display: block; 
+#sidebarToggle {
+    /* display: block;  */
     background-color: transparent;
     border: none;
     outline: none;
 }
 
-#sidebarToggle .bi-list{
+#sidebarToggle .bi-list {
     font-size: 36px;
     color: #f9f9f9;
 }
 
 #content {
     width: 100%;
-    transition: margin-left 0.3s ease-in;
-    margin-left: 0;
+    /* transition: margin-left 0.3s ease-in;
+    margin-left: 0; */
+    height: 100vh;
+}
+
+.header-title-bg {
+    background-color: hsl(210, 6%, 58%);
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 10px;
+}
+
+.header-title-bg h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #f9f9f9;
 }
 
 #content.active {
@@ -1063,7 +1080,7 @@ nav{
 }
 
 .admin-box {
-    max-width: 1320px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1088,7 +1105,7 @@ nav{
     font-size: 16px;
 }
 
-.add-btn{
+.add-btn {
     background-color: #CFA61E;
     padding: 7px 20px;
     color: #f9f9f9;
@@ -1096,113 +1113,173 @@ nav{
     align-items: right;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
     background-color: #A34039;
     color: #f9f9f9;
 }
 
-.edit-btn:hover, .add-btn:hover{
+.edit-btn:hover,
+.add-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.card{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.24);
+.content .card {
+    box-shadow: 0 0 10px rgba(71, 70, 70, 0.24);
     border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 20px;
     border: none;
+
 }
 
-.info img{
-    height: auto;
-    width: 160px;
-    object-fit: cover;
-    padding: 15px;
+.content .card.p-table-row {
+    padding: 15px 10px 10px 0;
 }
 
-.info:hover{
-    background-color: #C2C2C2;
+.content .card.p-table-row {
+    max-height: 1000px;
+    min-height: 500px
 }
 
-.card .card-title{
+.content .p-table-row .card-title {
     font-size: 28px;
     font-weight: 550;
+
 }
+
+.info .fa-hospital-user,
+.info .fa-calendar-check,
+.info .fa-user-tie,
+.info .fa-list-ol {
+    font-size: 60px;
+    color: #682924;
+    padding-left: 20px;
+}
+
+.info:hover {
+    background-color: #e9e9e9;
+}
+
+.content .card-title {
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.content .card-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
 /* ===========================Admin main page end=========================== */
 
 
 
 
-
 /* ===========================Admin patient/appointment details page start=========================== */
-.patient-table{
+/* ==patient== */
+.patient-table {
     padding-bottom: 60px;
 }
 
-.patient-table .patient-box{
+.patient-table .patient-box {
     padding: 0 13%;
 }
 
-.patient-table h2, .appointment-table h2, .staff-table h2{
-    font-size: 56px;
+.patient-table h2,
+.appointment-table h2,
+.staff-table h2 {
+    font-size: 36px;
     font-weight: 600;
-    margin: 60px 0;
     font-weight: 600;
 }
 
-.table{
+.table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(71, 70, 70, 0.24);
 }
 
-.appointment-table{
+.table-card {
+    padding: 30px;
+    background-color: #f4f4f4;
+    box-shadow: 0 0 10px rgba(71, 70, 70, 0.24);
+    border-radius: 10px;
+}
+
+.search-card {
+    padding: 24px;
+    background-color: #f4f4f4;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    margin-top: 60px;
+}
+
+.search-card input {
+    width: 400px;
+    max-width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0 15px;
+    border: 0.5px solid #ccc;
+    font-size: 16px;
+    background-color: #f5f1f1;
+
+}
+
+.search-card .fa-search {
+    color: #f5f5f5
+}
+
+.search-card button {
+    margin-left: 15px;
+    background-color: #CFA61E;
+}
+
+.appointment-table {
     padding-bottom: 60px;
 
 }
 
-.table th{
+.table th {
     font-size: 16px;
     font-weight: 700;
 }
 
-.table tr{
+.patient-table tbody td.affect {
+    padding-top: 18px;
+
+}
+
+.table tr {
     font-size: 600;
 }
 
-.table tr td{
+.table tr td {
     font-size: 16px;
-    align-items: center;
 }
 
-/* .table tr:nth-child(odd){
-   background-color: #FDD5D5;
-} */
-
-.table tr:nth-child(even){
+.table tr:nth-child(even) {
     background-color: #f9f9f9;
 
 }
 
-.table tr th{
+.table tr th {
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
 .table tr.table-body td,
-.table tr.table-head th{
+.table tr.table-head th {
     border: none
 }
 
-.modal .yes-btn{
+.modal .yes-btn {
     background-color: #682924;
     padding: 7px 20px;
     color: #f9f9f9;
     font-size: 14px;
 }
 
-.modal .no-btn{
+.modal .no-btn {
     background-color: #CFA61E;
     padding: 7px 20px;
     color: #f9f9f9;
@@ -1210,189 +1287,187 @@ nav{
 
 }
 
-.yes-btn:hover{
+.yes-btn:hover {
     background-color: #A34039;
     color: #f9f9f9;
 }
 
-.no-btn:hover{
+.no-btn:hover {
     background-color: #d1ac47;
     color: #f9f9f9;
 }
 
-.patient-table .btn-group{
+.patient-table .btn-group {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
 }
 
-.modal .modal-title{
+.modal .modal-title {
     font-size: 32px;
     font-weight: 600;
-}
-
-.modal-title span{
     color: #ff4b3e;
-
 }
 
-.modal .modal-text{
+.modal .modal-text {
     font-size: 16px;
     font-weight: 500;
 }
 
-.appointment, .appointment-add, .patient, .patient-add{
+.appointment,
+.patient,
+.staff {
+    width: 100%;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
-.appointment .appointment-box{
-    background-color: #FCF9F9;
-    border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
-    padding: 50px;
-}
-
-.appointment-add .appointment-box{
-    background-color: #FCF9F9;;
-    border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
-    padding: 30px 50px;
-}
-
-.appointment h2, .appointment-add h2, .patient h2, .patient-add{
+.appointment h2,
+.staff h2,
+.patient h2 {
+    color: #f9f9f9;
     font-size: 36px;
-    font-weight: 600;
-    font-weight: 600;
-
+    font-weight: 550;
 }
 
-.appointment form, 
-.appointment-add form,
+.appointment .profile-details,
+.patient .profile-details,
+.staff .profile-details {
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-left: 100px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #682924;
+}
+
+.form-fields {
+    padding: 40px 100px;
+    background-color: #f9f9f9;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.appointment form,
 .patient form,
-.patient-add form {
-    width: 100%; 
+.staff form{
+    width: 100%;
 }
 
-.appointment .form-group, 
-.appointment-add .form-group, 
-.patient .form-group,
-.patient-add .form-group{
-    margin-bottom: 20px;
-}
-
-.appointment .form-group label, 
-.appointment-add .form-group label, 
-.patient .form-group label,
-.patient-add .form-group label{
+.appointment label,
+.patient label,
+.staff label {
     font-size: 16px;
     font-weight: 500;
-    display: block;
     margin-bottom: 8px;
 }
 
-.appointment .form-control, 
-.appointment-add .form-control, 
+.appointment .form-control,
 .patient .form-control,
-.patient-add .form-control,
-.form-select{
+.staff .form-control,
+.custom-select-grp {
     width: 100%;
     height: 45px;
     border-radius: 5px;
-    padding: 0 15px;
-    border: none;
+    padding: 10px;
+    border: 1px solid #ccc;;
     font-size: 16px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
+} 
+
+.custom-select-grp{
+    box-shadow: 0 2px 10px rgba(134, 117, 117, 0.3);
+    border: 1px solid #ccc;;
 }
 
-.patient-box .double-form-field{
-    width: 400px;
-}
-
-.form-select{
+.form-select-grp {
     margin-top: 30px;
     font-size: 16px;
 }
 
-.profile-details .bi-person-circle, .fa-calendar, .fa-lock{
-    color: black;
+.appointment .profile-details i,
+.patient .profile-details i,
+.staff .profile-details i {
+    color: #f9f9f9;
     font-size: 60px;
     margin-right: 15px;
 }
 
-.appointment .profile-details, 
-.appointment-add .profile-details, 
-.patient .profile-details, 
-.patient-add .profile-details{
+.appointment .buttons,
+.patient .buttons,
+.staff .buttons {
     display: flex;
-    align-items: center;
-    margin: 40px 0;
+    justify-content: flex-end;
 }
 
-.save-btn{
-    background-color: #CFA61E;
-    color: #f9f9f9;
-    font-size: 14px;
-    padding: 10px 20px;
-    width: 100%;
-}
-
-.back-btn{
+.create-btn {
     background-color: #682924;
     color: #f9f9f9;
-    font-size: 14px;
-    padding: 10px 20px;
-    margin-right: 15px;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.appointment-add .create-btn, .patient-add .create-btn{
-    background-color: #682924;
-    color: #f9f9f9;
-    font-size: 14px;
+    font-size: 16px;
     padding: 12px 20px;
-    width: 100%;
-
 }
 
-.appointment .save-btn:hover{
-    background-color: #d1ac47;
-    color: #f9f9f9;
-
-}
-
-.appointment .back-btn:hover, .patient-add .create-btn:hover{
+.create-btn:hover{
     background-color: #A34039;
     color: #f9f9f9;
-
 }
 
-.appointment .buttons{
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-
+.appointment .save-btn,
+.patient .save-btn,
+.staff .save-btn {
+    background-color: #CFA61E;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 20px;
 }
 
-.appointment-add .buttons, .patient .buttons, .patient-add .buttons{
+.appointment .save-btn:hover,
+.patient .save-btn:hover,
+.staff .save-btn:hover {
+    background-color: #d1ac47;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 20px;
+}
+
+.appointment .back-btn,
+.patient .back-btn,
+.staff .back-btn {
+    background-color: #682924;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 20px;
+    margin-right: 15px;
+}
+
+.appointment .back-btn:hover,
+.patient .back-btn:hover,
+.staff .back-btn:hover {
+    background-color: #A34039;
+    color: #f9f9f9;
+}
+
+.appointment-add .buttons,
+.patient-add .buttons {
     display: flex;
     justify-content: center;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-.patient-table .buttons{
+.patient-table .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.patient-add .patient-box, 
-.patient .patient-box{
+.patient-add .patient-box,
+.patient .patient-box {
     background-color: #FCF9F9;
     border-radius: 16px;
     box-shadow: 0 2px 10px rgba(167, 142, 142, 0.3);
@@ -1408,15 +1483,17 @@ nav{
     background-color: #A34039;
 }
 
-#dt-length-0{
+#dt-length-0 {
     background-color: #fffdfd;
     box-shadow: 0 2px 10px rgba(134, 117, 117, 0.3);
 }
 
-#dt-length-0 option:hover{
+#dt-length-0 option:hover {
     background-color: #fffdfd;
     color: black;
 }
+
+
 /* ===========================Admin patient/appointment details page end=========================== */
 
 

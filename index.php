@@ -160,19 +160,6 @@ $weekend_end = end($weekends);     // Last element
 $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_start . "-" . $weekend_end;
 ?>
 
-
-
-$query = "SELECT settings_key, settings_value FROM settings";
-$result = mysqli_query($conn, $query);
-if (!$result) {
-    die("Failed to fetch settings: " . mysqli_error($conn));
-} else{
-    $settings = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $settings[$row['settings_key']] = $row['settings_value'];
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
 
