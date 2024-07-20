@@ -42,12 +42,12 @@
 
 }
 
-.register .required-text{
+.register .required-text, .appointment .required-text, .patient .required-text, .staff .required-text{
     margin-left: 10px;
     color: #ce5047;
 }
 
-.register .asterik{
+.register .asterik, .appointment .asterik, .patient .asterik, .staff .asterik{
     margin-right: 10px;
     color: #ce5047;
 }
@@ -555,11 +555,11 @@ nav{
     font-size: 16px;
 }
 
-.register .register-error-msg{
-    color: #22eb97;
-    font-size: 14px;
-    margin-top: 100px;
+.reg-error-msg {
+    color: #16a2ff;
+    font-size: 16px;
     position: fixed;
+    margin-top: 840px;
 }
 /* ===========================Register page end=========================== */
 
@@ -1187,7 +1187,7 @@ nav{
 .patient-table h2,
 .appointment-table h2,
 .staff-table h2 {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: 600;
     font-weight: 600;
 }

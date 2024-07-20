@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $status = "New";
     $last_updated_datetime = date('Y-m-d H:i:s');
     $payment_status = "UNPAID";
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
             header("Location: addPatient.php");
             exit();
         } else {
-            if (insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $_SESSION['admin_role'], $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false) {
+            if (insert_patient_details($conn, $name, $dob, $phone, $email, $password, $status, $_SESSION['admin_role'], $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false) {
                 $_SESSION['message'] = "Patient successfully added.";
                 header("Location: patientDetails.php");
                 exit();

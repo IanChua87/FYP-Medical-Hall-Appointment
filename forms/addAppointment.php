@@ -48,55 +48,10 @@ if (!$stmt) {
             position: fixed;
         }
 
-        /* .appointment {
-            width: 100%;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .form-fields {
-            padding: 40px 100px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-        }
-
-        .appointment .profile-details {
-            display: flex;
-            align-items: center;
-            padding-bottom: 20px;
-            padding-top: 40px;
-            padding-left: 100px;
-            background-color: #682924;
-        }
-
-        .appointment .profile-details h2 {
-            color: #f9f9f9;
-            font-weight: 550;
-        }
-
-        .appointment .profile-details i{
-            margin-left: 15px;
-            color: #f9f9f9;
-        }
-
         .appointment .buttons{
             display: flex;
             justify-content: flex-end;
         }
-
-        .create-btn {
-            background-color: #682924;
-            color: #f9f9f9;
-            font-size: 16px;
-            padding: 12px 20px;
-        }
-
-        .create-btn:hover{
-            background-color: #A34039;
-            color: #f9f9f9;
-        } */
     </style>
 </head>
 
@@ -113,7 +68,7 @@ if (!$stmt) {
                 <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class="active"><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
-                <li class=""><a href="editSettings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li class=""><a href="settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
                 <div class="sidebar-separator"></div>
                 <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
@@ -132,7 +87,7 @@ if (!$stmt) {
                                 <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Email:
                                 <span class="required-text">(required)</span>
                             </label>
-                            <input type="email" name="email" id="email" class="form-control">
+                            <input type="text" name="email" id="email" class="form-control">
                         </div>
 
                         <div class="form-group mb-3">

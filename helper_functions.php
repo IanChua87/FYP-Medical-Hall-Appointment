@@ -331,12 +331,12 @@ function login_users($conn, $email, $password)
     }
 }
 
-function insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified)
+function insert_patient_details($conn, $name, $dob, $phone, $email, $password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified)
 {
     $insert = "INSERT INTO patient (patient_name, patient_dob, patient_phoneNo, patient_email, patient_password, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable, is_verified) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert);
-    mysqli_stmt_bind_param($insert_stmt, "ssisssssssi", $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified);
+    mysqli_stmt_bind_param($insert_stmt, "ssisssssssi", $name, $dob, $phone, $email, $password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified);
 
     //execute the prepared statement
     if (mysqli_stmt_execute($insert_stmt)) {
@@ -346,11 +346,11 @@ function insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_pass
     }
 }
 
-function insert_users_details($conn, $name, $email, $hashed_password, $role)
+function insert_users_details($conn, $name, $email, $password, $role)
 {
     $insert = "INSERT INTO users (user_name, user_email, user_password, role) VALUES (?, ?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert);
-    mysqli_stmt_bind_param($insert_stmt, "ssis", $name, $email, $hashed_password, $role);
+    mysqli_stmt_bind_param($insert_stmt, "ssss", $name, $email, $password, $role);
 
     //execute the prepared statement
     mysqli_stmt_execute($insert_stmt);
@@ -407,11 +407,11 @@ function update_users_details($conn, $name, $email, $user_id)
     mysqli_stmt_execute($update_stmt);
 }
 
-function update_patient_password($conn, $password)
+function update_patient_password($conn, $password, $patient_id)
 {
     $update = "UPDATE patient SET patient_password = ? WHERE patient_id = ?";
     $update_stmt = mysqli_prepare($conn, $update);
-    mysqli_stmt_bind_param($update_stmt, "si", $password, $_SESSION['patient_id']);
+    mysqli_stmt_bind_param($update_stmt, "si", $password, $patient_id);
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);

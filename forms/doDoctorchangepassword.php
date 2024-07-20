@@ -27,12 +27,12 @@ if ($new_password !== $confirm_password) {
 }
 
 // Hash the new password
-$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+// $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
 // Update the password in the database
 $query = "UPDATE users SET user_password = ? WHERE user_id = ?";
 $stmt = mysqli_prepare($conn, $query);
-$stmt->bind_param("si", $hashed_password, $_SESSION['doctor_id']);
+$stmt->bind_param("si", $new_password, $_SESSION['doctor_id']);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {

@@ -41,10 +41,12 @@ if(isset($_POST['submit'])){
 
     } else{
         $_SESSION['error'] = "Appointment not found.";
-        header("Location: appointmentDetails.php");
+        header("Location: editAppointment.php?appointment_id=" . $appointment_id);
         exit();
     }
+
 } else {
+    $_SESSION['error'] = "Invalid request.";
     header("Location: appointmentDetails.php");
     exit();
 }

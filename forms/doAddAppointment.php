@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 
             $appointment_id = mysqli_insert_id($conn);
             if (insert_relation_details($conn, $relation, $appointment_id) !== false) {
-                $_SESSION['error'] = "Appointment successfully added.";
+                $_SESSION['message'] = "Appointment successfully added.";
                 header("Location: appointmentDetails.php");
                 exit();
             }
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
         }
     } else {
         $_SESSION['error'] = "Patient with this email doesn't exist. Please register first.";
-        header("Location: forms/register.php");
+        header("Location: addAppointment.php");
         exit();
     }
 

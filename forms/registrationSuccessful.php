@@ -7,6 +7,7 @@ include "../helper_functions.php";
 <!-- this is for patient register -->
 <?php
 $msg = "";
+
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
