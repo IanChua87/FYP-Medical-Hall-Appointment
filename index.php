@@ -169,6 +169,15 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
     <!-- 'links.php' contains cdn links' -->
     <?php include 'links.php'; ?>
     <link rel="stylesheet" href="style.css" />
+    <style>
+        .navbar svg {
+            overflow-y: hidden;
+        }
+
+        .hero .learn-more-btn:hover {
+            background-color: #d1ac47;
+        }
+    </style>
 </head>
 
 <body>
@@ -178,9 +187,11 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
     <?php
 
     echo '
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="index.php">
+            Logo
+        </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
@@ -380,7 +391,7 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
         <div class="footer-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-3">
-                <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+                    <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
                     <ul class="nav justify-content-center">
@@ -418,5 +429,21 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
     <!--footer end-->
 
 </body>
+<script>
+    $(document).ready(function() {
+        $('a[href^="#"]').on('click', function(event) {
+            event.preventDefault();
+
+            var target = this.hash;
+            var $target = $(target);
+
+            $('html, body').stop().animate({
+                'scrollTop': $target.offset().top
+            }, 600, 'swing', function() {
+                window.location.hash = target;
+            });
+        });
+    });
+</script>
 
 </html>

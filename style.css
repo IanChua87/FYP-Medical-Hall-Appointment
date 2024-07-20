@@ -58,6 +58,7 @@
 /* ====navbar start==== */
 nav{
     background-color: #682924;
+    max-height: 100px;
 }
 
 .navbar-brand{
@@ -164,10 +165,11 @@ nav{
     display: flex;
     align-items: center;
     height: 100vh;
-    background-image: url("img/hero.png");
+    background-image: url("img/Group\ 15.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #f4f4f4;
     width: 100%;
 
 }
@@ -175,23 +177,24 @@ nav{
 .hero-text h1{
     font-size: 54px;
     font-weight: 700;
-    color: #f9f9f9e8;
+    color: #682924;
 }
 
 .hero-text p{
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 550;
     margin-top: 25px;
-    color: #f9f9f9d8;
+    color: #682924;
 }
 
 .hero .learn-more-btn{
     padding: 12px 24px;
     background-color: #CFA61E;
     color: #f9f9f9;
-    box-shadow: 4px 9px 12px rgb(41, 40, 40);
+    box-shadow: 4px 9px 12px rgb(105, 105, 105);
     font-size: 16px;
     margin-top: 16px;
+    border: none;
 } 
 /* ====hero end==== */
 
@@ -834,6 +837,7 @@ nav{
 
     .navbar .login-btn {
         margin-bottom: 10px; 
+        margin-left: 0;
     }
 
     .right-col{
@@ -1660,6 +1664,10 @@ label.queue_label{
 
 /* ============Main page start=============== */
 @media (max-width: 992px) {
+    nav{
+        max-height:fit-content;
+    }
+
     .navbar .nav-item {
         margin-bottom: 15px;
     }
@@ -1688,6 +1696,10 @@ label.queue_label{
     /* ============Main page end=============== */
 }
 @media (max-width: 768px) {
+    nav{
+        max-height:fit-content;
+    }
+
     .navbar .nav-item {
         margin-bottom: 15px;
     }
