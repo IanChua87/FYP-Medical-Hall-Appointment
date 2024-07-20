@@ -118,6 +118,7 @@ if (!$stmt) {
                 <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
         </div>
+        
         <div class="appointment" id="appointment">
             <div class="container">
                 <div class="profile-details">

@@ -15,11 +15,16 @@ if (isset($_POST['submit'])) {
     $appointment_status = "UPCOMING";
     $appointment_date = $_POST['appointment_date'];
     $appointment_start_time = $_POST['appointment_time'];
+    // $appointment_start_time = DateTime::createFromFormat('h:i A', $_POST['appointment_time']);
     $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 1800);
+    // $appointment_end_time = $appointment_start_time->add(new DateInterval('PT30M'))->format('H:i A');
     $queue_no = $_POST['queue'];
     $appointment_remark = "";
     $relation = $_POST['relation'];
     $current_time = date('Y-m-d H:i:s');
+    // $cur_time = new DateTime();
+    // $current_time = $cur_time->format('Y-m-d H:i:s');
+    
 
     if (check_empty_appointment_input_fields($patient_email, $appointment_date, $appointment_start_time)) {
         $_SESSION['error'] = "Please fill in all fields.";

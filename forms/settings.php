@@ -38,7 +38,6 @@ if (!$result) {
 </head>
 
 <body>
-    <?php include '../adminNavbar.php' ?>
     <div class="settings">
         <div class="settings-square">
             <h1>Settings</h1>
@@ -83,12 +82,6 @@ if (!$result) {
                         <label for="start_weekend_time" class="col-sm-5 word-label">New Appointment Duration:</label>
                         <div class="col-sm-7 settings-value">
                             <p><?php echo $settings['new_appointment_duration'] ?></p>
-                        </div>
-                    </div>
-                    <div class="row mb-5">
-                        <label for="end_weekend_time" class="col-sm-5 word-label">Last Queue No:</label>
-                        <div class="col-sm-7 settings-value">
-                            <p><?php echo $settings['last_queue_no'] ?></p>
                         </div>
                     </div>
                     <div class="col-sm-4 mb-5">

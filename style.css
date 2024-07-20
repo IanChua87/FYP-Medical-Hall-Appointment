@@ -89,7 +89,7 @@ nav{
 
 .navbar .sign-up-btn{
     background-color: transparent;
-    padding: 6px 16px;
+    padding: 10px 16px;
     border-radius: 5px;
     color: #f9f9f9;
     border: 2px solid #f9f9f9;
@@ -201,10 +201,11 @@ nav{
 /* ====about==== */
 .about{
     background-color: #682924;
-    padding: 160px 0;
+    padding: 120px 0;
 }
 
-.about-box{
+.about-box {
+    display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -220,15 +221,13 @@ nav{
 .about p{
     font-size: 18px;
     color: #f9f9f9;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
-
-.right-col img{
+.right-col img {
     width: 100%;
-    height: auto;
-    margin-top: 160px;
-    margin-left: 50px;
+    max-height: 500px;
+    border-radius: 10px;
 }
 /* ====about end==== */
 
@@ -250,6 +249,12 @@ nav{
 
 .services .row{
     padding-bottom: 80px;
+}
+
+.services .card{
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    box-shadow: 0 0 10px rgba(94, 92, 92, 0.24)
 }
 
 .services .card,
@@ -299,6 +304,13 @@ nav{
     font-size: 16px;
     padding: 12px 24px;
 }
+
+.services .learn-more-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
+
+}
+
 /* ====services end==== */
 
 
@@ -311,7 +323,14 @@ nav{
     padding: 80px 0;
 }
 
-.operating-hours h2{
+.operating-box{
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 70%;
+}
+
+.operating-hours h2 {
     font-size: 42px;
     font-weight: 600;
     margin-bottom: 60px;
@@ -410,7 +429,6 @@ nav{
     align-items: center;
     margin: 0 auto;
     width: 80%;
-
 }
 
 .footer .logo{
@@ -432,8 +450,8 @@ nav{
     text-decoration: none;
 }
 
-.footer .contact-details p{
-    font-size: 13px;
+.footer .contact-details p {
+    font-size: 15px;
     font-weight: 400;
 }
 
@@ -808,11 +826,6 @@ nav{
 
 
 
-/* ============Main page start=============== */
-@media (max-width: 768px) {
-    .navbar .nav-item {
-        margin-bottom: 15px;
-    }
 
     .navbar .sign-up-btn {
         margin-left: 0;
@@ -1411,45 +1424,88 @@ nav{
 
 
 /* ===========================Last Queue No. page start=========================== */
-.queue-no{
+.queue{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
-.queue-no h1{
-    margin: 100px 0;
-    font-size: 48px;
-    font-weight: 700;
-}
-
-.queue-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 100px;
-    border: 1px solid #ccc;
-}
-
-.queue-box h2{
-    font-size: 64px;
-    font-weight: 500;
-    margin-bottom: 30px;
+.queue-container{
+    max-width: 550px;
+    margin: 0 auto;
 }
 
 .queue-wrapper{
+    background-color: #f9f9f9;
+    padding: 50px;
+}
+
+h1.queue-title{
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+
+}
+
+label.queue_label{
+    margin-bottom: 16px;
+}
+
+.check-btn{
+    background-color: #CFA61E;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 24px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.check-btn:hover{
+    background-color: #d1ac47;
+    color: #f9f9f9;
+}
+
+.queue_no-wrapper{
+    max-width: 170px;
     border: 1px solid #ccc;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .queue-wrapper h3{
     font-size: 128px;
-    font-weight: 600;
-    padding: 30px 50px;
 }
 
+.queue_no{
+    font-size: 90px;
+    font-weight: 600;
+    text-align: center;
+}
 
+.queue .buttons{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.queue .back-btn{
+    background-color: #682924;
+    color: #f9f9f9;
+    font-size: 16px;
+    padding: 12px 24px;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.queue .back-btn:hover{
+    background-color: #A34039;
+    color: #f9f9f9;
+
+}
 
 /* ===========================Last Queue No. page end=========================== */
 
@@ -1520,4 +1576,176 @@ nav{
 .settings-group .word-label{
     text-align: left;
 }
+
 /* ===========================Settings page end=========================== */
+
+
+
+/* ============Main page start=============== */
+@media (max-width: 992px) {
+    .navbar .nav-item {
+        margin-bottom: 15px;
+    }
+
+    .navbar .sign-up-btn {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .navbar .login-btn {
+        margin-bottom: 10px;
+    }
+
+    .services-box, .contact-box, .about-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90%;
+    }
+
+    .right-col{
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* ============Main page end=============== */
+}
+@media (max-width: 768px) {
+    .navbar .nav-item {
+        margin-bottom: 15px;
+    }
+
+    .navbar .sign-up-btn {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .navbar .login-btn {
+        margin-bottom: 10px;
+    }
+
+    .hero .hero-text h1 {
+        font-size: 36px;
+    }
+    
+    .hero .hero-text p {
+        font-size: 16px;
+    }
+
+    .services-box, .contact-box, .about-box, .operating-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90%;
+        margin-top: 0;
+    }
+
+    .right-col{
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .about-details h2, .services h2, .operating-hours h2, .contact h2 {
+        font-size: 36px;
+    }
+
+    .services h2{
+        margin: 10px 20px;
+    }
+
+    .services h5{
+        font-size: 24px;
+    }
+
+    .services p{
+        font-size: 14px;
+    }
+
+    .about-details p {
+        font-size: 16px;
+    }
+
+    .appt-duration{
+        margin-top: 60px;
+    }
+
+    .operating-hours h3{
+        font-size: 18px;
+    }
+
+    .operating-hours p{
+        font-size: 14px;
+    }
+
+    .contact {
+        padding: 30px 0;
+    }
+
+    .contact h2{
+        margin-bottom: 0px;
+    }
+
+    .footer ul{
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .footer .contact-details{
+        margin-top: 30px;
+    }
+    /* ============Main page end=============== */
+
+
+
+
+
+    /* ============Register / Login page start=============== */
+    .register .left-col,
+    .registered .left-col,
+    .login .left-col,
+    .reset-password .left-col,
+    .loggedout .left-col,
+    .booked .left-col {
+        height: 60vh;
+    }
+
+    .register .right-col,
+    .registered .right-col,
+    .login .right-col,
+    .reset-password .right-col,
+    .loggedout .right-col,
+    .booked .right-col {
+        margin-top: 0;
+    }
+
+    .login .form-container {
+        height: 55vh;
+        padding: 0 30px;
+    }
+
+    .register .form-container {
+        height: 80vh;
+        padding: 0 30px;
+    }
+
+    .registered .verified-box,
+    .reset-password .verified-box,
+    .loggedout .verified-box,
+    .contacted .verified-box,
+    .booked .verified-box {
+        margin-top: 70px;
+        height: calc(60vh - 100px);
+    }
+
+    .custom-nav ul li {
+        padding: 5px 0px;
+
+    }
+
+    .custom-nav .logout-btn {
+        margin-bottom: 20px;
+    }
+
+
+
+}

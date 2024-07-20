@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $confirm_password = $_POST['confirm_password'];
     $dob = $_POST['dob'];
     $phone = $_POST['phone'];
@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
         header("Location: register.php");
         exit();
     } else {
-        if (insert_patient_details($conn, $name, $dob, $phone, $email, $hashed_password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false) {
+        if (insert_patient_details($conn, $name, $dob, $phone, $email, $password, $status, $last_updated_by, $last_updated_datetime, $payment_status, $amount_payable, $is_verified) !== false) {
             $msg = "<h2>Registration<br> successful</h2>";
         } else {
             $_SESSION['error'] = "Registration failed";

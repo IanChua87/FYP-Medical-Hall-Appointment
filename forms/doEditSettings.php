@@ -16,7 +16,6 @@ if (isset($_POST['submit'])) {
         'opening_days',
         'appointment_duration',
         'new_appointment_duration',
-        'last_queue_no'
     ];
 
     $update_query = "UPDATE settings SET settings_value = ? WHERE settings_key = ?";

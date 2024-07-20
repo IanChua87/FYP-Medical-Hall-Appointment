@@ -15,7 +15,7 @@ $query = "SELECT settings_key, settings_value FROM settings";
 $result = mysqli_query($conn, $query);
 if (!$result) {
     die("Failed to fetch settings: " . mysqli_error($conn));
-} else{
+} else {
     $settings = [];
     while ($row = mysqli_fetch_assoc($result)) {
         $settings[$row['settings_key']] = $row['settings_value'];
@@ -38,7 +38,6 @@ if (!$result) {
 </head>
 
 <body>
-    <?php include '../adminNavbar.php' ?>
     <div class="settings">
         <div class="settings-box">
             <h1>Settings</h1>
@@ -86,13 +85,6 @@ if (!$result) {
                             <input type="text" name="new_appointment_duration" id="new_appointment_duration" class="form-control" value="<?php echo $settings['new_appointment_duration'] ?>">
                         </div>
                     </div>
-                    <div class="form-group row mb-5">
-                        <label for="last_queue_no" class="col-sm-5 col-form-label text-right">Last Queue No:</label>
-                        <div class="col-sm-7">
-                            <input type="text" name="last_queue_no" id="last_queue_no" class="form-control" value="<?php echo $settings['last_queue_no'] ?>">
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <div class="col-sm-12 d-flex flex-end">
                             <button type="submit" name="submit" class="btn save-btn">Save</button>
@@ -113,12 +105,18 @@ if (!$result) {
 </script>
 
 <script>
-        $(function() {
-            $(".time").timepicker({
-                timeFormat: 'hh:mm p',
-                interval: 15
-            });
+    $(function() {
+        $(".time").timepicker({
+            timeFormat: 'hh:mm p',
+            interval: 15,
+            minTime: '08:00am',
+            maxTime: '06:00pm',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+
         });
+    });
 </script>
 
 </html>

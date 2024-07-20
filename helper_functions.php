@@ -64,6 +64,15 @@ function check_empty_appointment_input_fields($email, $date, $time)
     }
 }
 
+function check_empty_queue_input_field($queue_no)
+{
+    if (empty($queue_no)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function invalid_email($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -85,6 +94,15 @@ function invalid_name($name)
 function invalid_phone_number($phone)
 {
     if (!preg_match("/^[0-9]*$/", $phone)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function invalid_number($number)
+{
+    if (!preg_match("/^[0-9]*$/", $number)) {
         return true;
     } else {
         return false;
@@ -168,6 +186,26 @@ function check_appointment_exists_by_id($conn, $appointment_id)
     }
 }
 
+function check_appointment_exists_by_queue_no($conn, $queue_no)
+{
+    $a_query = "SELECT * FROM appointment WHERE queue_no = ?";
+    $appointment_stmt = mysqli_prepare($conn, $a_query);
+
+    if (!$appointment_stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($appointment_stmt, "i", $queue_no);
+        mysqli_stmt_execute($appointment_stmt);
+        $a_result = mysqli_stmt_get_result($appointment_stmt);
+
+        if ($a_user_data = mysqli_fetch_assoc($a_result)) {
+            return $a_user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
 function check_patient_exists_by_id($conn, $patient_id)
 {
     $p_query = "SELECT * FROM patient WHERE patient_id = ?";
@@ -212,7 +250,7 @@ function login_patient($conn, $email, $password)
 {
     if (check_patient_exists_by_email($conn, $email) !== false) {
         $p_user_data = check_patient_exists_by_email($conn, $email);
-        if (password_verify($password, $p_user_data['patient_password'])) {
+        if ($password === $p_user_data['patient_password']) {
             $_SESSION['patient_id'] = $p_user_data['patient_id'];
             header("Location: ../P_index.php");
             exit();
@@ -220,6 +258,9 @@ function login_patient($conn, $email, $password)
             $_SESSION['login-error'] = "Invalid password, please try again";
             return $_SESSION['login-error'];
         }
+    } else{
+        $_SESSION['login-error'] = "Invalid email, please try again";
+        return $_SESSION['login-error'];
     }
 }
 
@@ -267,7 +308,7 @@ function login_users($conn, $email, $password)
 {
     if (check_users_exists_by_email($conn, $email) !== false) {
         $u_user_data = check_users_exists_by_email($conn, $email);
-        if (password_verify($password, $u_user_data['user_password'])) {
+        if ($password === $u_user_data['user_password']) {
             if ($u_user_data['role'] == "Admin") {
                 $_SESSION['admin_id'] = $u_user_data['user_id'];
                 $_SESSION['admin_role'] = $u_user_data['role'];
@@ -278,14 +319,15 @@ function login_users($conn, $email, $password)
                 header("Location: ../d_index.php");
                 exit();
             }
-        } else {
+        } 
+        else {
             $_SESSION['login-error'] = "Invalid password, please try again";
             return $_SESSION['login-error'];
         }
-    } 
-    else {
-        $_SESSION['login-error'] = "Email not found, please try again";
+    } else{
+        $_SESSION['login-error'] = "Invalid email, please try again";
         return $_SESSION['login-error'];
+    
     }
 }
 
@@ -319,7 +361,7 @@ function insert_appointment_details($conn, $date, $start_time, $end_time, $statu
     $insert = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id, queue_no, appointment_remarks) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert);
-    mysqli_stmt_bind_param($insert_stmt, "sssssssis", $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
+    mysqli_stmt_bind_param($insert_stmt, "ssssssiis", $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
 
     //execute the prepared statement
     mysqli_stmt_execute($insert_stmt);

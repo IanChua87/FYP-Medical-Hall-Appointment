@@ -43,13 +43,14 @@ if (!isset($_SESSION['admin_id'])) {
                 <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
             </div>
             <ul class="mt-3">
-                <li class="active"><a href="adminDashboard.php" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="forms/lastQueueNo.php" class="text-decoration-none"><i class="fa-solid fa-hourglass-start"></i> View Queue No.</a></li>
-                <li class=""><a href="forms/staffDetails.php" class="text-decoration-none"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
-                <li class=""><a href="forms/patientDetails.php" class="text-decoration-none"><i class="fa-solid fa-bed"></i> View Patient</a></li>
-                <li class=""><a href="forms/appointmentDetails.php" class="text-decoration-none"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class="active"><a href="adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li class=""><a href="forms/checkQueue.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
+                <li class=""><a href="forms/staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
+                <li class=""><a href="forms/patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
+                <li class=""><a href="forms/appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class=""><a href="forms/editSettings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
                 <div class="sidebar-separator"></div>
-                <li class=""><a href="forms/editSettings.php" class="text-decoration-none"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li class="mt-auto"><a href="forms/loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
         </div>
 
@@ -61,7 +62,7 @@ if (!isset($_SESSION['admin_id'])) {
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card mb-4 h-100 info" data-href="forms/lastQueueNo.php">
+                            <div class="card mb-4 h-100 info" data-href="forms/checkQueue.php">
                                 <div class="row g-0 d-flex align-items-center">
                                     <div class="col-md-4 col-sm-12">
                                         <i class="fas fa-list-ol"></i>
