@@ -44,12 +44,17 @@
 
 .register .required-text, .appointment .required-text, .patient .required-text, .staff .required-text{
     margin-left: 10px;
-    color: #ce5047;
+    color: #ce5047 !important;
 }
 
 .register .asterik, .appointment .asterik, .patient .asterik, .staff .asterik{
     margin-right: 10px;
+    color: #ce5047 !important;
+}
+
+.asterik, .required-text{
     color: #ce5047;
+
 }
 
 /* ===========================Main page start=========================== */
