@@ -104,7 +104,7 @@ $conn->close();
                         <br>
                         <div class="row mt-3">
                             <div class="col-6">
-                            <a href="../P_index.php" class="btn back-btn">Back</a>
+                            <a href="changepassword.php" class="btn back-btn">Back</a>
                             </div>
                             <div class="col-6">
                                 <button type="submit" id="saveButton" class="btn save-btn">Save</button>

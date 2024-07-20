@@ -2,9 +2,17 @@
 
 echo '
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#">Logo</a>
-
+    <div class="container"> ' ?>
+    <?php if (!isset($_SESSION["patient_id"])) { ?>
+        <a class="navbar-brand" href="../index.php">
+        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+        </a>
+        <?php } else { ?>
+        <a class="navbar-brand" href="../P_index.php">
+        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+        </a>   
+        <?php } ?>
+        <?php echo '
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>

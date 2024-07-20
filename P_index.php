@@ -71,10 +71,7 @@ $conn->close();
             align-items: center;
         }
 
-        .dropdown-menu {
-            left: auto;
-            right: 0;
-        }
+      
 
         @media (max-width: 991px) {
             .navbar-collapse {

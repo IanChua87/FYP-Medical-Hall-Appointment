@@ -28,7 +28,7 @@ if (isset($_POST['cancel'])) {
         }
 
         // Check if appointment ID exists in the relation table and retrieve the relation_name
-        $relation_query = "SELECT relation_name FROM relation_table WHERE appointment_id = ?";
+        $relation_query = "SELECT relation_name FROM relation WHERE appointment_id = ?";
         $relation_stmt = $conn->prepare($relation_query);
 
         if (!$relation_stmt) {
@@ -198,7 +198,7 @@ $conn->close();
                         $appt_start_time = $apptData['formatted_start_time'];
                         $appt_end_time = $apptData['formatted_end_time'];
                         $appt_status = $apptData['appointment_status'];
-                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'Nil';
+                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'nil';
                     ?>
                         <tr>
                             <td><?php echo date('d/m/Y', strtotime($appt_date)); ?></td>
