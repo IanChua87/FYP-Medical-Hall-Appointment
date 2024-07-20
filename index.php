@@ -310,7 +310,7 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
         <div class="footer-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-3">
-                <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+                <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
                     <ul class="nav justify-content-center">
