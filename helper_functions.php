@@ -252,15 +252,14 @@ function login_patient($conn, $email, $password)
         $p_user_data = check_patient_exists_by_email($conn, $email);
         if ($password === $p_user_data['patient_password']) {
             $_SESSION['patient_id'] = $p_user_data['patient_id'];
-            header("Location: ../P_index.php");
-            exit();
+            return true;
         } else {
             $_SESSION['login-error'] = "Invalid password, please try again";
-            return $_SESSION['login-error'];
+            return false;
         }
     } else{
         $_SESSION['login-error'] = "Invalid email, please try again";
-        return $_SESSION['login-error'];
+        return false;
     }
 }
 
