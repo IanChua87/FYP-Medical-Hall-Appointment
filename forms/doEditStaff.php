@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     // $password = $_POST['password'];
 
     if(check_empty_edit_users_input_fields($name, $email)){
-        $_SESSION['error'] = "Please fill in all fields.";
+        $_SESSION['error'] = "All fields are required";
         header("Location: editStaff.php?user_id=" . $user_id);
         exit();
     }

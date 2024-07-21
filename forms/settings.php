@@ -1,16 +1,12 @@
 <?php
 session_start();
 include "../db_connect.php";
-?>
 
-<?php
 if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit();
 }
-?>
 
-<?php
 $query = "SELECT settings_key, settings_value FROM settings";
 $result = mysqli_query($conn, $query);
 if (!$result) {
@@ -21,7 +17,6 @@ if (!$result) {
         $settings[$row['settings_key']] = $row['settings_value'];
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +32,24 @@ if (!$result) {
     <link rel="stylesheet" href="../style.css" />
     <style>
 
+        .session-msg-success, .session-msg-error {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .session-msg-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .session-msg-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 
@@ -109,6 +122,7 @@ if (!$result) {
                             <a href="editSettings.php" class="btn edit-btn">Edit</a>
                         </div>
                     </div>
+                    <?php include '../sessionMsg.php' ?>
                 </div>
             </div>
         </div>
@@ -118,7 +132,7 @@ if (!$result) {
 <script>
     $(document).ready(function() {
         setTimeout(function() {
-            $('#login-error-msg').fadeOut('slow');
+            $('#session-msg-success').fadeOut('slow');
         }, 1700);
     });
 </script>

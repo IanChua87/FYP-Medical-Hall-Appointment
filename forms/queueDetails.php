@@ -65,4 +65,14 @@ if (isset($_GET['queue_no'])) {
     </div>
 </body>
 
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#session-error-success').fadeOut('slow');
+        }, 1700);
+    });
+
+</script>
+
+
 </html>

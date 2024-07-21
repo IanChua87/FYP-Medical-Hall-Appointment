@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
         }
     } else {
         $_SESSION['error'] = "Patient with this email doesn't exist. Please register first.";
-        header("Location: addAppointment.php");
+        header("Location: addPatient.php");
         exit();
     }
 
