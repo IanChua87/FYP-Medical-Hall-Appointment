@@ -31,4 +31,3 @@ if (!mysqli_real_connect($conn, $host, $username, $password, $database, $port, N
     die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
 }
 
-echo 'Connected Successfully';
