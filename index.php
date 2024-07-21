@@ -186,50 +186,59 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
     <!--navbar-->
     <?php
 
-echo '
+    echo '
 <nav class="navbar navbar-expand-lg">
     <div class="container"> ' ?>
     <?php if (!isset($_SESSION["patient_id"])) { ?>
         <a class="navbar-brand" href="../index.php">
-        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+            <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
         </a>
-        <?php } else { ?>
+    <?php } else { ?>
         <a class="navbar-brand" href="../P_index.php">
-        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
-        </a>   
-        <?php } ?>
-        <?php echo '
+            <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+        </a>
+    <?php } ?>
+    <?php echo '
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ms-auto">'; ?>
-<?php if (!isset($_SESSION["patient_id"])) { ?>
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#about">About</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#services">Services</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#contact">Contact</a>
-    </li>
-<?php } else { ?>
-    <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="../P_index.php">Home</a>
-    </li>
-<?php } ?>
-<?php echo '
+    <?php if (!isset($_SESSION["patient_id"])) { ?>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="servicesDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Services
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropDown">
+                <li><a class="dropdown-item" href="servicesTCM.php">Personalized TCM Consultations</a></li>
+                <li><a class="dropdown-item" href="servicesPrescription.php">Customized Chinese Herbal Prescriptions</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#operating-hours">Opening Hours</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+        </li>
+    <?php } else { ?>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="../P_index.php">Home</a>
+        </li>
+    <?php } ?>
+    <?php echo '
                 
               
             </ul>; ' ?>
-<?php
-if (isset($_SESSION['patient_id'])) {
-    echo '
+    <?php
+    if (isset($_SESSION['patient_id'])) {
+        echo '
         <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="apptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Appointment
@@ -252,17 +261,17 @@ if (isset($_SESSION['patient_id'])) {
         <li><a class="dropdown-item" href="loggedOutSuccessful.php">Logout</a></li>
     </ul>
         </div>';
-} else {
-    echo '<ul class="nav navbar-nav">
+    } else {
+        echo '<ul class="nav navbar-nav">
             <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
             <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
           </ul>';
-}
+    }
 
-echo '    </div>
+    echo '    </div>
     </div>
 </nav>';
-?>
+    ?>
 
 
 
@@ -397,7 +406,7 @@ echo '    </div>
         <div class="footer-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-3">
-                <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+                    <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
                     <ul class="nav justify-content-center">
@@ -409,6 +418,9 @@ echo '    </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#operating-hours">Opening Hours</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">Contact</a>
