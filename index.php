@@ -206,8 +206,14 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
         <li class="nav-item">
             <a class="nav-link" href="#about">About</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="servicesDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="servicesDropDown">
+            <li><a class="dropdown-item" href="servicesTCM.php">Personalized TCM Consultations</a></li>
+            <li><a class="dropdown-item" href="servicesPrescription.php">Customized Chinese Herbal Prescriptions</a></li>
+          </ul>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
@@ -308,7 +314,7 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
                         <div class="card-body">
                             <h5 class="card-title">Personalized TCM Consultations</h5>
                             <p class="card-text">Our expert practitioners provide comprehensive health assessments and personalized treatment plans based on Traditional Chinese Medicine principles. Discover how TCM addresses health concerns and promote overall wellness.</p>
-                            <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                            <a href="servicesTCM.php" class="btn learn-more-btn mt-auto">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -328,7 +334,7 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
                         <div class="card-body">
                             <h5 class="card-title">Customized Chinese Herbal Prescriptions</h5>
                             <p class="card-text">Receive tailored herbal formulations designed to address your specific health needs. Our high-quality, natural herbal prescriptions support your body’s healing processes and promote holistic health.</p>
-                            <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
+                            <a href="servicesPrescription.php" class="btn learn-more-btn mt-auto">Learn More</a>
                         </div>
                     </div>
                 </div>

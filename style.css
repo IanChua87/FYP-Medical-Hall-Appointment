@@ -247,7 +247,6 @@ nav{
     align-items: center;
     margin: 0 auto;
     width: 70%;
-
 }
 
 .services .row{
@@ -312,6 +311,54 @@ nav{
     background-color: #d1ac47;
     color: #f9f9f9;
 
+}
+
+.herbs-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 85%;
+    margin: 0 auto;
+}
+
+.tcm-img-1 {
+    margin-right: 80px;
+}
+
+.herbal-img-1 {
+    margin-right: 80px;
+}
+
+.herbs h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin: 120px 0 80px;
+}
+
+.herbs h2 {
+    font-size: 24px;
+    font-weight: 550;
+    margin: 1rem 0;
+    line-height: 1.25;
+    margin-bottom: 60px;
+}
+
+.herbs h3 {
+    font-size: 22px;
+    font-weight: 550;
+    margin: 1rem 0;
+    line-height: 1.25;
+    margin-bottom: 120px;
+}
+
+.herb-content-bottom {
+    margin-top: 60px;
+}
+
+.fa-angle-down {
+    font-size: 40px;
+    color: #682924;
 }
 
 /* ====services end==== */
@@ -1785,6 +1832,30 @@ label.queue_label{
 
     .services p{
         font-size: 14px;
+    }
+
+    .herbs-img-group{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .herbal-img-1, .tcm-img-1{
+        margin-right: 0;
+    }
+
+    .herbs h1 {
+        font-size: 36px;
+    }
+    
+    .herbs h2 {
+        font-size: 20px;
+        margin-bottom: 60px;
+    }
+    
+    .herbs h3 {
+        font-size: 22px;
+        margin-bottom: 80px;
     }
 
     .about-details p {
