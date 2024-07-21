@@ -68,8 +68,8 @@ if (isset($_SESSION['patient_id'])) {
         </div>';
 } else {
     echo '<ul class="nav navbar-nav">
-            <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
-            <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
+            <a class="btn sign-up-btn" href="register.php" role="button">Sign Up</a>
+            <a class="btn login-btn" href="login.php" role="button">Login</a>
           </ul>';
 }
 

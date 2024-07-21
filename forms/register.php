@@ -27,11 +27,12 @@ unset($_SESSION['form_data']);
 </head>
 
 <body>
+    <?php include '../navbar.php'; ?>
     <section class="register vh-100">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col vh-100">
-                    <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+                    <img src="../img/side-image.png" alt="Login image" style="object-fit: cover; object-position: left; width:100%; height:925px;">
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
                     <div class="form-container">
@@ -71,32 +72,34 @@ unset($_SESSION['form_data']);
                                 <input type="password" id="confirm_password" class="form-control form-control-lg mb-1" placeholder="Confirm Password" name="confirm_password" />
                             </div>
 
-                            <div class="double-form-field row mb-3">
-                                <div class="col">
-                                    <div class="form-outline">
+                            <!-- <div class="double-form-field row mb-3"> -->
+                                <!-- <div class="col"> -->
+                                    <div class="form-outline mb-3">
                                         <label for="dob">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Date of Birth:
                                             <span class="required-text">(required)</span>
                                         </label>
                                         <input type="text" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" />
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-outline">
+                                <!-- </div> -->
+                                <!-- <div class="col"> -->
+                                    <div class="form-outline mb-3">
                                         <label for="phone">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Phone Number:
                                             <span class="required-text">(required)</span>
                                         </label>
                                         <input type="text" id="phone" class="form-control form-control-lg mb-1" placeholder="Phone Number" name="phone" />
                                     </div>
-                                </div>
-                            </div>
+                                <!-- </div> -->
+                            <!-- </div> -->
 
                             <div class="mt-4">
                                 <button type="submit" name="submit" class="btn register-btn">Create Account</button>
                             </div>
+                            <p class="reg-error-msg" id="reg-error-msg"><?php echo $error ?></p>
                         </form>
-                        <p class="reg-error-msg" id="reg-error-msg"><?php echo $error ?></p>
+                        <br><br>
+                        
                     </div>
                 </div>
             </div>
