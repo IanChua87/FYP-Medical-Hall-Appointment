@@ -71,10 +71,7 @@ $conn->close();
             align-items: center;
         }
 
-        .dropdown-menu {
-            left: auto;
-            right: 0;
-        }
+      
 
         @media (max-width: 991px) {
             .navbar-collapse {
@@ -94,75 +91,83 @@ $conn->close();
     <!--navbar-->
     <?php
 
-    echo '
+echo '
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#">Logo</a>
-
+    <div class="container"> ' ?>
+    <?php if (!isset($_SESSION["patient_id"])) { ?>
+        <a class="navbar-brand" href="../index.php">
+        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+        </a>
+        <?php } else { ?>
+        <a class="navbar-brand" href="../P_index.php">
+        <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+        </a>   
+        <?php } ?>
+        <?php echo '
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ms-auto">'; ?>
-    <?php if (!isset($_SESSION["patient_id"])) { ?>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#services">Services</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-        </li>
-    <?php } else { ?>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../P_index.php">Home</a>
-        </li>
-    <?php } ?>
-    <?php echo '
+<?php if (!isset($_SESSION["patient_id"])) { ?>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#about">About</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#services">Services</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#contact">Contact</a>
+    </li>
+<?php } else { ?>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="../P_index.php">Home</a>
+    </li>
+<?php } ?>
+<?php echo '
                 
               
             </ul>; ' ?>
-    <?php
-    if (isset($_SESSION['patient_id'])) {
-        echo '
+<?php
+if (isset($_SESSION['patient_id'])) {
+    echo '
         <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Appointment
-                </a>
-            <ul class="dropdown-menu" aria-labelledby="apptDropdown">
-                <li><a class="dropdown-item" href="forms/booking.php">Book Appointment</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
-            </ul>
-        </div>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle"></i>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/changepassword.php">Change Password</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
-            </ul>
+            <a class="nav-link dropdown-toggle" id="apptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Appointment
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="apptDropdown">
+        <li><a class="dropdown-item" href="forms/booking.php">Book Appointment</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
+    </ul>
+</div>
+<div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person-circle"></i>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="forms/changepassword.php">Change Password</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
+    </ul>
         </div>';
-    } else {
-        echo '<ul class="nav navbar-nav">
+} else {
+    echo '<ul class="nav navbar-nav">
             <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
             <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
           </ul>';
-    }
+}
 
-    echo '    </div>
+echo '    </div>
     </div>
 </nav>';
-    ?>
+?>
 
     <!--hero start-->
     <section class="hero" id="hero">

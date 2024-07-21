@@ -57,10 +57,18 @@ if (!isset($_SESSION['patient_id'])) {
                         <h2 class="text">Change Password</h2>
                         <br>
                         <div class="form-outline mb-4">
-                        <div class="input-text">New Password:</div><input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword" required/>
+                        <label for="newpassword">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> New Password:
+                                <span class="required-text">(required)</span>
+                        </label>
+                        <input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword" required/>
                         </div>
                         <div class="form-outline mb-4">
-                        <div class="input-text">Confirm Password:</div><input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword" required/>
+                        <label for="cfmpassword">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> Confirm Password:
+                                <span class="required-text">(required)</span>
+                        </label>
+                        <input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword" required/>
                         </div>
                         <br>
                         <div class="row mt-3">

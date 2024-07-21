@@ -44,12 +44,17 @@
 
 .register .required-text, .appointment .required-text, .patient .required-text, .staff .required-text{
     margin-left: 10px;
-    color: #ce5047;
+    color: #ce5047 !important;
 }
 
 .register .asterik, .appointment .asterik, .patient .asterik, .staff .asterik{
     margin-right: 10px;
+    color: #ce5047 !important;
+}
+
+.asterik, .required-text{
     color: #ce5047;
+
 }
 
 /* ===========================Main page start=========================== */
@@ -65,6 +70,7 @@ nav{
     color: #f9f9f9;
     font-size: 24px;
     font-weight: 600;
+    height: 50px;
 }
 
 .nav-link{
@@ -154,6 +160,13 @@ nav{
 .dropdown:hover .dropdown-toggle {
     background-color: #682924;
     color: #f9f9f9;
+}
+
+.navbar-logo {
+    width: 100px;  /* Set the width of the logo */
+    height: 100px; /* Set the height of the logo */
+    transform: translateY(-32px);
+    margin-left: -20px;
 }
 /* ====navbar end==== */
 
@@ -543,8 +556,8 @@ nav{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 60px;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
 }
 
 .register .text {
@@ -766,10 +779,9 @@ nav{
 .verified-box{
     display: flex;
     flex-direction: column;
-    padding: 0 30px;
     align-items: center;
-    margin-top: 200px;
-    height: calc(100vh - 200px);
+    justify-content: center;
+    height: calc(100vh - 150px);
 }
 
 .verified-box img{

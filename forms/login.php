@@ -48,6 +48,7 @@ if (isset($_POST['submit'])) {
 
 
 <body>
+<?php include '../navbar.php'; ?>
     <section class="login">
         <div class="container-fluid">
             <div class="row">

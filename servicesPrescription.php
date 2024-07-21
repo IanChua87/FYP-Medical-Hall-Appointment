@@ -32,7 +32,7 @@
             <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="index.php#about">About</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="servicesDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,7 +44,10 @@
           </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
+            <a class="nav-link" href="index.php#operating-hours">Opening Hours</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="index.php#contact">Contact</a>
         </li>
     <?php } else { ?>
         <li class="nav-item">
@@ -129,21 +132,24 @@
         <div class="footer-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-3">
-                    <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+                    <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link" href="#hero">Home</a>
+                            <a class="nav-link" href="index.php#hero">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
+                            <a class="nav-link" href="index.php#about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#services">Services</a>
+                            <a class="nav-link" href="index.php#services">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
+                            <a class="nav-link" href="index.php#operating-hours">Opening Hours</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php#contact">Contact</a>
                         </li>
                     </ul>
                 </div>

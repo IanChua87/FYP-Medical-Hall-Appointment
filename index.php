@@ -187,12 +187,18 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
     <?php
 
     echo '
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="index.php">
-            Logo
+<nav class="navbar navbar-expand-lg">
+    <div class="container"> ' ?>
+    <?php if (!isset($_SESSION["patient_id"])) { ?>
+        <a class="navbar-brand" href="../index.php">
+            <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
         </a>
-
+    <?php } else { ?>
+        <a class="navbar-brand" href="../P_index.php">
+            <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
+        </a>
+    <?php } ?>
+    <?php echo '
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-list"></i>
         </button>
@@ -207,20 +213,23 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
             <a class="nav-link" href="#about">About</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="servicesDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Services
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="servicesDropDown">
-            <li><a class="dropdown-item" href="servicesTCM.php">Personalized TCM Consultations</a></li>
-            <li><a class="dropdown-item" href="servicesPrescription.php">Customized Chinese Herbal Prescriptions</a></li>
-          </ul>
+            <a class="nav-link dropdown-toggle" id="servicesDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Services
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropDown">
+                <li><a class="dropdown-item" href="servicesTCM.php">Personalized TCM Consultations</a></li>
+                <li><a class="dropdown-item" href="servicesPrescription.php">Customized Chinese Herbal Prescriptions</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#operating-hours">Opening Hours</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
         </li>
     <?php } else { ?>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../P_index.php">Home</a>
+            <a class="nav-link" aria-current="page" href="../P_index.php">Home</a>
         </li>
     <?php } ?>
     <?php echo '
@@ -231,26 +240,26 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
     if (isset($_SESSION['patient_id'])) {
         echo '
         <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Appointment
-                </a>
-            <ul class="dropdown-menu" aria-labelledby="apptDropdown">
-                <li><a class="dropdown-item" href="forms/booking.php">Book Appointment</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
-            </ul>
-        </div>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle"></i>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/changepassword.php">Change Password</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
-            </ul>
+            <a class="nav-link dropdown-toggle" id="apptDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Appointment
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="apptDropdown">
+        <li><a class="dropdown-item" href="booking.php">Book Appointment</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="viewappointment.php">View Appointment</a></li>
+    </ul>
+</div>
+<div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person-circle"></i>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="editprofile.php">Edit Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="changepassword.php">Change Password</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="loggedOutSuccessful.php">Logout</a></li>
+    </ul>
         </div>';
     } else {
         echo '<ul class="nav navbar-nav">
@@ -397,7 +406,7 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
         <div class="footer-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-3">
-                    <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+                    <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
                     <ul class="nav justify-content-center">
@@ -409,6 +418,9 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#operating-hours">Opening Hours</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">Contact</a>
