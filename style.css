@@ -65,6 +65,7 @@ nav{
     color: #f9f9f9;
     font-size: 24px;
     font-weight: 600;
+    height: 50px
 }
 
 .nav-link{
@@ -75,7 +76,10 @@ nav{
 }
 
 .navbar-logo{
-
+    width: 100px;  /* Set the width of the logo */
+    height: 100px; /* Set the height of the logo */
+    transform: translateY(-32px);
+    margin-left: -20px;
 }
 
 .nav-link:hover{
