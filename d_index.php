@@ -58,11 +58,6 @@ $conn->close();
 
         }
 
-        .navbar-logo{
-            width: 60px;
-
-        }
-
     </style>
 </head>
 
@@ -73,13 +68,13 @@ $conn->close();
 echo '
 <nav class="navbar navbar-expand-lg">
 <div class="container"> '?>
-    <?php if (!isset($_SESSION["doctor_id"])) { ?>
+   <?php if (!isset($_SESSION["doctor_id"])) { ?>
     <a class="navbar-brand" href="../index.php">
-    <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+    <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
     </a>   
     <?php } else { ?>
     <a class="navbar-brand" href="../d_index.php">
-    <img src="../svg/logo.svg" alt="Logo" class="navbar-logo">
+    <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
     </a>   
     <?php } ?>
 
@@ -134,8 +129,8 @@ if (isset($_SESSION['doctor_id'])) {
     </div>';
 } else {
     echo '<ul class="nav navbar-nav">
-        <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
-        <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
+        <a class="btn sign-up-btn" href="register.php" role="button">Sign Up</a>
+        <a class="btn login-btn" href="login.php" role="button">Login</a>
       </ul>';
 }
 
@@ -143,6 +138,7 @@ echo '    </div>
 </div>
 </nav>';
 ?>
+
 
     <!--hero start-->
     <section class="hero" id="hero">
