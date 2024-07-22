@@ -53,7 +53,7 @@ mysqli_close($conn);
 
 <body>
 
-    <?php include '../navbar.php'; ?>
+    <?php include '../d_navbar.php'; ?>
 
     <div class="container mt-5">
         <?php

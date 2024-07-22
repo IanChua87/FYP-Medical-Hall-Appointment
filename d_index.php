@@ -71,7 +71,7 @@ $conn->close();
     <!--navbar-->
     <?php
 
-    include 'navbar.php';
+    include 'd_navbar.php';
     ?>
 
     <!--hero start-->
