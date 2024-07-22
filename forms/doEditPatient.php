@@ -46,11 +46,11 @@ if (isset($_POST['submit'])) {
 
     if (check_patient_exists_by_id($conn, $patient_id) !== false) {
 
-        if ($patient_data !== false && $patient_data['patient_id'] != $patient_id) {
-            $_SESSION['error'] = "Email already in use by another patient.";
-            header("Location: editPatient.php?patient_id=" . $patient_id);
-            exit();
-        }
+        // if ($patient_data !== false && $patient_data['patient_id'] != $patient_id) {
+        //     $_SESSION['error'] = "Email already in use by another patient.";
+        //     header("Location: editPatient.php?patient_id=" . $patient_id);
+        //     exit();
+        // }
 
         if (update_patient_details($conn, $patient_name, $dob, $phone, $email, $payment_status, $amount_payable, $patient_id) !== false) {
             $_SESSION['message'] = "Updated patient profile successfully.";

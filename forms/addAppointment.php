@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -28,6 +29,7 @@ if (!$stmt) {
     }
     $latest_queue_no = $queue_no + 1;
 }
+ob_start();
 ?>
 
 <!DOCTYPE html>
