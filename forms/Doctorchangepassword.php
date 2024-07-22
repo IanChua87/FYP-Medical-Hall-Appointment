@@ -31,7 +31,7 @@ if (!isset($_SESSION['doctor_id'])){
 <body>
 
 <!--navbar-->
-<?php include '../navbar.php'; ?>
+<?php include '../d_navbar.php'; ?>
 
 <div class="container mt-5">
     <?php
