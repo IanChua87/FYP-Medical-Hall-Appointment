@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 include "../helper_functions.php";
@@ -84,6 +85,7 @@ if (isset($_POST['submit'])) {
 
     mysqli_close($conn);
 }
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
