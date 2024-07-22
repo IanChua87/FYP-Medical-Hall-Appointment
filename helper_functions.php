@@ -481,3 +481,4 @@ function email_exists_for_other_user($conn, $email, $user_id) {
     }
     return false;
 }
+

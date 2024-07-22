@@ -160,6 +160,7 @@ $weekend_start = reset($weekends); // First element
 $weekend_end = end($weekends);     // Last element
 
 $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_start . "-" . $weekend_end;
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
