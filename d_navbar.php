@@ -55,17 +55,17 @@ if (isset($_SESSION['doctor_id'])) {
             <i class="bi bi-person-circle"></i>
         </a>
         <ul class="dropdown-menu" aria-labelledby="userDropdown">
-            <li><a class="dropdown-item" href="forms/editDoctorProfile.php">Edit Profile</a></li>
+            <li><a class="dropdown-item" href="editDoctorProfile.php">Edit Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="forms/Doctorchangepassword.php">Change Password</a></li>
+            <li><a class="dropdown-item" href="Doctorchangepassword.php">Change Password</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="forms/DoctorloggedOutSuccessful.php">Logout</a></li>
+            <li><a class="dropdown-item" href="DoctorloggedOutSuccessful.php">Logout</a></li>
         </ul>
     </div>';
 } else {
     echo '<ul class="nav navbar-nav">
-        <a class="btn sign-up-btn" href="forms/register.php" role="button">Sign Up</a>
-        <a class="btn login-btn" href="forms/login.php" role="button">Login</a>
+        <a class="btn sign-up-btn" href="register.php" role="button">Sign Up</a>
+        <a class="btn login-btn" href="login.php" role="button">Login</a>
       </ul>';
 }
 
