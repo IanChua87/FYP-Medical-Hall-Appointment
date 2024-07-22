@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
     $patient_id = $_POST['patient_id'];
     $appointment_date = $_POST['appointment_date'];
     $appointment_start_time =  $_POST['appointment_start_time'];
-    $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 1800);
+    $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 900);
     $appointment_status = $_POST['appointment_status'];
     $booked_datetime = date('Y-m-d H:i:s');
     $queue_no = $_POST['queue_no'];

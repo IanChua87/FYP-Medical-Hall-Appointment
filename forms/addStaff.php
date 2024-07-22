@@ -101,7 +101,6 @@ ob_end_flush();
                 <?php include '../sessionMsg.php' ?>
             </div>
         </div>
-
     </div>
 </body>
 

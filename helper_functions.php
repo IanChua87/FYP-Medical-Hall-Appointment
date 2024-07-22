@@ -366,13 +366,36 @@ function insert_users_details($conn, $name, $email, $password, $role)
 
 function insert_appointment_details($conn, $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark)
 {
+    try {
+        $start_time_24 = convert_to_24_hour_format($start_time);
+        $end_time_24 = convert_to_24_hour_format($end_time);
+    } catch (Exception $e) {
+        echo "Error in time conversion: " . $e->getMessage();
+        return false;
+    }
+
     $insert = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id, queue_no, appointment_remarks) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert);
-    mysqli_stmt_bind_param($insert_stmt, "ssssssiis", $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
+
+    mysqli_stmt_bind_param($insert_stmt, "ssssssiis", $date, $start_time_24, $end_time_24, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
 
     //execute the prepared statement
     mysqli_stmt_execute($insert_stmt);
+}
+
+function convert_to_24_hour_format($time_12_hour) {
+    if (strpos($time_12_hour, 'AM') !== false || strpos($time_12_hour, 'PM') !== false) {
+        $dateTime = DateTime::createFromFormat('h:i A', $time_12_hour);
+    } else {
+        $dateTime = DateTime::createFromFormat('H:i:s', $time_12_hour);
+    }
+
+    if ($dateTime === false) {
+        throw new Exception("Invalid time format: $time_12_hour");
+    }
+
+    return $dateTime->format('H:i:s');
 }
 
 function insert_relation_details($conn, $name, $appointment_id)
@@ -397,9 +420,17 @@ function update_patient_details($conn, $name, $dob, $phone, $email, $payment_sta
 
 function update_appointment_details($conn, $date, $start_time, $end_time, $status, $current_time, $appointment_id)
 {
+    try {
+        $start_time_24 = convert_to_24_hour_format($start_time);
+        $end_time_24 = convert_to_24_hour_format($end_time);
+    } catch (Exception $e) {
+        echo "Error in time conversion: " . $e->getMessage();
+        return false;
+    }
+
     $update = "UPDATE appointment SET appointment_date = ?, appointment_start_time = ?, appointment_end_time = ?, appointment_status = ?, booked_datetime = ? WHERE appointment_id = ?";
     $update_stmt = mysqli_prepare($conn, $update);
-    mysqli_stmt_bind_param($update_stmt, "sssssi", $date, $start_time, $end_time, $status, $current_time, $appointment_id);
+    mysqli_stmt_bind_param($update_stmt, "sssssi", $date, $start_time_24, $end_time_24, $status, $current_time, $appointment_id);
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);

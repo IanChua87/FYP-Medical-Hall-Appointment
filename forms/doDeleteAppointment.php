@@ -21,10 +21,13 @@ if (isset($_POST['appointment_id'])) {
     } else {
         mysqli_stmt_bind_param($stmt, 'i', $id);
         if (mysqli_stmt_execute($stmt)) {
+            $_SESSION['message'] = "Appointment record deleted successfully.";
             header("Location: appointmentDetails.php");
             exit();
         } else {
             $_SESSION['message'] = "Appointment record failed to be deleted.";
+            header("Location: appointmentDetails.php");
+            exit();
         }
         mysqli_stmt_close($stmt);
     }
