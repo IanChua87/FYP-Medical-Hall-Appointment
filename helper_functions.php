@@ -73,6 +73,15 @@ function check_empty_queue_input_field($queue_no)
     }
 }
 
+function check_contact_us_input_fields($name, $email, $message)
+{
+    if (empty($name) || empty($email) || empty($message)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function invalid_email($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

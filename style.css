@@ -44,17 +44,12 @@
 
 .register .required-text, .appointment .required-text, .patient .required-text, .staff .required-text{
     margin-left: 10px;
-    color: #ce5047 !important;
+    color: #ce5047;
 }
 
 .register .asterik, .appointment .asterik, .patient .asterik, .staff .asterik{
     margin-right: 10px;
-    color: #ce5047 !important;
-}
-
-.asterik, .required-text{
     color: #ce5047;
-
 }
 
 /* ===========================Main page start=========================== */
@@ -70,7 +65,6 @@ nav{
     color: #f9f9f9;
     font-size: 24px;
     font-weight: 600;
-    height: 50px;
 }
 
 .nav-link{
@@ -160,13 +154,6 @@ nav{
 .dropdown:hover .dropdown-toggle {
     background-color: #682924;
     color: #f9f9f9;
-}
-
-.navbar-logo {
-    width: 100px;  /* Set the width of the logo */
-    height: 100px; /* Set the height of the logo */
-    transform: translateY(-32px);
-    margin-left: -20px;
 }
 /* ====navbar end==== */
 
@@ -556,8 +543,8 @@ nav{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+    padding: 0 60px;
+    height: 100vh;
 }
 
 .register .text {
@@ -779,9 +766,10 @@ nav{
 .verified-box{
     display: flex;
     flex-direction: column;
+    padding: 0 30px;
     align-items: center;
-    justify-content: center;
-    height: calc(100vh - 150px);
+    margin-top: 200px;
+    height: calc(100vh - 200px);
 }
 
 .verified-box img{
@@ -1789,6 +1777,11 @@ label.queue_label{
         margin-top: 20px;
     }
 
+    .herbs h1 {
+        font-size: 36px;
+        margin-top: 180px;
+    }
+
     /* ============Main page end=============== */
 }
 @media (max-width: 768px) {
@@ -1858,6 +1851,7 @@ label.queue_label{
 
     .herbs h1 {
         font-size: 36px;
+        margin-top: 180px;
     }
     
     .herbs h2 {
