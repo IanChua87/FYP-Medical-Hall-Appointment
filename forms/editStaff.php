@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -34,6 +35,7 @@ if (!$edit_users_stmt) {
         exit();
     }
 }
+ob_end_flush();
 ?>
 
 

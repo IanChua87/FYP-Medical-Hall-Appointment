@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 
@@ -17,6 +18,7 @@ if (!$result) {
         $settings[$row['settings_key']] = $row['settings_value'];
     }
 }
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

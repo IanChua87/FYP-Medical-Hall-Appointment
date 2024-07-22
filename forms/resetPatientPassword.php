@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -17,6 +18,7 @@ if (!isset($_GET['patient_id'])) {
 
 
 $patient_id = $_GET['patient_id'];
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

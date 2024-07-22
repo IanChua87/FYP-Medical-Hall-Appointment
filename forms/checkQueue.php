@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -23,6 +24,7 @@ if (!isset($_SESSION['admin_id'])) {
 //         $queue_no = $row['queue_no'];
 //     }
 // }
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

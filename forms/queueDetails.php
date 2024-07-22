@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 
@@ -16,6 +17,10 @@ if (isset($_GET['queue_no'])) {
     header("Location: checkQueue.php");
     exit();
 }
+?>
+
+<?php
+ob_end_flush(); 
 ?>
 
 <!DOCTYPE html>

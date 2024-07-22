@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 // Check if the form was submitted
@@ -17,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      header("Location: viewappointment.php");
      exit();
  }
+ ob_end_flush();
 ?>
 
 <!DOCTYPE html>

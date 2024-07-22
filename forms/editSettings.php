@@ -22,7 +22,7 @@ if (!$result) {
         $settings[$row['settings_key']] = $row['settings_value'];
     }
 }
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

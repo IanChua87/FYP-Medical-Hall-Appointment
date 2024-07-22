@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 include "../db_connect.php";
@@ -7,7 +8,7 @@ if (!isset($_SESSION['doctor_id'])){
     header("Location: login.php");
     exit();
 }
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
