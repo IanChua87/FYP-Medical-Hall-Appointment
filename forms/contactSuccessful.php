@@ -22,7 +22,7 @@
                     <img src="../img/tick-verification.svg" alt="Tick logo symbol"/>
                     <h2>Message sent <br>successfully</h2>
                     <div class="mt-3">
-                        <a href="login.php" class="btn back-to-home-btn">Back to Home</a>
+                        <a href="../index.php" class="btn back-to-home-btn">Back to Home</a>
                     </div>
                 </div>
             </div>

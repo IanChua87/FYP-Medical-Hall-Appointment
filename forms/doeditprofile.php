@@ -27,6 +27,13 @@ if (empty($phone)) {
     exit();
 }
 
+// Validate email contains '.com'
+if (strpos($email, '.com') === false || strpos($email, '@') === false || strpos($email, 'gmail') === false) {
+    $error = "Invalid email address.";
+    header("Location: editprofile.php?error=" . urlencode($error));
+    exit();
+}
+
 $query = "UPDATE patient SET patient_email = ?, patient_phoneNo = ? WHERE patient_id = ?";
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "sii", $email, $phone, $patient_id);
