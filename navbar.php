@@ -26,9 +26,18 @@ echo '
     <li class="nav-item">
         <a class="nav-link" href="#about">About</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#services">Services</a>
-    </li>
+    <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="servicesDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="servicesDropDown">
+            <li><a class="dropdown-item" href="servicesTCM.php">Personalized TCM Consultations</a></li>
+            <li><a class="dropdown-item" href="servicesPrescription.php">Customized Chinese Herbal Prescriptions</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="index.php#operating-hours">Opening Hours</a>
+        </li>
     <li class="nav-item">
         <a class="nav-link" href="#contact">Contact</a>
     </li>
