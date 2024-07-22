@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 include "../db_connect.php";
@@ -44,7 +45,9 @@ if (!isset($_SESSION['patient_id'])) {
     ?>
 </div>
 
-
+<?php
+ob_end_flush();
+ ?>
 <section class="d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row justify-content-center">

@@ -29,6 +29,7 @@ if (!$stmt) {
     }
     $latest_queue_no = $queue_no + 1;
 }
+ob_start();
 ?>
 
 <!DOCTYPE html>

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -21,7 +22,7 @@ if (!$result) {
         $settings[$row['settings_key']] = $row['settings_value'];
     }
 }
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +39,20 @@ if (!$result) {
     <style>
         #sidebar{
             height: 1250px;
+        }
+
+        .session-msg-success, .session-msg-error {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .session-msg-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            margin-left: 50px;
         }
     </style>
 </head>
@@ -63,8 +78,9 @@ if (!$result) {
 
         <div class="content" id="content">
             <div class="settings">
+            <?php include '../sessionMsg.php' ?>
                 <div class="settings-box">
-                    <h1>Settings</h1>
+                        <h1>Settings</h1>
                     <div class="settings-group">
                         <form action="doEditSettings.php" method="POST">
                             <div class="form-group row mb-5">
@@ -125,7 +141,7 @@ if (!$result) {
 <script>
     $(document).ready(function() {
         setTimeout(function() {
-            $('#login-error-msg').fadeOut('slow');
+            $('#session-msg-error').fadeOut('slow');
         }, 1700);
     });
 </script>
@@ -140,7 +156,6 @@ if (!$result) {
             dynamic: false,
             dropdown: true,
             scrollbar: true
-
         });
     });
 </script>

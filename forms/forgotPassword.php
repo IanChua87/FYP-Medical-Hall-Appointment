@@ -1,8 +1,9 @@
 <?php
+ob_start();
 session_start();
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
 $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
-
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>

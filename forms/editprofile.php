@@ -1,4 +1,5 @@
 <?php 
+ob_start();
 session_start();
 include "../db_connect.php";
 
@@ -14,6 +15,7 @@ mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $patient_name, $patient_dob, $patient_email, $patient_phoneNo);
 mysqli_stmt_fetch($stmt);
 mysqli_stmt_close($stmt);
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

@@ -76,6 +76,7 @@ if (isset($_POST['book'])) {
         exit();
     }
 }
+ob_end_flush();
 ?>
 
 

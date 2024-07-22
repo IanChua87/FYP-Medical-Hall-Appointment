@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "../db_connect.php";
 session_start();
 
@@ -107,6 +108,7 @@ while ($row = $result->fetch_assoc()) {
 
 $stmt->close();
 $conn->close();
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>

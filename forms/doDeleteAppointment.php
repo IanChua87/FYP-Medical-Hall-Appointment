@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -32,3 +33,4 @@ if (isset($_POST['appointment_id'])) {
     exit();
 
 }
+ob_end_flush();

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "../db_connect.php";
 ?>
 
@@ -36,7 +37,7 @@ if ($conn->connect_error) {
 // }
 
 $conn->close();
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

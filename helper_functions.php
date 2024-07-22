@@ -73,6 +73,15 @@ function check_empty_queue_input_field($queue_no)
     }
 }
 
+function check_contact_us_input_fields($name, $email, $message)
+{
+    if (empty($name) || empty($email) || empty($message)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function invalid_email($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -252,15 +261,14 @@ function login_patient($conn, $email, $password)
         $p_user_data = check_patient_exists_by_email($conn, $email);
         if ($password === $p_user_data['patient_password']) {
             $_SESSION['patient_id'] = $p_user_data['patient_id'];
-            header("Location: ../P_index.php");
-            exit();
+            return true;
         } else {
             $_SESSION['login-error'] = "Invalid password, please try again";
-            return $_SESSION['login-error'];
+            return false;
         }
     } else{
         $_SESSION['login-error'] = "Invalid email, please try again";
-        return $_SESSION['login-error'];
+        return false;
     }
 }
 
@@ -442,4 +450,34 @@ function check_password_match($password, $confirm_password)
     } else {
         return false;
     }
+}
+
+function email_exists_for_other_patient($conn, $email, $patient_id) {
+    $sql = "SELECT * FROM patient WHERE patient_email = ? AND patient_id != ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "si", $email, $patient_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
+}
+
+function email_exists_for_other_user($conn, $email, $user_id) {
+    $sql = "SELECT * FROM users WHERE user_email = ? AND user_id != ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "si", $email, $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
 }
