@@ -451,3 +451,33 @@ function check_password_match($password, $confirm_password)
         return false;
     }
 }
+
+function email_exists_for_other_patient($conn, $email, $patient_id) {
+    $sql = "SELECT * FROM patient WHERE patient_email = ? AND patient_id != ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "si", $email, $patient_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
+}
+
+function email_exists_for_other_user($conn, $email, $user_id) {
+    $sql = "SELECT * FROM users WHERE user_email = ? AND user_id != ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "si", $email, $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
+}

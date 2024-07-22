@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 include "../helper_functions.php";
@@ -50,4 +51,5 @@ if(isset($_POST['submit'])){
     header("Location: appointmentDetails.php");
     exit();
 }
+ob_end_flush();
 

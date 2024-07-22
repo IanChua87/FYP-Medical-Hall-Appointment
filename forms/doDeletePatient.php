@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -31,3 +32,4 @@ if (isset($_POST['patient_id'])) {
     header("Location: patientDetails.php");
     exit();
 }
+ob_end_flush();

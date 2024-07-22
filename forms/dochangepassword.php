@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 
@@ -47,6 +48,7 @@ if ($stmt->affected_rows > 0) {
 
 $stmt->close();
 $conn->close();
+ob_end_flush();
 ?>
 
 

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 include "../helper_functions.php";
@@ -9,6 +10,7 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit();
 }
+
 
 if (isset($_POST['submit'])) {
     $patient_id = $_POST['patient_id'];
@@ -26,7 +28,7 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    if (invalid_name($name) !== false) {
+    if (invalid_name($patient_name) !== false) {
         $_SESSION['error'] = "Only letters and white space allowed in name.";
         header("Location: editPatient.php?patient_id=" . $patient_id);
         exit();
@@ -46,11 +48,11 @@ if (isset($_POST['submit'])) {
 
     if (check_patient_exists_by_id($conn, $patient_id) !== false) {
 
-        // if ($patient_data !== false && $patient_data['patient_id'] != $patient_id) {
-        //     $_SESSION['error'] = "Email already in use by another patient.";
-        //     header("Location: editPatient.php?patient_id=" . $patient_id);
-        //     exit();
-        // }
+        if (email_exists_for_other_patient($conn, $email, $patient_id)) {
+            $_SESSION['error'] = "Email already in use by another patient.";
+            header("Location: editPatient.php?patient_id=" . $patient_id);
+            exit();
+        }
 
         if (update_patient_details($conn, $patient_name, $dob, $phone, $email, $payment_status, $amount_payable, $patient_id) !== false) {
             $_SESSION['message'] = "Updated patient profile successfully.";
@@ -71,3 +73,4 @@ if (isset($_POST['submit'])) {
     header("Location: patientDetails.php");
     exit();
 }
+ob_end_flush();

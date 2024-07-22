@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "../db_connect.php";
 session_start();
 
@@ -174,6 +175,7 @@ if (isset($date)) {
 }
 
 $conn->close();
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
