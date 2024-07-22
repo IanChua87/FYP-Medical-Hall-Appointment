@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     $appointment_date = $_POST['appointment_date'];
     $appointment_start_time = $_POST['appointment_time'];
     // $appointment_start_time = DateTime::createFromFormat('h:i A', $_POST['appointment_time']);
-    $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 1800);
+    $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 900);
     // $appointment_end_time = $appointment_start_time->add(new DateInterval('PT30M'))->format('H:i A');
     $queue_no = $_POST['queue'];
     $appointment_remark = "";

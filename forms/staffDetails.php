@@ -155,8 +155,8 @@ ob_end_flush();
                             </div>
                         </div>
                     </div>
+                    <?php include '../sessionMsg.php' ?>
                 </div>
-                <?php include '../sessionMsg.php' ?>
             </div>
         </div>
     </div>

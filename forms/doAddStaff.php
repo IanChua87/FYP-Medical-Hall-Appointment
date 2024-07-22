@@ -48,16 +48,17 @@ if (isset($_POST['submit'])) {
         exit();
     } else {
         if (insert_users_details($conn, $staff_name, $email, $password, $role) !== false) {
-            $_SESSION['error'] = "Staff successfully added.";
+            $_SESSION['message'] = "Staff successfully added.";
             header("Location: staffDetails.php");
             exit();
         } else {
             $_SESSION['error'] = "Failed to add staff.";
             header("Location: addStaff.php");
+            exit();
         }
     }
 } else {
-
+    $_SESSION['error'] = "Invalid request.";
     header("Location: staffDetails.php");
     exit();
 }
