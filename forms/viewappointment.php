@@ -200,7 +200,7 @@ ob_end_flush();
                         $appt_start_time = $apptData['formatted_start_time'];
                         $appt_end_time = $apptData['formatted_end_time'];
                         $appt_status = $apptData['appointment_status'];
-                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'nil';
+                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'n.a.';
                     ?>
                         <tr>
                             <td><?php echo date('d/m/Y', strtotime($appt_date)); ?></td>

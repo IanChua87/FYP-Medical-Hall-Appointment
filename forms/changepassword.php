@@ -32,7 +32,7 @@ if (!isset($_SESSION['patient_id'])) {
 <body>
 
 <!--navbar-->
-<?php include '../d_navbar.php'; ?>
+<?php include '../navbar.php'; ?>
 
 <div class="container mt-5">
     <?php
@@ -64,14 +64,14 @@ ob_end_flush();
                                 <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> New Password:
                                 <span class="required-text">(required)</span>
                         </label>
-                        <input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword" required/>
+                        <input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword"/>
                         </div>
                         <div class="form-outline mb-4">
                         <label for="cfmpassword">
                                 <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> Confirm Password:
                                 <span class="required-text">(required)</span>
                         </label>
-                        <input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword" required/>
+                        <input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword"/>
                         </div>
                         <br>
                         <div class="row mt-3">

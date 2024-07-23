@@ -2,6 +2,7 @@
 ob_start();
 session_start();
 include "../db_connect.php";
+include "../helper_functions.php";
 
 if (!isset($_SESSION['patient_id'])) {
     header("Location: forms/login.php");
@@ -24,6 +25,16 @@ if (empty($email)) {
 }
 if (empty($phone)) {
     $error = "Please enter your phone number again.";
+    header("Location: editprofile.php?error=" . urlencode($error));
+    exit();
+}
+if(invalid_email($email)){
+    $error = "Please enter a valid email address.";
+    header("Location: editprofile.php?error=" . urlencode($error));
+    exit();
+}
+if(invalid_phone_number($phone)){
+    $error = "Please enter a valid phone number.";
     header("Location: editprofile.php?error=" . urlencode($error));
     exit();
 }

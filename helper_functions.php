@@ -91,6 +91,7 @@ function invalid_email($email)
     }
 }
 
+
 function invalid_name($name)
 {
     if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
@@ -100,9 +101,9 @@ function invalid_name($name)
     }
 }
 
-function invalid_phone_number($phone)
-{
-    if (!preg_match("/^[0-9]*$/", $phone)) {
+function invalid_phone_number($phone) {
+    
+    if (!preg_match("/^[0-9]{8}$/", $phone)) {
         return true;
     } else {
         return false;

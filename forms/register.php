@@ -78,7 +78,7 @@ unset($_SESSION['form_data']);
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Date of Birth:
                                             <span class="required-text">(required)</span>
                                         </label>
-                                        <input type="text" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" />
+                                        <input type="date" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" />
                                     </div>
                                 </div>
                                 <div class="col">
