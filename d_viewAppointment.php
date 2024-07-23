@@ -99,91 +99,53 @@ ob_end_flush();
             max-width: 600px;
         }
 
-        .editButton {
-            margin-top: 5px;
+        .error {
+            color: red;
+            display: none;
         }
     </style>
 </head>
 
 <body>
 <?php
-
-echo '
-<nav class="navbar navbar-expand-lg">
-<div class="container"> '?>
-   <?php if (!isset($_SESSION["doctor_id"])) { ?>
-    <a class="navbar-brand" href="../index.php">
-    <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
-    </a>   
-    <?php } else { ?>
-    <a class="navbar-brand" href="../d_index.php">
-    <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
-    </a>   
-    <?php } ?>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-list"></i>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav ms-auto">
-    
-
-<?php if (!isset($_SESSION["doctor_id"])) { ?>
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="../d_index.php">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#about">About</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#services">Services</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#contact">Contact</a>
-    </li>
-<?php } else { ?>
-
-<?php } ?>
-<?php echo '
-            
-          
-        </ul>' ?>
-<?php
-if (isset($_SESSION['doctor_id'])) {
-    echo '
-    <div class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../d_index.php">Home</a>
-    </div>
-    <div class="nav-item dropdown">
-        
-        
-        
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-circle"></i>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="userDropdown">
-            <li><a class="dropdown-item" href="forms/editDoctorProfile.php">Edit Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="forms/Doctorchangepassword.php">Change Password</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="forms/DoctorloggedOutSuccessful.php">Logout</a></li>
-        </ul>
-    </div>';
+echo '<nav class="navbar navbar-expand-lg"><div class="container">';
+if (!isset($_SESSION["doctor_id"])) {
+    echo '<a class="navbar-brand" href="../index.php"><img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo"></a>';
 } else {
-    echo '<ul class="nav navbar-nav">
-        <a class="btn sign-up-btn" href="register.php" role="button">Sign Up</a>
-        <a class="btn login-btn" href="login.php" role="button">Login</a>
-      </ul>';
+    echo '<a class="navbar-brand" href="../d_index.php"><img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo"></a>';
 }
-
-echo '    </div>
-</div>
-</nav>';
 ?>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="bi bi-list"></i>
+</button>
 
-
-
+<div class="collapse navbar-collapse" id="navbarMenu">
+    <ul class="navbar-nav ms-auto">
+        <?php if (!isset($_SESSION["doctor_id"])) { ?>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="../d_index.php">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <?php } ?>
+    </ul>
+    <?php
+    if (isset($_SESSION['doctor_id'])) {
+        echo '<div class="nav-item"><a class="nav-link active" aria-current="page" href="../d_index.php">Home</a></div>
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle"></i></a>
+                  <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                      <li><a class="dropdown-item" href="forms/editDoctorProfile.php">Edit Profile</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="forms/Doctorchangepassword.php">Change Password</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="forms/DoctorloggedOutSuccessful.php">Logout</a></li>
+                  </ul>
+              </div>';
+    } else {
+        echo '<ul class="nav navbar-nav"><a class="btn sign-up-btn" href="register.php" role="button">Sign Up</a><a class="btn login-btn" href="login.php" role="button">Login</a></ul>';
+    }
+    echo '</div></div></nav>';
+    ?>
 
     <div id="calendar"></div>
 
@@ -193,7 +155,7 @@ echo '    </div>
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -201,15 +163,17 @@ echo '    </div>
                     <form id="appointmentForm">
                         <div class="form-group">
                             <label for="doctorName">Doctor Name</label>
-                            <input type="text" class="form-control" id="doctorName" readonly value="<?php echo $doctorName; ?>">
+                            <input type="text" class="form-control" id="doctorName" readonly>
                         </div>
                         <div class="form-group">
                             <label for="duration">Duration (minutes)</label>
-                            <input type="number" class="form-control" id="duration" required>
+                            <input type="number" class="form-control" id="duration" readonly>
                         </div>
                         <div class="form-group">
                             <label for="remarks">Remarks</label>
                             <textarea class="form-control" id="remarks" rows="3"></textarea>
+                            <div class="error" id="errorRemarks">Please fill in the remarks</div>
+                            <div class="error" id="errorRemarksText">Only text allowed to be inputted</div>
                         </div>
                         <button type="button" id="submitAppointment" class="btn btn-primary">Submit</button>
                         <button type="button" id="editAppointment" class="btn btn-secondary" style="display:none;">Edit</button>
@@ -235,7 +199,6 @@ echo '    </div>
                     element.css('background-color', '#682924'); // Set the color of the appointment slot
                     if (event.status === 'COMPLETED') {
                         element.css('background-color', 'grey');
-                        element.append('<button type="button" class="btn btn-secondary btn-sm editButton">Edit</button>');
                     }
                 },
                 eventClick: function (event) {
@@ -253,78 +216,86 @@ echo '    </div>
                     }
 
                     $('#submitAppointment').off('click').on('click', function () {
-                        var duration = $('#duration').val();
-                        var remarks = $('#remarks').val();
+                        var remarks = $('#remarks').val().trim();
+                        var isNumber = /^\d+$/.test(remarks);
 
-                        if (duration) {
-                            // AJAX call to save remarks to the database
-                            $.ajax({
-                                url: 'forms/update_appointment.php',
-                                type: 'POST',
-                                data: {
-                                    appointment_id: event.id, // Assuming you have appointment ID
-                                    remarks: remarks,
-                                    status: 'COMPLETED' // Mark the status as COMPLETED
-                                },
-                                success: function(response) {
-                                    // Update the event in the calendar
-                                    event.title = 'Completed by ' + event.doctor_name;
-                                    event.description = remarks;
-                                    event.status = 'COMPLETED'; // Update the status in the event object
-                                    event.color = 'grey'; // Grey out the completed event
-                                    $('#calendar').fullCalendar('updateEvent', event);
+                        // Reset error messages
+                        $('.error').hide();
 
-                                    $('#appointmentModal').modal('hide');
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error(error);
-                                }
-                            });
+                        if (!remarks) {
+                            $('#errorRemarks').show();
+                            return;
                         }
+
+                        if (isNumber) {
+                            $('#errorRemarksText').show();
+                            return;
+                        }
+
+                        // AJAX call to save remarks to the database
+                        $.ajax({
+                            url: 'forms/update_appointment.php',
+                            type: 'POST',
+                            data: {
+                                appointment_id: event.id, // Assuming you have appointment ID
+                                remarks: remarks,
+                                status: 'COMPLETED' // Mark the status as COMPLETED
+                            },
+                            success: function(response) {
+                                // Update the event in the calendar
+                                event.title = 'Completed by ' + event.doctor_name;
+                                event.description = remarks;
+                                event.status = 'COMPLETED'; // Update the status in the event object
+                                event.color = 'grey'; // Grey out the completed event
+                                $('#calendar').fullCalendar('updateEvent', event);
+
+                                $('#appointmentModal').modal('hide');
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
                     });
 
                     $('#editAppointment').off('click').on('click', function () {
-                        var duration = $('#duration').val();
-                        var remarks = $('#remarks').val();
+                        var remarks = $('#remarks').val().trim();
+                        var isNumber = /^\d+$/.test(remarks);
 
-                        if (duration) {
-                            // AJAX call to save edited remarks to the database
-                            $.ajax({
-                                url: 'forms/update_appointment.php',
-                                type: 'POST',
-                                data: {
-                                    appointment_id: event.id, // Assuming you have appointment ID
-                                    remarks: remarks,
-                                    status: 'COMPLETED' // Maintain the status as COMPLETED
-                                },
-                                success: function(response) {
-                                    // Update the event in the calendar
-                                    event.description = remarks;
-                                    $('#calendar').fullCalendar('updateEvent', event);
+                        // Reset error messages
+                        $('.error').hide();
 
-                                    $('#appointmentModal').modal('hide');
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error(error);
-                                }
-                            });
+                        if (!remarks) {
+                            $('#errorRemarks').show();
+                            return;
                         }
+
+                        if (isNumber) {
+                            $('#errorRemarksText').show();
+                            return;
+                        }
+
+                        // AJAX call to save edited remarks to the database
+                        $.ajax({
+                            url: 'forms/update_appointment.php',
+                            type: 'POST',
+                            data: {
+                                appointment_id: event.id, // Assuming you have appointment ID
+                                remarks: remarks,
+                                status: 'COMPLETED' // Maintain the status as COMPLETED
+                            },
+                            success: function(response) {
+                                // Update the event in the calendar
+                                event.description = remarks;
+                                $('#calendar').fullCalendar('updateEvent', event);
+
+                                $('#appointmentModal').modal('hide');
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
                     });
                 }
-            });
-
-            // Handle edit button click
-            $(document).on('click', '.editButton', function(e) {
-                e.stopPropagation(); // Prevent the eventClick handler from being called
-                var eventId = $(this).closest('.fc-event').data('id'); // Assuming data-id contains the event ID
-                var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
-                $('#doctorName').val(event.doctor_name);
-                $('#duration').val(event.duration);
-                $('#remarks').val(event.description || ''); // Populate current remarks
-                $('#appointmentModal').modal('show');
-
-                $('#submitAppointment').hide();
-                $('#editAppointment').show();
             });
         });
     </script>
