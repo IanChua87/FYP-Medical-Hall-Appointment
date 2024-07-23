@@ -52,6 +52,12 @@ ob_end_flush();
             margin-top: 20px;
         }
 
+        .view-btn:hover {
+            background-color: #682924;
+            color: #CFA61E;
+            border: 1px solid #682924;
+        }
+
         .button-container {
             display: flex;
             gap: 20px;
