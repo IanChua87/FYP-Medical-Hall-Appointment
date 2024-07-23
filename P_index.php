@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "db_connect.php";
 
@@ -25,6 +26,7 @@ $stmt->bind_result($patient_name);
 $stmt->fetch();
 $stmt->close();
 $conn->close();
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
