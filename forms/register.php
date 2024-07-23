@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 
@@ -10,6 +11,7 @@ unset($_SESSION['error']);
 unset($_SESSION['form_data']);
 
 // echo "<script>console.log('PHP Error Message:', '" . addslashes($error) . "');</script>";
+ob_end_flush();
 ?>
 
 <!-- this is for patient register -->
