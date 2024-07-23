@@ -106,7 +106,7 @@ ob_end_flush();
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
                 <div class="verified-box">
-                    <img src="../img/tick-verification.svg" alt="Tick logo symbol"  style="margin-right: 40px;"/>
+                    <img src="../img/tick-verification.svg" alt="Tick logo symbol" style="margin-right: 10px;"/>
                     <h2>Update<br> Successful</h2>
                     <div class="mt-3">
                         <a href="viewappointment.php" class="btn back-to-home-btn">Back to View Appointment page</a>
