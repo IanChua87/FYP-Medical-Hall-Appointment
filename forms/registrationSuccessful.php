@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (invalid_phone_number($phone) !== false) {
-        $_SESSION['error'] = "Only numbers allowed in phone number.";
+        $_SESSION['error'] = "Only numbers allowed in phone number and must be 8 characters long.";
         $_SESSION['form_data'] = $_POST;
         header("Location: register.php");
         exit();
