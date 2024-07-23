@@ -1,15 +1,16 @@
 <?php
-include "db_connect.php"; // Adjust the path based on your setup]
+include "db_connect.php"; // Adjust the path based on your setup
 session_start();
 
-// Check if patient_id is set in the session
+// Check if doctor_id is set in the session
 if (!isset($_SESSION['doctor_id'])) {
     header("Location: forms/login.php");
     exit();
 }
 
 // Fetch the doctor's name from the users table
-$doctorQuery = "SELECT user_name FROM users WHERE role = 'Doctor' LIMIT 1";
+$doctorId = $_SESSION['doctor_id'];
+$doctorQuery = "SELECT user_name FROM users WHERE user_id = $doctorId";
 $doctorResult = mysqli_query($conn, $doctorQuery);
 $doctorRow = mysqli_fetch_assoc($doctorResult);
 
@@ -82,34 +83,14 @@ $appointments_json = json_encode($appointments);
         #calendar {
             max-width: 900px;
             margin: 50px auto;
-            background-color: #CFA61E; /* Calendar background color */
-            color: white; /* Calendar text color */
         }
 
-        .fc-event, .fc-event:hover {
-            background-color: #682924 !important; /* Appointment slot color */
-            border-color: #000000 !important; /* Appointment slot border color */
-            color: white !important; /* Appointment slot text color */
+        .fc-time-grid .fc-slats td {
+            height: 3em;
         }
 
-        .fc-time-grid .fc-slats td,
-        .fc-widget-content,
         .fc-widget-content .fc-time-grid .fc-content-col {
-            background-color: #CFA61E !important; /* Slot background color */
-            border-color: #000000 !important; /* Slot border color */
-            color: white !important; /* Slot text color */
-        }
-
-        .fc-widget-header {
-            background-color: #CFA61E !important; /* Header background color */
-            border-color: #000000 !important; /* Header border color */
-            color: white !important; /* Header text color */
-        }
-
-        .fc-day-header {
-            background-color: #CFA61E !important; /* Day header background color */
-            border-color: #000000 !important; /* Day header border color */
-            color: white !important; /* Day header text color */
+            height: auto;
         }
 
         .modal-dialog {
@@ -218,7 +199,7 @@ echo '    </div>
                     <form id="appointmentForm">
                         <div class="form-group">
                             <label for="doctorName">Doctor Name</label>
-                            <input type="text" class="form-control" id="doctorName" readonly>
+                            <input type="text" class="form-control" id="doctorName" readonly value="<?php echo $doctorName; ?>">
                         </div>
                         <div class="form-group">
                             <label for="duration">Duration (minutes)</label>
@@ -249,6 +230,7 @@ echo '    </div>
                 events: appointments,
                 timeFormat: 'h:mm A',
                 eventRender: function(event, element) {
+                    element.css('background-color', '#682924'); // Set the color of the appointment slot
                     if (event.status === 'COMPLETED') {
                         element.css('background-color', 'grey');
                         element.append('<button type="button" class="btn btn-secondary btn-sm editButton">Edit</button>');
