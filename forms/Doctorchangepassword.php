@@ -34,7 +34,7 @@ ob_end_flush();
 <!--navbar-->
 <?php include '../d_navbar.php'; ?>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <?php
     if (isset($_GET['error'])) {
         echo '<div class="alert alert-danger">' . htmlspecialchars($_GET['error']) . '</div>';
@@ -58,10 +58,18 @@ ob_end_flush();
                         <h2 class="text">Change Password</h2>
                         <br>
                         <div class="form-outline mb-4">
-                        <div class="input-text">New Password:</div><input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword" required/>
+                        <label for="newpassword">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> New Password:
+                                <span class="required-text">(required)</span>
+                        </label>
+                        <input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword"/>
                         </div>
                         <div class="form-outline mb-4">
-                        <div class="input-text">Confirm Password:</div><input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword" required/>
+                        <label for="cfmpassword">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> Confirm Password:
+                                <span class="required-text">(required)</span>
+                        </label>
+                        <input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword"/>
                         </div>
                         <br>
                         <div class="row mt-3">

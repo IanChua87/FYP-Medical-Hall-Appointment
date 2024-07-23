@@ -21,8 +21,21 @@ if (empty($email)) {
     exit();
 }
 
+if(invalid_email($email)){
+    $error = "Please enter a valid email address.";
+    header("Location: editDoctorprofile.php?error=" . urlencode($error));
+    exit();
+}
+
 $query = "UPDATE users SET user_email = ? WHERE user_id = ?";
 $stmt = mysqli_prepare($conn, $query);
+
+if(check_users_exists_by_email($conn,$email)){
+    $error = "Email is already taken by another doctor.";
+    header("Location: editprofile.php?error=" . urlencode($error));
+    exit();
+}
+
 mysqli_stmt_bind_param($stmt, "si", $email, $user_id);
 
 if (mysqli_stmt_execute($stmt)) {
@@ -30,6 +43,8 @@ if (mysqli_stmt_execute($stmt)) {
 } else {
     $message = "An error occurred while updating the profile";
 }
+
+
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);

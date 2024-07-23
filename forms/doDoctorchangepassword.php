@@ -2,6 +2,7 @@
 ob_start();
 session_start();
 include "../db_connect.php";
+include "../helper_functions.php";
 
 // Ensure the user is logged in as a doctor
 if (!isset($_SESSION['doctor_id'])){
@@ -10,18 +11,25 @@ if (!isset($_SESSION['doctor_id'])){
 }
 
 // Get the form data
-$new_password = trim($_POST['newpassword']);
+$password = trim($_POST['newpassword']);
 $confirm_password = trim($_POST['cfmpassword']);
 
 // Validate input
-if (empty($new_password) || empty($confirm_password)) {
+if (empty($password) || empty($confirm_password)) {
     $error = "Please fill in all fields.";
     header("Location: Doctorchangepassword.php?error=".urlencode($error));
     exit();
 }
 
+if(check_password_strength($password)){
+    $error = "Password must contain at least 8 characters.";
+    header("Location: Doctorchangepassword.php?error=".urlencode($error));
+    exit();
+
+}
+
 // Check if passwords match
-if ($new_password !== $confirm_password) {
+if (check_confirm_password($password, $confirm_password)) {
     $error = "Passwords do not match.";
     header("Location: Doctorchangepassword.php?error=".urlencode($error));
     exit();
@@ -33,7 +41,7 @@ if ($new_password !== $confirm_password) {
 // Update the password in the database
 $query = "UPDATE users SET user_password = ? WHERE user_id = ?";
 $stmt = mysqli_prepare($conn, $query);
-$stmt->bind_param("si", $new_password, $_SESSION['doctor_id']);
+$stmt->bind_param("si", $password, $_SESSION['doctor_id']);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {
@@ -76,7 +84,7 @@ ob_end_flush();
 <!--navbar-->
 <?php include '../d_navbar.php'; ?>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <?php
     if (isset($_GET['error'])) {
         echo '<div class="alert alert-danger">' . htmlspecialchars($_GET['error']) . '</div>';
