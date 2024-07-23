@@ -85,9 +85,9 @@ unset($_SESSION['form_data']);
                                 <input type="password" id="confirm_password" class="form-control form-control-lg" placeholder="Confirm Password" name="confirm_password" />
                             </div>
 
-                            <div class="double-form-field row mb-4">
-                                <div class="col">
-                                    <div class="form-outline">
+                            <div class="double-form-field row mb-3">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-outline mb-3">
                                         <label for="dob">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Date of Birth:
                                             <span class="required-text">(required)</span>
@@ -95,8 +95,8 @@ unset($_SESSION['form_data']);
                                         <input type="text" class="form-control form-control-lg" id="dob" name="dob" placeholder="Date of Birth" />
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-outline">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-outline mb-3">
                                         <label for="phone">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Phone Number:
                                             <span class="required-text">(required)</span>
