@@ -1,5 +1,6 @@
 <?php
-include "db_connect.php"; // Adjust the path based on your setup
+ob_start();
+include "db_connect.php"; // Adjust the path based on your setup]
 session_start();
 
 // Check if doctor_id is set in the session
@@ -66,6 +67,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // Convert PHP array to JavaScript
 $appointments_json = json_encode($appointments);
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>

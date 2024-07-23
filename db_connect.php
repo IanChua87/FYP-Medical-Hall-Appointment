@@ -1,5 +1,5 @@
 <?php
-$host = "localhost:3304";
+$host = "localhost:3307";
 $username = "root";
 $password = "";
 $dbname = "fyp_sin_nam";
@@ -15,6 +15,10 @@ if (!$conn) {
 
 // $conn = mysqli_init();
 
+// if(!$conn){
+//     die("mysqli_init failed");
+// }
+
 // mysqli_ssl_set($conn, NULL, NULL, "", NULL, NULL);
 
 // $host = 'sinnammed-001-server.mysql.database.azure.com';
@@ -23,4 +27,7 @@ if (!$conn) {
 // $database = 'fyp_sin_nam';
 // $port = 3306;
 
-// mysqli_real_connect($conn, $host, $username, $password, $database, $port, NULL, MYSQLI_CLIENT_SSL);
+// if (!mysqli_real_connect($conn, $host, $username, $password, $database, $port, NULL, MYSQLI_CLIENT_SSL)) {
+//     die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());
+// }
+

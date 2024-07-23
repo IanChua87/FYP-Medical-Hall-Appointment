@@ -73,6 +73,15 @@ function check_empty_queue_input_field($queue_no)
     }
 }
 
+function check_contact_us_input_fields($name, $email, $message)
+{
+    if (empty($name) || empty($email) || empty($message)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function invalid_email($email)
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -81,6 +90,7 @@ function invalid_email($email)
         return false;
     }
 }
+
 
 function invalid_name($name)
 {
@@ -91,9 +101,9 @@ function invalid_name($name)
     }
 }
 
-function invalid_phone_number($phone)
-{
-    if (!preg_match("/^[0-9]*$/", $phone)) {
+function invalid_phone_number($phone) {
+    
+    if (!preg_match("/^[0-9]{8}$/", $phone)) {
         return true;
     } else {
         return false;
@@ -252,15 +262,14 @@ function login_patient($conn, $email, $password)
         $p_user_data = check_patient_exists_by_email($conn, $email);
         if ($password === $p_user_data['patient_password']) {
             $_SESSION['patient_id'] = $p_user_data['patient_id'];
-            header("Location: ../P_index.php");
-            exit();
+            return true;
         } else {
             $_SESSION['login-error'] = "Invalid password, please try again";
-            return $_SESSION['login-error'];
+            return false;
         }
     } else{
         $_SESSION['login-error'] = "Invalid email, please try again";
-        return $_SESSION['login-error'];
+        return false;
     }
 }
 
@@ -358,13 +367,36 @@ function insert_users_details($conn, $name, $email, $password, $role)
 
 function insert_appointment_details($conn, $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark)
 {
+    try {
+        $start_time_24 = convert_to_24_hour_format($start_time);
+        $end_time_24 = convert_to_24_hour_format($end_time);
+    } catch (Exception $e) {
+        echo "Error in time conversion: " . $e->getMessage();
+        return false;
+    }
+
     $insert = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id, queue_no, appointment_remarks) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert);
-    mysqli_stmt_bind_param($insert_stmt, "ssssssiis", $date, $start_time, $end_time, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
+
+    mysqli_stmt_bind_param($insert_stmt, "ssssssiis", $date, $start_time_24, $end_time_24, $status, $booked_by, $current_time, $patient_id, $queue_no, $remark);
 
     //execute the prepared statement
     mysqli_stmt_execute($insert_stmt);
+}
+
+function convert_to_24_hour_format($time_12_hour) {
+    if (strpos($time_12_hour, 'AM') !== false || strpos($time_12_hour, 'PM') !== false) {
+        $dateTime = DateTime::createFromFormat('h:i A', $time_12_hour);
+    } else {
+        $dateTime = DateTime::createFromFormat('H:i:s', $time_12_hour);
+    }
+
+    if ($dateTime === false) {
+        throw new Exception("Invalid time format: $time_12_hour");
+    }
+
+    return $dateTime->format('H:i:s');
 }
 
 function insert_relation_details($conn, $name, $appointment_id)
@@ -389,9 +421,17 @@ function update_patient_details($conn, $name, $dob, $phone, $email, $payment_sta
 
 function update_appointment_details($conn, $date, $start_time, $end_time, $status, $current_time, $appointment_id)
 {
+    try {
+        $start_time_24 = convert_to_24_hour_format($start_time);
+        $end_time_24 = convert_to_24_hour_format($end_time);
+    } catch (Exception $e) {
+        echo "Error in time conversion: " . $e->getMessage();
+        return false;
+    }
+
     $update = "UPDATE appointment SET appointment_date = ?, appointment_start_time = ?, appointment_end_time = ?, appointment_status = ?, booked_datetime = ? WHERE appointment_id = ?";
     $update_stmt = mysqli_prepare($conn, $update);
-    mysqli_stmt_bind_param($update_stmt, "sssssi", $date, $start_time, $end_time, $status, $current_time, $appointment_id);
+    mysqli_stmt_bind_param($update_stmt, "sssssi", $date, $start_time_24, $end_time_24, $status, $current_time, $appointment_id);
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);
@@ -443,3 +483,34 @@ function check_password_match($password, $confirm_password)
         return false;
     }
 }
+
+function email_exists_for_other_patient($conn, $email, $patient_id) {
+    $sql = "SELECT * FROM patient WHERE patient_email = ? AND patient_id != ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "si", $email, $patient_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
+}
+
+function email_exists_for_other_user($conn, $email, $user_id) {
+    $sql = "SELECT * FROM users WHERE user_email = ? AND user_id != ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "si", $email, $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    }
+    return false;
+}
+

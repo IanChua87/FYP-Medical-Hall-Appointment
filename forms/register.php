@@ -27,7 +27,6 @@ unset($_SESSION['form_data']);
 </head>
 
 <body>
-    <?php include '../navbar.php'; ?>
     <section class="register vh-100">
         <div class="container-fluid">
             <div class="row">
@@ -72,17 +71,17 @@ unset($_SESSION['form_data']);
                                 <input type="password" id="confirm_password" class="form-control form-control-lg mb-1" placeholder="Confirm Password" name="confirm_password" />
                             </div>
 
-                            <!-- <div class="double-form-field row mb-3"> -->
-                                <!-- <div class="col"> -->
+                            <div class="double-form-field row mb-3">
+                                <div class="col">
                                     <div class="form-outline mb-3">
                                         <label for="dob">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Date of Birth:
                                             <span class="required-text">(required)</span>
                                         </label>
-                                        <input type="text" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" />
+                                        <input type="date" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" />
                                     </div>
-                                <!-- </div> -->
-                                <!-- <div class="col"> -->
+                                </div>
+                                <div class="col">
                                     <div class="form-outline mb-3">
                                         <label for="phone">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Phone Number:
@@ -90,16 +89,14 @@ unset($_SESSION['form_data']);
                                         </label>
                                         <input type="text" id="phone" class="form-control form-control-lg mb-1" placeholder="Phone Number" name="phone" />
                                     </div>
-                                <!-- </div> -->
-                            <!-- </div> -->
+                                </div>
+                            </div>
 
                             <div class="mt-4">
                                 <button type="submit" name="submit" class="btn register-btn">Create Account</button>
                             </div>
-                            <p class="reg-error-msg" id="reg-error-msg"><?php echo $error ?></p>
                         </form>
-                        <br><br>
-                        
+                        <p class="reg-error-msg" id="reg-error-msg"><?php echo $error ?></p>
                     </div>
                 </div>
             </div>

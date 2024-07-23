@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "../db_connect.php";
 session_start();
 
@@ -107,6 +108,7 @@ while ($row = $result->fetch_assoc()) {
 
 $stmt->close();
 $conn->close();
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>
@@ -144,7 +146,7 @@ $conn->close();
 </head>
 <body>
     <?php include '../navbar.php'; ?>
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
         <?php if (isset($_GET['success']) && $_GET['success'] == 'true') { ?>
             <div class="alert alert-success" role="alert">
                 Appointment cancelled successfully!
@@ -198,7 +200,7 @@ $conn->close();
                         $appt_start_time = $apptData['formatted_start_time'];
                         $appt_end_time = $apptData['formatted_end_time'];
                         $appt_status = $apptData['appointment_status'];
-                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'nil';
+                        $relation_name = $apptData['relation_name'] ? $apptData['relation_name'] : 'n.a.';
                     ?>
                         <tr>
                             <td><?php echo date('d/m/Y', strtotime($appt_date)); ?></td>

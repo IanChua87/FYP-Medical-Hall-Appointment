@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "../db_connect.php";
 session_start();
 
@@ -76,6 +77,7 @@ if (isset($_POST['book'])) {
         exit();
     }
 }
+ob_end_flush();
 ?>
 
 

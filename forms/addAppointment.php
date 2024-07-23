@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -9,7 +10,7 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-
+ob_end_flush();
 ?>
 
 <?php
@@ -28,6 +29,7 @@ if (!$stmt) {
     }
     $latest_queue_no = $queue_no + 1;
 }
+ob_start();
 ?>
 
 <!DOCTYPE html>

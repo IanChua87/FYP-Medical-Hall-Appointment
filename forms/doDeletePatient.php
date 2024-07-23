@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 ?>
@@ -20,10 +21,13 @@ if (isset($_POST['patient_id'])) {
     } else {
         mysqli_stmt_bind_param($stmt, 'i', $id);
         if (mysqli_stmt_execute($stmt)) {
+            $_SESSION['message'] = "Patient record deleted successfully.";
             header("Location: patientDetails.php");
             exit();
         } else {
             $_SESSION['message'] = "Patient record failed to be deleted.";
+            header("Location: patientDetails.php");
+            exit();
         }
         mysqli_stmt_close($stmt);
     }
@@ -31,3 +35,4 @@ if (isset($_POST['patient_id'])) {
     header("Location: patientDetails.php");
     exit();
 }
+ob_end_flush();

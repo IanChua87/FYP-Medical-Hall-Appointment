@@ -1,10 +1,12 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 
 // Clear the session variables and destroy the session
 $_SESSION = array();
 session_destroy();
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 include "../helper_functions.php";
@@ -17,7 +18,7 @@ if (isset($_POST['submit'])) {
     // $password = $_POST['password'];
 
     if(check_empty_edit_users_input_fields($name, $email)){
-        $_SESSION['error'] = "Please fill in all fields.";
+        $_SESSION['error'] = "All fields are required";
         header("Location: editStaff.php?user_id=" . $user_id);
         exit();
     }
@@ -35,6 +36,12 @@ if (isset($_POST['submit'])) {
     }
 
     if(check_users_exists_by_id($conn, $user_id) !== false ){
+
+        if (email_exists_for_other_user($conn, $email, $user_id)) {
+            $_SESSION['error'] = "Email already in use by another patient.";
+            header("Location: editStaff.php?user_id=" . $user_id);
+            exit();
+        }
 
         if(update_users_details($conn, $name, $email, $user_id) !== false){
             $_SESSION['message'] = "Staff profile successfully updated.";
@@ -89,3 +96,4 @@ if (isset($_POST['submit'])) {
     header("Location: staffDetails.php");
     exit();
 }
+ob_end_flush();

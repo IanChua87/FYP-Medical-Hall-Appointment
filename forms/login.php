@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 include "../helper_functions.php";
@@ -12,16 +13,28 @@ if (isset($_POST['submit'])) {
 
     if (check_empty_login_input_fields($email, $password)) {
         $_SESSION['login-error'] = "Please enter your email and password.";
+        header("Location: login.php");
+        exit();
     }
 
-    if(login_patient($conn, $email, $password) === false || login_users($conn, $email, $password) === false){
+    if (login_patient($conn, $email, $password)) {
+        header("Location: ../P_index.php");
+        exit();
+    }
+
+    if (login_users($conn, $email, $password)) {
+        header("Location: ../adminDashboard.php");
+        exit();
+    }
+
+    if (!isset($_SESSION['login-error'])) {
         $_SESSION['login-error'] = "Invalid email or password.";
     }
 
     header("Location: login.php");
     exit();
 }
-
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>

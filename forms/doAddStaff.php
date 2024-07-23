@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 include "../helper_functions.php";
@@ -42,23 +43,26 @@ if (isset($_POST['submit'])) {
     }
 
     if (check_users_exists_by_email($conn, $email) !== false) {
-        $_SESSION['error'] = "Failed to add staff.";
+        $_SESSION['error'] = "Staff with this email already exists.";
         header("Location: addStaff.php");
         exit();
     } else {
         if (insert_users_details($conn, $staff_name, $email, $password, $role) !== false) {
-            $_SESSION['error'] = "Staff successfully added.";
+            $_SESSION['message'] = "Staff successfully added.";
             header("Location: staffDetails.php");
             exit();
         } else {
             $_SESSION['error'] = "Failed to add staff.";
             header("Location: addStaff.php");
+            exit();
         }
     }
 } else {
+    $_SESSION['error'] = "Invalid request.";
     header("Location: staffDetails.php");
     exit();
 }
+ob_end_flush();
 ?>
 
 

@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy PHP app to Azure Web App - SinNamTest
+name: Build and deploy PHP app to Azure Web App - SinNamMainApptWeb
 
 on:
   push:
@@ -60,7 +60,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'SinNamTest'
+          app-name: 'SinNamMainApptWeb'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E3E1C91FB3884905A34129EB009D5FC7 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE78AB5A9A3F40CA872D3254FDA2CE7A }}

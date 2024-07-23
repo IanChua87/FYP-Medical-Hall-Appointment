@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 // Include database connection file
 include "db_connect.php";
 
@@ -158,6 +160,7 @@ $weekend_start = reset($weekends); // First element
 $weekend_end = end($weekends);     // Last element
 
 $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_start . "-" . $weekend_end;
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
@@ -176,6 +179,18 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
 
         .hero .learn-more-btn:hover {
             background-color: #d1ac47;
+        }
+
+        .session-msg-error {
+            text-align: center;
+            border-radius: 5px;
+            background-color: #f8d7da;
+            color: black;
+            border: 1px solid #f5c6cb;
+        }
+
+        form{
+            padding: 20px 0;
         }
     </style>
 </head>
@@ -377,7 +392,7 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
         <div class="contact-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-6">
-                    <form action="forms/contact.php" method="post">
+                    <form action="forms/contactSuccessful.php" method="post">
                         <div class="mb-3">
                             <input type="text" class="form-control-lg" name="name" placeholder="Name">
                         </div>
@@ -387,10 +402,15 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
                         <div class="mb-3">
                             <textarea class="form-control feedback-field" name="message" rows="6" placeholder="Feedback"></textarea>
                         </div>
-                        <a class="btn submit-btn" href="forms/contactSuccessful.php" role="button">Submit</a>
+                        <button type="submit" name="submit" class="btn submit-btn">Submit</button>
+                        <?php
+                        if (isset($_SESSION['contact_error'])) {
+                            echo '<div class="session-msg-error">' . $_SESSION['contact_error'] . '</div>';
+                            
+                        }
+                        ?>
                     </form>
                 </div>
-
                 <div class="col-12 col-md-12 col-lg-6">
                     <img src="img/contact-img.png" alt="contact-img">
                 </div>
@@ -462,6 +482,14 @@ $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_
             });
         });
     });
+
+    // $(document).ready(function() {
+    //     console.log("Document is ready.");
+    //     setTimeout(function() {
+    //         $('.session-msg-error').fadeOut('slow');
+    //     }, 1700);
+
+    // });
 </script>
 
 </html>

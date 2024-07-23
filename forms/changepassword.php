@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 include "../db_connect.php";
@@ -31,9 +32,9 @@ if (!isset($_SESSION['patient_id'])) {
 <body>
 
 <!--navbar-->
-<?php include '../d_navbar.php'; ?>
+<?php include '../navbar.php'; ?>
 
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <?php
     if (isset($_GET['error'])) {
         echo '<div class="alert alert-danger">' . htmlspecialchars($_GET['error']) . '</div>';
@@ -44,7 +45,9 @@ if (!isset($_SESSION['patient_id'])) {
     ?>
 </div>
 
-
+<?php
+ob_end_flush();
+ ?>
 <section class="d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row justify-content-center">
@@ -61,14 +64,14 @@ if (!isset($_SESSION['patient_id'])) {
                                 <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> New Password:
                                 <span class="required-text">(required)</span>
                         </label>
-                        <input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword" required/>
+                        <input type="password" id="idPassword" class="form-control form-control-lg" placeholder="Password" name="newpassword"/>
                         </div>
                         <div class="form-outline mb-4">
                         <label for="cfmpassword">
                                 <span class="asterik"><i class="fa-solid fa-asterisk"></i></span> Confirm Password:
                                 <span class="required-text">(required)</span>
                         </label>
-                        <input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword" required/>
+                        <input type="password" id="idPasswordConfirm" class="form-control form-control-lg" placeholder="Password" name="cfmpassword"/>
                         </div>
                         <br>
                         <div class="row mt-3">

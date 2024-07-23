@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "../db_connect.php";
 
@@ -32,6 +33,7 @@ if (mysqli_stmt_execute($stmt)) {
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

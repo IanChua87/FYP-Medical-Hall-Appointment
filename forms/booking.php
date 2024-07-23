@@ -1,5 +1,7 @@
 <?php
+ob_start();
 session_start();
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +132,7 @@ session_start();
 <body>
 
 <?php include '../navbar.php'; ?>
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
 
 </div>
 

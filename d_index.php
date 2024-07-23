@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include "db_connect.php";
 
@@ -26,7 +27,7 @@ $stmt->close();
 $conn->close();
 
 // Display doctor name
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
