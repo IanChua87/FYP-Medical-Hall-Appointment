@@ -108,7 +108,7 @@ ob_end_flush();
                 </div>
                 <div class="col-sm-12 col-sm-12 col-lg-4 text-black right-col">
                     <div class="verified-box">
-                        <img src="../img/tick-verification.svg" alt="Tick logo symbol" />
+                        <img src="../img/tick-verification.svg" alt="Tick logo symbol" style="margin-right: 10px;"/>
                         <?php echo $msg ?>
                         <div class="mt-3">
                             <a href="login.php" class="btn login-btn">Login</a>

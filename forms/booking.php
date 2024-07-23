@@ -12,6 +12,7 @@ ob_end_flush();
     <title>Sin Nam Medical Hall | Appointment Booking</title>
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
+    
 
     <style>
         .booking {
