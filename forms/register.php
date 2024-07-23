@@ -22,23 +22,37 @@ unset($_SESSION['form_data']);
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
     <style>
+        /* img{
+            width: 100%;
+            height: 100%;
+        }
 
+        .register-btn{
+            background-color: #CFA61E;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+        } */
     </style>
 </head>
 
 <body>
-    <section class="register vh-100">
-        <div class="container-fluid">
+    <?php include '../navbar.php'; ?>
+    <section class="register">
+        <div class="container-fluid h-100">
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col vh-100">
-                    <img src="../img/side-image.png" alt="Login image" style="object-fit: cover; object-position: left; width:100%; height:925px;">
+                <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
+                    <img src="../img/side-img.jpg" alt="Login image">
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
+                <div class="col-sm-12 col-md-12 col-lg-4 px-0 text-black right-col">
                     <div class="form-container">
+                        <a href="../index.php" class="home-link">Home</a>
+                        <h3 class="text">Create Account</h3>
+                        <p class="registered-prompt">Already registered? <span><a href="login.php">Login</a></span> now</p>
                         <form method="post" action="registrationSuccessful.php">
-                            <h3 class="text">Create<br> Account</h3>
-                            <p class="registered-prompt">Already registered? <span><a href="login.php">Login</a></span> now</p>
-
                             <div class="form-outline mb-3">
                                 <label for="name">
                                     <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Name:
@@ -60,7 +74,7 @@ unset($_SESSION['form_data']);
                                     <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Password:
                                     <span class="required-text">(required)</span>
                                 </label>
-                                <input type="password" id="password" class="form-control form-control-lg mb-1" placeholder="Password" name="password" />
+                                <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" name="password" />
                             </div>
 
                             <div class="form-outline mb-3">
@@ -68,31 +82,30 @@ unset($_SESSION['form_data']);
                                     <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Confirm Password:
                                     <span class="required-text">(required)</span>
                                 </label>
-                                <input type="password" id="confirm_password" class="form-control form-control-lg mb-1" placeholder="Confirm Password" name="confirm_password" />
+                                <input type="password" id="confirm_password" class="form-control form-control-lg" placeholder="Confirm Password" name="confirm_password" />
                             </div>
 
-                            <div class="double-form-field row mb-3">
+                            <div class="double-form-field row mb-4">
                                 <div class="col">
-                                    <div class="form-outline mb-3">
+                                    <div class="form-outline">
                                         <label for="dob">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Date of Birth:
                                             <span class="required-text">(required)</span>
                                         </label>
-                                        <input type="date" class="form-control date-input mb-1" id="dob" name="dob" placeholder="Date of Birth" />
+                                        <input type="text" class="form-control form-control-lg" id="dob" name="dob" placeholder="Date of Birth" />
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="form-outline mb-3">
+                                    <div class="form-outline">
                                         <label for="phone">
                                             <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Phone Number:
                                             <span class="required-text">(required)</span>
                                         </label>
-                                        <input type="text" id="phone" class="form-control form-control-lg mb-1" placeholder="Phone Number" name="phone" />
+                                        <input type="text" id="phone" class="form-control form-control-lg" placeholder="Phone Number" name="phone" />
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="mt-4">
+                            <div class="mt-3">
                                 <button type="submit" name="submit" class="btn register-btn">Create Account</button>
                             </div>
                         </form>
@@ -103,6 +116,10 @@ unset($_SESSION['form_data']);
         </div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
     <script>
         $(document).ready(function() {
             setTimeout(function() {
@@ -112,7 +129,7 @@ unset($_SESSION['form_data']);
     </script>
 
     <script>
-        $(function() {
+        $(document).ready(function() {
             $("#dob").datepicker({
                 changeMonth: true,
                 changeYear: true,

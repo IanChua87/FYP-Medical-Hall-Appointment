@@ -23,7 +23,7 @@ ob_end_flush();
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-8 px-0 d-none d-sm-block">
-                    <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+                    <img src="../img/side-img.jpg" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
                 </div>
                 <div class="col-sm-4 text-black right-col">
                     <div class="form-container">

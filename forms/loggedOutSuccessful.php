@@ -24,7 +24,7 @@ ob_end_flush();
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
-                <img src="../img/side-image.png" alt="Login image" class="w-100 vh-100"
+                <img src="../img/side-img.jpg" alt="Login image" class="w-100 vh-100"
                      style="object-fit: cover; object-position: left;">
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">

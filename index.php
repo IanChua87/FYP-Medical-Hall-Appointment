@@ -192,6 +192,12 @@ ob_end_flush();
         form{
             padding: 20px 0;
         }
+
+        .submit-btn:hover{
+            background-color: #d1ac47;  
+        }
+
+        
     </style>
 </head>
 
@@ -311,13 +317,13 @@ ob_end_flush();
     <section class="about" id="about">
         <div class="about-box">
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-6 left-col">
+                <div class="col-sm-12 col-md-12 col-lg-6 left-col">
                     <div class="about-details mt-3">
                         <h2>About Us</h2>
                         <p>At Sim Nam Medical Hall, we pride ourselves on <br> a rich history and legacy that spans over multiple <br> generations. Established with a vision to provide <br> exceptional and professional healthcare services, <br> we have been serving the community for <br> decades, earning the trust and respect <br> of our patients.</p>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-6 right-col">
+                <div class="col-sm-12 col-md-12 col-lg-6 right-col">
                     <img src="img/Mr Desmond Sin.jpg" alt="about-section" class="img-fluid">
                 </div>
             </div>
@@ -332,9 +338,9 @@ ob_end_flush();
         <div class="services-box">
             <h2 class="text-center">Our Services</h2>
             <div class="row row-md-2 g-4">
-                <div class="col-12 col-md-6 col-lg-4">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="card h-100">
-                        <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="consultation img">
+                        <img src="img/consultation tcm.png" class="card-img-top img-fluid" alt="consultation img">
                         <div class="card-body">
                             <h5 class="card-title">Personalized TCM Consultations</h5>
                             <p class="card-text">Our expert practitioners provide comprehensive health assessments and personalized treatment plans based on Traditional Chinese Medicine principles. Discover how TCM addresses health concerns and promote overall wellness.</p>
@@ -342,17 +348,7 @@ ob_end_flush();
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card h-100">
-                        <img src="img/accupuncture.png" class="card-img-top img-fluid" alt="acupuncture img">
-                        <div class="card-body">
-                            <h5 class="card-title">Effective Acupuncture Treatments </h5>
-                            <p class="card-text">Experience the benefits of acupuncture for pain relief, stress reduction, and enhanced well-being. Our skilled acupuncturists use precise techniques to restore balance and improve your health naturally.</p>
-                            <a href="#" class="btn learn-more-btn mt-auto">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-4">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="card h-100">
                         <img src="img/medical-herbs.png" class="card-img-top img-fluid" alt="chinese herbs img">
                         <div class="card-body">

@@ -23,9 +23,8 @@
 
 .form-outline .form-control-lg {
     width: 100%;
-    height: 50px;
-    border-radius: 5px;
-    padding: 0 15px;
+    border-radius: 3px;
+    padding: 16px;
     border: 1px solid #ccc;
     font-size: 16px;
 }
@@ -268,7 +267,7 @@ nav{
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    width: 70%;
+    width: 900px;
 }
 
 .services .row{
@@ -293,7 +292,8 @@ nav{
 
 .services .card img{
     width: 100%;
-    height: auto
+    height: 350px;
+    object-fit: cover;
 }
 
 .services h2{
@@ -382,6 +382,7 @@ nav{
     font-size: 40px;
     color: #682924;
 }
+
 
 /* ====services end==== */
 
@@ -474,13 +475,11 @@ nav{
 
 .contact form{
     margin-top: 60px;
-    padding-right: 20px;
 }
 
 .contact img{
     width: 100%;
-    height: auto;
-    margin-top: 30px;
+    height: 600px;
 }
 
 
@@ -563,9 +562,16 @@ nav{
 /* ===========================Register page start=========================== */
 .register .form-container{
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    padding: 0 60px;
+    padding: 0 50px;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #682924;
+    border-radius: 0;
+}
+
+.register img{
+    width: 100%;
     height: 100vh;
 }
 
@@ -577,25 +583,28 @@ nav{
     line-height: 1;
 }
 
+.register .home-link{
+    text-decoration: none;
+    color: #c0b5b5;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 450;
+}
+
 .registered-prompt{
     color: #f9f9f9;
     font-size: 13px;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .registered-prompt a{
     color: #CFA61E;
     text-decoration: none;
-
+    font-size: 13px;
 }
 
 .registered-prompt a:hover{
     text-decoration: underline;
-}
-
-.registered-prompt span{
-    color: #CFA61E;
-    font-weight: 500;
 }
 
 .register .register-btn{
@@ -609,10 +618,6 @@ nav{
 .register .register-btn:hover{
     background-color: #d1ac47;
     color: #f9f9f9;
-}
-
-.register .copyright{
-    margin-top: 70px;
 }
 
 .double-form-field select{
@@ -632,6 +637,10 @@ nav{
     font-size: 16px;
     position: fixed;
     margin-top: 840px;
+}
+
+.register .right-col{
+    border-radius: 0;
 }
 /* ===========================Register page end=========================== */
 
@@ -896,6 +905,22 @@ nav{
 
 /* ===========================Media queries responsiveness=========================== */
 
+@media (width < 992px){
+    .navbar .login-btn {
+        margin-bottom: 10px; 
+        margin-left: 0;
+    }
+
+    .hero{
+        height: 50vh;
+    }
+
+    .about img{
+        width: 100%;
+        max-height: 700px;
+        border-radius: 10px;
+    }
+}
 
 
 @media screen and (max-width: 768px) {
@@ -931,7 +956,7 @@ nav{
     .reset-password .left-col,
     .loggedout .left-col,
     .booked .left-col{
-        height: 60vh;
+        display: none;
     }
 
     .register .right-col,
@@ -941,7 +966,8 @@ nav{
     .loggedout .right-col,
     .booked .right-col
     {
-        margin-top: 0;
+        padding-top: 50px;
+        height: 100vh;
     }
 
     .login .form-container{
@@ -975,43 +1001,6 @@ nav{
     
 
 }
-
-/* ===========================Admin main page start=========================== */
-/* .custom-nav ul li{
-    padding: 10px 15px;
-}
-
-.admin-main .admin-box{
-    padding: 0 35%;
-}
-
-.admin-main h1{
-    text-align: center;
-    font-size: 60px;
-    font-weight: 600;
-    margin: 50px 0;
-}
-
-.admin-main .control-options{
-    display: flex;
-    flex-direction: column;
-    padding: 0 90px;
-    justify-content: center;
-
-}
-
-.admin-main .btn{
-    background-color: #CFA61E;
-    color: #f9f9f9;
-    font-size: 16px;
-    padding: 20px 0px;
-    margin-bottom: 40px;
-}
-
-.admin-main .btn:hover{
-    background-color: #d1ac47;
-    color: #f9f9f9;
-} */
 
 #sidebar {
     min-width: 300px;
