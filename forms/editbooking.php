@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <?php include '../navbar.php'; ?>
-<div class="container mt-5"></div>
+<div class="container mt-5 mb-5"></div>
 
 <div class="message" id="message"></div>
 

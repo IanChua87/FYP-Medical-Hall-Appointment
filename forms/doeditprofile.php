@@ -39,8 +39,14 @@ if(invalid_phone_number($phone)){
     exit();
 }
 
+
 $query = "UPDATE patient SET patient_email = ?, patient_phoneNo = ? WHERE patient_id = ?";
 $stmt = mysqli_prepare($conn, $query);
+if(check_patient_exists_by_email($conn,$email)){
+    $error = "Email is already taken by another patient.";
+    header("Location: editprofile.php?error=" . urlencode($error));
+    exit();
+}
 mysqli_stmt_bind_param($stmt, "sii", $email, $phone, $patient_id);
 
 
@@ -49,6 +55,8 @@ if (mysqli_stmt_execute($stmt)) {
 } else {
     $message = "An error occurred while updating the profile";
 }
+
+
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);

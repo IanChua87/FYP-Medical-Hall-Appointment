@@ -146,7 +146,7 @@ ob_end_flush();
 </head>
 <body>
     <?php include '../navbar.php'; ?>
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
         <?php if (isset($_GET['success']) && $_GET['success'] == 'true') { ?>
             <div class="alert alert-success" role="alert">
                 Appointment cancelled successfully!
