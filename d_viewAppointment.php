@@ -218,6 +218,8 @@ if (!isset($_SESSION["doctor_id"])) {
                 $('#submitAppointment').off('click').on('click', function () {
                     var remarks = $('#remarks').val().trim();
                     var isNumber = /^\d+$/.test(remarks);
+                    var hasText = /[a-zA-Z]/.test(remarks);
+                    var hasMixed = /^(?=.*[a-zA-Z])(?=.*\d).+$/.test(remarks);
 
                     // Reset error messages
                     $('.error').hide();
@@ -227,9 +229,18 @@ if (!isset($_SESSION["doctor_id"])) {
                         return;
                     }
 
+                    if (hasMixed) {
+                        $('#errorRemarksText').show();
+                        return;
+                    }
+
                     if (isNumber) {
                         $('#errorRemarksText').show();
                         return;
+                    }
+
+                    if (hasText && !isNumber) {
+                        $('#errorRemarksText').hide(); // Hide the error if only text is present
                     }
 
                     // AJAX call to save remarks to the database
@@ -260,6 +271,8 @@ if (!isset($_SESSION["doctor_id"])) {
                 $('#editAppointment').off('click').on('click', function () {
                     var remarks = $('#remarks').val().trim();
                     var isNumber = /^\d+$/.test(remarks);
+                    var hasText = /[a-zA-Z]/.test(remarks);
+                    var hasMixed = /^(?=.*[a-zA-Z])(?=.*\d).+$/.test(remarks);
 
                     // Reset error messages
                     $('.error').hide();
@@ -269,9 +282,18 @@ if (!isset($_SESSION["doctor_id"])) {
                         return;
                     }
 
+                    if (hasMixed) {
+                        $('#errorRemarksText').show();
+                        return;
+                    }
+
                     if (isNumber) {
                         $('#errorRemarksText').show();
                         return;
+                    }
+
+                    if (hasText && !isNumber) {
+                        $('#errorRemarksText').hide(); // Hide the error if only text is present
                     }
 
                     // AJAX call to save edited remarks to the database
@@ -299,6 +321,7 @@ if (!isset($_SESSION["doctor_id"])) {
         });
     });
 </script>
+
 </body>
 
 </html>
