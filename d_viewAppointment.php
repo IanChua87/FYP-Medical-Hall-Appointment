@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include "db_connect.php"; // Adjust the path based on your setup]
+include "db_connect.php"; // Adjust the path based on your setup
 session_start();
 
 // Check if doctor_id is set in the session
@@ -27,20 +27,17 @@ $settingsRow = mysqli_fetch_assoc($settingsResult);
 $appointmentDuration = $settingsRow['appointment_duration'];
 $newAppointmentDuration = $settingsRow['new_appointment_duration'];
 
-// Fetch appointments with patient name, status, and determine the duration based on patient status or relation
+// Fetch appointments with formatted start and end times
 $query = "
     SELECT 
         a.appointment_id,
         a.appointment_date, 
-        a.appointment_start_time, 
-        a.appointment_end_time,
+        DATE_FORMAT(a.appointment_start_time, '%H:%i') AS appointment_start_time, 
+        DATE_FORMAT(a.appointment_end_time, '%H:%i') AS appointment_end_time,
         p.patient_name,
         p.patient_status,
         r.relation_name,
-        CASE 
-            WHEN p.patient_status = 'new' OR r.relation_name IS NOT NULL THEN '30'
-            ELSE '$appointmentDuration'
-        END as duration
+        CONCAT(DATE_FORMAT(a.appointment_start_time, '%H:%i'), ' - ', DATE_FORMAT(a.appointment_end_time, '%H:%i')) AS duration
     FROM 
         appointment a
     JOIN 
@@ -69,6 +66,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 $appointments_json = json_encode($appointments);
 ob_end_flush();
 ?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -150,155 +150,159 @@ if (!isset($_SESSION["doctor_id"])) {
     <div id="calendar"></div>
 
     <!-- Modal Structure -->
-    <div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="appointmentForm">
-                        <div class="form-group">
-                            <label for="doctorName">Doctor Name</label>
-                            <input type="text" class="form-control" id="doctorName" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="duration">Duration (minutes)</label>
-                            <input type="number" class="form-control" id="duration" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="remarks">Remarks</label>
-                            <textarea class="form-control" id="remarks" rows="3"></textarea>
-                            <div class="error" id="errorRemarks">Please fill in the remarks</div>
-                            <div class="error" id="errorRemarksText">Only text allowed to be inputted</div>
-                        </div>
-                        <button type="button" id="submitAppointment" class="btn btn-primary">Submit</button>
-                        <button type="button" id="editAppointment" class="btn btn-secondary" style="display:none;">Edit</button>
-                    </form>
-                </div>
+<div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="appointmentModalLabel">Appointment Details</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="appointmentForm">
+                    <div class="form-group">
+                        <label for="doctorName">Doctor Name</label>
+                        <input type="text" class="form-control" id="doctorName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Start & End Time</label>
+                        <input type="text" class="form-control" id="duration" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="remarks">Remarks</label>
+                        <textarea class="form-control" id="remarks" rows="3"></textarea>
+                        <div class="error" id="errorRemarks">Please fill in the remarks</div>
+                        <div class="error" id="errorRemarksText">Only text allowed to be inputted</div>
+                    </div>
+                    <button type="button" id="submitAppointment" class="btn btn-primary">Submit</button>
+                    <button type="button" id="editAppointment" class="btn btn-secondary" style="display:none;">Edit</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        $(document).ready(function () {
-            var appointments = <?php echo $appointments_json; ?>;
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                defaultView: 'agendaWeek',
-                events: appointments,
-                timeFormat: 'h:mm A',
-                eventRender: function(event, element) {
-                    element.css('background-color', '#682924'); // Set the color of the appointment slot
-                    if (event.status === 'COMPLETED') {
-                        element.css('background-color', 'grey');
-                    }
-                },
-                eventClick: function (event) {
-                    $('#doctorName').val(event.doctor_name);
-                    $('#duration').val(event.duration);
-                    $('#remarks').val(event.description || ''); // Populate current remarks
-                    $('#appointmentModal').modal('show');
-
-                    if (event.status === 'COMPLETED') {
-                        $('#submitAppointment').hide();
-                        $('#editAppointment').show();
-                    } else {
-                        $('#submitAppointment').show();
-                        $('#editAppointment').hide();
-                    }
-
-                    $('#submitAppointment').off('click').on('click', function () {
-                        var remarks = $('#remarks').val().trim();
-                        var isNumber = /^\d+$/.test(remarks);
-
-                        // Reset error messages
-                        $('.error').hide();
-
-                        if (!remarks) {
-                            $('#errorRemarks').show();
-                            return;
-                        }
-
-                        if (isNumber) {
-                            $('#errorRemarksText').show();
-                            return;
-                        }
-
-                        // AJAX call to save remarks to the database
-                        $.ajax({
-                            url: 'forms/update_appointment.php',
-                            type: 'POST',
-                            data: {
-                                appointment_id: event.id, // Assuming you have appointment ID
-                                remarks: remarks,
-                                status: 'COMPLETED' // Mark the status as COMPLETED
-                            },
-                            success: function(response) {
-                                // Update the event in the calendar
-                                event.title = 'Completed by ' + event.doctor_name;
-                                event.description = remarks;
-                                event.status = 'COMPLETED'; // Update the status in the event object
-                                event.color = 'grey'; // Grey out the completed event
-                                $('#calendar').fullCalendar('updateEvent', event);
-
-                                $('#appointmentModal').modal('hide');
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    });
-
-                    $('#editAppointment').off('click').on('click', function () {
-                        var remarks = $('#remarks').val().trim();
-                        var isNumber = /^\d+$/.test(remarks);
-
-                        // Reset error messages
-                        $('.error').hide();
-
-                        if (!remarks) {
-                            $('#errorRemarks').show();
-                            return;
-                        }
-
-                        if (isNumber) {
-                            $('#errorRemarksText').show();
-                            return;
-                        }
-
-                        // AJAX call to save edited remarks to the database
-                        $.ajax({
-                            url: 'forms/update_appointment.php',
-                            type: 'POST',
-                            data: {
-                                appointment_id: event.id, // Assuming you have appointment ID
-                                remarks: remarks,
-                                status: 'COMPLETED' // Maintain the status as COMPLETED
-                            },
-                            success: function(response) {
-                                // Update the event in the calendar
-                                event.description = remarks;
-                                $('#calendar').fullCalendar('updateEvent', event);
-
-                                $('#appointmentModal').modal('hide');
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
-                    });
+<script>
+    $(document).ready(function () {
+        var appointments = <?php echo $appointments_json; ?>;
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'agendaWeek',
+            events: appointments,
+            timeFormat: 'h:mm A',
+            eventRender: function(event, element) {
+                element.css('background-color', '#682924'); // Set the color of the appointment slot
+                if (event.status === 'COMPLETED') {
+                    element.css('background-color', 'grey');
                 }
-            });
+            },
+            eventClick: function (event) {
+                $('#doctorName').val(event.doctor_name);
+                $('#duration').val(event.duration); // Populate duration
+                $('#remarks').val(event.description || ''); // Populate current remarks
+                $('#appointmentModal').modal('show');
+
+                if (event.status === 'COMPLETED') {
+                    $('#submitAppointment').hide();
+                    $('#editAppointment').show();
+                } else {
+                    $('#submitAppointment').show();
+                    $('#editAppointment').hide();
+                }
+
+                $('#submitAppointment').off('click').on('click', function () {
+                    var remarks = $('#remarks').val().trim();
+                    var isNumber = /^\d+$/.test(remarks);
+
+                    // Reset error messages
+                    $('.error').hide();
+
+                    if (!remarks) {
+                        $('#errorRemarks').show();
+                        return;
+                    }
+
+                    if (isNumber) {
+                        $('#errorRemarksText').show();
+                        return;
+                    }
+
+                    // AJAX call to save remarks to the database
+                    $.ajax({
+                        url: 'forms/update_appointment.php',
+                        type: 'POST',
+                        data: {
+                            appointment_id: event.id, // Assuming you have appointment ID
+                            remarks: remarks,
+                            status: 'COMPLETED' // Mark the status as COMPLETED
+                        },
+                        success: function(response) {
+                            // Update the event in the calendar
+                            event.title = 'Completed by ' + event.doctor_name;
+                            event.description = remarks;
+                            event.status = 'COMPLETED'; // Update the status in the event object
+                            event.color = 'grey'; // Grey out the completed event
+                            $('#calendar').fullCalendar('updateEvent', event);
+
+                            $('#appointmentModal').modal('hide');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                });
+
+                $('#editAppointment').off('click').on('click', function () {
+                    var remarks = $('#remarks').val().trim();
+                    var isNumber = /^\d+$/.test(remarks);
+
+                    // Reset error messages
+                    $('.error').hide();
+
+                    if (!remarks) {
+                        $('#errorRemarks').show();
+                        return;
+                    }
+
+                    if (isNumber) {
+                        $('#errorRemarksText').show();
+                        return;
+                    }
+
+                    // AJAX call to save edited remarks to the database
+                    $.ajax({
+                        url: 'forms/update_appointment.php',
+                        type: 'POST',
+                        data: {
+                            appointment_id: event.id, // Assuming you have appointment ID
+                            remarks: remarks,
+                            status: 'COMPLETED' // Maintain the status as COMPLETED
+                        },
+                        success: function(response) {
+                            // Update the event in the calendar
+                            event.description = remarks;
+                            $('#calendar').fullCalendar('updateEvent', event);
+
+                            $('#appointmentModal').modal('hide');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                });
+            }
         });
-    </script>
+    });
+</script>
 </body>
 
 </html>
+
+
+
+
