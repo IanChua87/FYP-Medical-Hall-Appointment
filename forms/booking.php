@@ -12,8 +12,6 @@ ob_end_flush();
     <title>Sin Nam Medical Hall | Appointment Booking</title>
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
-    
-
     <style>
         .booking {
             display: flex;
@@ -42,7 +40,6 @@ ob_end_flush();
         h2 {
             margin-bottom: 20px;
             text-align: center;
-            /* margin-top: 50px; */
         }
         h3 {
             text-align: center;
@@ -51,7 +48,7 @@ ob_end_flush();
         }
         .slots-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 2fr)); /* Adjust the width as needed */
+            grid-template-columns: repeat(auto-fill, minmax(220px, 2fr));
             gap: 20px;
             margin-top: 20px;
             margin-left: 20px;
@@ -134,11 +131,9 @@ ob_end_flush();
 
 <?php include '../navbar.php'; ?>
 <div class="container mt-5 mb-5">
-
 </div>
 
 <div class="message" id="message"></div>
-
 
 <div class="date-btn-container">
     <h2>Book an Appointment</h2>
@@ -151,14 +146,13 @@ ob_end_flush();
         </label>
     </div>
     <div class="hidden" id="relationField">
-    <select class="form-control" id="relation" name="relation" style="margin-bottom: 10px; width: 180px; height: 40px; padding: 5px;">
-        <option value="" disabled selected>Select Relationship</option>
-        <option value="family">Family</option>
-        <option value="friend">Friend</option>
-        <option value="relative">Relative</option>
-    </select>
-</div>
-
+        <select class="form-control" id="relation" name="relation" style="margin-bottom: 10px; width: 180px; height: 40px; padding: 5px;">
+            <option value="" disabled selected>Select Relationship</option>
+            <option value="family">Family</option>
+            <option value="friend">Friend</option>
+            <option value="relative">Relative</option>
+        </select>
+    </div>
 
     <input type="date" id="selectedDate" name="selectedDate" style="width: 180px; height: 30px" min="<?php echo date('Y-m-d'); ?>">
 </div>
@@ -195,115 +189,109 @@ ob_end_flush();
             relationField.classList.remove('hidden');
             relationInput.required = true;
         });
-       
     });
 </script>
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLX5HbYpZ8eylGk8PI6z7dSPyJS+pMS7l+cmDA6j6CmP1U8xjm0JEv1YtQT6V" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGgmTZ3lVarvT+LkB3r7SNF6phb5g2Ai3sbgJRMv2d/twvc1pdxDOXP8u3g" crossorigin="anonymous"></script>
 
 <script>
-$(document).ready(function() {
-    $('#selectedDate').on('change', function() {
-        var selectedDate = new Date($(this).val());
-        var today = new Date();
-        today.setHours(0, 0, 0, 0); // Set time to 00:00:00 for accurate comparison
+    $(document).ready(function() {
+        $('#selectedDate').on('change', function() {
+            var selectedDate = new Date($(this).val());
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
 
-        // Check if the selected date is in the past
-        if (selectedDate < today) {
-            $('#message').text('Please select a valid date.');
-            $('#slotContainer').empty(); // Clear the slot container
-            return; // Exit the function
-        }
+            if (selectedDate < today) {
+                $('#message').text('Please select a valid date.');
+                $('#slotContainer').empty();
+                return;
+            }
 
-        $('#slotContainer').html('<p>Loading...</p>');
-        $('#message').text('');
+            $('#slotContainer').html('<p>Loading...</p>');
+            $('#message').text('');
 
-        $.ajax({
-            url: 'getAvailableSlots.php',
-            method: 'POST',
-            data: { selectedDate: $(this).val() },
-            dataType: 'json',
-            success: function(response) {
-                var slotContainer = $('#slotContainer');
-                slotContainer.empty();
+            $.ajax({
+                url: 'getAvailableSlots.php',
+                method: 'POST',
+                data: { selectedDate: $(this).val() },
+                dataType: 'json',
+                success: function(response) {
+                    var slotContainer = $('#slotContainer');
+                    slotContainer.empty();
 
-                if (response.length > 0) {
-                    $.each(response, function(index, slot) {
-                        var slotButton = $('<button></button>')
-                            .text(slot.start + ' - ' + slot.end)
-                            .addClass('slot-button')
-                            .prop('disabled', slot.booked);
+                    if (response.length > 0) {
+                        $.each(response, function(index, slot) {
+                            var slotButton = $('<button></button>')
+                                .text(slot.start + ' - ' + slot.end)
+                                .addClass('slot-button')
+                                .prop('disabled', slot.booked);
 
-                        if (slot.booked) {
-                            slotButton.addClass('booked-slot');
-                        } else {
-                            var currentTime = new Date();
+                            if (slot.booked) {
+                                slotButton.addClass('booked-slot');
+                            } else {
+                                var currentTime = new Date();
 
-                            if (selectedDate.toDateString() === currentTime.toDateString()) {
-                                var slotStartTime = new Date(selectedDate);
-                                var slotEndTime = new Date(selectedDate);
+                                if (selectedDate.toDateString() === currentTime.toDateString()) {
+                                    var slotStartTime = new Date(selectedDate);
+                                    var slotEndTime = new Date(selectedDate);
 
-                                var startParts = slot.start.split(':');
-                                var endParts = slot.end.split(':');
+                                    var startParts = slot.start.split(':');
+                                    var endParts = slot.end.split(':');
 
-                                slotStartTime.setHours(startParts[0], startParts[1], 0, 0);
-                                slotEndTime.setHours(endParts[0], endParts[1], 0, 0);
+                                    slotStartTime.setHours(startParts[0], startParts[1], 0, 0);
+                                    slotEndTime.setHours(endParts[0], endParts[1], 0, 0);
 
-                                if (slotStartTime <= currentTime) {
-                                    slotButton.prop('disabled', true).addClass('booked-slot');
+                                    if (slotStartTime <= currentTime) {
+                                        slotButton.prop('disabled', true).addClass('booked-slot');
+                                    }
+                                }
+
+                                if (!slotButton.prop('disabled')) {
+                                    slotButton.addClass('available-slot');
+                                    slotButton.on('click', function() {
+                                        populateModal(slot.start, slot.end);
+                                        var bookingModal = new bootstrap.Modal(document.getElementById('bookingmodal'));
+                                        bookingModal.show();
+                                    });
                                 }
                             }
 
-                            if (!slotButton.prop('disabled')) {
-                                slotButton.addClass('available-slot');
-                                slotButton.on('click', function() {
-                                    populateModal(slot.start, slot.end);
-                                    var bookingModal = new bootstrap.Modal(document.getElementById('bookingmodal'));
-                                    bookingModal.show();
-                                });
-                            }
-                        }
+                            slotContainer.append(slotButton);
+                        });
+                    } else {
+                        var alertDiv = $('<div></div>')
+                            .addClass('alert alert-danger')
+                            .attr('role', 'alert')
+                            .text('Sin Nam Medical Hall is not open on this day');
 
-                        slotContainer.append(slotButton);
-                    });
-                } else {
-                    var alertDiv = $('<div></div>')
-                        .addClass('alert alert-danger')
-                        .attr('role', 'alert')
-                        .text('Sin Nam Medical Hall is not open on this day');
-
-                    $('#message').html(alertDiv);
+                        $('#message').html(alertDiv);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#slotContainer').html('<p>Error fetching slots. Please try again later.</p>');
+                    console.error('Error fetching slots:', error);
                 }
-            },
-            error: function(xhr, status, error) {
-                $('#slotContainer').html('<p>Error fetching slots. Please try again later.</p>');
-                console.error('Error fetching slots:', error);
-            }
+            });
         });
     });
-});
 
-function populateModal(startTime, endTime) {
-    const timeslot = startTime + " - " + endTime;
-    document.getElementById('timeslot').value = timeslot; // Populate timeslot field
-    document.getElementById('modalApptDate').value = document.getElementById('selectedDate').value; // Populate appointment date
+    function populateModal(startTime, endTime) {
+        const timeslot = startTime + " - " + endTime;
+        document.getElementById('timeslot').value = timeslot;
+        document.getElementById('modalApptDate').value = document.getElementById('selectedDate').value;
 
-    // Check which radio button is selected and populate modal fields accordingly
-    const options = document.querySelector('input[name="options"]:checked');
-    if (options && options.value === '2') { // If 'others' is selected
-        document.getElementById('modalRelation').value = document.getElementById('relation').value; // Populate relation field
-    } else {
-        document.getElementById('modalRelation').value = ''; // Clear relation field if 'self' is selected (optional)
+        const options = document.querySelector('input[name="options"]:checked');
+        if (options && options.value === '2') {
+            document.getElementById('modalRelation').value = document.getElementById('relation').value;
+        } else {
+            document.getElementById('modalRelation').value = '';
+        }
+
+        document.getElementById('modalOptions').value = options ? options.value : '';
     }
-
-    // Ensure modal options field is set to the selected radio button value
-    document.getElementById('modalOptions').value = options ? options.value : ''; 
-}
 </script>
-
 
 <!-- The Modal -->
 <div class="modal fade" id="bookingmodal" tabindex="-1" aria-labelledby="bookingmodalLabel" aria-hidden="true">
@@ -339,26 +327,6 @@ function populateModal(startTime, endTime) {
     </div>
 </div>
 
-<script>
-function populateModal(startTime, endTime) {
-    const timeslot = startTime + " - " + endTime;
-    document.getElementById('timeslot').value = timeslot; // Populate timeslot field
-    document.getElementById('modalApptDate').value = document.getElementById('selectedDate').value; // Populate appointment date
-
-    // Check which radio button is selected and populate modal fields accordingly
-    const options = document.querySelector('input[name="options"]:checked');
-    if (options && options.value === '2') { // If 'others' is selected
-        document.getElementById('modalRelation').value = document.getElementById('relation').value; // Populate relation field
-    } else {
-        document.getElementById('modalRelation').value = ''; // Clear relation field if 'self' is selected (optional)
-    }
-
-    // Ensure modal options field is set to the selected radio button value
-    document.getElementById('modalOptions').value = options ? options.value : ''; 
-}
-
-
-    </script>
 
 
 </body>
