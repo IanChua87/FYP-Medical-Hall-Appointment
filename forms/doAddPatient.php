@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $status = "New";
+    $status = "NEW";
     $last_updated_datetime = date('Y-m-d H:i:s');
     $payment_status = "UNPAID";
     $amount_payable = 50.00;
@@ -70,41 +70,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-
-    // $select_query = "SELECT * FROM patient WHERE patient_name = ?";
-    // $select_stmt = mysqli_prepare($conn, $select_query);
-
-    // if (!$select_stmt) {
-    //     die("Failed to prepare statement");
-    // } 
-    // else {
-    //     mysqli_stmt_bind_param($select_stmt, 's', $patient_name);
-    //     mysqli_stmt_execute($select_stmt);
-    //     $select_result = mysqli_stmt_get_result($select_stmt);
-
-    //     if (mysqli_num_rows($select_result) > 0) {
-    //         $_SESSION['error'] = "Failed to add patient, patient already exists.";
-    //     } else {
-    //         $insert_query = "INSERT INTO patient (patient_dob, patient_phoneNo, patient_email, patient_password, patient_name, patient_status, last_updated_by, last_updated_datetime, payment_status, amount_payable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    //         $patient_stmt = mysqli_prepare($conn, $insert_query);
-
-    //         if (!$patient_stmt) {
-    //             die("Failed to prepare statement");
-    //         } else {
-    //             mysqli_stmt_bind_param($patient_stmt, 'ssssssssss', $dob, $phone_number, $email, $hashed_password, $patient_name, $def_patient_status, $_SESSION['admin_role'], $current_date, $def_payment_status, $def_payment_amt);
-
-    //             if (mysqli_stmt_execute($patient_stmt)) {
-    //                 $_SESSION['error'] = "Patient successfully added.";
-    //                 header("Location: patientDetails.php");
-    //                 exit();
-    //             } else {
-    //                 $_SESSION['error'] = "Failed to add patient." . mysqli_stmt_error($patient_stmt);
-    //             }
-
-    //             mysqli_stmt_close($patient_stmt);
-    //         }
-    //     }
-    // }
+    
 } else {
     header("Location: patientDetails.php");
     exit();

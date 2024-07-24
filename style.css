@@ -1277,7 +1277,7 @@ nav {
 }
 
 .content .card.p-table-row {
-    padding: 15px 10px 10px 0;
+    padding: 0 10px 10px 0;
 }
 
 .content .card.p-table-row {
@@ -1286,8 +1286,8 @@ nav {
 }
 
 .content .p-table-row .card-title {
-    font-size: 28px;
-    font-weight: 550;
+    font-size: 30px;
+    font-weight: 600;
 
 }
 

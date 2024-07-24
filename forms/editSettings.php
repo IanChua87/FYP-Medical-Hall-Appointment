@@ -37,11 +37,12 @@ ob_end_flush();
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../style.css" />
     <style>
-        #sidebar{
+        #sidebar {
             height: 1250px;
         }
 
-        .session-msg-success, .session-msg-error {
+        .session-msg-success,
+        .session-msg-error {
             margin-top: 20px;
             text-align: center;
             padding: 10px;
@@ -71,6 +72,7 @@ ob_end_flush();
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class=""><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
                 <li class="active"><a href="settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li class=""><a href="viewHoliday.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Holiday</a></li>
                 <div class="sidebar-separator"></div>
                 <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
@@ -78,9 +80,9 @@ ob_end_flush();
 
         <div class="content" id="content">
             <div class="settings">
-            <?php include '../sessionMsg.php' ?>
+                <?php include '../sessionMsg.php' ?>
                 <div class="settings-box">
-                        <h1>Settings</h1>
+                    <h1>Settings</h1>
                     <div class="settings-group">
                         <form action="doEditSettings.php" method="POST">
                             <div class="form-group row mb-5">

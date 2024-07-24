@@ -70,12 +70,14 @@ ob_end_flush();
                 <li class=""><a href="checkQueue.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
                 <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
-                <li class="active"><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
-                <li class=""><a href="editSettings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li class=""><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class="active"><a href="settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li class=""><a href="viewHoliday.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Holiday</a></li>
                 <div class="sidebar-separator"></div>
                 <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
         </div>
+
         <div class="appointment" id="appointment">
             <div class="container">
                 <div class="profile-details">
@@ -107,6 +109,19 @@ ob_end_flush();
                             </label>
                             <input type="text" name="appointment_start_time" id="appointment_time" class="form-control" value="<?php echo $appointment_time ?>">
                         </div>
+
+                        <!-- <div class="form-group mb-3">
+                            <label for="relation">
+                                <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Relation:
+                                <span class="required-text">(required)</span>
+                            </label>
+                            <select name="relation" id="relation" class="form-control">
+                                <option value="select">Select Relation</option>
+                                <option value="family">Family</option>
+                                <option value="friend">Friend</option>
+                                <option value="relative">Relative</option>
+                            </select>
+                        </div> -->
 
                         <div class="form-group mb-3">
                             <label for="appointment_status">

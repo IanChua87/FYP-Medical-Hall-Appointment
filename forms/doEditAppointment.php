@@ -18,6 +18,7 @@ if(isset($_POST['submit'])){
     $appointment_status = $_POST['appointment_status'];
     $booked_datetime = date('Y-m-d H:i:s');
     $queue_no = $_POST['queue_no'];
+    // $relation = $_POST['relation'];
 
 
     if(check_appointment_exists_by_id($conn, $appointment_id) !== false ){

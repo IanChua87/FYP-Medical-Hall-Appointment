@@ -9,27 +9,20 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
     exit();
 }
-
-ob_end_flush();
 ?>
 
 <?php
-$query = "SELECT * FROM appointment ORDER BY queue_no DESC LIMIT 1";
-$stmt = mysqli_prepare($conn, $query);
-if (!$stmt) {
-    die("Failed to prepare statement");
+$query = "SELECT settings_key, settings_value FROM settings";
+$result = mysqli_query($conn, $query);
+if (!$result) {
+    die("Failed to fetch settings: " . mysqli_error($conn));
 } else {
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $queue_no = $row['queue_no'];
-    } else {
-        $queue_no = 0;
+    $settings = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $settings[$row['settings_key']] = $row['settings_value'];
     }
-    $latest_queue_no = $queue_no + 1;
 }
-ob_start();
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +43,7 @@ ob_start();
             position: fixed;
         }
 
-        .appointment .buttons{
+        .appointment .buttons {
             display: flex;
             justify-content: flex-end;
         }
@@ -66,16 +59,17 @@ ob_start();
             </div>
             <ul class="mt-3">
                 <li class=""><a href="../adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="lastQueueNo.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> View Queue No.</a></li>
+                <li class=""><a href="checkQueue.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
                 <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
-                <li class="active"><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
-                <li class=""><a href="settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li class=""><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class="active"><a href="settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
+                <li class=""><a href="viewHoliday.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Holiday</a></li>
                 <div class="sidebar-separator"></div>
                 <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
         </div>
-        
+
         <div class="appointment" id="appointment">
             <div class="container">
                 <div class="profile-details">
@@ -115,12 +109,9 @@ ob_start();
                             </label>
                             <select name="relation" id="relation" class="form-control">
                                 <option value="select">Select Relation</option>
-                                <option value="parent">Parent</option>
-                                <option value="sibling">Sibling</option>
-                                <option value="child">Child</option>
-                                <option value="spouse">Spouse</option>
+                                <option value="family">Family</option>
                                 <option value="friend">Friend</option>
-                                <option value="other">Other</option>
+                                <option value="relative">Relative</option>
                             </select>
                         </div>
 

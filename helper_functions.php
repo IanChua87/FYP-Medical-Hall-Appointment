@@ -514,3 +514,43 @@ function email_exists_for_other_user($conn, $email, $user_id) {
     return false;
 }
 
+function update_patient_status($conn, $status, $patient_id)
+{
+    $update = "UPDATE patient SET patient_status = ? WHERE patient_id = ?";
+    $update_stmt = mysqli_prepare($conn, $update);
+    mysqli_stmt_bind_param($update_stmt, "si", $status, $patient_id);
+
+    //execute the prepared statement
+    mysqli_stmt_execute($update_stmt);
+}
+
+function count_appointments($conn, $patient_id) {
+    // SQL query to count the number of upcoming appointments for the patient
+    $query = "SELECT COUNT(*) AS appointment_count 
+              FROM appointment 
+              WHERE patient_id = ? AND appointment_status = 'UPCOMING'";
+    
+    // Prepare the SQL statement
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt === false) {
+        die('MySQL prepare error: ' . mysqli_error($conn));
+    }
+
+    // Bind the patient_id parameter
+    mysqli_stmt_bind_param($stmt, "i", $patient_id);
+
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
+
+    // Bind the result to a variable
+    mysqli_stmt_bind_result($stmt, $appointment_count);
+
+    // Fetch the result
+    mysqli_stmt_fetch($stmt);
+
+    // Close the statement
+    mysqli_stmt_close($stmt);
+
+    return $appointment_count;
+}
