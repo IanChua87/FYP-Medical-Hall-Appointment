@@ -12,17 +12,22 @@ if (!isset($_SESSION['admin_id'])) {
 ?>
 
 <?php
-$query = "SELECT settings_key, settings_value FROM settings";
-$result = mysqli_query($conn, $query);
-if (!$result) {
-    die("Failed to fetch settings: " . mysqli_error($conn));
+$query = "SELECT * FROM appointment ORDER BY queue_no DESC LIMIT 1";
+$stmt = mysqli_prepare($conn, $query);
+if (!$stmt) {
+    die("Failed to prepare statement");
 } else {
-    $settings = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $settings[$row['settings_key']] = $row['settings_value'];
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $queue_no = $row['queue_no'];
+    } else {
+        $queue_no = 0;
     }
+    $latest_queue_no = $queue_no + 1;
 }
-ob_end_flush();
+ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +64,7 @@ ob_end_flush();
             </div>
             <ul class="mt-3">
                 <li class=""><a href="../adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="checkQueue.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
+                <li class=""><a href="queueDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
                 <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class=""><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
@@ -137,7 +142,7 @@ ob_end_flush();
     $(document).ready(function() {
         var today = new Date();
         $('#appointment_date').datepicker({
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'dd/mm/yy',
             beforeShowDay: function(date) {
                 var day = date.getDay();
                 return [(day !== 1 && day !== 0), ''];

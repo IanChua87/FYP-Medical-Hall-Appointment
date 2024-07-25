@@ -29,12 +29,16 @@ ob_end_flush();
             word-wrap: break-word;
         }
 
-        .session-msg-success{
+        .session-msg-success {
             margin-top: 20px;
         }
 
         #dt-length-0 label {
             font-size: 10px;
+        }
+
+        #sidebar {
+            max-height: 2000px;
         }
     </style>
 </head>
@@ -44,8 +48,8 @@ ob_end_flush();
         $(document).ready(function() {
             $('#table').DataTable({
                 "pagingType": "numbers",
-                "pageLength": 10,
-                "lengthMenu": [10, 25, 50, 75],
+                "pageLength": 6,
+                "lengthMenu": [6, 12],
             });
         });
     </script>
@@ -57,7 +61,7 @@ ob_end_flush();
             </div>
             <ul class="mt-3">
                 <li class=""><a href="../adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="checkQueue.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
+                <li class=""><a href="queueDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
                 <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class="active"><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
@@ -79,6 +83,13 @@ ob_end_flush();
                     <div class="table-card">
                         <div class="table-responsive">
                             <table class="table table-striped" id="table">
+                                <!-- <div class="filter-dropdown mb-1 w-20">
+                                    <select class="form-select" id="filterStatus" onchange="filterAppointments()">
+                                        <option value="UPCOMING" <?php echo (!isset($_GET['status']) || $_GET['status'] == 'UPCOMING') ? 'selected' : ''; ?>>Upcoming</option>
+                                        <option value="CANCELLED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'CANCELLED') ? 'selected' : ''; ?>>Cancelled</option>
+                                        <option value="COMPLETED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'COMPLETED') ? 'selected' : ''; ?>>Completed</option>
+                                    </select>
+                                </div> -->
                                 <thead class="table-primary">
                                     <tr>
                                         <th>Patient Name</th>
@@ -92,7 +103,7 @@ ob_end_flush();
 
                                 <tbody>
                                     <?php
-                                    $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'Completed' ORDER BY appointment_id ASC";
+                                    $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'COMPLETED' AND A.appointment_status != 'CANCELLED' ORDER BY appointment_id ASC";
                                     $appointment_stmt = mysqli_prepare($conn, $query);
                                     if (!$appointment_stmt) {
                                         die("Failed to prepare statement");
@@ -106,8 +117,8 @@ ob_end_flush();
                                                 echo "<tr>";
                                                 echo "<td>" . $row['patient_name'] . "</td>";
                                                 echo "<td>" . $row['patient_phoneNo'] . "</td>";
-                                                echo "<td>" . $row['appointment_date'] . "</td>";
-                                                echo "<td>" . $row['appointment_start_time'] . "</td>";
+                                                echo "<td>" . date("d/m/Y", strtotime($row['appointment_date'])) . "</td>";
+                                                echo "<td>" . date("H:i", strtotime($row['appointment_start_time'])) . "</td>";
                                                 echo "<td>" . $row['appointment_status'] . "</td>";
                                                 echo "<td>
                                             <div class='buttons'>

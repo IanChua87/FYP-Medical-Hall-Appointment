@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
-    $dob = $_POST['dob'];
+    $dob = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['dob'])));
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = $_POST['password'];

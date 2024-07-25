@@ -208,7 +208,7 @@ ob_end_flush();
     <?php
 
     echo '
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container"> ' ?>
     <?php if (!isset($_SESSION["patient_id"])) { ?>
         <a class="navbar-brand" href="../index.php">

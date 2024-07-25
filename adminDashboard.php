@@ -29,7 +29,7 @@
             </div>
             <ul class="mt-3">
                 <li class="active"><a href="adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="forms/checkQueue.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
+                <li class=""><a href="forms/queueDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
                 <li class=""><a href="forms/staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="forms/patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class=""><a href="forms/appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
@@ -161,7 +161,7 @@
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            color: '#ff0000', // Y-axis label color (red)
+                            color: 'black', // Y-axis label color (red)
                             font: {
                                 size: 14 // Change font size if needed
                             }
@@ -169,20 +169,27 @@
                         title: {
                             display: true,
                             text: 'Number of Items',
-                            color: '#ff0000' // Y-axis title color (red)
+                            color: '#682924' // Y-axis title color (red)
                         }
                     },
                     x: {
                         ticks: {
-                            color: '#ff0000', // X-axis label color (red)
+                            color: '#black', // X-axis label color (red)
                             font: {
-                                size: 14 // Change font size if needed
+                                size: 13 // Change font size if needed
                             }
                         },
                         title: {
                             display: true,
                             text: 'Categories',
-                            color: '#ff0000' // X-axis title color (red)
+                            color: '#682924',
+                            font:{
+                                size: 16
+                            },
+                            padding: {
+                                top: 30
+                            }
+                            // X-axis title color (red)
                         }
                     }
                 },
@@ -190,9 +197,9 @@
                 plugins: {
                     legend: {
                         labels: {
-                            color: '#ff0000', // Legend label color (red)
+                            color: 'hsl(210, 6%, 58%)', // Legend label color (red)
                             font: {
-                                size: 17
+                                size: 16
                             }
                         }
                     }

@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     mysqli_stmt_bind_param($update_stmt, 'si', $date, $id);
 
     foreach ($holiday_ids as $id) {
-        $date = $_POST['holiday_date_' . $id];
+        $date = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['holiday_date_' . $id])));
 
         if (!mysqli_stmt_execute($update_stmt)) {
             die("Failed to execute statement: " . mysqli_stmt_error($update_stmt));

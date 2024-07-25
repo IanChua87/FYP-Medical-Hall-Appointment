@@ -1692,7 +1692,6 @@ label.queue_label {
 }
 
 .queue_no-wrapper {
-    max-width: 170px;
     border: 1px solid #ccc;
     margin: 0 auto;
     padding: 20px;
@@ -1703,7 +1702,7 @@ label.queue_label {
 }
 
 .queue_no {
-    font-size: 90px;
+    font-size: 56px;
     font-weight: 600;
     text-align: center;
 }

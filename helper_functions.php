@@ -522,6 +522,7 @@ function update_patient_status($conn, $status, $patient_id)
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);
+
 }
 
 function count_appointments($conn, $patient_id) {
@@ -540,17 +541,64 @@ function count_appointments($conn, $patient_id) {
     // Bind the patient_id parameter
     mysqli_stmt_bind_param($stmt, "i", $patient_id);
 
-    // Execute the statement
     mysqli_stmt_execute($stmt);
 
-    // Bind the result to a variable
     mysqli_stmt_bind_result($stmt, $appointment_count);
 
-    // Fetch the result
     mysqli_stmt_fetch($stmt);
 
-    // Close the statement
     mysqli_stmt_close($stmt);
 
     return $appointment_count;
+}
+
+function cancel_past_appointments($conn) {
+    // SQL query to cancel past appointments
+    $query = "UPDATE appointment 
+              SET appointment_status = 'CANCELLED' 
+              WHERE appointment_status = 'UPCOMING' AND appointment_date < CURDATE()";
+    
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt === false) {
+        die('MySQL prepare error: ' . mysqli_error($conn));
+    }
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+}
+
+function reset_queue_number_for_next_day($conn){
+    $query = "UPDATE appointment SET queue_no = 0 WHERE appointment_date = CURDATE()";
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt === false) {
+        die('MySQL prepare error: ' . mysqli_error($conn));
+    }
+
+    if (mysqli_stmt_execute($stmt) === false) {
+        die('MySQL execute error: ' . mysqli_stmt_error($stmt));
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+function check_latest_queue_no($conn){
+    $query = "SELECT MAX(queue_no) AS latest_queue_no FROM appointment WHERE appointment_date = CURDATE()";
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt === false) {
+        die('MySQL prepare error: ' . mysqli_error($conn));
+    }
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt, $latest_queue_no);
+
+    mysqli_stmt_fetch($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    return $latest_queue_no;
 }

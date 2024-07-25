@@ -14,8 +14,9 @@ if (!isset($_SESSION['admin_id'])) {
 if (isset($_POST['submit'])) {
     $patient_email = $_POST['email'];
     $appointment_status = "UPCOMING";
-    $appointment_date = $_POST['appointment_date'];
-    $appointment_start_time = $_POST['appointment_time'];
+    $appointment_date = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['appointment_date'])));
+    // $appointment_start_time = $_POST['appointment_time'];
+    $appointment_start_time = date('H:i:s', strtotime($appointment_start_time));
     $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 900); // Assuming 15 minutes duration
     $queue_no = $_POST['queue'];
     $appointment_remark = "";

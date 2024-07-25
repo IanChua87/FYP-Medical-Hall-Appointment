@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin_id'])) {
 if (isset($_POST['submit'])) {
     $patient_id = $_POST['patient_id'];
     $patient_name = $_POST['name'];
-    $dob = $_POST['dob'];
+    $dob = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['dob'])));
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $payment_status = $_POST['payment_status'];
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (invalid_phone_number($phone) !== false) {
-        $_SESSION['error'] = "Only numbers allowed in phone number.";
+        $_SESSION['error'] = "Only numbers allowed in phone number and minimum number of characters must be 8.";
         header("Location: editPatient.php?patient_id=" . $patient_id);
         exit();
     }
