@@ -83,6 +83,13 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    if(check_patient_phone_exists($conn, $phone) !== false){
+        $_SESSION['error'] = "Phone number already exists.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
     mysqli_close($conn);
 }
 ob_end_flush();

@@ -64,15 +64,6 @@ function check_empty_appointment_input_fields($email, $date, $time)
     }
 }
 
-function check_empty_queue_input_field($queue_no)
-{
-    if (empty($queue_no)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 function check_contact_us_input_fields($name, $email, $message)
 {
     if (empty($name) || empty($email) || empty($message)) {
@@ -165,6 +156,46 @@ function check_patient_exists_by_email($conn, $email)
         die("Failed to prepare statement");
     } else {
         mysqli_stmt_bind_param($patient_stmt, "s", $email);
+        mysqli_stmt_execute($patient_stmt);
+        $p_result = mysqli_stmt_get_result($patient_stmt);
+
+        if ($p_user_data = mysqli_fetch_assoc($p_result)) {
+            return $p_user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
+function check_patient_phone_exists($conn, $phone)
+{
+    $p_query = "SELECT * FROM patient WHERE patient_phoneNo = ?";
+    $patient_stmt = mysqli_prepare($conn, $p_query);
+
+    if (!$patient_stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($patient_stmt, "s", $phone);
+        mysqli_stmt_execute($patient_stmt);
+        $p_result = mysqli_stmt_get_result($patient_stmt);
+
+        if ($p_user_data = mysqli_fetch_assoc($p_result)) {
+            return $p_user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
+function check_patient_password($conn, $password, $patient_id)
+{
+    $p_query = "SELECT * FROM patient WHERE patient_password = ? AND patient_id = ?";
+    $patient_stmt = mysqli_prepare($conn, $p_query);
+
+    if (!$patient_stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($patient_stmt, "si", $password, $patient_id);
         mysqli_stmt_execute($patient_stmt);
         $p_result = mysqli_stmt_get_result($patient_stmt);
 
@@ -585,7 +616,7 @@ function reset_queue_number_for_next_day($conn){
 }
 
 function check_latest_queue_no($conn){
-    $query = "SELECT MAX(queue_no) AS latest_queue_no FROM appointment WHERE appointment_date = CURDATE()";
+    $query = "SELECT MAX(queue_no) AS latest_queue_no FROM appointment WHERE appointment_date < CURDATE()";
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt === false) {

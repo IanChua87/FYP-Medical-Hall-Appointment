@@ -35,6 +35,12 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
+    if(check_patient_password($conn, $password, $patient_id) !== false){
+        $_SESSION['error'] = "Password cannot be the same as the current password.";
+        header("Location: resetPatientPassword.php?patient_id=" . $patient_id);
+        exit();
+    }
+
     if (update_patient_password($conn, $password, $patient_id) !== false) {
         $_SESSION['message'] = "Updated patient password successfully.";
         header("Location: patientDetails.php");
@@ -44,6 +50,7 @@ if (isset($_POST['submit'])) {
         header("Location: resetPatientPassword.php?patient_id=" . $patient_id);
         exit();
     }
+
 } else {
     $_SESSION['error'] = "Invalid request.";
     header("Location: patientDetails.php");
