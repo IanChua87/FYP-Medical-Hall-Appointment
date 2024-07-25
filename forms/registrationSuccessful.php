@@ -21,8 +21,8 @@ if (isset($_POST['submit'])) {
     $last_updated_by = "Admin";
     $last_updated_datetime = date("Y-m-d H:i:s");
     $payment_status = "UNPAID";
-    $amount_payable = 50.00;
-    $is_verified = 1;
+    $amount_payable = 0.00;
+    $is_verified = 0;
 
 
     if (check_empty_register_input_fields($name, $email, $password, $confirm_password, $dob, $phone)) {

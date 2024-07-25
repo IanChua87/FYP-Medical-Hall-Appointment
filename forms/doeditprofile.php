@@ -40,7 +40,7 @@ if(invalid_phone_number($phone)){
 }
 
 
-$query = "UPDATE patient SET patient_email = ?, patient_phoneNo = ? WHERE patient_id = ?";
+$query = "UPDATE patient SET patient_email = ?, patient_phoneNo = ?, last_updated_by = patient_name WHERE patient_id = ?";
 $stmt = mysqli_prepare($conn, $query);
 if(check_patient_exists_by_email($conn,$email)){
     $error = "Email is already taken by another patient.";
