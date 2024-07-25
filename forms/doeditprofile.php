@@ -38,6 +38,11 @@ if(invalid_phone_number($phone)){
     header("Location: editprofile.php?error=" . urlencode($error));
     exit();
 }
+if(check_patient_phone_exists($conn, $phone)){
+    $error = "Phone number is already taken by another patient.";
+    header("Location: editprofile.php?error=" . urlencode($error));
+    exit();
+}
 
 
 $query = "UPDATE patient SET patient_email = ?, patient_phoneNo = ?, last_updated_by = patient_name WHERE patient_id = ?";
