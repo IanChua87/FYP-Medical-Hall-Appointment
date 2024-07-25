@@ -1,3 +1,43 @@
+<?php
+ob_start();
+session_start();
+include "db_connect.php";
+include "helper_functions.php";
+
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Query setup
+$count_query = [
+    "SELECT COUNT(*) AS patient_count FROM patient",
+    "SELECT COUNT(*) AS staff_count FROM users",
+    "SELECT COUNT(*) AS appointments_count FROM appointment"
+];
+
+// Fetch data
+$data = [];
+$data['patients'] = getCount($conn, $count_query[0]);
+$data['staff'] = getCount($conn, $count_query[1]);
+$data['appointments'] = getCount($conn, $count_query[2]);
+
+$labels = ["Patients", "Staff", "Appointments"];
+$data_values = [$data['patients'], $data['staff'], $data['appointments']];
+
+// Close connection
+mysqli_close($conn);
+
+// foreach($count_query as $query){
+//     $result = mysqli_query($conn, $query);
+//     $data = mysqli_fetch_assoc($result);
+//     $patients[] = $data['patient_count'];
+//     $staff[] = $data['staff_count'];
+//     $appointments[] = $data['appointments_count'];
+// }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -126,6 +166,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
         import {
             Colors
@@ -133,7 +174,7 @@
         Chart.register(Colors);
     </script>
 
-<script>
+    <script>
     $(document).ready(function() {
         // Initialize the chart
         const ctx = document.getElementById('myChart').getContext('2d');
@@ -141,19 +182,13 @@
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Patient', 'Appointment', 'Staff'],
+                labels: <?php echo json_encode($labels); ?>,
                 datasets: [{
-                        label: '# ongoing patients and appointments',
-                        data: [12, 19, 3],
+                        label: 'ongoing patients, staff and appointments',
+                        data: <?php echo json_encode($data_values); ?>,
                         borderWidth: 0,
                         backgroundColor: ['#28a745', '#007bff', '#ffc107']
                     },
-                    {
-                        label: '# completed patients and appointments',
-                        data: [10, 15, 5],
-                        borderWidth: 0,
-                        backgroundColor: ['#28a745', '#007bff', '#ffc107']
-                    }
                 ]
             },
             options: {
@@ -174,7 +209,7 @@
                     },
                     x: {
                         ticks: {
-                            color: '#black', // X-axis label color (red)
+                            color: 'black',
                             font: {
                                 size: 13 // Change font size if needed
                             }
@@ -189,15 +224,15 @@
                             padding: {
                                 top: 30
                             }
-                            // X-axis title color (red)
                         }
                     }
+                    
                 },
                 responsive: true,
                 plugins: {
                     legend: {
                         labels: {
-                            color: 'hsl(210, 6%, 58%)', // Legend label color (red)
+                            color: 'black', 
                             font: {
                                 size: 16
                             }
@@ -224,42 +259,6 @@
             $(".info").click(function() {
                 window.location.href = $(this).data("href");
             });
-
-            // Fetch data and render Chart.js chart
-            // $.ajax({
-            //     url: 'fetch_patient_data.php',
-            //     method: 'GET',
-            //     dataType: 'json',
-            //     success: function(data) {
-            //         const labels = data.map(item => item.date);
-            //         const values = data.map(item => item.patient_count);
-
-            //         const ctx = $('#myChart')[0].getContext('2d');
-            //         new Chart(ctx, {
-            //             type: 'bar',
-            //             data: {
-            //                 labels: labels,
-            //                 datasets: [{
-            //                     label: 'Number of Patients',
-            //                     data: values,
-            //                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            //                     borderColor: 'rgba(75, 192, 192, 1)',
-            //                     borderWidth: 1
-            //                 }]
-            //             },
-            //             options: {
-            //                 scales: {
-            //                     y: {
-            //                         beginAtZero: true
-            //                     }
-            //                 }
-            //             }
-            //         });
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.error('Error fetching data:', error);
-            //     }
-            // });
         });
     </script>
 </body>

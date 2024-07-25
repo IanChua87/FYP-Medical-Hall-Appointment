@@ -13,7 +13,6 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $confirm_password = $_POST['confirm_password'];
     $dob = $_POST['dob'];
     $phone = $_POST['phone'];
@@ -83,7 +82,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    if(check_patient_phone_exists($conn, $phone) !== false){
+    if (check_patient_phone_exists($conn, $phone) !== false) {
         $_SESSION['error'] = "Phone number already exists.";
         $_SESSION['form_data'] = $_POST;
         header("Location: register.php");
@@ -115,7 +114,7 @@ ob_end_flush();
                 </div>
                 <div class="col-sm-12 col-sm-12 col-lg-4 text-black right-col">
                     <div class="verified-box">
-                        <img src="../img/tick-verification.svg" alt="Tick logo symbol" style="margin-right: 10px;"/>
+                        <img src="../img/tick-verification.svg" alt="Tick logo symbol" style="margin-right: 10px;" />
                         <?php echo $msg ?>
                         <div class="mt-3">
                             <a href="login.php" class="btn login-btn">Login</a>

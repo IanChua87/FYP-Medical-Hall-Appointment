@@ -633,3 +633,14 @@ function check_latest_queue_no($conn){
 
     return $latest_queue_no;
 }
+
+
+function getCount($conn, $query) {
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return (int)$row[array_key_first($row)]; // Get the first key's value
+    } else {
+        return 0;
+    }
+}
