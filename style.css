@@ -746,9 +746,9 @@ nav {
 }
 
 .login .login-error-msg {
-    color: #f4f4f4;
+    color: #fa0101;
     font-size: 15px;
-    margin-top: 500px;
+    margin-bottom: 500px;
     position: fixed;
 
 }
