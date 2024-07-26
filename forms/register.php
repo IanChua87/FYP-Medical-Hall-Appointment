@@ -40,7 +40,6 @@ unset($_SESSION['form_data']);
 </head>
 
 <body>
-    <?php include '../navbar.php'; ?>
     <section class="register">
         <div class="container-fluid h-100">
             <div class="row">

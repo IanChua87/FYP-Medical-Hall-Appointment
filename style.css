@@ -653,7 +653,7 @@ nav {
 }
 
 .reg-error-msg {
-    color: #16a2ff;
+    color: #f4f4f4;
     font-size: 16px;
     position: fixed;
     margin-top: 770px;
@@ -746,7 +746,7 @@ nav {
 }
 
 .login .login-error-msg {
-    color: #16a2ff;
+    color: #f4f4f4;
     font-size: 15px;
     margin-top: 500px;
     position: fixed;
