@@ -600,19 +600,39 @@ function cancel_past_appointments($conn) {
     mysqli_stmt_close($stmt);
 }
 
-function reset_queue_number_for_next_day($conn){
+function reset_queue_number_for_next_day($conn) {
+    // Create a log file path
+    $logFile = 'reset_queue.log';
+    $log = fopen($logFile, 'a');
+
+    // Log the date and time the script is run
+    fwrite($log, "Running reset_queue.php at " . date('Y-m-d H:i:s') . "\n");
+
     $query = "UPDATE appointment SET queue_no = 0 WHERE appointment_date = CURDATE()";
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt === false) {
-        die('MySQL prepare error: ' . mysqli_error($conn));
+        $error = 'MySQL prepare error: ' . mysqli_error($conn);
+        fwrite($log, $error . "\n");
+        die($error);
     }
 
     if (mysqli_stmt_execute($stmt) === false) {
-        die('MySQL execute error: ' . mysqli_stmt_error($stmt));
+        $error = 'MySQL execute error: ' . mysqli_stmt_error($stmt);
+        fwrite($log, $error . "\n");
+        die($error);
     }
 
+    // Log success
+    fwrite($log, "Queue numbers reset successfully.\n");
+
     mysqli_stmt_close($stmt);
+
+    // Log the completion time
+    fwrite($log, "Script completed at " . date('Y-m-d H:i:s') . "\n\n");
+
+    // Close the log file
+    fclose($log);
 }
 
 function check_latest_queue_no($conn){
