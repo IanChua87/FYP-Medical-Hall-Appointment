@@ -102,7 +102,7 @@ ob_end_flush();
 
                                 <tbody>
                                     <?php
-                                    $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'COMPLETED' AND A.appointment_status != 'CANCELLED' ORDER BY appointment_id ASC";
+                                    $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'COMPLETED' ORDER BY appointment_id ASC";
                                     $appointment_stmt = mysqli_prepare($conn, $query);
                                     if (!$appointment_stmt) {
                                         die("Failed to prepare statement");

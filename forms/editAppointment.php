@@ -175,7 +175,7 @@ ob_end_flush();
         });
 
         $('#appointment_time').timepicker({
-            timeFormat: 'HH:mm',
+            timeFormat: 'hh:mm p',
             minTime: '1100',
             maxTime: '1630',
             showDuration: true,
