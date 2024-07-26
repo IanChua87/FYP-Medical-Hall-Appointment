@@ -136,7 +136,7 @@ echo '
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-4 px-0 text-black right-col">
                     <div class="form-container">
-                        <a href="../index.php" class="home-link">Home</a>
+                        <!-- <a href="../index.php" class="home-link">Home</a> -->
                         <h3 class="text">Create Account</h3>
                         <p class="registered-prompt">Already registered? <span><a href="login.php">Login</a></span> now</p>
                         <form method="post" action="registrationSuccessful.php">
