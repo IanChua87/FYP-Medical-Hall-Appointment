@@ -58,6 +58,9 @@ ob_end_flush();
         #table {
             border: none;
         }
+        #sidebar{
+            height: 880px;
+        }
     </style>
 </head>
 
