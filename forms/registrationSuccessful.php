@@ -72,6 +72,13 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
+    if (check_patient_phone_exists($conn, $phone) !== false) {
+        $_SESSION['error'] = "Phone number already exists.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
     if (check_patient_exists_by_email($conn, $email) !== false) {
         $_SESSION['error'] = "User with this email already exists.";
         $_SESSION['form_data'] = $_POST;
@@ -87,13 +94,6 @@ if (isset($_POST['submit'])) {
             header("Location: register.php");
             exit();
         }
-    }
-
-    if (check_patient_phone_exists($conn, $phone) !== false) {
-        $_SESSION['error'] = "Phone number already exists.";
-        $_SESSION['form_data'] = $_POST;
-        header("Location: register.php");
-        exit();
     }
 
     mysqli_close($conn);
