@@ -721,3 +721,22 @@ function getCount($conn, $query) {
         return 0;
     }
 }
+
+function check_patient_exist_by_payment_status($conn, $patient_id){
+    $query = "SELECT * FROM patient WHERE payment_status = 'UNPAID' AND patient_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    if (!$stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $patient_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($user_data = mysqli_fetch_assoc($result)) {
+            return $user_data;
+        } else {
+            return false;
+        }
+    }
+}

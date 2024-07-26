@@ -92,7 +92,7 @@ ob_end_flush();
                                     <?php echo $holiday_data['holiday_name']; ?>:
                                 </label>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <p><?php echo date("d/m/y", strtotime($holiday_data['holiday_date'])); ?></p>
+                                    <p><?php echo $holiday_data['holiday_date']; ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>

@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (invalid_phone_number($phone) !== false) {
-        $_SESSION['error'] = "Only numbers allowed in phone number and minimum number of characters must be 8.";
+        $_SESSION['error'] = "Phone Number must start with 8 or 9 and it must be of 8 characters long";
         header("Location: editPatient.php?patient_id=" . $patient_id);
         exit();
     }

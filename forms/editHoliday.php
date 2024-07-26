@@ -113,7 +113,7 @@ ob_end_flush();
 <script>
     $(document).ready(function() {
         $(".date").datepicker({
-            dateFormat: 'dd/mm/yy',
+            dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
             yearRange: "c-1:c+10"
