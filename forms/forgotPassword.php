@@ -30,7 +30,7 @@ ob_end_flush();
                         <h3 class="text">Forgot Password</h3>
                         <form method="post" action="doforgotPassword.php">
                             <div data-mdb-input-init class="form-outline mb-5">
-                                <input type="email" class="form-control form-control-lg" placeholder="Email" />
+                                <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" />
                             </div>
 
 

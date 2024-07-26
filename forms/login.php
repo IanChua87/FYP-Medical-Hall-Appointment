@@ -147,7 +147,7 @@ echo '
                     <div class="form-container">
                         <h3 class="text">Login</h3>
                         <p class="login-prompt">Already registered? <span> <a href="register.php">Register</a> </span>now</p>
-                        <form method="post" action="login.php">
+                        <form method="post">
                             <div class="form-outline mb-4">
                                 <input type="email" class="form-control form-control-lg" placeholder="Email" name="email" />
                             </div>
