@@ -35,7 +35,7 @@ mysqli_close($conn);
 //     $staff[] = $data['staff_count'];
 //     $appointments[] = $data['appointments_count'];
 // }
-
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>

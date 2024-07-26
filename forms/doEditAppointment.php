@@ -9,8 +9,6 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-cancel_past_appointments($conn);
-
 if(isset($_POST['submit'])){
     $appointment_id = $_POST['appointment_id'];
     $patient_id = $_POST['patient_id'];

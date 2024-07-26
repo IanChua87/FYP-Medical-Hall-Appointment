@@ -592,7 +592,8 @@ function cancel_past_appointments($conn) {
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt === false) {
-        die('MySQL prepare error: ' . mysqli_error($conn));
+        error_log('MySQL prepare error: ' . mysqli_error($conn));
+        return false;
     }
 
     mysqli_stmt_execute($stmt);
@@ -653,7 +654,6 @@ function check_latest_queue_no($conn){
 
     return $latest_queue_no;
 }
-
 
 function getCount($conn, $query) {
     $result = mysqli_query($conn, $query);
