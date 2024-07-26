@@ -174,11 +174,7 @@ ob_end_flush();
                     <h3>There are no appointments to be displayed.</h3>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <?php if (isset($_GET['status'])) { ?>
-                        <a href="viewappointment.php" class="btn back-btn" style="width: 100px;">Back</a>
-                    <?php } else { ?>
                         <a href="../P_index.php" class="btn back-btn" style="width: 100px;">Back</a>
-                    <?php } ?>
                 </div>
             <?php } else { ?>
                 <div class="table-header-row">
