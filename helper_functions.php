@@ -167,6 +167,21 @@ function check_patient_exists_by_email($conn, $email)
     }
 }
 
+function check_user_old_enough($dob)
+{
+    $today = new DateTime(date("Y-m-d"));
+    $dob = new DateTime($dob);
+    $age = $today->diff($dob)->y;
+
+    // Return true if the user is 18 or older
+    if ($age >= 18) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 function check_patient_phone_exists($conn, $phone)
 {
     $p_query = "SELECT * FROM patient WHERE patient_phoneNo = ?";

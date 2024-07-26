@@ -197,6 +197,17 @@ ob_end_flush();
             background-color: #d1ac47;  
         }
 
+        .nav-link:focus,
+        .nav-link:hover {
+            color: #d1ac47; /* Set the color for the nav links when hovered or focused */
+            background-color: transparent; /* Ensure the background color remains transparent */
+        }
+
+        .nav-link.active {
+            color: #d1ac47; /* Set the color for the active nav link */
+            background-color: transparent; /* Ensure the background color remains transparent */
+        }
+
         
     </style>
 </head>
@@ -228,7 +239,7 @@ ob_end_flush();
             <ul class="navbar-nav ms-auto">'; ?>
     <?php if (!isset($_SESSION["patient_id"])) { ?>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+            <a class="nav-link" aria-current="page" href="../index.php">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#about">About</a>

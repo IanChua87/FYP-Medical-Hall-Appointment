@@ -65,6 +65,13 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
+    if(check_user_old_enough($dob) !== true){
+        $_SESSION['error'] = "You must be at least 18 years old to register.";
+        $_SESSION['form_data'] = $_POST;
+        header("Location: register.php");
+        exit();
+    }
+
     if (check_patient_exists_by_email($conn, $email) !== false) {
         $_SESSION['error'] = "User with this email already exists.";
         $_SESSION['form_data'] = $_POST;
