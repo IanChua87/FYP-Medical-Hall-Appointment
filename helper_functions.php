@@ -93,13 +93,14 @@ function invalid_name($name)
 }
 
 function invalid_phone_number($phone) {
-    
-    if (!preg_match("/^[0-9]{8}$/", $phone)) {
+    // Check if the phone number starts with 8 or 9 and is followed by 7 digits
+    if (!preg_match("/^[89][0-9]{7}$/", $phone)) {
         return true;
     } else {
         return false;
     }
 }
+
 
 function invalid_number($number)
 {
@@ -167,6 +168,26 @@ function check_patient_exists_by_email($conn, $email)
     }
 }
 
+function check_email_exists_in_db($conn, $email, $patient_id)
+{
+    $p_query = "SELECT * FROM patient WHERE patient_email = ? AND patient_id != ?";
+    $patient_stmt = mysqli_prepare($conn, $p_query);
+
+    if (!$patient_stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($patient_stmt, "si", $email, $patient_id);
+        mysqli_stmt_execute($patient_stmt);
+        $p_result = mysqli_stmt_get_result($patient_stmt);
+
+        if ($p_user_data = mysqli_fetch_assoc($p_result)) {
+            return $p_user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
 function check_user_old_enough($dob)
 {
     $today = new DateTime(date("Y-m-d"));
@@ -190,7 +211,7 @@ function check_patient_phone_exists($conn, $phone)
     if (!$patient_stmt) {
         die("Failed to prepare statement");
     } else {
-        mysqli_stmt_bind_param($patient_stmt, "s", $phone);
+        mysqli_stmt_bind_param($patient_stmt, "si", $phone, $patient_id);
         mysqli_stmt_execute($patient_stmt);
         $p_result = mysqli_stmt_get_result($patient_stmt);
 
@@ -201,6 +222,27 @@ function check_patient_phone_exists($conn, $phone)
         }
     }
 }
+
+function check_phone_exists_in_db($conn, $phone, $patient_id)
+{
+    $p_query = "SELECT * FROM patient WHERE patient_phoneNo = ? AND patient_id != ?";
+    $patient_stmt = mysqli_prepare($conn, $p_query);
+
+    if (!$patient_stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($patient_stmt, "si", $phone, $patient_id);
+        mysqli_stmt_execute($patient_stmt);
+        $p_result = mysqli_stmt_get_result($patient_stmt);
+
+        if ($p_user_data = mysqli_fetch_assoc($p_result)) {
+            return $p_user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
 
 function check_patient_password($conn, $password, $patient_id)
 {

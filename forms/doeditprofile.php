@@ -38,7 +38,7 @@ if(invalid_phone_number($phone)){
     header("Location: editprofile.php?error=" . urlencode($error));
     exit();
 }
-if(check_patient_phone_exists($conn, $phone)){
+if(check_phone_exists_in_db($conn, $phone, $patient_id)){
     $error = "Phone number is already taken by another patient.";
     header("Location: editprofile.php?error=" . urlencode($error));
     exit();
@@ -47,7 +47,7 @@ if(check_patient_phone_exists($conn, $phone)){
 
 $query = "UPDATE patient SET patient_email = ?, patient_phoneNo = ?, last_updated_by = patient_name WHERE patient_id = ?";
 $stmt = mysqli_prepare($conn, $query);
-if(check_patient_exists_by_email($conn,$email)){
+if(check_email_exists_in_db($conn,$email,$patient_id)){
     $error = "Email is already taken by another patient.";
     header("Location: editprofile.php?error=" . urlencode($error));
     exit();

@@ -140,7 +140,10 @@ ob_end_flush();
         }
 
         .filter-dropdown {
-            margin-left: 20px;
+            margin-left: 870px;
+            display: flex;
+            align-items: center;
+            width: 200px;
         }
     </style>
 </head>
@@ -158,6 +161,14 @@ ob_end_flush();
             </div>
         <?php } ?>
         <div class="container mt-3">
+        <div class="filter-dropdown">
+                        <select class="form-select" id="filterStatus" onchange="filterAppointments()">
+                            <option value="UPCOMING" <?php echo (!isset($_GET['status']) || $_GET['status'] == 'UPCOMING') ? 'selected' : ''; ?>>Upcoming</option>
+                            <option value="CANCELLED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'CANCELLED') ? 'selected' : ''; ?>>Cancelled</option>
+                            <option value="COMPLETED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'COMPLETED') ? 'selected' : ''; ?>>Completed</option>
+                        </select>
+                    </div>
+                    <br>
             <?php if (count($appointments) === 0) { ?>
                 <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
                     <h3>There are no appointments to be displayed.</h3>
@@ -172,13 +183,6 @@ ob_end_flush();
             <?php } else { ?>
                 <div class="table-header-row">
                     <h2 class="table-header-title">Appointments for <?php echo $patient_name; ?></h2>
-                    <div class="filter-dropdown">
-                        <select class="form-select" id="filterStatus" onchange="filterAppointments()">
-                            <option value="UPCOMING" <?php echo (!isset($_GET['status']) || $_GET['status'] == 'UPCOMING') ? 'selected' : ''; ?>>Upcoming</option>
-                            <option value="CANCELLED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'CANCELLED') ? 'selected' : ''; ?>>Cancelled</option>
-                            <option value="COMPLETED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'COMPLETED') ? 'selected' : ''; ?>>Completed</option>
-                        </select>
-                    </div>
                 </div>
                 <table class="table table-hover table-secondary mt-3">
                     <thead class="table-primary">
