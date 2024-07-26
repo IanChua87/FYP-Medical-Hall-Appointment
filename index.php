@@ -276,9 +276,9 @@ ob_end_flush();
         Appointment
     </a>
     <ul class="dropdown-menu" aria-labelledby="apptDropdown">
-        <li><a class="dropdown-item" href="booking.php">Book Appointment</a></li>
+        <li><a class="dropdown-item" href="forms/booking.php">Book Appointment</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="viewappointment.php">View Appointment</a></li>
+        <li><a class="dropdown-item" href="forms/viewappointment.php">View Appointment</a></li>
     </ul>
 </div>
 <div class="nav-item dropdown">
@@ -286,11 +286,11 @@ ob_end_flush();
         <i class="bi bi-person-circle"></i>
     </a>
     <ul class="dropdown-menu" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item" href="editprofile.php">Edit Profile</a></li>
+        <li><a class="dropdown-item" href="forms/editprofile.php">Edit Profile</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="changepassword.php">Change Password</a></li>
+        <li><a class="dropdown-item" href="forms/changepassword.php">Change Password</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="loggedOutSuccessful.php">Logout</a></li>
+        <li><a class="dropdown-item" href="forms/loggedOutSuccessful.php">Logout</a></li>
     </ul>
         </div>';
     } else {
