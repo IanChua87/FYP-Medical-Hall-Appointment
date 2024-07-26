@@ -15,20 +15,20 @@ if (isset($_POST['submit'])) {
         'weekend_open_time',
         'weekend_close_time',
         'opening_days',
-        'appointment_duration',
-        'new_appointment_duration',
     ];
 
     $weekday_open_time = $_POST['weekday_open_time'];
+    $formatted_weekday_open_time = date('H:i:s', strtotime($weekday_open_time));
     $weekday_close_time = $_POST['weekday_close_time'];
+    $formatted_weekday_close_time = $weekday_close_time . ":00";
     $weekend_open_time = $_POST['weekend_open_time'];
+    $formatted_weekend_open_time = $weekend_open_time . ":00";
     $weekend_close_time = $_POST['weekend_close_time'];
+    $formatted_weekend_close_time = $weekend_close_time . ":00";
     $opening_days = $_POST['opening_days'];
-    $appointment_duration = $_POST['appointment_duration'];
-    $new_appointment_duration = $_POST['new_appointment_duration'];
 
 
-    if (empty($weekday_open_time) || empty($weekday_close_time) || empty($weekend_open_time) || empty($weekend_close_time) || empty($opening_days) || empty($appointment_duration) || empty($new_appointment_duration)) {
+    if (empty($weekday_open_time) || empty($weekday_close_time) || empty($weekend_open_time) || empty($weekend_close_time) || empty($opening_days)) {
         $_SESSION['error'] = "Please fill in all fields.";
         header("Location: editSettings.php");
         exit();
@@ -39,12 +39,6 @@ if (isset($_POST['submit'])) {
     //     header("Location: editSettings.php");
     //     exit();
     // }
-
-    if (!is_numeric($appointment_duration) || !is_numeric($new_appointment_duration)) {
-        $_SESSION['error'] = "Appointment duration must be a number.";
-        header("Location: editSettings.php");
-        exit();
-    }
 
     $update_query = "UPDATE settings SET settings_value = ? WHERE settings_key = ?";
     $update_stmt = mysqli_prepare($conn, $update_query);

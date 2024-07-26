@@ -1294,7 +1294,8 @@ nav {
 .info .fa-hospital-user,
 .info .fa-calendar-check,
 .info .fa-user-tie,
-.info .fa-list-ol {
+.info .fa-list-ol,
+.info .fa-gear {
     font-size: 60px;
     color: #682924;
     padding-left: 20px;

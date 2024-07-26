@@ -69,13 +69,13 @@ ob_end_flush();
         <div class="sidebar" id="sidebar">
             <div class="header-box px-3 mt-2 mb-2 d-flex align-items-center justify-content-between">
                 <h1 class="header">Sin Nam</h1>
+                <!-- <button class="btn close-btn"><i class="fa-solid fa-xmark"></i></button> -->
             </div>
             <ul class="mt-3">
                 <li class="active"><a href="adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="forms/queueDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
-                <li class=""><a href="forms/staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="forms/patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class=""><a href="forms/appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class=""><a href="forms/staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="forms/settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
                 <li class=""><a href="forms/viewHoliday.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Holiday</a></li>
                 <div class="sidebar-separator"></div>
@@ -91,15 +91,15 @@ ob_end_flush();
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card mb-4 h-100 info" data-href="forms/checkQueue.php">
+                            <div class="card mb-4 h-100 info" data-href="forms/settings.php">
                                 <div class="row g-0 d-flex align-items-center">
                                     <div class="col-md-4 col-sm-12">
-                                        <i class="fas fa-list-ol"></i>
+                                        <i class="fa-solid fa-gear"></i>
                                     </div>
                                     <div class="col-md-8 col-sm-12">
                                         <div class="card-body">
-                                            <h5 class="card-title">View Queue No.</h5>
-                                            <p class="card-text">Check the last appointment queue number of current day</p>
+                                            <h5 class="card-title">View Settings</h5>
+                                            <p class="card-text">View the settings field that's can be edited to affect the website</p>
                                         </div>
                                     </div>
                                 </div>

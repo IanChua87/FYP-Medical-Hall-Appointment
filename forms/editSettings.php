@@ -67,10 +67,9 @@ ob_end_flush();
             </div>
             <ul class="mt-3">
                 <li class=""><a href="../adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class=""><a href="queueDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-hourglass-start"></i> Check Queue No.</a></li>
-                <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class=""><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
+                <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class="active"><a href="settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
                 <li class=""><a href="viewHoliday.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Holiday</a></li>
                 <div class="sidebar-separator"></div>
@@ -115,18 +114,6 @@ ob_end_flush();
                                     <input type="text" name="opening_days" id="opening_days" class="form-control" value="<?php echo $settings['opening_days'] ?>">
                                 </div>
                             </div>
-                            <div class="form-group row mb-5">
-                                <label for="appointment_duration" class="col-sm-5 col-form-label text-right">Appointment Duration:</label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="appointment_duration" id="appointment_duration" class="form-control" value="<?php echo $settings['appointment_duration'] ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-5">
-                                <label for="new_appointment_duration" class="col-sm-5 col-form-label text-right">New Appointment Duration:</label>
-                                <div class="col-sm-7">
-                                    <input type="text" name="new_appointment_duration" id="new_appointment_duration" class="form-control" value="<?php echo $settings['new_appointment_duration'] ?>">
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="col-sm-12 d-flex flex-end">
                                     <button type="submit" name="submit" class="btn save-btn">Save</button>
@@ -151,10 +138,12 @@ ob_end_flush();
 <script>
     $(function() {
         $(".time").timepicker({
-            timeFormat: 'hh:mm p',
-            interval: 15,
-            minTime: '08:00am',
-            maxTime: '06:00pm',
+            timeFormat: 'HH:mm',
+            interval: 30,
+            minTime: '11:00',
+            maxTime: '16:30',
+            defaultTime: '00:00',
+            startTime: '00:00',
             dynamic: false,
             dropdown: true,
             scrollbar: true
