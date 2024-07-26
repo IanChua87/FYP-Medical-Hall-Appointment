@@ -211,7 +211,7 @@ function check_patient_phone_exists($conn, $phone)
     if (!$patient_stmt) {
         die("Failed to prepare statement");
     } else {
-        mysqli_stmt_bind_param($patient_stmt, "si", $phone, $patient_id);
+        mysqli_stmt_bind_param($patient_stmt, "i", $phone);
         mysqli_stmt_execute($patient_stmt);
         $p_result = mysqli_stmt_get_result($patient_stmt);
 
@@ -231,7 +231,7 @@ function check_phone_exists_in_db($conn, $phone, $patient_id)
     if (!$patient_stmt) {
         die("Failed to prepare statement");
     } else {
-        mysqli_stmt_bind_param($patient_stmt, "si", $phone, $patient_id);
+        mysqli_stmt_bind_param($patient_stmt, "ii", $phone, $patient_id);
         mysqli_stmt_execute($patient_stmt);
         $p_result = mysqli_stmt_get_result($patient_stmt);
 
