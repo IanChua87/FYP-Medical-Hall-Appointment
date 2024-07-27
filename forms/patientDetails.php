@@ -38,6 +38,10 @@ ob_end_flush();
         .session-msg-success {
             margin-top: 20px;
         }
+
+        #sidebar{
+            min-height: 880px;
+        }
     </style>
 </head>
 
