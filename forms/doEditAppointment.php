@@ -17,15 +17,15 @@ if(isset($_POST['submit'])){
     $appointment_end_time = date('H:i:s', strtotime($appointment_start_time) + 900);
     $appointment_status = $_POST['appointment_status'];
     $booked_datetime = date('Y-m-d H:i:s');
-    $queue_no = $_POST['queue_no'];
-    // $relation = $_POST['relation'];
+    $relation = $_POST['relation'];
 
     $query = "";
     if(check_appointment_exists_by_id($conn, $appointment_id) !== false){
 
         if(check_patient_exists_by_id($conn, $patient_id) !== false){
             
-            if(update_appointment_details($conn, $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $booked_datetime, $appointment_id) !== false){
+            if(update_appointment_details($conn, $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $booked_datetime, $appointment_id) !== false 
+            && update_relation_details($conn, $relation, $appointment_id) !== false){
                 $_SESSION['message'] = "Appointment successfully updated.";
                 header("Location: appointmentDetails.php");
                 exit();
@@ -34,6 +34,8 @@ if(isset($_POST['submit'])){
                 header("Location: editAppointment.php?appointment_id=" . $appointment_id);
                 exit();
             }
+
+
 
         } else{
             $_SESSION['error'] = "Patient not found.";

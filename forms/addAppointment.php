@@ -113,6 +113,7 @@ ob_start();
                             </label>
                             <select name="relation" id="relation" class="form-control">
                                 <option value="select">Select Relation</option>
+                                <option value="n.a.">Self</option>
                                 <option value="family">Family</option>
                                 <option value="friend">Friend</option>
                                 <option value="relative">Relative</option>

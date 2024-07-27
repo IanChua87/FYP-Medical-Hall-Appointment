@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $amount_payable = $_POST['amount_payable'];
 
 
-    if (check_empty_edit_patient_input_fields($patient_name, $email, $dob, $phone, $payment_status, $amount_payable)) {
+    if (check_empty_edit_patient_input_fields($patient_name, $email, $dob, $phone, $payment_status)) {
         $_SESSION['error'] = "Please fill in all fields.";
         header("Location: editPatient.php?patient_id=" . $patient_id);
         exit();
