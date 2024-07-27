@@ -127,7 +127,7 @@ ob_end_flush();
                     <img src="../img/tick-verification.svg" alt="Tick logo symbol" style="margin-right: 10px;"/>
                     <h2>Booking<br> Successful</h2>
                     <div class="mt-3">
-                        <a href="viewappointment.php" class="btn back-to-home-btn">Back to View Appointment page</a>
+                        <a href="viewappointment.php" class="btn back-to-home-btn">Proceed to View Appointment page</a>
                     </div>
                 </div>
             </div>
