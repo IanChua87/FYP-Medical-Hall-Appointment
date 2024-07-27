@@ -161,7 +161,7 @@ echo '
                                     <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Password:
                                     <span class="required-text">(required)</span>
                                 </label>
-                                <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" name="password" />
+                                <input type="password" id="password" class="form-control form-control-lg" placeholder="Password (8 characters)" name="password" />
                             </div>
 
                             <div class="form-outline mb-3">
@@ -169,7 +169,7 @@ echo '
                                     <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Confirm Password:
                                     <span class="required-text">(required)</span>
                                 </label>
-                                <input type="password" id="confirm_password" class="form-control form-control-lg" placeholder="Confirm Password" name="confirm_password" />
+                                <input type="password" id="confirm_password" class="form-control form-control-lg" placeholder="Confirm Password (8 characters)" name="confirm_password" />
                             </div>
 
                             <div class="double-form-field row mb-3">
@@ -211,7 +211,7 @@ echo '
         $(document).ready(function() {
             setTimeout(function() {
                 $('#reg-error-msg').fadeOut('slow');
-            }, 1700);
+            }, 2500);
         });
     </script>
 

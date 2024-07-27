@@ -335,7 +335,7 @@ ob_end_flush();
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6 right-col">
-                    <img src="img/Mr Desmond Sin.jpg" alt="about-section" class="img-fluid">
+                <img src="../img/side-img.jpg" alt="about-section" class="img-fluid">
                 </div>
             </div>
         </div>

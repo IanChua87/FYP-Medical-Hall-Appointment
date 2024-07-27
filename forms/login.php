@@ -177,7 +177,7 @@ echo '
                             $(document).ready(function() {
                                 setTimeout(function() {
                                     $('#login-error-msg').fadeOut('slow');
-                                }, 1700);
+                                }, 2500);
                             });
                         </script>
 

@@ -182,25 +182,7 @@ ob_end_flush();
             </div>
         <?php } ?>
         <div class="container mt-3">
-<<<<<<< Updated upstream
         <div class="filter-dropdown">
-=======
-            <?php if (count($appointments) === 0) { ?>
-                <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
-                    <h3>There are no appointments to be displayed.</h3>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                    <?php if (isset($_GET['status'])) { ?>
-                        <a href="viewappointment.php" class="btn back-btn" style="width: 100px;">Back</a>
-                    <?php } else { ?>
-                        <a href="../P_index.php" class="btn back-btn" style="width: 100px; background-color: #CFA61E; color: #f9f9f9 ">Back</a>
-                    <?php } ?>
-                </div>
-            <?php } else { ?>
-                <div class="table-header-row">
-                    <h2 class="table-header-title">Appointments for <?php echo $patient_name; ?></h2>
-                    <div class="filter-dropdown">
->>>>>>> Stashed changes
                         <select class="form-select" id="filterStatus" onchange="filterAppointments()">
                             <option value="UPCOMING" <?php echo (!isset($_GET['status']) || $_GET['status'] == 'UPCOMING') ? 'selected' : ''; ?>>Upcoming</option>
                             <option value="CANCELLED" <?php echo (isset($_GET['status']) && $_GET['status'] == 'CANCELLED') ? 'selected' : ''; ?>>Cancelled</option>
