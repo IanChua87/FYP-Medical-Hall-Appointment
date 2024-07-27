@@ -11,6 +11,12 @@ if (!isset($_SESSION['admin_id'])) {
 if (isset($_POST['submit'])) {
     $holiday_ids = $_POST['holiday_id'];
 
+    if(empty($_POST['holiday_date_' . $holiday_ids[0]]) || empty($_POST['holiday_date_' . $holiday_ids[1]]) || empty($_POST['holiday_date_' . $holiday_ids[2]]) || empty($_POST['holiday_date_' . $holiday_ids[3]]) || empty($_POST['holiday_date_' . $holiday_ids[4]]) || empty($_POST['holiday_date_' . $holiday_ids[5]]) || empty($_POST['holiday_date_' . $holiday_ids[6]]) || empty($_POST['holiday_date_' . $holiday_ids[7]]) || empty($_POST['holiday_date_' . $holiday_ids[8]]) || empty($_POST['holiday_date_' . $holiday_ids[9]]) || empty($_POST['holiday_date_' . $holiday_ids[10]])) {
+        $_SESSION['error'] = "No holiday selected.";
+        header("Location: editHoliday.php");
+        exit();
+    }
+
     // Prepare update statement
     $update_query = "UPDATE holiday SET holiday_date = ? WHERE holiday_id = ?";
     $update_stmt = mysqli_prepare($conn, $update_query);

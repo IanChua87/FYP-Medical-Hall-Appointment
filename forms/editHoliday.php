@@ -116,7 +116,7 @@ ob_end_flush();
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
-            yearRange: "c-1:c+10"
+            yearRange: "c-1:c+100"
         });
     });
 </script>
