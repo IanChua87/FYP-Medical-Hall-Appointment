@@ -765,7 +765,7 @@ nav {
     font-size: 14px;
     margin-top: 500px;
     position: fixed;
-    
+
 }
 
 /* ===========================Login page end=========================== */
@@ -1752,6 +1752,7 @@ label.queue_label {
 
 .settings-wrapper {
     padding: 50px;
+    
 }
 
 .settings-box {

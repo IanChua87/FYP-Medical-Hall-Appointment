@@ -40,7 +40,7 @@ ob_end_flush();
         }
 
         #sidebar{
-            min-height: 880px;
+            min-height: 1200px;
         }
     </style>
 </head>
