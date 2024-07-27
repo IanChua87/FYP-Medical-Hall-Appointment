@@ -5,25 +5,23 @@ include "db_connect.php";
 include "helper_functions.php";
 
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: login.php");
+    header("Location: forms/login.php");
     exit();
 }
 
 // Query setup
 $count_query = [
-    "SELECT COUNT(*) AS patient_count FROM patient",
-    "SELECT COUNT(*) AS staff_count FROM users",
-    "SELECT COUNT(*) AS appointments_count FROM appointment"
+    "SELECT COUNT(appointment_status) AS cancelled_appointment_count FROM appointment WHERE appointment_status = 'CANCELLED'",
+    "SELECT COUNT(appointment_status) AS upcoming_appointment_count FROM appointment WHERE appointment_status = 'UPCOMING'",
 ];
 
 // Fetch data
 $data = [];
-$data['patients'] = getCount($conn, $count_query[0]);
-$data['staff'] = getCount($conn, $count_query[1]);
-$data['appointments'] = getCount($conn, $count_query[2]);
+$data['cancelled'] = getCount($conn, $count_query[0]);
+$data['upcoming'] = getCount($conn, $count_query[1]);
 
-$labels = ["Patients", "Staff", "Appointments"];
-$data_values = [$data['patients'], $data['staff'], $data['appointments']];
+$labels = ["Booked", "Cancelled"];
+$data_values = [$data['upcoming'], $data['cancelled']];
 
 // Close connection
 mysqli_close($conn);
@@ -59,7 +57,7 @@ ob_end_flush();
             border: none;
         }
         #sidebar{
-            height: 880px;
+            min-height: 880px;
         }
     </style>
 </head>
@@ -187,7 +185,7 @@ ob_end_flush();
             data: {
                 labels: <?php echo json_encode($labels); ?>,
                 datasets: [{
-                        label: 'ongoing patients, staff and appointments',
+                        label: 'Number of patients cancelling an appointment vs Number of patients having an appointment',
                         data: <?php echo json_encode($data_values); ?>,
                         borderWidth: 0,
                         backgroundColor: ['#28a745', '#007bff', '#ffc107']

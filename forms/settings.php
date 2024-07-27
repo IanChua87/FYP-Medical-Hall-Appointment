@@ -109,7 +109,7 @@ ob_end_flush();
                                 <p><?php echo $settings['opening_days'] ?></p>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div>
                             <a href="editSettings.php" class="btn edit-btn">Edit</a>
                         </div>
                     </div>
