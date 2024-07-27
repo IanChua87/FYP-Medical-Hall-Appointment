@@ -188,13 +188,13 @@ ob_end_flush();
 
 <?php include '../sessionMsg.php' ?>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         setTimeout(function() {
             $('#session-msg-success').fadeOut('slow');
         }, 1700);
     });
-</script>
+</script> -->
 
 
 </html>

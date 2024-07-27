@@ -183,11 +183,6 @@ ob_end_flush();
             });
         });
 
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('#session-msg-success').fadeOut('slow');
-            }, 1700);
-        });
     </script>
 </body>
 
