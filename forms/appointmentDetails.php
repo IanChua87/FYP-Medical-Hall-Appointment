@@ -102,7 +102,7 @@ ob_end_flush();
 
                                 <tbody>
                                     <?php
-                                    $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'COMPLETED' ORDER BY appointment_id ASC";
+                                    $query = "SELECT * FROM patient P INNER JOIN appointment A ON P.patient_id = A.patient_id WHERE A.appointment_status != 'COMPLETED' ORDER BY appointment_date ASC";
                                     $appointment_stmt = mysqli_prepare($conn, $query);
                                     if (!$appointment_stmt) {
                                         die("Failed to prepare statement");
@@ -155,8 +155,8 @@ ob_end_flush();
                             </div>
                         </div>
                     </div>
+                    <?php include '../sessionMsg.php' ?>
                 </div>
-                <?php include '../sessionMsg.php' ?>
             </div>
         </div>
     </div>

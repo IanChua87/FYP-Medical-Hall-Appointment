@@ -50,6 +50,12 @@ if (isset($_POST['submit'])) {
             }
         }
 
+        if(check_appointment_date_time_conflict($conn, $appointment_date, $appointment_start_time)){
+            $_SESSION['error'] = "Appointment date and time conflict.";
+            header("Location: addAppointment.php");
+            exit();
+        }
+
         if (insert_appointment_details($conn, $appointment_date, $appointment_start_time, $appointment_end_time, $appointment_status, $_SESSION['admin_role'], $current_time, $patient_id, $queue_no, $appointment_remark) !== false) {
             $appointment_id = mysqli_insert_id($conn);
 

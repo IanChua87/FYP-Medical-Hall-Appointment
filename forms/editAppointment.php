@@ -129,10 +129,11 @@ ob_end_flush();
                                 <span class="required-text">(required)</span>
                             </label>
                             <select name="appointment_status" id="appointment_status" class="form-control">
-                                <option value="CANCELLED">CANCELLED</option>
-                                <option value="MISSED">MISSED</option>
+                                <option value="select">Select Appointment Status</option>
                                 <option value="UPCOMING">UPCOMING</option>
                                 <option value="COMPLETED">COMPLETED</option>
+                                <option value="CANCELLED">CANCELLED</option>
+                                <option value="MISSED">MISSED</option>
                             </select>
                         </div>
 

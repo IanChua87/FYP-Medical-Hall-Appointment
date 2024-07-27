@@ -750,3 +750,64 @@ function update_relation_details($conn, $name, $appointment_id)
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);
 }
+
+function check_appointment_by_appointment_status($conn, $id)
+{
+    $query = "SELECT * FROM appointment WHERE appointment_status = 'UPCOMING' AND appointment_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    if (!$stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($stmt, "s", $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($user_data = mysqli_fetch_assoc($result)) {
+            return $user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
+function check_appointment_date_time_conflict($conn, $date, $start_time)
+{
+    $query = "SELECT * FROM appointment WHERE appointment_date = ? AND appointment_start_time = ?";
+    $stmt = mysqli_prepare($conn, $query);
+
+    if (!$stmt) {
+        die("Failed to prepare statement");
+    } else {
+        mysqli_stmt_bind_param($stmt, "ss", $date, $start_time);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($user_data = mysqli_fetch_assoc($result)) {
+            return $user_data;
+        } else {
+            return false;
+        }
+    }
+}
+
+// function select_taken_time_slot($conn, $date)
+// {
+//     $query = "SELECT appointment_start_time FROM appointment WHERE appointment_date = ?";
+//     $stmt = mysqli_prepare($conn, $query);
+
+//     if (!$stmt) {
+//         die("Failed to prepare statement");
+//     } else {
+//         mysqli_stmt_bind_param($stmt, "s", $date);
+//         mysqli_stmt_execute($stmt);
+//         $result = mysqli_stmt_get_result($stmt);
+
+//         $takenTimeSlots = [];
+
+//         while($row = mysqli_fetch_assoc($result)) {
+//             $takenTimeSlots[] = date('h:i A', strtotime($row['appointment_start_time']));
+//         }
+//         return $takenTimeSlots;
+//     }
+// }

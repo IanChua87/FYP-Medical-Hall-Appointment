@@ -40,7 +40,6 @@ ob_start();
     <!-- 'links.php' contains cdn links' -->
     <?php include '../links.php'; ?>
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <style>
         .session-msg-error {
             margin-top: 20px;
@@ -133,10 +132,7 @@ ob_start();
     </div>
 </body>
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
 
 <script>
     $(document).ready(function() {
@@ -152,12 +148,37 @@ ob_start();
         });
 
         $('#appointment_time').timepicker({
-            timeFormat: 'hh:mm:p',
-            minTime: '1100',
-            maxTime: '1630',
+            timeFormat: 'hh:mm p',
+            minTime: '11:00 AM',
+            maxTime: '04:30 PM',
             showDuration: true,
-            interval: 15
+            interval: 15,
+            disableTimeRanges: []
         });
+
+
+        // $('#appointment_date').change(function() {
+        //     var appointmentDate = $(this).val();
+
+        //     $.ajax({
+        //         url: 'adminRetrieveTimeSlots.php',
+        //         method: 'GET',
+        //         data: {
+        //             appointment_date: appointmentDate
+        //         },
+        //         success: function(response) {
+        //             console.log('Response:', response);
+        //             var takenTimeSlots = JSON.parse(response);
+        //             var disabledRanges = takenTimeSlots.map(function(time) {
+        //                 return [time, time]; 
+        //             });
+        //             $('#appointment_time').timepicker('option', 'disableTimeRanges', disabledRanges);
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error('AJAX Error:', status, error);
+        //         }
+        //     });
+        // });
     });
     $(document).ready(function() {
         setTimeout(function() {

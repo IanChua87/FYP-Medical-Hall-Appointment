@@ -2,6 +2,7 @@
 ob_start();
 session_start();
 include "../db_connect.php";
+include "../helper_functions.php";
 ?>
 
 <?php
@@ -12,6 +13,12 @@ if (!isset($_SESSION['admin_id'])) {
 
 if (isset($_POST['appointment_id'])) {
     $id = $_POST['appointment_id'];
+
+    if(check_appointment_by_appointment_status($conn, $id) !== false){
+        $_SESSION['message'] = "Appointment record cannot be deleted as it is still in progress.";
+        header("Location: appointmentDetails.php");
+        exit();
+    }
 
     $query = "DELETE FROM appointment WHERE appointment_id = ?";
     $stmt = mysqli_prepare($conn, $query);
