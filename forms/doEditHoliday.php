@@ -10,12 +10,33 @@ if (!isset($_SESSION['admin_id'])) {
 
 if (isset($_POST['submit'])) {
     $holiday_ids = $_POST['holiday_id'];
+    
 
-    if(empty($_POST['holiday_date_' . $holiday_ids[0]]) || empty($_POST['holiday_date_' . $holiday_ids[1]]) || empty($_POST['holiday_date_' . $holiday_ids[2]]) || empty($_POST['holiday_date_' . $holiday_ids[3]]) || empty($_POST['holiday_date_' . $holiday_ids[4]]) || empty($_POST['holiday_date_' . $holiday_ids[5]]) || empty($_POST['holiday_date_' . $holiday_ids[6]]) || empty($_POST['holiday_date_' . $holiday_ids[7]]) || empty($_POST['holiday_date_' . $holiday_ids[8]]) || empty($_POST['holiday_date_' . $holiday_ids[9]]) || empty($_POST['holiday_date_' . $holiday_ids[10]])) {
-        $_SESSION['error'] = "No holiday selected.";
+    $unique_dates = array();
+    $duplicate_dates = array();
+
+    for($i = 0; $i < count($holiday_ids); $i++) {
+        if(empty($_POST['holiday_date_' . $holiday_ids[$i]])) {
+            $_SESSION['error'] = "Please fill in all fields.";
+            header("Location: editHoliday.php");
+            exit();
+        }
+    }
+
+    for($i = 0; $i < count($holiday_ids); $i++) {
+        if(in_array($_POST['holiday_date_' . $holiday_ids[$i]], $unique_dates)) {
+            $duplicate_dates[] = $_POST['holiday_date_' . $holiday_ids[$i]];
+        } else {
+            $unique_dates[] = $_POST['holiday_date_' . $holiday_ids[$i]];
+        }
+    }
+
+    if(count($duplicate_dates) > 0) {
+        $_SESSION['error'] = "Duplicate dates found: " . implode(", ", $duplicate_dates);
         header("Location: editHoliday.php");
         exit();
     }
+
 
     // Prepare update statement
     $update_query = "UPDATE holiday SET holiday_date = ? WHERE holiday_id = ?";
@@ -25,7 +46,6 @@ if (isset($_POST['submit'])) {
         die("Failed to prepare statement: " . mysqli_error($conn));
     }
 
-    // Bind parameters and execute the statement for each holiday
     mysqli_stmt_bind_param($update_stmt, 'si', $date, $id);
 
     foreach ($holiday_ids as $id) {
@@ -36,12 +56,12 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    // Close statement and connection
     mysqli_stmt_close($update_stmt);
-    $conn->close();
+    mysqli_close($conn);
     $_SESSION['message'] = "Updated holiday settings successfully.";
     header("Location: viewHoliday.php");
     exit();
+    
 } else {
     $_SESSION['error'] = "Invalid request.";
     header("Location: editHoliday.php");
