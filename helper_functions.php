@@ -17,9 +17,9 @@ function check_empty_add_patient_input_fields($name, $email, $password, $dob, $p
     }
 }
 
-function check_empty_edit_patient_input_fields($name, $email, $dob, $phone, $payment_status, $amount_payable)
+function check_empty_edit_patient_input_fields($name, $email, $dob, $phone, $payment_status)
 {
-    if (empty($name) || empty($email) || empty($dob) || empty($phone) || empty($payment_status) || empty($amount_payable)) {
+    if (empty($name) || empty($email) || empty($dob) || empty($phone) || empty($payment_status)) {
         return true;
     } else {
         return false;
@@ -739,4 +739,14 @@ function check_patient_exist_by_payment_status($conn, $patient_id){
             return false;
         }
     }
+}
+
+function update_relation_details($conn, $name, $appointment_id)
+{
+    $update = "UPDATE relation SET relation_name = ? WHERE appointment_id = ?";
+    $update_stmt = mysqli_prepare($conn, $update);
+    mysqli_stmt_bind_param($update_stmt, "si", $name, $appointment_id);
+
+    //execute the prepared statement
+    mysqli_stmt_execute($update_stmt);
 }

@@ -109,18 +109,19 @@ ob_end_flush();
                             <input type="text" name="appointment_start_time" id="appointment_time" class="form-control" value="<?php echo $appointment_time ?>">
                         </div>
 
-                        <!-- <div class="form-group mb-3">
+                        <div class="form-group mb-3">
                             <label for="relation">
                                 <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Relation:
                                 <span class="required-text">(required)</span>
                             </label>
                             <select name="relation" id="relation" class="form-control">
                                 <option value="select">Select Relation</option>
+                                <option value="n.a.">Self</option>
                                 <option value="family">Family</option>
                                 <option value="friend">Friend</option>
                                 <option value="relative">Relative</option>
                             </select>
-                        </div> -->
+                        </div>
 
                         <div class="form-group mb-3">
                             <label for="appointment_status">
@@ -135,13 +136,13 @@ ob_end_flush();
                             </select>
                         </div>
 
-                        <div class="form-group mb-3">
+                        <!-- <div class="form-group mb-3">
                             <label for="queue_no">
                                 <span class="asterik"><i class="fa-solid fa-asterisk"></i></span>Queue No:
                                 <span class="required-text">(required)</span>
                             </label>
                             <input type="text" name="queue_no" id="queue_no" class="form-control" value="<?php echo $queue_no ?>" disabled>
-                        </div>
+                        </div> -->
 
                         <div class="buttons">
                             <button type="button" class="btn back-btn">Go Back</button>
