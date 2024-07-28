@@ -1,7 +1,8 @@
 <?php
 session_start();
-
+include "../db_connect.php";
 include '../helper_functions.php';
+
 
 if(isset($_POST['submit'])) {
     $name = $_POST['name'];
@@ -9,22 +10,30 @@ if(isset($_POST['submit'])) {
     $message = $_POST['message'];
 
     if (check_contact_us_input_fields($name, $email, $message)) {
-        $_SESSION['contact_error'] = "Please fill in all fields.";
+        $_SESSION['error'] = "Please fill in all fields.";
+        $_SESSION['form_data'] = $_POST;
         header("Location: ../index.php#contact");
         exit();
     }
     
-    if (invalid_name($name) !== false) {
-        $_SESSION['contact_error'] = "Only letters and white space allowed in name.";
+    if (invalid_name($name)) {
+        $_SESSION['error'] = "Only letters and white space allowed in name.";
         header("Location: ../index.php#contact");
         exit();
     }
     
-    if (invalid_email($email) !== false) {
-        $_SESSION['contact_error'] = "Invalid email format.";
+    if (invalid_email($email)) {
+        $_SESSION['error'] = "Invalid email format.";
         header("Location: ../index.php#contact");
         exit();
     }
+
+    // Insert data into contact table
+    $sql = "INSERT INTO contact (name, email, message) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $name, $email, $message);
+    $stmt->execute();
+    $stmt->close();
 
     // $to = "chuaxiangyuian@gmail.com";
     // $subject = "Contact Us Form Submission from $name";
@@ -43,7 +52,7 @@ if(isset($_POST['submit'])) {
     // }
 
 } 
-
+$conn->close();
 
 
 
@@ -73,7 +82,7 @@ if(isset($_POST['submit'])) {
                         <img src="../img/tick-verification.svg" alt="Tick logo symbol" />
                         <h2>Message sent <br>successfully</h2>
                         <div class="mt-3">
-                            <a href="login.php" class="btn back-to-home-btn">Back to Home</a>
+                            <a href="../index.php" class="btn back-to-home-btn">Back to Home</a>
                         </div>
                     </div>
                 </div>

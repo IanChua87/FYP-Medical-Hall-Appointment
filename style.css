@@ -754,11 +754,12 @@ nav {
 }
 
 .session-msg-error {
-    color: rgb(129, 27, 27);
-    font-size: 16px;
-    margin-top: 500px;
-    position: fixed;
+    color: #fa0101;
+    font-size: 15px;
+    margin-left: 180px; /* Adjust this as needed */
+    position: relative; /* Changed to relative */
 }
+
 
 .session-msg-success {
     color: #13bd76;
@@ -1804,7 +1805,7 @@ label.queue_label {
     text-align: left;
 }
 
-.settings-group .form-group {}
+.settings-group .form-group 
 
 .settings-group .form-control {
     width: 100%;

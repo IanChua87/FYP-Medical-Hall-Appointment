@@ -4,6 +4,13 @@ session_start();
 // Include database connection file
 include "db_connect.php";
 
+$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+
+unset($_SESSION['error']);
+unset($_SESSION['form_data']);
+
+
 // Initialize an empty array to store the settings values
 $opening_days = array();
 
@@ -181,13 +188,13 @@ ob_end_flush();
             background-color: #d1ac47;
         }
 
-        .session-msg-error {
+        /* .session-msg-error {
             text-align: center;
             border-radius: 5px;
             background-color: #f8d7da;
             color: black;
             border: 1px solid #f5c6cb;
-        }
+        } */
 
         form{
             padding: 20px 0;
@@ -396,10 +403,14 @@ ob_end_flush();
     <!--contact start-->
     <section class="contact" id="contact">
         <h2 class="text-center">Contact Us</h2>
+        <?php if ($error) { ?>
+                    <p class="session-msg-error"><?php echo $error; ?></p>
+                <?php } ?>
         <div class="contact-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-6">
                     <form action="forms/contactSuccessful.php" method="post">
+
                         <div class="mb-3">
                             <input type="text" class="form-control-lg" name="name" placeholder="Name">
                         </div>
@@ -410,12 +421,6 @@ ob_end_flush();
                             <textarea class="form-control feedback-field" name="message" rows="6" placeholder="Feedback"></textarea>
                         </div>
                         <button type="submit" name="submit" class="btn submit-btn">Submit</button>
-                        <?php
-                        if (isset($_SESSION['contact_error'])) {
-                            echo '<div class="session-msg-error">' . $_SESSION['contact_error'] . '</div>';
-                            
-                        }
-                        ?>
                     </form>
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
@@ -475,28 +480,12 @@ ob_end_flush();
 
 </body>
 <script>
-    $(document).ready(function() {
-        $('a[href^="#"]').on('click', function(event) {
-            event.preventDefault();
-
-            var target = this.hash;
-            var $target = $(target);
-
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top
-            }, 600, 'swing', function() {
-                window.location.hash = target;
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorElement = document.querySelector('.session-msg-error');
+            if (errorElement) {
+                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         });
-    });
-
-    // $(document).ready(function() {
-    //     console.log("Document is ready.");
-    //     setTimeout(function() {
-    //         $('.session-msg-error').fadeOut('slow');
-    //     }, 1700);
-
-    // });
-</script>
+    </script>
 
 </html>
