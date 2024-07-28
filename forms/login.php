@@ -17,18 +17,26 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
+    if(check_users_exists_by_email($conn, $email) === false && check_patient_exists_by_email($conn, $email) === false){
+        $_SESSION['login-error'] = "Email not found.";
+        header("Location: login.php");
+        exit();
+    }
+
     if (login_patient($conn, $email, $password)) {
         header("Location: ../P_index.php");
         exit();
-    }
+    } 
 
     if (login_users($conn, $email, $password)) {
         header("Location: ../adminDashboard.php");
         exit();
     }
 
-    if (!isset($_SESSION['login-error'])) {
+    if(!login_patient($conn, $email, $password) && !login_users($conn, $email, $password)){
         $_SESSION['login-error'] = "Invalid email or password.";
+        header("Location: login.php");
+        exit();
     }
 
     header("Location: login.php");
@@ -49,21 +57,21 @@ ob_end_flush();
 
 
 <body>
-<?php
+    <?php
 
-echo '
+    echo '
     <nav class="navbar navbar-expand-lg">
         <div class="container"> ' ?>
-        <?php if (!isset($_SESSION["patient_id"])) { ?>
-            <a class="navbar-brand" href="../index.php">
+    <?php if (!isset($_SESSION["patient_id"])) { ?>
+        <a class="navbar-brand" href="../index.php">
             <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
-            </a>
-            <?php } else { ?>
-            <a class="navbar-brand" href="../P_index.php">
+        </a>
+    <?php } else { ?>
+        <a class="navbar-brand" href="../P_index.php">
             <img src="../svg/Sin_Nam_Med_Hall_Logo.svg" alt="Logo" class="navbar-logo">
-            </a>   
-            <?php } ?>
-            <?php echo '
+        </a>
+    <?php } ?>
+    <?php echo '
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list"></i>
             </button>
@@ -85,10 +93,10 @@ echo '
                 <li><a class="dropdown-item" href="../servicesTCM.php">Personalized TCM Consultations</a></li>
                 <li><a class="dropdown-item" href="../servicesPrescription.php">Customized Chinese Herbal Prescriptions</a></li>
             </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../index.php#operating-hours">Opening Hours</a>
-            </li>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="../index.php#operating-hours">Opening Hours</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="../index.php#contact">Contact</a>
         </li>
@@ -147,7 +155,7 @@ echo '
                     <div class="form-container">
                         <h3 class="text">Login</h3>
                         <p class="login-prompt">Already registered? <span> <a href="register.php">Register</a> </span>now</p>
-                        <form method="post">
+                        <form method="post" action="login.php">
                             <div class="form-outline mb-4">
                                 <input type="email" class="form-control form-control-lg" placeholder="Email" name="email" />
                             </div>
@@ -167,7 +175,7 @@ echo '
                             </div>
                         </form>
                         <?php
-                        if(isset($_SESSION['login-error'])){
+                        if (isset($_SESSION['login-error'])) {
                             echo '<p class="login-error-msg" id="login-error-msg">' . $_SESSION['login-error'] . '</p>';
                             unset($_SESSION['login-error']);
                         }
@@ -193,6 +201,3 @@ echo '
 </body>
 
 </html>
-
-<?php
-

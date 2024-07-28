@@ -24,7 +24,7 @@ function check_empty_edit_patient_input_fields($name, $email, $dob, $phone, $pay
     } else {
         return false;
     }
-} 
+}
 
 function check_empty_edit_appointment_input_fields($start_time)
 {
@@ -92,7 +92,8 @@ function invalid_name($name)
     }
 }
 
-function invalid_phone_number($phone) {
+function invalid_phone_number($phone)
+{
     // Check if the phone number starts with 8 or 9 and is followed by 7 digits
     if (!preg_match("/^[89][0-9]{7}$/", $phone)) {
         return true;
@@ -352,11 +353,9 @@ function login_patient($conn, $email, $password)
             $_SESSION['patient_id'] = $p_user_data['patient_id'];
             return true;
         } else {
-            $_SESSION['login-error'] = "Invalid password, please try again";
             return false;
         }
-    } else{
-        $_SESSION['login-error'] = "Invalid email, please try again";
+    } else {
         return false;
     }
 }
@@ -416,15 +415,9 @@ function login_users($conn, $email, $password)
                 header("Location: ../d_index.php");
                 exit();
             }
-        } 
-        else {
-            $_SESSION['login-error'] = "Invalid password, please try again";
-            return $_SESSION['login-error'];
+        } else {
+            return false;
         }
-    } else{
-        $_SESSION['login-error'] = "Invalid email, please try again";
-        return $_SESSION['login-error'];
-    
     }
 }
 
@@ -473,7 +466,8 @@ function insert_appointment_details($conn, $date, $start_time, $end_time, $statu
     mysqli_stmt_execute($insert_stmt);
 }
 
-function convert_to_24_hour_format($time_12_hour) {
+function convert_to_24_hour_format($time_12_hour)
+{
     if (strpos($time_12_hour, 'AM') !== false || strpos($time_12_hour, 'PM') !== false) {
         $dateTime = DateTime::createFromFormat('h:i A', $time_12_hour);
     } else {
@@ -572,7 +566,8 @@ function check_password_match($password, $confirm_password)
     }
 }
 
-function email_exists_for_other_patient($conn, $email, $patient_id) {
+function email_exists_for_other_patient($conn, $email, $patient_id)
+{
     $sql = "SELECT * FROM patient WHERE patient_email = ? AND patient_id != ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -587,7 +582,8 @@ function email_exists_for_other_patient($conn, $email, $patient_id) {
     return false;
 }
 
-function email_exists_for_other_user($conn, $email, $user_id) {
+function email_exists_for_other_user($conn, $email, $user_id)
+{
     $sql = "SELECT * FROM users WHERE user_email = ? AND user_id != ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -610,15 +606,15 @@ function update_patient_status($conn, $status, $patient_id)
 
     //execute the prepared statement
     mysqli_stmt_execute($update_stmt);
-
 }
 
-function count_appointments($conn, $patient_id) {
+function count_appointments($conn, $patient_id)
+{
     // SQL query to count the number of upcoming appointments for the patient
     $query = "SELECT COUNT(*) AS appointment_count 
               FROM appointment 
               WHERE patient_id = ? AND appointment_status = 'UPCOMING'";
-    
+
     // Prepare the SQL statement
     $stmt = mysqli_prepare($conn, $query);
 
@@ -640,12 +636,13 @@ function count_appointments($conn, $patient_id) {
     return $appointment_count;
 }
 
-function cancel_past_appointments($conn) {
+function cancel_past_appointments($conn)
+{
     // SQL query to cancel past appointments
     $query = "UPDATE appointment 
               SET appointment_status = 'CANCELLED' 
               WHERE appointment_status = 'UPCOMING' AND appointment_date < CURDATE()";
-    
+
     $stmt = mysqli_prepare($conn, $query);
 
     if ($stmt === false) {
@@ -658,7 +655,8 @@ function cancel_past_appointments($conn) {
     mysqli_stmt_close($stmt);
 }
 
-function reset_queue_number_for_next_day($conn) {
+function reset_queue_number_for_next_day($conn)
+{
     // Create a log file path
     $logFile = 'reset_queue.log';
     $log = fopen($logFile, 'a');
@@ -693,7 +691,8 @@ function reset_queue_number_for_next_day($conn) {
     fclose($log);
 }
 
-function check_latest_queue_no($conn){
+function check_latest_queue_no($conn)
+{
     $query = "SELECT MAX(queue_no) AS latest_queue_no FROM appointment WHERE appointment_date < CURDATE()";
     $stmt = mysqli_prepare($conn, $query);
 
@@ -712,7 +711,8 @@ function check_latest_queue_no($conn){
     return $latest_queue_no;
 }
 
-function getCount($conn, $query) {
+function getCount($conn, $query)
+{
     $result = mysqli_query($conn, $query);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
@@ -722,7 +722,8 @@ function getCount($conn, $query) {
     }
 }
 
-function check_patient_exist_by_payment_status($conn, $patient_id){
+function check_patient_exist_by_payment_status($conn, $patient_id)
+{
     $query = "SELECT * FROM patient WHERE payment_status = 'UNPAID' AND patient_id = ?";
     $stmt = mysqli_prepare($conn, $query);
 
@@ -811,4 +812,3 @@ function check_appointment_date_time_conflict($conn, $date, $start_time)
 //         return $takenTimeSlots;
 //     }
 // }
-
