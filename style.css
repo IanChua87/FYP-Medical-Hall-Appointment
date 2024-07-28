@@ -757,6 +757,7 @@ nav {
     color: #fa0101;
     font-size: 15px;
     margin-left: 180px; /* Adjust this as needed */
+    margin-top: -30px;
     position: relative; /* Changed to relative */
 }
 

@@ -4,11 +4,7 @@ session_start();
 // Include database connection file
 include "db_connect.php";
 
-$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 
-unset($_SESSION['error']);
-unset($_SESSION['form_data']);
 
 
 // Initialize an empty array to store the settings values
@@ -167,6 +163,14 @@ $weekend_start = reset($weekends); // First element
 $weekend_end = end($weekends);     // Last element
 
 $weekend_display = ($weekend_start == $weekend_end) ? $weekend_start : $weekend_start . "-" . $weekend_end;
+
+$contact_error = isset($_SESSION['contact_error']) ? $_SESSION['contact_error'] : '';
+$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+
+unset($_SESSION['contact_error']);
+unset($_SESSION['form_data']);
+
+
 ob_end_flush();
 ?>
 
@@ -403,9 +407,6 @@ ob_end_flush();
     <!--contact start-->
     <section class="contact" id="contact">
         <h2 class="text-center">Contact Us</h2>
-        <?php if ($error) { ?>
-                    <p class="session-msg-error"><?php echo $error; ?></p>
-                <?php } ?>
         <div class="contact-box">
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-6">
@@ -421,6 +422,7 @@ ob_end_flush();
                             <textarea class="form-control feedback-field" name="message" rows="6" placeholder="Feedback"></textarea>
                         </div>
                         <button type="submit" name="submit" class="btn submit-btn">Submit</button>
+                        <p class="session-msg-error" id="session-msg-error"><?php echo $contact_error; ?></p>
                     </form>
                 </div>
                 <div class="col-12 col-md-12 col-lg-6">
@@ -480,11 +482,16 @@ ob_end_flush();
 
 </body>
 <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var errorElement = document.querySelector('.session-msg-error');
-            if (errorElement) {
-                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var errorElement = document.querySelector('.session-msg-error');
+        //     if (errorElement) {
+        //         errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        //     }
+        // });
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#session-msg-error').fadeOut('slow');
+            }, 2500);
         });
     </script>
 
