@@ -10,20 +10,20 @@ if(isset($_POST['submit'])) {
     $message = $_POST['message'];
 
     if (check_contact_us_input_fields($name, $email, $message)) {
-        $_SESSION['error'] = "Please fill in all fields.";
+        $_SESSION['contact_error'] = "Please fill in all fields.";
         $_SESSION['form_data'] = $_POST;
         header("Location: ../index.php#contact");
         exit();
     }
     
     if (invalid_name($name)) {
-        $_SESSION['error'] = "Only letters and white space allowed in name.";
+        $_SESSION['contact_error'] = "Only letters and white space allowed in name.";
         header("Location: ../index.php#contact");
         exit();
     }
     
     if (invalid_email($email)) {
-        $_SESSION['error'] = "Invalid email format.";
+        $_SESSION['contact_error'] = "Invalid email format.";
         header("Location: ../index.php#contact");
         exit();
     }
