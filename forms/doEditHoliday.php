@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 
     for($i = 0; $i < count($holiday_ids); $i++) {
         if(empty($_POST['holiday_date_' . $holiday_ids[$i]])) {
-            $_SESSION['error'] = "Please fill in all fields.";
+            $_SESSION['error'] = "All fields are required";
             header("Location: editHoliday.php");
             exit();
         }
@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
     $_SESSION['message'] = "Updated holiday settings successfully.";
     header("Location: viewHoliday.php");
     exit();
-    
+
 } else {
     $_SESSION['error'] = "Invalid request.";
     header("Location: editHoliday.php");

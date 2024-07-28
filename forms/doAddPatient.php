@@ -48,8 +48,20 @@ if (isset($_POST['submit'])) {
             exit();
         }
 
+        if(check_user_old_enough($dob) === false){
+            $_SESSION['error'] = "Patient must be at least 18 years old.";
+            header("Location: addPatient.php");
+            exit();
+        }
+
         if (invalid_phone_number($phone) !== false) {
             $_SESSION['error'] = "Only numbers allowed in phone number.";
+            header("Location: addPatient.php");
+            exit();
+        }
+
+        if(check_patient_phone_exists($conn, $phone) !== false){
+            $_SESSION['error'] = "Patient with this phone number already exists.";
             header("Location: addPatient.php");
             exit();
         }
