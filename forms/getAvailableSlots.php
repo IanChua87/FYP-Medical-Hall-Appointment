@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include "../db_connect.php"; // Include database connection file
 session_start(); // Start session
 
@@ -176,19 +177,19 @@ if (isset($_POST['selectedDate'])) {
         list($opening_hour, $opening_min) = explode(".", $opening_time);
         list($closing_hour, $closing_min) = explode(".", $closing_time);
 
-        if (strpos($opening_time, '.') !== false) {
-            list($opening_hour, $opening_min) = explode(".", $opening_time);
-        } else {
-            error_log('Unexpected format for opening time: ' . $opening_time);
-            // Set default values or handle error
-        }
+        // if (strpos($opening_time, '.') !== false) {
+        //     list($opening_hour, $opening_min) = explode(".", $opening_time);
+        // } else {
+        //     error_log('Unexpected format for opening time: ' . $opening_time);
+        //     // Set default values or handle error
+        // }
         
-        if (strpos($closing_time, '.') !== false) {
-            list($closing_hour, $closing_min) = explode(".", $closing_time);
-        } else {
-            error_log('Unexpected format for closing time: ' . $closing_time);
-            // Set default values or handle error
-        }
+        // if (strpos($closing_time, '.') !== false) {
+        //     list($closing_hour, $closing_min) = explode(".", $closing_time);
+        // } else {
+        //     error_log('Unexpected format for closing time: ' . $closing_time);
+        //     // Set default values or handle error
+        // }
         
 
         error_log('Opening time: ' . $opening_hour . ':' . $opening_min);
@@ -236,4 +237,5 @@ if (isset($_POST['selectedDate'])) {
 } else {
     echo json_encode(['error' => 'No date selected.']);
 }
+ob_end_flush();
 ?>
