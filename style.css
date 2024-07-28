@@ -1334,7 +1334,8 @@ nav {
 
 .patient-table h2,
 .appointment-table h2,
-.staff-table h2 {
+.staff-table h2,
+.contact-table h2 {
     font-size: 40px;
     font-weight: 600;
     font-weight: 600;

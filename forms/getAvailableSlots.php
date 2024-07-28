@@ -176,6 +176,9 @@ if (isset($_POST['selectedDate'])) {
         list($opening_hour, $opening_min) = explode(".", $opening_time);
         list($closing_hour, $closing_min) = explode(".", $closing_time);
 
+        error_log('Opening time: ' . $opening_hour . ':' . $opening_min);
+        error_log('Closing time: ' . $closing_hour . ':' . $closing_min);
+
         $current_time = strtotime($opening_hour . ':' . $opening_min);
 
         // Loop through time slots and check availability based on booked slots

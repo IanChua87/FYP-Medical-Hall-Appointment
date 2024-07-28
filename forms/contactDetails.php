@@ -1,14 +1,17 @@
 <?php
 ob_start();
+unset($_SESSION['message']);
+unset($_SESSION['error']);
+
 session_start();
 include "../db_connect.php";
 ?>
 
 <?php
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: login.php");
-    exit();
-}
+// if (!isset($_SESSION['admin_id'])) {
+//     header("Location: login.php");
+//     exit();
+// }
 ob_end_flush();
 ?>
 <!DOCTYPE html>
@@ -17,7 +20,7 @@ ob_end_flush();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Staff</title>
+    <title>Admin | Contact</title>
     <!-- 'links.php' contains cdn links' -->
     <?php include '../links.php'; ?>
     <!-- Bootstrap CSS -->
@@ -62,22 +65,21 @@ ob_end_flush();
                 <li class=""><a href="../adminDashboard.php" class="text-decoration-none outer"><i class="fa-solid fa-house"></i> Dashboard</a></li>
                 <li class=""><a href="patientDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-bed"></i> View Patient</a></li>
                 <li class=""><a href="appointmentDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-calendar-check"></i> View Appointment</a></li>
-                <li class="active"><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
+                <li class=""><a href="staffDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-user-doctor"></i> View Staff</a></li>
                 <li class=""><a href="settings.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Settings</a></li>
                 <li class=""><a href="viewHoliday.php" class="text-decoration-none outer"><i class="fa-solid fa-gear"></i> View Holiday</a></li>
-                <li class=""><a href="contactDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-envelope"></i> View Contact</a></li>
+                <li class="active"><a href="contactDetails.php" class="text-decoration-none outer"><i class="fa-solid fa-envelope"></i> View Contact</a></li>
                 <div class="sidebar-separator"></div>
                 <li class="mt-auto"><a href="loggedOutSuccessful.php" class="text-decoration-none logout-btn outer"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
         </div>
 
         <div class="content" id="content">
-            <div class="staff-table">
+            <div class="contact-table">
                 <div class="container-fluid">
                     <div class="search-card">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h2 class="text-center">Staff Details</h2>
-                            <a href='addStaff.php' class='btn add-btn'>Add</a>
+                            <h2 class="text-center">Contact Details</h2>
                         </div>
                     </div>
 
@@ -86,16 +88,15 @@ ob_end_flush();
                             <table class="table table-striped" id="table">
                                 <thead class="table-primary">
                                     <tr class="table-head">
-                                        <th scope="col">Staff Name</th>
-                                        <th scope="col">Staff Email</th>
-                                        <!-- <th scope="col">Staff Password</th> -->
-                                        <th scope="col">Role</th>
-                                        <th scope="col">Take Actions</th>
+                                        <th scope="col">Contact Name</th>
+                                        <th scope="col">Contact Email</th>
+                                        <th scope="col">Contact Message</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $query = "SELECT * FROM users ORDER BY user_id ASC";
+                                    $query = "SELECT * FROM contact ORDER BY id ASC";
                                     $user_stmt = mysqli_prepare($conn, $query);
                                     if (!$user_stmt) {
                                         die("Failed to prepare statement");
@@ -106,25 +107,14 @@ ob_end_flush();
                                         if (mysqli_num_rows($result) > 0) {
                                             while ($row = mysqli_fetch_assoc($result)) {
                                                 echo "<tr class='table-body'>";
-                                                echo "<td>" . $row['user_name'] . "</td>";
-                                                echo "<td>" . $row['user_email'] . "</td>";
-                                                echo "<td>" . $row['role'] . "</td>";
-                                                if ($row['role'] == 'Doctor') {
-                                                    echo "<td>
-                                        <div class='buttons'>
-                                            <a href='editStaff.php?user_id=" . $row['user_id'] . "' class='btn edit-btn'>Edit</a>
-                                            <a href='doDeleteStaff.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['user_id'] . "'>Delete</a>
-                                        </div>
-                                    </td>";
-
-                                                    echo "</tr>";
-                                                } else {
-                                                    echo "<td>
-                                        <div class='buttons'>
-                                            <a href='editStaff.php?user_id=" . $row['user_id'] . "' class='btn edit-btn'>Edit</a>
-                                        </div>
-                                    </td>";
-                                                }
+                                                echo "<td>" . $row['name'] . "</td>";
+                                                echo "<td>" . $row['email'] . "</td>";
+                                                echo "<td>" . $row['message'] . "</td>";
+                                                echo "<td>
+                                                <div class='buttons'>
+                                                    <a href='doDeleteContact.php' class='btn delete-btn' data-bs-toggle='modal' data-bs-target='#delete-modal' data-id='" . $row['id'] . "'>Delete</a>
+                                                </div>
+                                            </td>";
                                             }
                                         }
                                     }
@@ -141,11 +131,11 @@ ob_end_flush();
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="modal-text">Are you sure you want to delete the staff record? <br> This action cannot be undone.</p>
+                                            <p class="modal-text">Are you sure you want to delete the contact record? <br> This action cannot be undone.</p>
                                         </div>
                                         <div class="modal-footer">
-                                            <form action="doDeleteStaff.php" id="delete-form" method="POST">
-                                                <input type="hidden" name="user_id" id="user_id" value="">
+                                            <form action="doDeleteContact.php" id="delete-form" method="POST">
+                                                <input type="hidden" name="contact_id" id="contact_id" value="">
                                                 <button type="submit" class="btn yes-btn">Yes</button>
                                                 <button type="button" class="btn no-btn" data-bs-dismiss="modal">No</button>
                                             </form>
@@ -168,8 +158,8 @@ ob_end_flush();
     <script>
         $(document).ready(function() {
             $('.delete-btn').on('click', function() {
-                var userId = $(this).data('id');
-                $('#user_id').val(userId);
+                var contactId = $(this).data('id');
+                $('#contact_id').val(contactId);
             });
 
             $('.yes-btn').on('click', function() {
