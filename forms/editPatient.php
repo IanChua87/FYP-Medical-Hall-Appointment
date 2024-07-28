@@ -172,7 +172,7 @@ ob_end_flush();
                         </div>
                         <div class="buttons mb-2">
                             <button type="button" class="btn back-btn">Go Back</button>
-                            <button type="submit" name="submit" class="btn save-btn">Save</button>
+                            <button type="submit" name="submit" class="btn save-btn">Save Patient</button>
                         </div>
                     </form>
                 </div>

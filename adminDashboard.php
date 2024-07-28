@@ -144,7 +144,7 @@ ob_end_flush();
                                     <div class="col-md-8 col-sm-12">
                                         <div class="card-body">
                                             <h5 class="card-title">View Staff</h5>
-                                            <p class="card-text">Appointment can be added, deleted and modified if needed</p>
+                                            <p class="card-text">Staff can be added, deleted and modified if needed</p>
                                         </div>
                                     </div>
                                 </div>
