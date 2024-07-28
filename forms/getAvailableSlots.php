@@ -111,46 +111,97 @@ if (isset($_POST['selectedDate'])) {
             die("Failed to prepare statement: " . $conn->error);
         }
 
-        $patient_id = $_SESSION['patient_id'];
-        $stmt->bind_param("i", $patient_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $patient = $result->fetch_assoc();
-        $stmt->close();
+        if (isset($_SESSION['patient_id'])) {
+            $patient_sql = "SELECT patient_status FROM patient WHERE patient_id = ?";
+            $stmt = $conn->prepare($patient_sql);
+            if ($stmt === false) {
+                die("Failed to prepare statement: " . $conn->error);
+            }
 
-        if ($patient) {
-            if ($patient['patient_status'] === "NEW") {
-                // Fetch new appointment duration
-                $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration'";
-                $stmt = $conn->prepare($settings_sql);
-                if ($stmt === false) {
-                    die("Failed to prepare statement: " . $conn->error);
-                }
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $settings = $result->fetch_assoc();
-                $stmt->close();
+            $patient_id = $_SESSION['patient_id'];
+            $stmt->bind_param("i", $patient_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $patient = $result->fetch_assoc();
+            $stmt->close();
 
-                if ($settings) {
-                    $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
-                }
-            } else {
-                // Fetch regular appointment duration
-                $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'appointment_duration'";
-                $stmt = $conn->prepare($settings_sql);
-                if ($stmt === false) {
-                    die("Failed to prepare statement: " . $conn->error);
-                }
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $settings = $result->fetch_assoc();
-                $stmt->close();
+            if ($patient) {
+                if ($patient['patient_status'] === "NEW") {
+                    // Fetch new appointment duration
+                    $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration'";
+                    $stmt = $conn->prepare($settings_sql);
+                    if ($stmt === false) {
+                        die("Failed to prepare statement: " . $conn->error);
+                    }
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $settings = $result->fetch_assoc();
+                    $stmt->close();
 
-                if ($settings) {
-                    $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
+                    if ($settings) {
+                        $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
+                    }
+                } else {
+                    // Fetch regular appointment duration
+                    $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'appointment_duration'";
+                    $stmt = $conn->prepare($settings_sql);
+                    if ($stmt === false) {
+                        die("Failed to prepare statement: " . $conn->error);
+                    }
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $settings = $result->fetch_assoc();
+                    $stmt->close();
+
+                    if ($settings) {
+                        $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
+                    }
                 }
             }
+        } else {
+            die("Session variable 'patient_id' is not set.");
         }
+
+        // $patient_id = $_SESSION['patient_id'];
+        // $stmt->bind_param("i", $patient_id);
+        // $stmt->execute();
+        // $result = $stmt->get_result();
+        // $patient = $result->fetch_assoc();
+        // $stmt->close();
+
+        // if ($patient) {
+        //     if ($patient['patient_status'] === "NEW") {
+        //         // Fetch new appointment duration
+        //         $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration'";
+        //         $stmt = $conn->prepare($settings_sql);
+        //         if ($stmt === false) {
+        //             die("Failed to prepare statement: " . $conn->error);
+        //         }
+        //         $stmt->execute();
+        //         $result = $stmt->get_result();
+        //         $settings = $result->fetch_assoc();
+        //         $stmt->close();
+
+        //         if ($settings) {
+        //             $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
+        //         }
+        //     } else {
+        //         // Fetch regular appointment duration
+        //         $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'appointment_duration'";
+        //         $stmt = $conn->prepare($settings_sql);
+        //         if ($stmt === false) {
+        //             die("Failed to prepare statement: " . $conn->error);
+        //         }
+        //         $stmt->execute();
+        //         $result = $stmt->get_result();
+        //         $settings = $result->fetch_assoc();
+        //         $stmt->close();
+
+        //         if ($settings) {
+        //             $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
+        //         }
+        //     }
+        // }
 
         // Function to fetch booked slots for the selected date
         function getBookedSlots($conn, $date) {
