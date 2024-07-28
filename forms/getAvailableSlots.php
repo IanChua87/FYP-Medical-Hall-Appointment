@@ -225,6 +225,22 @@ if (isset($_POST['selectedDate'])) {
         $booked_slots = getBookedSlots($conn, $date);
         $available_slots = [];
 
+        if (strpos($opening_time, ':') !== false) {
+            list($opening_hour, $opening_min) = explode(":", $opening_time);
+        } else {
+            error_log('Unexpected format for opening time: ' . $opening_time);
+            $opening_hour = 9; // Set default values or handle error
+            $opening_min = 0;
+        }
+
+        if (strpos($closing_time, ':') !== false) {
+            list($closing_hour, $closing_min) = explode(":", $closing_time);
+        } else {
+            error_log('Unexpected format for closing time: ' . $closing_time);
+            $closing_hour = 17; // Set default values or handle error
+            $closing_min = 0;
+        }
+
         list($opening_hour, $opening_min) = explode(".", $opening_time);
         list($closing_hour, $closing_min) = explode(".", $closing_time);
 
