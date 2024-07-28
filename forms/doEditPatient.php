@@ -54,6 +54,12 @@ if (isset($_POST['submit'])) {
             exit();
         }
 
+        if(check_user_old_enough($dob) === false){
+            $_SESSION['error'] = "Patient must be at least 18 years old.";
+            header("Location: editPatient.php?patient_id=" . $patient_id);
+            exit();
+        }
+
         if (update_patient_details($conn, $patient_name, $dob, $phone, $email, $payment_status, $amount_payable, $patient_id) !== false) {
             $_SESSION['message'] = "Updated patient profile successfully.";
             header("Location: patientDetails.php");
