@@ -104,14 +104,19 @@ if (isset($_POST['selectedDate'])) {
             die("Opening or closing time not found in settings.");
         }
 
-        // Fetch patient status
-        $patient_sql = "SELECT patient_status FROM patient WHERE patient_id = ?";
-        $stmt = $conn->prepare($patient_sql);
-        if ($stmt === false) {
-            die("Failed to prepare statement: " . $conn->error);
+        // Ensure opening and closing times are in the correct format
+        if (strpos($opening_time, ':') === false || strpos($closing_time, ':') === false) {
+            die("Invalid time format in settings.");
         }
 
-        if (isset($_SESSION['patient_id'])) {
+        list($opening_hour, $opening_min) = explode(":", $opening_time);
+        list($closing_hour, $closing_min) = explode(":", $closing_time);
+
+        error_log('Opening time: ' . $opening_hour . ':' . $opening_min);
+        error_log('Closing time: ' . $closing_hour . ':' . $closing_min);
+
+        // Fetch patient status
+        if (isset($_SESSION['patient_id'])) { // Added check for 'patient_id'
             $patient_sql = "SELECT patient_status FROM patient WHERE patient_id = ?";
             $stmt = $conn->prepare($patient_sql);
             if ($stmt === false) {
@@ -159,49 +164,8 @@ if (isset($_POST['selectedDate'])) {
                 }
             }
         } else {
-            die("Session variable 'patient_id' is not set.");
+            die("Session variable 'patient_id' is not set."); // Added error handling for missing 'patient_id'
         }
-
-        // $patient_id = $_SESSION['patient_id'];
-        // $stmt->bind_param("i", $patient_id);
-        // $stmt->execute();
-        // $result = $stmt->get_result();
-        // $patient = $result->fetch_assoc();
-        // $stmt->close();
-
-        // if ($patient) {
-        //     if ($patient['patient_status'] === "NEW") {
-        //         // Fetch new appointment duration
-        //         $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'new_appointment_duration'";
-        //         $stmt = $conn->prepare($settings_sql);
-        //         if ($stmt === false) {
-        //             die("Failed to prepare statement: " . $conn->error);
-        //         }
-        //         $stmt->execute();
-        //         $result = $stmt->get_result();
-        //         $settings = $result->fetch_assoc();
-        //         $stmt->close();
-
-        //         if ($settings) {
-        //             $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
-        //         }
-        //     } else {
-        //         // Fetch regular appointment duration
-        //         $settings_sql = "SELECT settings_value FROM settings WHERE settings_key = 'appointment_duration'";
-        //         $stmt = $conn->prepare($settings_sql);
-        //         if ($stmt === false) {
-        //             die("Failed to prepare statement: " . $conn->error);
-        //         }
-        //         $stmt->execute();
-        //         $result = $stmt->get_result();
-        //         $settings = $result->fetch_assoc();
-        //         $stmt->close();
-
-        //         if ($settings) {
-        //             $appointment_duration = (int)$settings['settings_value']; // Set duration based on settings value
-        //         }
-        //     }
-        // }
 
         // Function to fetch booked slots for the selected date
         function getBookedSlots($conn, $date) {
@@ -224,43 +188,6 @@ if (isset($_POST['selectedDate'])) {
         // Fetch booked slots for the selected date
         $booked_slots = getBookedSlots($conn, $date);
         $available_slots = [];
-
-        if (strpos($opening_time, ':') !== false) {
-            list($opening_hour, $opening_min) = explode(":", $opening_time);
-        } else {
-            error_log('Unexpected format for opening time: ' . $opening_time);
-            $opening_hour = 9; // Set default values or handle error
-            $opening_min = 0;
-        }
-
-        if (strpos($closing_time, ':') !== false) {
-            list($closing_hour, $closing_min) = explode(":", $closing_time);
-        } else {
-            error_log('Unexpected format for closing time: ' . $closing_time);
-            $closing_hour = 17; // Set default values or handle error
-            $closing_min = 0;
-        }
-
-        list($opening_hour, $opening_min) = explode(".", $opening_time);
-        list($closing_hour, $closing_min) = explode(".", $closing_time);
-
-        // if (strpos($opening_time, '.') !== false) {
-        //     list($opening_hour, $opening_min) = explode(".", $opening_time);
-        // } else {
-        //     error_log('Unexpected format for opening time: ' . $opening_time);
-        //     // Set default values or handle error
-        // }
-        
-        // if (strpos($closing_time, '.') !== false) {
-        //     list($closing_hour, $closing_min) = explode(".", $closing_time);
-        // } else {
-        //     error_log('Unexpected format for closing time: ' . $closing_time);
-        //     // Set default values or handle error
-        // }
-        
-
-        error_log('Opening time: ' . $opening_hour . ':' . $opening_min);
-        error_log('Closing time: ' . $closing_hour . ':' . $closing_min);
 
         $current_time = strtotime($opening_hour . ':' . $opening_min);
 
