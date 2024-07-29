@@ -31,6 +31,7 @@ if (isset($_POST['book'])) {
         // $relation = isset($_POST['relation']) ? $_POST['relation'] : null;
         $relation = $_POST['relation'];
         $appointment_status = "UPCOMING";
+        $queue_no = 0;
 
         // Separate the timeslot into start and end times
         $timeslot_parts = explode(' - ', $timeslot);
@@ -42,7 +43,7 @@ if (isset($_POST['book'])) {
             $booked_datetime = date('Y-m-d H:i:s');
 
             // Prepare the SQL query for inserting into appointment table
-            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id, queue_no) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $query);
 
             if (!$stmt) {
@@ -50,7 +51,7 @@ if (isset($_POST['book'])) {
             }
 
             // Bind the parameters for appointment insertion
-            mysqli_stmt_bind_param($stmt, "ssssssi", $apptdate, $appointment_start_time, $appointment_end_time, $appointment_status, $patient_name, $booked_datetime, $patient_id);
+            mysqli_stmt_bind_param($stmt, "ssssssi", $apptdate, $appointment_start_time, $appointment_end_time, $appointment_status, $patient_name, $booked_datetime, $patient_id, $queue_no);
 
             // Execute the statement for appointment insertion
             if (mysqli_stmt_execute($stmt)) {
