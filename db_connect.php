@@ -1,4 +1,6 @@
 <?php
+//======localhost DB connection=====
+
 // $host = "localhost:3304";
 // $username = "root";
 // $password = "";
@@ -12,6 +14,8 @@
 //     die("Connection failed: " . mysqli_connect_error());
 // }
 
+
+//======hosted DB connection=====
 
 $conn = mysqli_init();
 
