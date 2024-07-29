@@ -30,6 +30,7 @@ if (isset($_POST['book'])) {
         $options = $_POST['options'];
         // $relation = isset($_POST['relation']) ? $_POST['relation'] : null;
         $relation = $_POST['relation'];
+        $appointment_status = "UPCOMING";
 
         // Separate the timeslot into start and end times
         $timeslot_parts = explode(' - ', $timeslot);
@@ -41,7 +42,7 @@ if (isset($_POST['book'])) {
             $booked_datetime = date('Y-m-d H:i:s');
 
             // Prepare the SQL query for inserting into appointment table
-            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $query);
 
             if (!$stmt) {
@@ -49,7 +50,7 @@ if (isset($_POST['book'])) {
             }
 
             // Bind the parameters for appointment insertion
-            mysqli_stmt_bind_param($stmt, "sssssi", $apptdate, $appointment_start_time, $appointment_end_time, $patient_name, $booked_datetime, $patient_id);
+            mysqli_stmt_bind_param($stmt, "ssssssi", $apptdate, $appointment_start_time, $appointment_end_time, $appointment_status, $patient_name, $booked_datetime, $patient_id);
 
             // Execute the statement for appointment insertion
             if (mysqli_stmt_execute($stmt)) {
@@ -71,9 +72,9 @@ if (isset($_POST['book'])) {
                     }
                     mysqli_stmt_close($stmt_relation);
                 }
-                 // Close the statement and connection
-            mysqli_stmt_close($stmt);
-            mysqli_close($conn);
+                // Close the statement and connection
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
 
                 header("Location: bookingSuccessful.php?success=" . urlencode("Appointment booked successfully for relation: $relation"));
                 exit();
@@ -82,8 +83,6 @@ if (isset($_POST['book'])) {
                 header("Location: booking.php?error=" . urlencode($error));
                 exit();
             }
-
-           
         } else {
             $error = "Invalid timeslot format.";
             header("Location: booking.php?error=" . urlencode($error));
@@ -115,25 +114,24 @@ ob_end_flush();
 </head>
 
 <body>
-<section class="booked vh-100">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
-                <img src="../img/side-img.jpg" alt="Login image" class="w-100 vh-100"
-                     style="object-fit: cover; object-position: left;">
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
-                <div class="verified-box">
-                    <img src="../img/tick-verification.svg" alt="Tick logo symbol" style="margin-right: 10px;"/>
-                    <h2>Booking<br> Successful</h2>
-                    <div class="mt-3">
-                        <a href="viewappointment.php" class="btn back-to-home-btn">Proceed to View Appointment page</a>
+    <section class="booked vh-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-8 px-0 d-sm-block left-col">
+                    <img src="../img/side-img.jpg" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-4 text-black right-col">
+                    <div class="verified-box">
+                        <img src="../img/tick-verification.svg" alt="Tick logo symbol" style="margin-right: 10px;" />
+                        <h2>Booking<br> Successful</h2>
+                        <div class="mt-3">
+                            <a href="viewappointment.php" class="btn back-to-home-btn">Proceed to View Appointment page</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 </body>
