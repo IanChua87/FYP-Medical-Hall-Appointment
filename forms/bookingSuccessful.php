@@ -42,7 +42,7 @@ if (isset($_POST['book'])) {
             $booked_datetime = date('Y-m-d H:i:s');
 
             // Prepare the SQL query for inserting into appointment table
-            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO appointment (appointment_date, appointment_start_time, appointment_end_time, appointment_status, booked_by, booked_datetime, patient_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $query);
 
             if (!$stmt) {
