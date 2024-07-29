@@ -241,8 +241,8 @@ if (isset($_POST['selectedDate'])) {
             $closing_min = 0;
         }
 
-        list($opening_hour, $opening_min) = explode(".", $opening_time);
-        list($closing_hour, $closing_min) = explode(".", $closing_time);
+        // list($opening_hour, $opening_min) = explode(".", $opening_time);
+        // list($closing_hour, $closing_min) = explode(".", $closing_time);
 
         // if (strpos($opening_time, '.') !== false) {
         //     list($opening_hour, $opening_min) = explode(".", $opening_time);
@@ -257,6 +257,22 @@ if (isset($_POST['selectedDate'])) {
         //     error_log('Unexpected format for closing time: ' . $closing_time);
         //     // Set default values or handle error
         // }
+
+        if (strpos($opening_time, ':') !== false) {
+            list($opening_hour, $opening_min) = explode(":", $opening_time);
+        } else {
+            error_log('Unexpected format for opening time: ' . $opening_time);
+            $opening_hour = 9; // Set default values or handle error
+            $opening_min = 0;
+        }
+        
+        if (strpos($closing_time, ':') !== false) {
+            list($closing_hour, $closing_min) = explode(":", $closing_time);
+        } else {
+            error_log('Unexpected format for closing time: ' . $closing_time);
+            $closing_hour = 17; // Set default values or handle error
+            $closing_min = 0;
+        }
         
 
         error_log('Opening time: ' . $opening_hour . ':' . $opening_min);
