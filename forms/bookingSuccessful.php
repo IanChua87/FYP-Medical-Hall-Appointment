@@ -51,7 +51,7 @@ if (isset($_POST['book'])) {
             }
 
             // Bind the parameters for appointment insertion
-            mysqli_stmt_bind_param($stmt, "ssssssi", $apptdate, $appointment_start_time, $appointment_end_time, $appointment_status, $patient_name, $booked_datetime, $patient_id, $queue_no);
+            mysqli_stmt_bind_param($stmt, "ssssssii", $apptdate, $appointment_start_time, $appointment_end_time, $appointment_status, $patient_name, $booked_datetime, $patient_id, $queue_no);
 
             // Execute the statement for appointment insertion
             if (mysqli_stmt_execute($stmt)) {
